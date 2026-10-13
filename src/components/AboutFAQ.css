@@ -552,10 +552,13 @@
     rgba(74, 222, 128, 0.6) 50%,
     rgba(74, 222, 128, 0) 100%
   );
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   mask-composite: exclude;
   opacity: 0;
   transition: opacity 0.4s ease;
