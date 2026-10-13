@@ -9,8 +9,8 @@ import ScrollToTop from "./components/ScrollToTop";
 
 import App from "./pages/App.jsx";
 import About from "./pages/About.jsx";
-import Members from "./pages/Members.jsx";
-import Home from "./pages/Home.jsx"
+import GymHome from "./pages/GymHome.jsx";
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -26,7 +26,8 @@ createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/members" element={<Members />} />
+        <Route path="/gym-home" element={<GymHome />} />
+       
       </Routes>
 
       {/* ✅ Footer har page par (last me) */}

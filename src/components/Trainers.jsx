@@ -27,11 +27,12 @@ function Trainers() {
     );
   };
 
-  // Heading words data
-  const headingLines = [
-    ["THE", "FACES"],
-    ["BEHIND"],
-    ["KINETIX"],
+  // ✅ Simple words array — sabhi 4 words alag alag
+  const headingWords = [
+    { text: "THE",     green: false, index: 0 },
+    { text: "FACES",   green: false, index: 1 },
+    { text: "BEHIND",  green: false, index: 2 },
+    { text: "KINETIX", green: true,  index: 3 },
   ];
 
   return (
@@ -54,29 +55,21 @@ function Trainers() {
 
           {/* Heading */}
           <h2 className="trainers-heading">
-            {headingLines.map((line, lineIdx) => (
-              <span className="line" key={lineIdx}>
-                {line.map((word, wordIdx) => {
-                  const globalIdx = lineIdx * 2 + wordIdx;
-                  const isGreen = word === "KINETIX";
-                  return (
-                    <motion.span
-                      key={wordIdx}
-                      className={`word ${isGreen ? "green" : ""}`}
-                      initial={{ opacity: 0, y: "100%", rotateX: -70 }}
-                      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                      viewport={{ once: false, amount: 0.3 }}
-                      transition={{
-                        duration: 0.6,
-                        ease: [0.22, 1, 0.36, 1],
-                        delay: 0.1 + globalIdx * 0.1,
-                      }}
-                    >
-                      {word}
-                    </motion.span>
-                  );
-                })}
-              </span>
+            {headingWords.map((word) => (
+              <motion.span
+                key={word.index}
+                className={`word ${word.green ? "green" : ""}`}
+                initial={{ opacity: 0, y: 60, rotateX: -70 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: 0.15 + word.index * 0.12,
+                }}
+              >
+                {word.text}
+              </motion.span>
             ))}
           </h2>
 
@@ -86,7 +79,7 @@ function Trainers() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.55 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.7 }}
           >
             <button className="trainer-arrow" onClick={handlePrev} aria-label="Previous">
               ←

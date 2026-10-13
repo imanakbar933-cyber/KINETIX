@@ -62,6 +62,10 @@
    HEADING
 ========================================================= */
 
+/* =========================================================
+   HEADING
+========================================================= */
+
 .trainers-heading {
   margin: 0;
   color: #ffffff;
@@ -71,21 +75,17 @@
   line-height: 1.1;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
 
-.trainers-heading .line {
-  display: block;
-  overflow: hidden;
-  padding: 4px 0;
+  display: flex;
+  flex-wrap: wrap;                /* ✅ words wrap honge */
+  gap: 0 14px;                    /* ✅ words ke beech gap */
+  max-width: 100%;
   perspective: 800px;
 }
 
 .trainers-heading .word {
   display: inline-block;
-  margin-right: 14px;
+  white-space: nowrap;            /* ✅ har word ek line me */
 }
 
 .trainers-heading .word.green {

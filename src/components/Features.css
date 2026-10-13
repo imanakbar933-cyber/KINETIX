@@ -5,7 +5,7 @@
    ============================================ */
 .features-section {
   position: relative;
-  background: #1c1c1c;
+ background: #050505;
   color: #fff;
   padding: 120px 40px 100px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -165,7 +165,7 @@
   inset: 0;
 
   /* ✅ Image path */
-  background-image: url("/assets/gym-background.jpg");
+  background-image: url("/gym-assets/gym-background.jpg");
   background-size: 400% 100%;           /* ✅ 4x width — split into 4 */
   background-repeat: no-repeat;
 
@@ -452,3 +452,4 @@
     font-size: 1rem;
   }
 }
+
