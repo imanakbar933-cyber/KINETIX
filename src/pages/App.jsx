@@ -2,24 +2,28 @@
 import Hero from "../components/Hero";
 import Headlines from "../components/Headlines";
 import GymShowcase from "../components/GymShowcase";
-import Footer from "../components/Footer";
-
 import About from "../components/About";
-import Membership from "../components/Membership";
 
-
+import Contact from "../components/Contact";
+import FAQ from "../components/FAQ";
+import Newsletter from "../components/Newsletter";
+import Schedule from "../components/Schedule";
 
 function Home() {
   return (
     <>
-      
+      {/* Iman's Existing Home Components */}
       <Hero />
-      <Headlines /> 
+      <Headlines />
       <GymShowcase />
       <About />
-      {/* <Membership /> */}
-      <Headlines /> 
-    
+      <Headlines />
+
+      {/* Your Home Components */}
+      <Schedule />
+      <Contact />
+      <FAQ />
+      <Newsletter />
     </>
   );
 }
