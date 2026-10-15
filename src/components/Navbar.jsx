@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import "./Navbar.css";
 
 function Navbar() {
@@ -124,16 +124,8 @@ function Navbar() {
                 className={`dropdown-menu ${
                   dropdownOpen ? "show" : ""
                 }`}
-              >
-
-                <a
-                  href="#team"
-                  className="dropdown-item"
-                >
-                  Team
-                </a>
-
-                <a
+              ><Link to="/team" className="dropdown-item">Team</Link>
+                  <a
                   href="#classroom"
                   className="dropdown-item"
                 >

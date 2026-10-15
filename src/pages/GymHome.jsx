@@ -5,7 +5,7 @@ import FAQ from '../components/FAQ';
 import Exercises from '../components/Exercises';
 import AboutFAQ from '../components/AbouFAQ';
 import ClientStories from '../components/Clientstories';
-import TeamHeroSection from '../components/TeamHeroSection';
+
 function Home() {
   return (
     <div style={{ background: '#fefdfd', minHeight: '100vh' }}>
@@ -18,7 +18,7 @@ function Home() {
      <AboutFAQ />
      <Contact />
      <ClientStories />
-     <TeamHeroSection />
+    
     
            </div>
            
