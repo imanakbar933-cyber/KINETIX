@@ -12,21 +12,21 @@ const TeamFaces = () => {
       name: "AHMED RAZA",
       role: "Head Trainer",
       image: "/gym-assets/AHMED.jpg",
-      link: "/team/Ahmed",
+      link: "/team/ahmed",
     },
     {
       id: 2,
       name: "BILAL KHAN",
       role: "Fitness Coach",
       image: "/gym-assets/Bilal.jpg",
-      link: "/team/Bilal",
+      link: "/team/bilal",
     },
     {
       id: 3,
       name: "FATIMA ALI",
       role: "Yoga Instructor",
       image: "/gym-assets/Fatimah.jpg",
-      link: "/team/Fatima",
+      link: "/team/fatima",
     },
   ];
 

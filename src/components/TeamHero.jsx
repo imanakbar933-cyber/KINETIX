@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import "./TeamHero.css";
 
-const TeamHero = () => {
+const TeamHero = ({ title = "OUR TEAM", breadcrumb = "OUR TEAM" }) => {
   return (
     <section className="teamhero-section">
 
@@ -15,7 +15,7 @@ const TeamHero = () => {
       {/* Content */}
       <div className="teamhero-container">
 
-        {/* Main Title */}
+        {/* Main Title — Dynamic */}
         <motion.h1
           className="teamhero-title"
           initial={{ opacity: 0, x: -80 }}
@@ -23,10 +23,10 @@ const TeamHero = () => {
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
         >
-          OUR TEAM
+          {title}
         </motion.h1>
 
-        {/* Breadcrumb */}
+        {/* Breadcrumb — Dynamic */}
         <motion.nav
           className="teamhero-breadcrumb"
           initial={{ opacity: 0, x: -60 }}
@@ -37,7 +37,7 @@ const TeamHero = () => {
         >
           <Link to="/" className="breadcrumb-link">HOME</Link>
           <span className="breadcrumb-separator">/</span>
-          <span className="breadcrumb-current">OUR TEAM</span>
+          <span className="breadcrumb-current">{breadcrumb}</span>
         </motion.nav>
 
       </div>

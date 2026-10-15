@@ -1,0 +1,235 @@
+/* src/pages/TeamMember.css */
+
+/* ============================================
+   PAGE
+   ============================================ */
+.teammember-page {
+  background: #0a0a0a;
+  min-height: 100vh;
+}
+
+/* ============================================
+   NOT FOUND
+   ============================================ */
+.teammember-notfound {
+  padding: 200px 60px;
+  text-align: center;
+  background: #0a0a0a;
+  min-height: 70vh;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.teammember-notfound h1 {
+  font-size: 3rem;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.teammember-notfound p {
+  color: #8a8a8a;
+  font-size: 1.1rem;
+  margin: 0 0 30px 0;
+}
+
+.teammember-back-btn {
+  display: inline-block;
+  color: #4ade80;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: 2px solid #4ade80;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.teammember-back-btn:hover {
+  background: #4ade80;
+  color: #0a0a0a;
+}
+
+/* ============================================
+   MEMBER DETAIL SECTION
+   ============================================ */
+.memberdetail-section {
+  background: #0a0a0a;
+  color: #fff;
+  padding: 100px 60px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+}
+
+.memberdetail-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.memberdetail-content {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 70px;
+  align-items: start;
+}
+
+/* LEFT — Image */
+.memberdetail-image-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid rgba(74, 222, 128, 0.2);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(74, 222, 128, 0.1);
+  aspect-ratio: 3 / 4;
+}
+
+.memberdetail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* RIGHT — Info */
+.memberdetail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-top: 20px;
+}
+
+.memberdetail-name {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -1.5px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.memberdetail-role {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #8a8a8a;
+  letter-spacing: 1px;
+  margin: 0;
+  font-style: italic;
+}
+
+.memberdetail-bio {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #b5b5b5;
+  margin: 0;
+  max-width: 620px;
+}
+
+/* Experience Block */
+.memberdetail-experience-block {
+  margin-top: 30px;
+}
+
+.memberdetail-block-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 30px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.memberdetail-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.memberdetail-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.memberdetail-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.memberdetail-bar-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+.memberdetail-bar-percent {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #4ade80;
+  letter-spacing: 0.5px;
+}
+
+.memberdetail-bar-track {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(74, 222, 128, 0.15);
+}
+
+.memberdetail-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.6);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .memberdetail-section {
+    padding: 80px 30px;
+  }
+
+  .memberdetail-content {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .memberdetail-image-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .memberdetail-name {
+    font-size: 2.6rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .memberdetail-section {
+    padding: 60px 20px;
+  }
+
+  .memberdetail-name {
+    font-size: 2rem;
+  }
+
+  .memberdetail-bio {
+    font-size: 0.95rem;
+  }
+}
