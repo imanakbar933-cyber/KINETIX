@@ -5,13 +5,17 @@ import React from "react";
 import TeamHero from "../components/TeamHero";
 // import TeamSection from "../components/TeamSection";
 import Footer from "../components/Footer";
+import TeamFaces from "../components/TeamFaces"; 
 
 const Team = () => {
   return (
     <div>
       {/* <Navbar /> */}
-      <TeamHero />
+     
       {/* <TeamSection /> */}
+      
+       <TeamHero />
+       <TeamFaces />
       <Footer />
     </div>
   );
