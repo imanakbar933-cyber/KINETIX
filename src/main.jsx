@@ -11,6 +11,7 @@ import About from "./pages/About.jsx";
 import GymHome from "./pages/GymHome.jsx";
 import Team from "./pages/Team.jsx";
 import TeamMember from "./pages/TeamMember1";  
+import SchedulePage from "./pages/SchedulePage.jsx";
 
 
 createRoot(document.getElementById("root")).render(
@@ -30,7 +31,8 @@ createRoot(document.getElementById("root")).render(
         <Route path="/gym-home" element={<GymHome />} />
   
          <Route path="/team" element={<Team />} />
-          <Route path="/team/:memberId" element={<TeamMember />} />   
+          <Route path="/team/:memberId" element={<TeamMember />} />  
+          <Route path="/schedules" element={<SchedulePage />} /> 
       </Routes>
 
       {/* ✅ Footer har page par (last me) */}

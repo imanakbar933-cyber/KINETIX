@@ -132,12 +132,7 @@ function Navbar() {
                   Classroom
                 </a>
 
-                <a
-                  href="#schedules"
-                  className="dropdown-item"
-                >
-                  Schedules
-                </a>
+                <Link to="/schedules" className="dropdown-item">Schedules</Link>
                 <a
                   href="#gallery"
                   className="dropdown-item"
