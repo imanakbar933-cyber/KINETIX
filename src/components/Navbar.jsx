@@ -125,12 +125,7 @@ function Navbar() {
                   dropdownOpen ? "show" : ""
                 }`}
               ><Link to="/team" className="dropdown-item">Team</Link>
-                  <a
-                  href="#classroom"
-                  className="dropdown-item"
-                >
-                  Classroom
-                </a>
+                  <Link to="/ClassroomPage" className="dropdown-item">ClassRoom</Link>
 
                 <Link to="/schedules" className="dropdown-item">Schedules</Link>
                 <a
@@ -140,12 +135,7 @@ function Navbar() {
                   Gallery
                 </a>
 
-                <a
-                  href="#faq"
-                  className="dropdown-item"
-                >
-                  FAQ
-                </a>
+                <Link to="/faqpage" className="dropdown-item">FAQ</Link>
 
               </div>
             </div>

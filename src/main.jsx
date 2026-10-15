@@ -12,7 +12,8 @@ import GymHome from "./pages/GymHome.jsx";
 import Team from "./pages/Team.jsx";
 import TeamMember from "./pages/TeamMember1";  
 import SchedulePage from "./pages/SchedulePage.jsx";
-
+import FaqPage from "./pages/FaqPage.jsx";
+import ClassroomPage from "./pages/ClassroomPage";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -33,6 +34,8 @@ createRoot(document.getElementById("root")).render(
          <Route path="/team" element={<Team />} />
           <Route path="/team/:memberId" element={<TeamMember />} />  
           <Route path="/schedules" element={<SchedulePage />} /> 
+          <Route path="/Faqpage" element={<FaqPage />} />
+          <Route path="/ClassroomPage" element={<ClassroomPage/>} />
       </Routes>
 
       {/* ✅ Footer har page par (last me) */}
