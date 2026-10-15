@@ -2,16 +2,14 @@
 
 import React from "react";
 import ClassroomHero from "../components/ClassroomHero";
-// import Classroom from "../components/Classroom";
+import ClassroomContent from "../components/ClassroomContent";
 
 const ClassroomPage = () => {
   return (
     <div>
       {/* ✅ Classroom Hero */}
       <ClassroomHero />
-
-      {/* ✅ Classroom Content */}
-      {/* <Classroom /> */}
+      <ClassroomContent  /> 
     </div>
   );
 };
