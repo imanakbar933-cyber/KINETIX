@@ -3,6 +3,8 @@
 import React from "react";
 import ClassroomHero from "../components/ClassroomHero";
 import ClassroomContent from "../components/ClassroomContent";
+import  Classroom from "../components/Classroom"; 
+
 
 const ClassroomPage = () => {
   return (
@@ -10,6 +12,8 @@ const ClassroomPage = () => {
       {/* ✅ Classroom Hero */}
       <ClassroomHero />
       <ClassroomContent  /> 
+      <Classroom />
+       
     </div>
   );
 };

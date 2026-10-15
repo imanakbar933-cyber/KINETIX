@@ -1,0 +1,286 @@
+/* src/components/ClassroomContent.css */
+
+/* ============================================
+   SECTION
+   ============================================ */
+.classroomcontent-section {
+  position: relative;
+  background: #0a0a0a;
+  color: #fff;
+  padding: 100px 60px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+}
+
+.classroomcontent-section::before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(
+    circle,
+    rgba(74, 222, 128, 0.05) 0%,
+    transparent 70%
+  );
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.classroomcontent-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.classroomcontent-header {
+  text-align: center;
+  margin-bottom: 70px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.classroomcontent-subtitle {
+  color: #4ade80;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin: 0 0 18px 0;
+  text-shadow: 0 0 30px rgba(74, 222, 128, 0.4);
+}
+
+.classroomcontent-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+}
+
+.classroomcontent-highlight {
+  color: #4ade80;
+  text-shadow: 0 0 40px rgba(74, 222, 128, 0.5);
+}
+
+.classroomcontent-description {
+  font-size: 1.05rem;
+  color: #8a8a8a;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ============================================
+   ✅ GRID — 3 COLUMNS (FORCE)
+   ============================================ */
+.classroomcontent-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 30px !important;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* ============================================
+   CLASS CARD
+   ============================================ */
+.classcard {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #141414;
+  border: 1px solid rgba(74, 222, 128, 0.1);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.classcard:hover {
+  border-color: rgba(74, 222, 128, 0.5);
+  box-shadow:
+    0 25px 60px rgba(74, 222, 128, 0.15),
+    0 0 0 1px rgba(74, 222, 128, 0.3);
+  background: #1a1a1a;
+}
+
+.classcard-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ============================================
+   IMAGE
+   ============================================ */
+.classcard-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.classcard-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s ease;
+}
+
+.classcard:hover .classcard-image {
+  transform: scale(1.08);
+}
+
+.classcard-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 50%,
+    rgba(10, 10, 10, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+/* ============================================
+   BODY
+   ============================================ */
+.classcard-body {
+  padding: 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.classcard-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.25;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.classcard:hover .classcard-title {
+  color: #4ade80;
+}
+
+.classcard-desc {
+  font-size: 0.95rem;
+  color: #a0a0a0;
+  line-height: 1.7;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.classcard:hover .classcard-desc {
+  color: #d0d0d0;
+}
+
+/* ============================================
+   READ MORE
+   ============================================ */
+.classcard-readmore {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #4ade80;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-top: auto;
+  padding-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.classcard-readmore svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.classcard:hover .classcard-readmore {
+  color: #22c55e;
+}
+
+.classcard:hover .classcard-readmore svg {
+  transform: translateX(8px);
+}
+
+/* ============================================
+   RESPONSIVE — Sirf Mobile
+   ============================================ */
+
+/* Tablet (2 columns) — sirf 900px se neeche */
+@media (max-width: 900px) {
+  .classroomcontent-section {
+    padding: 80px 40px;
+  }
+
+  .classroomcontent-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+  }
+
+  .classroomcontent-title {
+    font-size: 2.6rem;
+  }
+}
+
+/* Mobile (1 column) — sirf 600px se neeche */
+@media (max-width: 600px) {
+  .classroomcontent-section {
+    padding: 60px 20px;
+  }
+
+  .classroomcontent-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .classroomcontent-title {
+    font-size: 1.9rem;
+    letter-spacing: -1px;
+  }
+
+  .classroomcontent-description {
+    font-size: 0.95rem;
+  }
+
+  .classroomcontent-header {
+    margin-bottom: 50px;
+  }
+
+  .classcard-body {
+    padding: 24px 22px 22px;
+  }
+
+  .classcard-title {
+    font-size: 1.15rem;
+  }
+
+  .classcard-desc {
+    font-size: 0.88rem;
+  }
+}

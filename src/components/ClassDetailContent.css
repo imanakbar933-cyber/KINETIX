@@ -1,0 +1,415 @@
+/* src/components/ClassDetailContent.css */
+
+/* ============================================
+   SECTION
+   ============================================ */
+.classdetailcontent-section {
+  position: relative;
+  background: #0a0a0a;
+  color: #fff;
+  padding: 100px 60px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  overflow: hidden;
+}
+
+.classdetailcontent-section::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(
+    circle,
+    rgba(74, 222, 128, 0.04) 0%,
+    transparent 70%
+  );
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.classdetailcontent-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   GRID — 2 Columns (Left: Content, Right: Box)
+   ============================================ */
+.classdetailcontent-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* ============================================
+   LEFT SIDE
+   ============================================ */
+.classdetailcontent-left {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Heading */
+.classdetailcontent-heading {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0 0 8px 0;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+  position: relative;
+}
+
+.classdetailcontent-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 60px;
+  height: 2px;
+  background: #4ade80;
+  border-radius: 2px;
+}
+
+/* About Paragraph */
+.classdetailcontent-about {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #b5b5b5;
+  margin: 0 0 30px 0;
+}
+
+/* Features List */
+.classdetailcontent-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.classdetailcontent-features li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1rem;
+  color: #d0d0d0;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.classdetailcontent-features li:hover {
+  color: #4ade80;
+  transform: translateX(6px);
+}
+
+/* Check Icon */
+.feature-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.15);
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  color: #4ade80;
+  font-weight: 900;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.classdetailcontent-features li:hover .feature-check {
+  background: #4ade80;
+  color: #0a0a0a;
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.6);
+}
+
+/* ============================================
+   ✅ RIGHT SIDE — Info Box
+   ============================================ */
+.classdetailcontent-right {
+  position: sticky;
+  top: 100px;
+}
+
+.classdetailcontent-box {
+  background: #141414;
+  border: 1px solid rgba(74, 222, 128, 0.15);
+  border-radius: 18px;
+  padding: 35px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle Glow */
+.classdetailcontent-box::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(74, 222, 128, 0.15) 0%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.classdetailcontent-box:hover {
+  border-color: rgba(74, 222, 128, 0.4);
+  box-shadow: 0 20px 50px rgba(74, 222, 128, 0.12);
+}
+
+/* Box Title */
+.classdetailcontent-box-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Box Description */
+.classdetailcontent-box-desc {
+  font-size: 0.9rem;
+  color: #8a8a8a;
+  line-height: 1.7;
+  margin: 0 0 10px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Box Items List */
+.classdetailcontent-box-items {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Each Item */
+.box-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  transition: transform 0.3s ease;
+}
+
+.box-item:hover {
+  transform: translateX(4px);
+}
+
+/* Icon */
+.box-icon {
+  font-size: 1.2rem;
+  width: 26px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Label — "DATE:", "TIME:" etc */
+.box-label {
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  min-width: 105px;
+}
+
+/* Value */
+.box-value {
+  color: #a0a0a0;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Divider */
+.box-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(74, 222, 128, 0.3) 50%,
+    transparent 100%
+  );
+  margin: 8px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Price Row */
+.box-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.box-price-label {
+  color: #8a8a8a;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.box-price-value {
+  color: #4ade80;
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+}
+
+/* Buy Now Button */
+.box-buy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #ffffff;
+  color: #0a0a0a;
+  padding: 18px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.box-buy-btn:hover {
+  background: #4ade80;
+  box-shadow: 0 15px 40px rgba(74, 222, 128, 0.5);
+  transform: translateY(-3px);
+}
+
+.box-buy-plus {
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.box-buy-btn:hover .box-buy-plus {
+  transform: rotate(90deg);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .classdetailcontent-section {
+    padding: 80px 30px;
+  }
+
+  .classdetailcontent-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .classdetailcontent-right {
+    position: static;
+  }
+
+  .classdetailcontent-heading {
+    font-size: 1.3rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .classdetailcontent-section {
+    padding: 60px 20px;
+  }
+
+  .classdetailcontent-heading {
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+  }
+
+  .classdetailcontent-about {
+    font-size: 0.95rem;
+  }
+
+  .classdetailcontent-features li {
+    font-size: 0.9rem;
+  }
+
+  .classdetailcontent-box {
+    padding: 28px 22px;
+  }
+
+  .classdetailcontent-box-title {
+    font-size: 1.25rem;
+  }
+
+  .box-label {
+    min-width: 90px;
+    font-size: 0.8rem;
+  }
+
+  .box-value {
+    font-size: 0.85rem;
+  }
+
+  .box-icon {
+    font-size: 1rem;
+    width: 22px;
+  }
+
+  .box-price-value {
+    font-size: 1.1rem;
+  }
+
+  .box-buy-btn {
+    padding: 15px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .box-label {
+    min-width: 80px;
+    font-size: 0.75rem;
+  }
+
+  .box-value {
+    font-size: 0.8rem;
+  }
+}
