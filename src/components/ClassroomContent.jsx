@@ -74,28 +74,9 @@ const ClassroomContent = () => {
             playsInline
             preload="auto"
           >
-            <source src="/gym-assets/classroom.mp4" type="video/mp4" />
+            <source src="/gym-assets/Flexibility.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-
-          {/* Buy Now Floating Button */}
-          <motion.button
-            className="classroomcontent-buy"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
-            animate={{
-              y: [0, -8, 0],
-            }}
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 0 30px rgba(74, 222, 128, 0.5)",
-            }}
-          >
-            <span>Buy Now</span>
-            <span className="buy-plus">+</span>
-          </motion.button>
 
         </motion.div>
 
