@@ -4,7 +4,6 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import TeamHero from "../components/TeamHero";
-import Footer from "../components/Footer";
 import "./TeamMember1.css";
 
 const TeamMember1 = () => {
@@ -64,7 +63,6 @@ const TeamMember1 = () => {
             ← Back to Team
           </Link>
         </section>
-        <Footer />
       </div>
     );
   }
@@ -129,8 +127,6 @@ const TeamMember1 = () => {
           </div>
         </div>
       </section>
-
-      <Footer/>
     </div>
   );
 };
