@@ -1,0 +1,235 @@
+/* src/styles/Exercises.css */
+
+/* ---------- Section ---------- */
+.exercises-section {
+  background: #1c1c1c;
+  color: #fff;
+  padding: 100px 40px 80px;
+  min-height: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+}
+
+.exercises-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ---------- Header ---------- */
+.exercises-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.exercises-subtitle {
+  color: #4ade80;
+  font-size: 0.9rem;
+  letter-spacing: 4px;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+  font-family: inherit;
+}
+
+.exercises-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: #ffffff;
+  margin: 0;
+  text-transform: uppercase;
+  font-family: inherit;
+} /* ✅ NEW — Description Paragraph */
+.exercises-description {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #9a9a9a;
+  max-width: 720px;
+  margin: 30px auto 0 auto;      /* ✅ Title ke baad gap */
+  text-align: center;
+  font-family: inherit;
+}
+
+/* Header margin thoda adjust karo */
+.exercises-header {
+  text-align: center;
+  margin-bottom: 80px;            /* ✅ 100px → 80px */
+}
+
+/* ---------- Grid — 4 Cards ---------- */
+.exercises-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+/* ---------- Exercise Card ---------- */
+.exercise-card {
+  background: #202020;
+  border: 1px solid #2a2a2a;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.exercise-card:hover {
+  border-color: rgba(74, 222, 128, 0.5);
+  background: #232323;
+  box-shadow: 0 15px 40px rgba(74, 222, 128, 0.15);
+}
+
+/* ---------- Video Wrapper ---------- */
+.exercise-video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  background: #000;
+}
+
+.exercise-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+/* Green overlay on top */
+.exercise-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(28, 28, 28, 0.9) 100%
+  );
+  pointer-events: none;
+  transition: background 0.4s ease;
+}
+
+.exercise-card:hover .exercise-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(74, 222, 128, 0.1) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(28, 28, 28, 0.95) 100%
+  );
+}
+
+/* Number badge (top-left) */
+.exercise-number {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 44px;
+  height: 44px;
+  background: rgba(28, 28, 28, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(74, 222, 128, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #4ade80;
+  letter-spacing: 1px;
+  z-index: 2;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.exercise-card:hover .exercise-number {
+  background: #4ade80;
+  color: #0a0a0a;
+  border-color: #4ade80;
+}
+
+/* ---------- Content ---------- */
+.exercise-content {
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.exercise-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  line-height: 1.3;
+  font-family: inherit;
+  transition: color 0.3s ease;
+}
+
+.exercise-card:hover .exercise-title {
+  color: #4ade80;
+}
+
+/* Green underline */
+.exercise-underline {
+  height: 2px;
+  background: #4ade80;
+  border-radius: 2px;
+}
+
+.exercise-desc {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #9a9a9a;
+  margin: 0;
+  font-family: inherit;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1200px) {
+  .exercises-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .exercises-title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .exercises-section {
+    padding: 60px 20px;
+  }
+
+  .exercises-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .exercises-title {
+    font-size: 2rem;
+  }
+
+  .exercises-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+  }
+
+  .exercise-video-wrapper {
+    height: 220px;
+  }
+
+  .exercise-title {
+    font-size: 1.05rem;
+  }
+
+  .exercise-desc {
+    font-size: 0.88rem;
+  }
+}

@@ -1,0 +1,284 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.footer-section {
+  background-color: #111111;
+  color: #ffffff;
+  padding: 80px 60px 40px;
+  overflow-x: hidden;
+  
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.5fr 1.5fr;
+  gap: 40px;
+}
+
+/* --- Column Styles --- */
+.footer-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Brand Column --- */
+.brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Square 'K' Logo */
+.logo-square {
+  width: 45px;
+  height: 45px;
+  background-color: #333333; /* Dark grey default */
+  border: 2px solid #4caf50;
+  border-radius: 8px; /* Smooth Square */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+  transition: all 0.4s ease; /* Smooth Transition */
+  cursor: pointer;
+}
+
+/* Logo Hover Effect: Color becomes Green */
+.logo-square:hover {
+  background-color: #4caf50; /* Green Background on Hover */
+  transform: rotate(-5deg) scale(1.1); /* Slight tilt + zoom */
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.7); /* Stronger Glow */
+}
+
+/* 'K' Letter Styling */
+.logo-letter {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #4caf50; /* Green Default */
+  
+  line-height: 1;
+  transition: color 0.4s ease; /* Smooth Color Transition */
+}
+
+/* Hover par 'K' White ho jayega */
+.logo-square:hover .logo-letter {
+  color: #ffffff; 
+}
+
+.brand-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin: 0;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.brand-name:hover {
+  color: #4caf50;
+}
+
+.brand-sub {
+  color: #888;
+  font-size: 0.9rem;
+  letter-spacing: 4px;
+  margin-top: -10px;
+}
+
+/* Contact Info */
+.contact-info {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.contact-info li {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  color: #b0b0b0;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.contact-info li:hover {
+  color: #4caf50; /* Green on hover */
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  stroke: #b0b0b0;
+  flex-shrink: 0;
+  margin-top: 3px;
+  transition: stroke 0.3s ease;
+}
+
+.contact-info li:hover .contact-icon {
+  stroke: #4caf50; /* Icon green on hover */
+}
+
+/* --- Links Column --- */
+.col-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footer-links a {
+  color: #b0b0b0;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #4caf50; /* Green */
+  transform: translateX(8px); /* Slide Right */
+}
+
+/* --- Opening Hours Column --- */
+.hours-block {
+  margin-bottom: 25px;
+}
+
+.day-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.time-text {
+  color: #b0b0b0;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.time-text:hover {
+  color: #4caf50;
+}
+
+/* --- Newsletter Column --- */
+.newsletter-text {
+  color: #b0b0b0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.newsletter-form {
+  display: flex;
+  align-items: center;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-bottom: 25px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.newsletter-form:focus-within {
+  border-color: #4caf50;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.2);
+}
+
+.newsletter-form input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.newsletter-form input::placeholder {
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.newsletter-form input:focus::placeholder {
+  color: #4caf50;
+}
+
+.newsletter-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.newsletter-btn:hover {
+  transform: translateX(5px) scale(1.1);
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-box {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.social-box:hover {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  transform: translateY(-5px) rotate(5deg);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+/* --- Responsive Design (Mobile) --- */
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .brand-logo {
+    justify-content: flex-start;
+  }
+}

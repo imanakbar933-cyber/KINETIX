@@ -1,0 +1,212 @@
+/* src/styles/FAQ.css */
+
+/* ================= SECTION ================= */
+.faq-section {
+background: #050505;
+  color: #fff;
+  padding: 80px 60px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+}
+
+.faq-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;      /* ✅ Left chhota, right bara */
+  gap: 80px;
+  align-items: start;
+}
+
+/* ================= LEFT SIDE — Title + Description ================= */
+.faq-left {
+  padding-top: 20px;
+  position: sticky;                       /* ✅ Scroll pe fix rahe */
+  top: 100px;
+}
+
+.faq-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin: 0 0 24px 0;
+  text-transform: uppercase;
+}
+
+.faq-subtitle-text {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #8a8a8a;
+  margin: 0 0 35px 0;
+  max-width: 500px;
+}
+
+/* ✅ CTA Button — Screenshot 2 jaisa */
+.faq-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #4ade80;
+  color: #0a0a0a;
+  border: none;
+  padding: 16px 32px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(74, 222, 128, 0.3);
+}
+
+.faq-cta-btn:hover {
+  background: #22c55e;
+  box-shadow: 0 12px 35px rgba(74, 222, 128, 0.5);
+}
+
+/* ================= RIGHT SIDE — FAQ List ================= */
+.faq-right {
+  padding-top: 20px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---------- FAQ Item ---------- */
+.faq-item {
+  background: #1e1e1e;
+  border: 1px solid #2c2c2c;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.faq-item:hover {
+  border-color: rgba(74, 222, 128, 0.35);
+}
+
+.faq-item.open {
+  border-color: rgba(74, 222, 128, 0.5);
+  background: #202420;
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 26px 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.faq-q-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  line-height: 1.45;
+  transition: color 0.3s ease;
+  flex: 1;
+}
+
+.faq-item.open .faq-q-text {
+  color: #4ade80;
+}
+
+.faq-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7a7a7a;
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.faq-item.open .faq-icon {
+  color: #4ade80;
+}
+
+.faq-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.faq-answer {
+  overflow: hidden;
+}
+
+.faq-a-text {
+  padding: 0 30px 26px 30px;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #b5b5b5;
+  margin: 0;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width: 1000px) {
+  .faq-section {
+    padding: 70px 30px;
+  }
+
+  .faq-container {
+    grid-template-columns: 1fr;          /* ✅ Stack on mobile */
+    gap: 50px;
+  }
+
+  .faq-left {
+    position: static;                    /* Sticky remove on mobile */
+    padding-top: 0;
+  }
+
+  .faq-title {
+    font-size: 2.4rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .faq-section {
+    padding: 50px 20px;
+  }
+
+  .faq-title {
+    font-size: 1.9rem;
+  }
+
+  .faq-subtitle-text {
+    font-size: 0.98rem;
+  }
+
+  .faq-q-text {
+    font-size: 1rem;
+  }
+
+  .faq-question {
+    padding: 20px 22px;
+    gap: 16px;
+  }
+
+  .faq-a-text {
+    padding: 0 22px 20px 22px;
+    font-size: 0.95rem;
+  }
+
+  .faq-cta-btn {
+    padding: 14px 26px;
+    font-size: 0.85rem;
+  }
+}
