@@ -1,0 +1,399 @@
+/* =========================================================
+   TRAINER DETAIL PAGE
+========================================================= */
+
+.trainer-detail-page {
+  width: 100%;
+  background: #050505;
+  font-family: Arial, sans-serif;
+}
+
+/* =========================================================
+   DETAIL SECTION
+========================================================= */
+
+.trainer-detail {
+  width: 100%;
+  padding: 100px 5%;
+  background: #050505;
+}
+
+.trainer-detail-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* =========================================================
+   LEFT SIDE
+========================================================= */
+
+.trainer-detail-left {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.trainer-detail-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(3, 234, 4, 0.15);
+  box-shadow:
+    0 0 0 1px rgba(3, 234, 4, 0.05),
+    0 20px 50px rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.trainer-detail-image:hover {
+  border-color: rgba(3, 234, 4, 0.5);
+  box-shadow:
+    0 0 25px rgba(3, 234, 4, 0.25),
+    0 25px 60px rgba(0, 0, 0, 0.7);
+}
+
+.trainer-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.trainer-detail-image:hover img {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   EXPERIENCE (Below Image)
+========================================================= */
+
+.trainer-experience {
+  padding: 24px 0;
+}
+
+.trainer-experience h3 {
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.trainer-experience p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.trainer-detail-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.trainer-detail-name {
+  margin: 0;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.trainer-detail-role {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.trainer-detail-about {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.85;
+  max-width: 580px;
+}
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.trainer-section-title {
+  margin: 30px 0 16px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.trainer-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.skill-row {
+  width: 100%;
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.skill-name {
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.skill-percent {
+  color: #03ea04;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(3, 234, 4, 0.6);
+}
+
+.skill-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #03ea04, #03ea04);
+  border-radius: 3px;
+  box-shadow: 0 0 12px rgba(3, 234, 4, 0.6);
+  position: relative;
+}
+
+.skill-fill::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(3, 234, 4, 0.9);
+}
+
+/* =========================================================
+   SOCIAL ICONS
+========================================================= */
+
+.trainer-socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.trainer-socials a {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trainer-socials a:hover {
+  background: #03ea04;
+  color: #050505;
+  border-color: #03ea04;
+  box-shadow: 0 0 20px rgba(3, 234, 4, 0.6);
+  transform: translateY(-3px);
+}
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+.trainer-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 580px;
+}
+
+.trainer-contact-form input,
+.trainer-contact-form textarea {
+  width: 100%;
+  padding: 14px 18px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  resize: none;
+}
+
+.trainer-contact-form input::placeholder,
+.trainer-contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.trainer-contact-form input:focus,
+.trainer-contact-form textarea:focus {
+  outline: none;
+  border-color: #03ea04;
+  box-shadow: 0 0 15px rgba(3, 234, 4, 0.25);
+}
+
+.trainer-contact-form button {
+  align-self: flex-start;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #03ea04, #02b803);
+  color: #050505;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(3, 234, 4, 0.35);
+  margin-top: 8px;
+}
+
+.trainer-contact-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 30px rgba(3, 234, 4, 0.6);
+  background: linear-gradient(135deg, #03ea04, #03ea04);
+}
+
+/* =========================================================
+   NOT FOUND
+========================================================= */
+
+.trainer-not-found {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.trainer-not-found h1 {
+  font-size: 40px;
+  margin: 0;
+}
+
+.trainer-not-found a {
+  color: #03ea04;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .trainer-detail {
+    padding: 70px 5%;
+  }
+
+  .trainer-detail-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .trainer-detail-image {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .trainer-detail {
+    padding: 50px 20px;
+  }
+
+  .trainer-detail-name {
+    font-size: 30px;
+  }
+
+  .trainer-detail-role,
+  .trainer-detail-about {
+    font-size: 14px;
+  }
+
+  .trainer-experience h3,
+  .trainer-section-title {
+    font-size: 13px;
+  }
+
+  .skill-name,
+  .skill-percent {
+    font-size: 13px;
+  }
+
+  .trainer-socials a {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .trainer-contact-form button {
+    padding: 12px 28px;
+    font-size: 12px;
+  }
+}

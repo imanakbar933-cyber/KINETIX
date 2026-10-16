@@ -1,0 +1,244 @@
+/* =========================================
+   MAIN HEADLINES SECTION
+========================================= */
+
+.headlines-section {
+  width: 100%;
+  background-color: #090a0c;
+  overflow: hidden;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  margin: 0;
+}
+
+
+/* =========================================
+   HEADLINES ROW
+========================================= */
+
+.headlines-row {
+  width: 100%;
+  height: 80px;
+  background-color: #45464b;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  margin: 0;
+  padding: 0;
+
+  cursor: pointer;
+
+  transition: background-color 0.4s ease;
+}
+
+.headlines-row:hover {
+  background-color: #000000;
+}
+
+
+/* =========================================
+   SECOND ROW
+========================================= */
+
+.row-two {
+  margin-top: 25px;
+}
+
+
+/* =========================================
+   MARQUEE TRACK
+========================================= */
+
+.headlines-track {
+  display: flex;
+  align-items: center;
+
+  width: max-content;
+
+  white-space: nowrap;
+
+  gap: 38px;
+
+  margin: 0;
+  padding: 0;
+
+  user-select: none;
+}
+
+
+/* =========================================
+   TEXT STYLES
+========================================= */
+
+.white-text {
+  color: #ffffff;
+
+  font-size: 32px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  flex-shrink: 0;
+
+  transition: transform 0.3s ease;
+}
+
+
+.green-text {
+  color: transparent;
+
+  -webkit-text-stroke: 1.5px #00ff00;
+
+  font-size: 32px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  flex-shrink: 0;
+
+  transition:
+    transform 0.3s ease,
+    -webkit-text-stroke 0.3s ease;
+}
+
+
+/* =========================================
+   TEXT HOVER
+========================================= */
+
+.headlines-row:hover .white-text,
+.headlines-row:hover .green-text {
+  transform: scale(1.05);
+}
+
+
+.headlines-row:hover .green-text {
+  -webkit-text-stroke: 2px #00ff00;
+}
+
+
+/* =========================================
+   DUMBBELL ICON
+========================================= */
+
+.dumbbell-icon {
+  width: 42px;
+  height: 42px;
+
+  min-width: 42px;
+  min-height: 42px;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
+
+  display: block;
+
+  pointer-events: none;
+
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+
+/* =========================================
+   DUMBBELL HOVER
+========================================= */
+
+.headlines-row:hover .dumbbell-icon {
+  transform: scale(1.1) rotate(-10deg);
+
+  filter:
+    drop-shadow(0 0 6px #00ff00)
+    drop-shadow(0 0 12px #00ff00);
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+.row-one .headlines-track {
+  animation: moveLeft 30s linear infinite;
+}
+
+
+.row-two .headlines-track {
+  animation: moveRight 30s linear infinite;
+}
+
+
+@keyframes moveLeft {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+@keyframes moveRight {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .headlines-section {
+    padding-top: 45px;
+    padding-bottom: 45px;
+  }
+
+
+  .headlines-row {
+    height: 65px;
+  }
+
+
+  .row-two {
+    margin-top: 18px;
+  }
+
+
+  .white-text,
+  .green-text {
+    font-size: 23px;
+  }
+
+
+  .green-text {
+    -webkit-text-stroke: 1px #00ff00;
+  }
+
+
+  .dumbbell-icon {
+    width: 32px;
+    height: 32px;
+
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+
+  .headlines-track {
+    gap: 25px;
+  }
+}

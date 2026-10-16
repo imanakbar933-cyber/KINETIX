@@ -1,0 +1,461 @@
+/* =========================================================
+   TRAINERS SECTION
+========================================================= */
+
+.trainers {
+  position: relative;
+  width: 100%;
+  padding: 40px 5% 80px;
+  background: #050505;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.trainers-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* =========================================================
+   LEFT SIDE
+========================================================= */
+
+.trainers-left {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ---------- TAG ---------- */
+
+.trainers-tag {
+  display: inline-block;
+  color: #03ea04;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  position: relative;
+  padding-left: 40px;
+  text-shadow: 0 0 12px rgba(3, 234, 4, 0.5);
+}
+
+.trainers-tag::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 2px;
+  background: #03ea04;
+  box-shadow: 0 0 12px rgba(3, 234, 4, 0.9);
+  border-radius: 2px;
+}
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.trainers-heading {
+  margin: 0;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: clamp(38px, 4.5vw, 64px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  display: flex;
+  flex-wrap: wrap;                /* ✅ words wrap honge */
+  gap: 0 14px;                    /* ✅ words ke beech gap */
+  max-width: 100%;
+  perspective: 800px;
+}
+
+.trainers-heading .word {
+  display: inline-block;
+  white-space: nowrap;            /* ✅ har word ek line me */
+}
+
+.trainers-heading .word.green {
+  color: #03ea04;
+  text-shadow:
+    0 0 18px rgba(3, 234, 4, 0.7),
+    0 0 40px rgba(3, 234, 4, 0.4);
+}
+
+.trainers-heading:hover .word {
+  text-shadow:
+    0 0 18px rgba(3, 234, 4, 0.5),
+    0 0 40px rgba(3, 234, 4, 0.3);
+  transition: text-shadow 0.35s ease;
+}
+
+/* =========================================================
+   ARROW BUTTONS
+========================================================= */
+
+.trainers-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.trainer-arrow {
+  width: 52px;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+}
+
+.trainer-arrow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #03ea04;
+  transform: translateY(101%);
+  transition: transform 0.3s ease-out;
+  z-index: -1;
+}
+
+.trainer-arrow:hover::before {
+  transform: translateY(0);
+}
+
+.trainer-arrow:hover {
+  color: #050505;
+  border-color: #03ea04;
+  box-shadow: 0 0 22px rgba(3, 234, 4, 0.6);
+  transform: translateY(-4px);
+}
+
+.trainer-arrow:active {
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   SLIDER
+========================================================= */
+
+.trainers-slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.trainers-track {
+  display: flex;
+  gap: 20px;
+  will-change: transform;
+}
+
+/* =========================================================
+   TRAINER CARD
+========================================================= */
+
+.trainer-card {
+  flex: 0 0 calc((100% - 40px) / 3);
+}
+
+.trainer-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.trainer-card-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4.2;
+  border-radius: 10px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  transition:
+    transform 0.35s ease-out,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.trainer-card:hover .trainer-card-image {
+  transform: translateY(-10px);
+  border-color: rgba(3, 234, 4, 0.55);
+  box-shadow:
+    0 0 30px rgba(3, 234, 4, 0.22),
+    0 25px 50px rgba(0, 0, 0, 0.7);
+}
+
+.trainer-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease-out, filter 0.45s ease-out;
+  filter: brightness(0.95) saturate(1.05);
+}
+
+.trainer-card:hover .trainer-card-image img {
+  transform: scale(1.08);
+  filter: brightness(1.05) saturate(1.15);
+}
+
+/* =========================================================
+   NEON SWEEP — only on hover
+========================================================= */
+
+.trainer-sweep {
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(3, 234, 4, 0.18) 40%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(3, 234, 4, 0.18) 60%,
+    transparent 100%
+  );
+  transform: skewX(-18deg);
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.trainer-card:hover .trainer-sweep {
+  opacity: 1;
+  animation: trainerSweep 3s ease-in-out infinite;
+}
+
+@keyframes trainerSweep {
+  0%   { left: -60%; }
+  45%  { left: 130%; }
+  100% { left: 130%; }
+}
+
+/* =========================================================
+   SCAN LINE — only on hover
+========================================================= */
+
+.trainer-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -20%;
+  height: 18%;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(3, 234, 4, 0.12) 45%,
+    rgba(3, 234, 4, 0.35) 50%,
+    rgba(3, 234, 4, 0.12) 55%,
+    transparent 100%
+  );
+  opacity: 0;
+}
+
+.trainer-card:hover .trainer-scan {
+  opacity: 1;
+  animation: trainerScan 2.5s ease-in-out infinite;
+}
+
+@keyframes trainerScan {
+  0%   { top: -25%; opacity: 0; }
+  15%  { opacity: 0.9; }
+  85%  { opacity: 0.9; }
+  100% { top: 110%; opacity: 0; }
+}
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.trainer-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  transition: background 0.35s ease;
+}
+
+.trainer-card:hover .trainer-card-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(3, 234, 4, 0.08) 0%,
+    rgba(0, 0, 0, 0.35) 55%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+}
+
+/* =========================================================
+   NAME
+========================================================= */
+
+.trainer-card-name {
+  position: absolute;
+  left: 20px;
+  bottom: 22px;
+  z-index: 5;
+  margin: 0;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+  transition: transform 0.35s ease, color 0.35s ease;
+}
+
+.trainer-card:hover .trainer-card-name {
+  transform: translateY(-4px);
+  color: #03ea04;
+  text-shadow:
+    0 0 15px rgba(3, 234, 4, 0.8),
+    0 2px 12px rgba(0, 0, 0, 0.9);
+}
+
+/* =========================================================
+   ARROW BUTTON ON CARD
+========================================================= */
+
+.trainer-card-arrow {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 5;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-out;
+}
+
+.trainer-card:hover .trainer-card-arrow {
+  background: #03ea04;
+  color: #050505;
+  border-color: #03ea04;
+  box-shadow: 0 0 22px rgba(3, 234, 4, 0.8);
+  transform: rotate(45deg);
+}
+
+/* =========================================================
+   NEON CORNERS
+========================================================= */
+
+.t-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 6;
+  pointer-events: none;
+  border-color: #03ea04;
+  border-style: solid;
+  border-width: 0;
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.t-tl { top: 12px; left: 12px; border-top-width: 2px; border-left-width: 2px; transform: translate(-6px, -6px); }
+.t-tr { top: 12px; right: 12px; border-top-width: 2px; border-right-width: 2px; transform: translate(6px, -6px); }
+.t-bl { bottom: 12px; left: 12px; border-bottom-width: 2px; border-left-width: 2px; transform: translate(-6px, 6px); }
+.t-br { bottom: 12px; right: 12px; border-bottom-width: 2px; border-right-width: 2px; transform: translate(6px, 6px); }
+
+.trainer-card:hover .t-corner {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+  .trainers-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .trainers-heading {
+    font-size: 40px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .trainers {
+    padding: 30px 20px 70px;
+  }
+
+  .trainers-heading {
+    font-size: 32px;
+  }
+
+  .trainer-card {
+    flex: 0 0 100%;
+  }
+
+  .trainer-card-name {
+    font-size: 13px;
+    left: 12px;
+    bottom: 14px;
+  }
+
+  .trainer-card-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .trainer-arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+
+  .trainer-sweep,
+  .trainer-scan {
+    display: none;
+  }
+}

@@ -1,0 +1,1199 @@
+/* =========================================================
+   KINETIX WORKOUT ANIMATION
+========================================================= */
+
+.workout-animation {
+
+  width: 100%;
+
+  height: 450px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 55%,
+      rgba(97, 100, 97, 0.07),
+      transparent 30%
+    ),
+    #141414;
+
+  color: white;
+
+  margin: 0;
+
+  padding: 0;
+}
+
+
+/* =========================================================
+   BACKGROUND TEXT
+========================================================= */
+
+.workout-bg-text {
+
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  font-size: clamp(130px, 20vw, 300px);
+
+  font-weight: 950;
+
+  letter-spacing: -15px;
+
+  color: transparent;
+
+  -webkit-text-stroke: 1px rgba(255,255,255,0.045);
+
+  white-space: nowrap;
+
+  pointer-events: none;
+
+  animation: bgTextMove 8s ease-in-out infinite alternate;
+
+}
+
+
+@keyframes bgTextMove {
+
+  0% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+  }
+
+  100% {
+
+    transform:
+      translate(-48%, -50%)
+      scale(1.04);
+
+  }
+
+}
+
+
+/* =========================================================
+   FALLING DUMBBELLS
+========================================================= */
+
+.falling-dumbbells {
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 3;
+
+}
+
+
+.falling-dumbbell {
+
+  position: absolute;
+
+  font-size: 42px;
+
+  filter:
+    grayscale(1)
+    brightness(1.4);
+
+  opacity: 0;
+
+}
+
+
+/* =========================================================
+   DUMBBELL POSITIONS
+========================================================= */
+
+/* Almost sab ek sath start honge */
+
+.dumbbell-1 {
+  left: 15%;
+  top: -70px;
+}
+
+.play-animation .dumbbell-1 {
+  animation: dumbbellDrop1 1s ease-in forwards;
+}
+
+.dumbbell-2 {
+  left: 25%;
+  top: -90px;
+}
+
+.play-animation .dumbbell-2 {
+  animation: dumbbellDrop2 1.1s ease-in forwards;
+}
+
+
+.dumbbell-3 {
+  left: 36%;
+  top: -80px;
+}
+
+.play-animation .dumbbell-3 {
+  animation: dumbbellDrop3 1s ease-in forwards;
+}
+
+
+.dumbbell-4 {
+  left: 47%;
+  top: -100px;
+}
+
+.play-animation .dumbbell-4 {
+  animation: dumbbellDrop4 1.1s ease-in forwards;
+}
+
+
+.dumbbell-5 {
+  left: 58%;
+  top: -75px;
+}
+
+.play-animation .dumbbell-5 {
+  animation: dumbbellDrop5 cubic-bezier(0.075, 0.82, 0.165, 1) ease-in forwards;
+}
+
+
+.dumbbell-6 {
+  left: 68%;
+  top: -95px;
+}
+
+.play-animation .dumbbell-6 {
+  animation: dumbbellDrop6 1.15s ease-in forwards;
+}
+
+
+.dumbbell-7 {
+  left: 78%;
+  top: -70px;
+}
+
+.play-animation .dumbbell-7 {
+  animation: dumbbellDrop7 1.05s ease-in forwards;
+}
+
+
+.dumbbell-8 {
+  left: 87%;
+  top: -110px;
+}
+
+.play-animation .dumbbell-8 {
+  animation: dumbbellDrop8 1.15s ease-in forwards;
+}
+
+/* =========================================================
+   DUMBBELL DROP ANIMATIONS
+   FALL DOWN + STAY THERE
+========================================================= */
+
+@keyframes dumbbellDrop1 {
+
+  0% {
+
+    transform:
+      translateY(-100px)
+      rotate(-30deg);
+
+    opacity: 0;
+
+  }
+
+  12% {
+
+    opacity: 1;
+
+  }
+
+  88% {
+
+    transform:
+      translateY(395px)
+      rotate(170deg);
+
+    opacity: 1;
+
+  }
+
+  93% {
+
+    transform:
+      translateY(380px)
+      rotate(190deg);
+
+  }
+
+  100% {
+
+    transform:
+      translateY(395px)
+      rotate(205deg);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+@keyframes dumbbellDrop2 {
+
+  0% {
+
+    transform:
+      translateY(-120px)
+      rotate(40deg);
+
+    opacity: 0;
+
+  }
+
+  12% {
+
+    opacity: 1;
+
+  }
+
+  88% {
+
+    transform:
+      translateY(400px)
+      rotate(-160deg);
+
+    opacity: 1;
+
+  }
+
+  94% {
+
+    transform:
+      translateY(385px)
+      rotate(-185deg);
+
+  }
+
+  100% {
+
+    transform:
+      translateY(400px)
+      rotate(-200deg);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+@keyframes dumbbellDrop3 {
+
+  0% {
+
+    transform:
+      translateY(-100px)
+      rotate(-20deg);
+
+    opacity: 0;
+
+  }
+
+  12% {
+
+    opacity: 1;
+
+  }
+
+  88% {
+
+    transform:
+      translateY(390px)
+      rotate(160deg);
+
+    opacity: 1;
+
+  }
+
+  94% {
+
+    transform:
+      translateY(375px)
+      rotate(185deg);
+
+  }
+
+  100% {
+
+    transform:
+      translateY(390px)
+      rotate(200deg);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+@keyframes dumbbellDrop4 {
+
+  0% {
+
+    transform:
+      translateY(-130px)
+      rotate(35deg);
+
+    opacity: 0;
+
+  }
+
+  12% {
+
+    opacity: 1;
+
+  }
+
+  88% {
+
+    transform:
+      translateY(405px)
+      rotate(-170deg);
+
+    opacity: 1;
+
+  }
+
+  94% {
+
+    transform:
+      translateY(390px)
+      rotate(-195deg);
+
+  }
+
+  100% {
+
+    transform:
+      translateY(405px)
+      rotate(-215deg);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+@keyframes dumbbellDrop5 {
+
+  0% {
+
+    transform:
+      translateY(-100px)
+      rotate(-30deg);
+
+    opacity: 0;
+
+  }
+
+  12% {
+
+    opacity: 1;
+
+  }
+
+  88% {
+
+    transform:
+      translateY(395px)
+      rotate(180deg);
+
+    opacity: 1;
+
+  }
+
+  94% {
+
+    transform:
+      translateY(380px)
+      rotate(205deg);
+
+  }
+
+  100% {
+
+    transform:
+      translateY(395px)
+      rotate(220deg);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+@keyframes dumbbellDrop6 {
+
+  0% {
+
+    transform:
+      translateY(-120px)
+      rotate(25deg);
+
+    opacity: 0;
+
+  }
+
+  12% {
+
+    opacity: 1;
+
+  }
+
+  88% {
+
+    transform:
+      translateY(400px)
+      rotate(-180deg);
+
+    opacity: 1;
+
+  }
+
+  94% {
+
+    transform:
+      translateY(385px)
+      rotate(-205deg);
+
+  }
+
+  100% {
+
+    transform:
+      translateY(400px)
+      rotate(-220deg);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+@keyframes dumbbellDrop7 {
+
+  0% {
+
+    transform:
+      translateY(-90px)
+      rotate(-25deg);
+
+    opacity: 0;
+
+  }
+
+  12% {
+
+    opacity: 1;
+
+  }
+
+  88% {
+
+    transform:
+      translateY(395px)
+      rotate(170deg);
+
+    opacity: 1;
+
+  }
+
+  94% {
+
+    transform:
+      translateY(380px)
+      rotate(195deg);
+
+  }
+
+  100% {
+
+    transform:
+      translateY(395px)
+      rotate(210deg);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+@keyframes dumbbellDrop8 {
+
+  0% {
+
+    transform:
+      translateY(-140px)
+      rotate(40deg);
+
+    opacity: 0;
+
+  }
+
+  12% {
+
+    opacity: 1;
+
+  }
+
+  88% {
+
+    transform:
+      translateY(405px)
+      rotate(-170deg);
+
+    opacity: 1;
+
+  }
+
+  94% {
+
+    transform:
+      translateY(390px)
+      rotate(-195deg);
+
+  }
+
+  100% {
+
+    transform:
+      translateY(405px)
+      rotate(-210deg);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+/* =========================================================
+   CARTOON FITNESS CHARACTER
+========================================================= */
+
+.fitness-character {
+
+  position: absolute;
+
+  left: 80%;
+
+  bottom: 85px;
+
+  width: 180px;
+
+  height: 330px;
+
+  transform:
+    translateX(-50%)
+    scale(0.9);
+
+  transform-origin: bottom center;
+
+  animation:
+    characterExercise 2.5s ease-in-out infinite;
+
+  z-index: 5;
+
+}
+
+
+/* =========================================================
+   HEAD
+========================================================= */
+
+.character-head {
+
+  position: absolute;
+
+  width: 80px;
+
+  height: 80px;
+
+  border-radius: 50%;
+
+  background: #03ea04;
+
+  left: 50px;
+
+  top: 0;
+
+  box-shadow:
+    0 0 25px rgba(3,234,4,0.25);
+
+}
+
+
+/* =========================================================
+   EYES
+========================================================= */
+
+.eye {
+
+  position: absolute;
+
+  width: 7px;
+
+  height: 9px;
+
+  background: #050706;
+
+  border-radius: 50%;
+
+  top: 31px;
+
+}
+
+
+.eye-left {
+
+  left: 24px;
+
+}
+
+
+.eye-right {
+
+  right: 24px;
+
+}
+
+
+/* =========================================================
+   SMILE
+========================================================= */
+
+.character-mouth {
+
+  position: absolute;
+
+  width: 22px;
+
+  height: 10px;
+
+  border-bottom:
+    3px solid #050706;
+
+  border-radius: 50%;
+
+  left: 29px;
+
+  top: 45px;
+
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.character-body {
+
+  position: absolute;
+
+  width: 95px;
+
+  height: 125px;
+
+  background: #f1f1f1;
+
+  left: 43px;
+
+  top: 72px;
+
+  border-radius:
+    28px 28px 20px 20px;
+
+  border:
+    3px solid #050706;
+
+}
+
+
+/* Shirt K */
+
+.character-body::before {
+
+  content: "K";
+
+  position: absolute;
+
+  left: 30px;
+
+  top: 35px;
+
+  font-size: 45px;
+
+  font-weight: 950;
+
+  color: #03ea04;
+
+}
+
+
+/* =========================================================
+   ARMS
+========================================================= */
+
+.character-arm {
+
+  position: absolute;
+
+  width: 25px;
+
+  height: 110px;
+
+  background: #03ea04;
+
+  border:
+    3px solid #050706;
+
+  border-radius: 20px;
+
+  top: 82px;
+
+  transform-origin: top center;
+
+}
+
+
+.arm-left {
+
+  left: 20px;
+
+  transform:
+    rotate(35deg);
+
+  animation:
+    leftArmExercise 2.5s ease-in-out infinite;
+
+}
+
+
+.arm-right {
+
+  right: 20px;
+
+  transform:
+    rotate(-35deg);
+
+  animation:
+    rightArmExercise 2.5s ease-in-out infinite;
+
+}
+
+
+/* =========================================================
+   HANDS
+========================================================= */
+
+.character-hand {
+
+  position: absolute;
+
+  width: 30px;
+
+  height: 30px;
+
+  background: #03ea04;
+
+  border:
+    3px solid #050706;
+
+  border-radius: 50%;
+
+  bottom: -13px;
+
+  left: -5px;
+
+}
+
+
+/* =========================================================
+   LEGS
+========================================================= */
+
+.character-leg {
+
+  position: absolute;
+
+  width: 32px;
+
+  height: 100px;
+
+  background: #878a88;
+
+  border:
+    3px solid #050706;
+
+  border-radius:
+    10px 10px 18px 18px;
+
+  top: 190px;
+
+  transform-origin: top center;
+
+}
+
+
+.leg-left {
+
+  left: 55px;
+
+  transform:
+    rotate(8deg);
+
+}
+
+
+.leg-right {
+
+  right: 55px;
+
+  transform:
+    rotate(-8deg);
+
+}
+
+
+/* =========================================================
+   CHARACTER EXERCISE
+========================================================= */
+
+@keyframes characterExercise {
+
+  0%,
+  100% {
+
+    transform:
+      translateX(-50%)
+      translateY(0)
+      scale(0.9);
+
+  }
+
+  50% {
+
+    transform:
+      translateX(-50%)
+      translateY(-12px)
+      scale(0.93);
+
+  }
+
+}
+
+
+/* =========================================================
+   ARMS MOVEMENT
+========================================================= */
+
+@keyframes leftArmExercise {
+
+  0%,
+  100% {
+
+    transform:
+      rotate(35deg);
+
+  }
+
+  50% {
+
+    transform:
+      rotate(105deg);
+
+  }
+
+}
+
+
+@keyframes rightArmExercise {
+
+  0%,
+  100% {
+
+    transform:
+      rotate(-35deg);
+
+  }
+
+  50% {
+
+    transform:
+      rotate(-105deg);
+
+  }
+
+}
+
+
+/* =========================================================
+   CHARACTER DUMBBELLS
+========================================================= */
+
+.character-dumbbell {
+
+  position: absolute;
+
+  width: 42px;
+
+  height: 12px;
+
+  background: #03ea04;
+
+  border-radius: 5px;
+
+  z-index: 10;
+
+}
+
+
+.character-dumbbell::before,
+.character-dumbbell::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 15px;
+
+  height: 30px;
+
+  background: #191d1b;
+
+  border:
+    2px solid #03ea04;
+
+  border-radius: 4px;
+
+  top: -9px;
+
+}
+
+
+.character-dumbbell::before {
+
+  left: -7px;
+
+}
+
+
+.character-dumbbell::after {
+
+  right: -7px;
+
+}
+
+
+.dumbbell-left {
+
+  left: -10px;
+
+  top: 170px;
+
+  transform:
+    rotate(25deg);
+
+}
+
+
+.dumbbell-right {
+
+  right: -10px;
+
+  top: 170px;
+
+  transform:
+    rotate(-25deg);
+
+}
+
+
+/* =========================================================
+   GROUND
+========================================================= */
+
+.workout-ground {
+
+  position: absolute;
+
+  left: 80%;
+
+  bottom: 65px;
+
+  width: 350px;
+
+  height: 2px;
+
+  transform: translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #03ea04,
+      transparent
+    );
+
+  box-shadow:
+    0 0 15px rgba(3,234,4,0.5);
+
+}
+
+
+/* =========================================================
+   CAPTION
+========================================================= */
+
+.workout-caption {
+
+  position: absolute;
+
+  left: 6%;
+
+  bottom: 200x;
+
+  z-index: 8;
+
+}
+
+
+.workout-caption span {
+
+  color: #03ea04;
+
+  font-size: 70px;
+
+  font-weight: 1000;
+
+  letter-spacing: 3px;
+
+}
+
+
+.workout-caption h3 {
+
+  margin: 15px 0 0;
+
+  font-size: 38px;
+
+  line-height: 0.9;
+
+  letter-spacing: -2px;
+
+  font-weight: 900;
+
+}
+
+
+.workout-caption strong {
+
+  color: #03ea04;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .workout-animation {
+
+    height: 600px;
+
+  }
+
+
+  .fitness-character {
+
+    transform:
+      translateX(-50%)
+      scale(0.75);
+
+  }
+
+
+  .workout-caption {
+
+    left: 5%;
+
+    bottom: 35px;
+
+  }
+
+
+  .workout-caption h3 {
+
+    font-size: 28px;
+
+  }
+
+
+  .workout-bg-text {
+
+    font-size: 110px;
+
+  }
+
+
+  .falling-dumbbell {
+
+    font-size: 32px;
+
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .workout-animation * {
+
+    animation: none !important;
+
+  }
+
+
+  .falling-dumbbell {
+
+    opacity: 1;
+
+    transform: translateY(395px);
+
+  }
+
+}

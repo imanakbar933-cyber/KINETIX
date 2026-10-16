@@ -1,0 +1,522 @@
+/* =========================================
+   GYMFREAK SHOWCASE
+========================================= */
+
+.gym-showcase {
+  background: #080a0b;
+
+  color: white;
+
+  overflow: hidden;
+
+  /* Important:
+     Showcase khud extra top gap nahi dega
+  */
+  margin: 0;
+}
+
+
+/* =========================================
+   TOP SECTION
+========================================= */
+
+.showcase-top {
+  min-height: 620px;
+
+  display: grid;
+
+  grid-template-columns: 40% 60%;
+
+  position: relative;
+
+  padding: 0 6% 50px;
+
+  background:
+    radial-gradient(
+      circle at 75% 40%,
+      rgba(199, 255, 0, 0.04),
+      transparent 35%
+    ),
+    #080a0b;
+}
+/* =========================================
+   HEADING
+========================================= */
+
+.showcase-heading {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding-right: 50px;
+
+  position: relative;
+
+  z-index: 3;
+}
+
+
+/* =========================================
+   SMALL HEADING
+========================================= */
+
+.showcase-small {
+  color: #03ea04;
+
+  font-size: 11px;
+
+  letter-spacing: 4px;
+
+  font-weight: bold;
+
+  margin-bottom: 20px;
+}
+
+
+.showcase-small::after {
+  content: "";
+
+  display: inline-block;
+
+  width: 60px;
+
+  height: 2px;
+
+  background: #03ea04;
+
+  margin-left: 15px;
+
+  vertical-align: middle;
+}
+
+
+/* =========================================
+   MAIN HEADING
+========================================= */
+
+.showcase-heading h2 {
+  font-size: clamp(55px, 6vw, 90px);
+
+  line-height: 0.9;
+
+  letter-spacing: -4px;
+
+  margin: 0;
+
+  font-weight: 900;
+}
+
+
+/* =========================================
+   GREEN HEADING
+========================================= */
+
+.showcase-heading h2 span {
+  color: #03ea04;
+
+  text-shadow:
+    0 0 30px rgba(199, 255, 0, 0.15);
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.showcase-description {
+  max-width: 390px;
+
+  color: #858b8d;
+
+  line-height: 1.8;
+
+  font-size: 14px;
+
+  margin-top: 30px;
+}
+
+
+/* =========================================
+   IMAGE AREA
+========================================= */
+
+.gym-images {
+  position: relative;
+
+  height: 560px;
+
+  margin-top: 0;
+}
+
+/* =========================================
+   GYM IMAGE
+========================================= */
+
+.gym-image {
+  position: absolute;
+
+  width: 350px;
+
+  height: 500px;
+
+  background-size: cover;
+
+  background-position: center;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.55);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition:
+    box-shadow 0.5s ease;
+}
+
+
+/* =========================================
+   IMAGE HOVER
+========================================= */
+
+.gym-image:hover {
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.7),
+    0 0 35px rgba(199, 255, 0, 0.08);
+}
+
+
+/* =========================================
+   IMAGE DARK OVERLAY
+========================================= */
+
+.gym-image::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 50%,
+      rgba(0, 0, 0, 0.85)
+    );
+}
+
+
+/* =========================================
+   IMAGE 1
+========================================= */
+
+.image-one {
+
+  left: 4%;
+
+  top: 20px;
+
+  background-image:
+    url("https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=900&q=85");
+
+  animation:
+    imageOneMove 6s ease-in-out infinite;
+}
+
+
+/* =========================================
+   IMAGE 2
+========================================= */
+
+.image-two {
+
+  right: 5%;
+
+  top: 80px;
+
+  width: 310px;
+
+  height: 440px;
+
+  background-image:
+    url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=85");
+
+  animation:
+    imageTwoMove 6s ease-in-out infinite;
+}
+
+
+/* =========================================
+   IMAGE ANIMATION 1
+========================================= */
+
+@keyframes imageOneMove {
+
+  0% {
+    transform:
+      translateY(0)
+      rotate(-2deg);
+  }
+
+  50% {
+    transform:
+      translateY(-22px)
+      rotate(1deg);
+  }
+
+  100% {
+    transform:
+      translateY(0)
+      rotate(-2deg);
+  }
+
+}
+
+
+/* =========================================
+   IMAGE ANIMATION 2
+========================================= */
+
+@keyframes imageTwoMove {
+
+  0% {
+    transform:
+      translateY(20px)
+      rotate(2deg);
+  }
+
+  50% {
+    transform:
+      translateY(-15px)
+      rotate(-1deg);
+  }
+
+  100% {
+    transform:
+      translateY(20px)
+      rotate(2deg);
+  }
+
+}
+
+
+/* =========================================
+   IMAGE LABEL
+========================================= */
+
+.image-label {
+
+  position: absolute;
+
+  z-index: 2;
+
+  bottom: 25px;
+
+  left: 25px;
+
+  font-size: 12px;
+
+  font-weight: bold;
+
+  letter-spacing: 2px;
+}
+
+
+.image-label span {
+
+  color: #03ea04;
+
+  margin-right: 10px;
+}
+
+
+/* =========================================
+   FLOATING CIRCLE
+========================================= */
+
+.moving-circle {
+
+  position: absolute;
+
+  right: 40px;
+
+  top: 15px;
+
+  width: 105px;
+
+  height: 105px;
+
+  border-radius: 50%;
+
+  background: #03ea04;
+
+  color: #111;
+
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  animation:
+    circleFloat 3s ease-in-out infinite;
+
+  box-shadow:
+    0 0 35px rgba(199, 255, 0, 0.18);
+}
+
+
+/* =========================================
+   CIRCLE TEXT
+========================================= */
+
+.moving-circle span {
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  font-weight: bold;
+}
+
+
+.moving-circle strong {
+
+  font-size: 23px;
+
+  margin-top: 4px;
+}
+
+
+/* =========================================
+   CIRCLE ANIMATION
+========================================= */
+
+@keyframes circleFloat {
+
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+========================================= */
+
+@media (max-width: 950px) {
+
+  .showcase-top {
+
+    grid-template-columns: 1fr;
+
+    /*
+       Mobile/tablet par bhi
+       extra top gap nahi
+    */
+
+    padding: 0 5% 80px;
+  }
+
+
+  .showcase-heading {
+
+    padding-right: 0;
+
+    margin-bottom: 50px;
+
+    padding-top: 70px;
+  }
+
+
+  .gym-images {
+
+    height: 550px;
+
+    margin-top: 0;
+  }
+
+}
+
+
+/* =========================================
+   RESPONSIVE - MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .showcase-top {
+
+    padding: 0 5% 60px;
+  }
+
+
+  .showcase-heading {
+
+    padding-top: 45px;
+  }
+
+
+  .showcase-heading h2 {
+
+    font-size: 55px;
+
+  }
+
+
+  .gym-images {
+
+    height: 450px;
+
+  }
+
+
+  .gym-image {
+
+    width: 230px;
+
+    height: 360px;
+
+  }
+
+
+  .image-two {
+
+    width: 200px;
+
+    height: 320px;
+
+    right: 0;
+
+    top: 80px;
+
+  }
+
+
+  .moving-circle {
+
+    width: 75px;
+
+    height: 75px;
+
+    right: 5px;
+
+  }
+
+}

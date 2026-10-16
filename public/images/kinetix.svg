@@ -1,0 +1,40 @@
+<svg width="390" height="100" viewBox="0 0 390 100" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- LEFT DUMBBELL -->
+  <rect x="5" y="38" width="7" height="25" rx="2" fill="#03EA04"></rect>
+  <rect x="14" y="30" width="8" height="41" rx="2" fill="#03EA04"></rect>
+  <rect x="23" y="42" width="18" height="17" rx="2" fill="#03EA04"></rect>
+
+  <!-- K -->
+  <path d="M48 10
+       L67 10
+       L67 42
+       L92 10
+       L116 10
+       L86 47
+       L117 90
+       L93 90
+       L67 55
+       L67 90
+       L48 90
+       Z" fill="#03EA04"></path>
+
+  <!-- RIGHT DUMBBELL -->
+  <rect x="122" y="42" width="18" height="17" rx="2" fill="#03EA04"></rect>
+  <rect x="141" y="30" width="8" height="41" rx="2" fill="#03EA04"></rect>
+  <rect x="151" y="38" width="7" height="25" rx="2" fill="#03EA04"></rect>
+
+  <!-- DIVIDER -->
+  <line x1="181" y1="20" x2="181" y2="80" stroke="#555" stroke-width="1"></line>
+
+  <!-- KINETIX -->
+  <text x="201" y="48" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="2">
+    KINETIX
+  </text>
+
+  <!-- FITNESS CLUB -->
+  <text x="203" y="71" fill="#03EA04" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" letter-spacing="3">
+    FITNESS CLUB
+  </text>
+
+</svg>
