@@ -128,12 +128,8 @@ function Navbar() {
                   <Link to="/ClassroomPage" className="dropdown-item">ClassRoom</Link>
 
                 <Link to="/schedules" className="dropdown-item">Schedules</Link>
-                <a
-                  href="#gallery"
-                  className="dropdown-item"
-                >
-                  Gallery
-                </a>
+               <Link to="/GalleryPage" className="dropdown-item">Gallery</Link>
+              
 
                 <Link to="/faqpage" className="dropdown-item">FAQ</Link>
 

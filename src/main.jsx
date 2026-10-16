@@ -15,6 +15,7 @@ import SchedulePage from "./pages/SchedulePage.jsx";
 import FaqPage from "./pages/FaqPage.jsx";
 import ClassroomPage from "./pages/ClassroomPage";
 import ClassDetail from "./pages/ClassDetail";
+import GalleryPage from "./pages/GalleryPage";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -38,6 +39,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/Faqpage" element={<FaqPage />} />
           <Route path="/ClassroomPage" element={<ClassroomPage/>} />
         <Route path="/classroom/:classId" element={<ClassDetail />} /> 
+         <Route path="/GalleryPage" element={<GalleryPage />} />
       </Routes>
 
       {/* ✅ Footer har page par (last me) */}
