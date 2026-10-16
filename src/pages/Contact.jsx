@@ -11,7 +11,7 @@ function Contact() {
       <ContactInfo />
       <ContactMap />
       <ContactHighlights />
-      <ContactInfo />
+     
     </>
   );
 }
