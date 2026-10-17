@@ -1985,3 +1985,33 @@ a {
     transform: none;
   }
 }
+
+.service-card-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  outline-offset: 5px;
+}
+
+.service-card-link .service-card {
+  height: 100%;
+  cursor: pointer;
+}
+
+.service-card-link:focus-visible {
+  outline: 2px solid #3cf13c;
+  border-radius: 8px;
+}
+
+.service-view-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #3cf13c;
+  transition: gap 0.3s ease;
+}
+
+.service-card-link:hover .service-view-link {
+  gap: 14px;
+}

@@ -125,7 +125,7 @@ function ServiceDetail() {
   return (
     <main className="sd" ref={pageRef} key={slug}>
       <div className="sd-progress" />
-      <div className="sd-curtain" aria-hidden="true" />
+      {/* <div className="sd-curtain" aria-hidden="true" /> */}
 
       {/* ---------- HERO ---------- */}
       <header className="sd-hero">
