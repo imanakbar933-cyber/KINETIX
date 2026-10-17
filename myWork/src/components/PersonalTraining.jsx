@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ServicePage, Block, CardGrid, Steps, Faq, Cta, Reveal, Check } from "./serviceKit";
+import { ServicePage, Block, CardGrid, Steps, Faq, Cta, Reveal, Check } from "./ServiceKit";
 
 /* NOTE: stats aur packages sample hain. Apni asal details / pricing yahan edit karein. */
 const MARQUEE = ["One-On-One", "Your Goals", "Form First", "Progress Tracked", "Real Results", "Certified Coaches"];

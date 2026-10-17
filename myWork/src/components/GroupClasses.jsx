@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ServicePage, Block, Steps, TipList, Cta, Reveal } from "./serviceKit";
+import { ServicePage, Block, Steps, TipList, Cta, Reveal } from "./ServiceKit";
 
 /* NOTE: timetable, spots aur stats SAMPLE hain. Apna asal schedule yahan edit karein. */
 const MARQUEE = ["Sweat Together", "Yoga", "Zumba", "HIIT", "All Levels Welcome", "Good Vibes Only"];
