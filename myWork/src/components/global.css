@@ -2015,3 +2015,42 @@ a {
 .service-card-link:hover .service-view-link {
   gap: 14px;
 }
+
+
+.services {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.services-watermark {
+  position: absolute;
+  top: 15rem;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.services-watermark span {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Lato', 'Arial Black', sans-serif;
+  font-size: clamp(4rem, 13vw, 12rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+}
+
+.services .section-heading,
+.services .services-grid {
+  position: relative;
+  z-index: 1;
+}

@@ -119,10 +119,10 @@ function Facilities() {
 
               <p>{facility.description}</p>
 
-              <a href="#plans">
+              {/* <a href="#plans">
                 Explore
                 <span>↗</span>
-              </a>
+              </a> */}
             </div>
           </article>
         ))}

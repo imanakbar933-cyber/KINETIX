@@ -31,6 +31,10 @@ function ServicesSection() {
       id="services"
       ref={sectionRef}
     >
+
+      <div className="services-watermark" aria-hidden="true">
+        <span>OUR SERVICES</span>
+      </div>
       <div className="section-heading services-heading">
         <p className="eyebrow">WHAT WE PROVIDE</p>
         <h2>SERVICES WE OFFER</h2>
