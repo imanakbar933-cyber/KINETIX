@@ -88,22 +88,9 @@ function Navbar() {
           >
 
             {/* HOME */}
-            <Link
-              to="/"
-              className="nav-link"
-              onClick={handleHomeClick}
-            >
-              Home
-            </Link>
-
-
+            <Link to="/" className="nav-link" onClick={handleHomeClick}>Home</Link>
             {/* ABOUT */}
-            <Link
-              to="/about"
-              className="nav-link"
-            >
-              About
-            </Link>
+            <Link to="/about" className="nav-link"> About</Link>
 
 
             {/* SERVICES DROPDOWN */}

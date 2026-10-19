@@ -1,0 +1,53 @@
+/* ================================
+   TEAM HERO SECTION
+================================ */
+.team-hero {
+  position: relative;
+  width: 100%;
+  height: 75vh;
+  min-height: 500px;
+  overflow: hidden;
+  background-color: #0a0a0a;
+  display: block;
+}
+
+/* Image wrapper with zoom animation */
+.team-hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+  transition: transform 8s ease-out;
+}
+
+.team-hero-image.zoom-in {
+  transform: scale(1.1);
+}
+
+/* Image itself */
+.team-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .team-hero {
+    height: 60vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-hero {
+    height: 50vh;
+  }
+}
