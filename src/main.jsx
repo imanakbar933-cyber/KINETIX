@@ -18,8 +18,11 @@ import Team from "./pages/Team.jsx";
 import GalleryPage from "./pages/GalleryPage.jsx";
 import ClassDetail from "./pages/ClassDetail.jsx";
 import Contact from "./pages/Contact.jsx";
+import TrainersPage from "./pages/TrainersPage.jsx";   // 👈 ADD
+import ServicesPage from "./pages/ServicesPage.jsx";
+import ServiceDetailPage from "./pages/ServiceDetailPage.jsx";
 import TeamMember1 from "./pages/TeamMember1.jsx";
-import TrainersPage from "./pages/TrainersPage.jsx";
+import SchedulePage from "./pages/SchedulePage.jsx";
 
 
 createRoot(document.getElementById("root")).render(
@@ -40,8 +43,13 @@ createRoot(document.getElementById("root")).render(
         <Route path="/GalleryPage" element={<GalleryPage />} />
         <Route path="/class-detail/:classId" element={<ClassDetail />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/TrainersPage" element={<TrainersPage/>} />
-</Routes>
+        <Route path="/trainers" element={<TrainersPage />} />   {/* 👈 ADD */}
+        <Route path="/services" element={<ServicesPage />} />
+      <Route path="/services/:slug" element={<ServiceDetailPage />} />
+      <Route path="/schedules" element={<SchedulePage />} />
+   
+      </Routes>
+
       <Footer />
       
     </BrowserRouter>
