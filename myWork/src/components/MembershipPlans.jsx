@@ -8,7 +8,7 @@ function MembershipPlans() {
     monthly: [
       {
         name: 'Basic Membership',
-        price: '2000',
+        price: '2500',
         equipment: [
           'Basic cardio machines',
           'Treadmills & exercise bikes',
@@ -19,7 +19,7 @@ function MembershipPlans() {
       },
       {
         name: 'Premium Membership',
-        price: '3000',
+        price: '3500',
         equipment: [
           'All Basic equipment',
           'Advanced cardio machines',
