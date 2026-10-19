@@ -164,13 +164,7 @@ function Navbar() {
             </div>
 
 
-            {/* OTHER NAV LINKS */}
-            <a
-              href="#trainers"
-              className="nav-link"
-            >
-              Trainers
-            </a>
+            <Link to="/trainers" className="nav-link">Trainers</Link>
 
             <a
               href="#membership"

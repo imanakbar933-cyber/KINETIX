@@ -1,26 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import "./ContactHighlights.css";
 
 function ContactHighlights() {
-  const [visible, setVisible] = useState(false);
   const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, {
+    amount: 0.15,
+    once: false,   // 👈 HAR BAAR animate hoga
+  });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  // 👇 3 cards — clean, no emoji, SVG icons
   const features = [
     {
       number: "01",
@@ -56,59 +44,207 @@ function ContactHighlights() {
     },
   ];
 
+  // ===== Animation Variants =====
+  const containerVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: [0.16, 1, 0.3, 1],
+        staggerChildren: 0.15,
+        delayChildren: 0.15,
+      },
+    },
+  };
+
+  const badgeVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: "easeOut" },
+    },
+  };
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
+  const descVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const boxVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.97 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1],
+        delay: 0.4 + i * 0.18,
+      },
+    }),
+  };
+
+  const bottomVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut", delay: 0.9 },
+    },
+  };
+
   return (
-    <section
+    <motion.section
       ref={sectionRef}
-      className={`contact-cta ${visible ? "is-visible" : ""}`}
+      className="contact-cta"
+      variants={containerVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
     >
       <div className="contact-cta-container">
-
         {/* HEADER */}
         <div className="contact-cta-header">
-          <span className="contact-cta-badge">WHY CHOOSE US</span>
+          <motion.span
+            className="contact-cta-badge"
+            variants={badgeVariants}
+          >
+            WHY CHOOSE US
+          </motion.span>
 
-          <h2 className="contact-cta-title">
+          <motion.h2
+            className="contact-cta-title"
+            variants={titleVariants}
+          >
             MORE THAN A <span className="green">GYM.</span>
-          </h2>
+          </motion.h2>
 
-          <p className="contact-cta-desc">
+          <motion.p
+            className="contact-cta-desc"
+            variants={descVariants}
+          >
             We build people — not just bodies. Here's what makes us different.
-          </p>
+          </motion.p>
         </div>
 
         {/* NEON BOX */}
-        <div className="contact-cta-box">
-          <div className="contact-cta-neon"></div>
+        <motion.div
+          className="contact-cta-box"
+          variants={boxVariants}
+        >
+          <motion.div
+            className="contact-cta-neon"
+            animate={{
+              boxShadow: [
+                "inset 0 0 18px rgba(3, 234, 4, 0.35), inset 0 0 35px rgba(3, 234, 4, 0.18), 0 0 20px rgba(3, 234, 4, 0.45), 0 0 45px rgba(3, 234, 4, 0.25)",
+                "inset 0 0 30px rgba(3, 234, 4, 0.65), inset 0 0 65px rgba(3, 234, 4, 0.35), 0 0 35px rgba(3, 234, 4, 0.8), 0 0 75px rgba(3, 234, 4, 0.5)",
+                "inset 0 0 18px rgba(3, 234, 4, 0.35), inset 0 0 35px rgba(3, 234, 4, 0.18), 0 0 20px rgba(3, 234, 4, 0.45), 0 0 45px rgba(3, 234, 4, 0.25)",
+              ],
+              borderColor: ["#03ea04", "#7eff80", "#03ea04"],
+            }}
+            transition={{
+              duration: 2.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
 
           <div className="contact-cta-inner">
             {features.map((item, i) => (
-              <div
+              <motion.div
                 key={i}
                 className="cta-card"
-                style={{ "--delay": `${0.6 + i * 0.18}s` }}
+                custom={i}
+                variants={cardVariants}
+                whileHover={{
+                  y: -8,
+                  borderColor: "rgba(3, 234, 4, 0.45)",
+                  boxShadow: "0 20px 45px rgba(3, 234, 4, 0.15)",
+                  transition: { duration: 0.35, ease: "easeOut" },
+                }}
               >
-                <span className="cta-card-number">{item.number}</span>
+                <motion.span
+                  className="cta-card-number"
+                  whileHover={{ opacity: 0.09, color: "#03ea04" }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {item.number}
+                </motion.span>
 
-                <div className="cta-card-icon">{item.icon}</div>
+                <motion.div
+                  className="cta-card-icon"
+                  whileHover={{
+                    backgroundColor: "rgba(3, 234, 4, 0.18)",
+                    borderColor: "#03ea04",
+                    boxShadow: "0 0 22px rgba(3, 234, 4, 0.4)",
+                    scale: 1.05,
+                  }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                >
+                  {item.icon}
+                </motion.div>
 
                 <h3 className="cta-card-title">{item.title}</h3>
                 <p className="cta-card-text">{item.text}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* BOTTOM CTA */}
-        <div className="contact-cta-bottom">
-          <a href="#membership" className="cta-button">
+        <motion.div
+          className="contact-cta-bottom"
+          variants={bottomVariants}
+        >
+          <motion.a
+            href="#membership"
+            className="cta-button"
+            whileHover={{
+              y: -4,
+              boxShadow:
+                "0 0 30px rgba(3, 234, 4, 0.7), 0 0 60px rgba(3, 234, 4, 0.4), 0 15px 40px rgba(0, 0, 0, 0.4)",
+            }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
             Start Your Journey
-            <span className="cta-arrow">↗</span>
-          </a>
+            <motion.span
+              className="cta-arrow"
+              whileHover={{ x: 3, y: -3 }}
+              transition={{ duration: 0.3 }}
+            >
+              ↗
+            </motion.span>
+          </motion.a>
           <p className="cta-note">No pressure. Just progress.</p>
-        </div>
-
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

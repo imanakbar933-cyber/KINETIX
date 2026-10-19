@@ -1,19 +1,25 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import "./Trainers.css";
 
 function Trainers() {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, {
+    amount: 0.25,
+    once: false,   // 👈 HAR BAAR animate
+  });
+
   const trainersData = [
-    { id: 1, name: "HENRY",        image: "/images/trainer1.jpg" },
-    { id: 2, name: "JAMES",        image: "/images/trainer2.jpg" },
-    { id: 3, name: "MIKE",         image: "/images/trainer3.jpg" },
-    { id: 4, name: "DAVID KHAN",   image: "/images/trainer4.jpg" },
-    { id: 5, name: "ALEX BROWN",   image: "/images/trainer5.jpg" },
+    { id: 1, name: "HENRY",      image: "/images/trainer1.jpg" },
+    { id: 2, name: "JAMES",      image: "/images/trainer2.jpg" },
+    { id: 3, name: "MIKE",       image: "/images/trainer3.jpg" },
+    { id: 4, name: "DAVID KHAN", image: "/images/trainer4.jpg" },
+    { id: 5, name: "ALEX BROWN", image: "/images/trainer5.jpg" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCount = 1;
+  const visibleCount = 3;
 
   const handleNext = () => {
     setCurrentIndex((prev) =>
@@ -27,7 +33,6 @@ function Trainers() {
     );
   };
 
-  // ✅ Simple words array — sabhi 4 words alag alag
   const headingWords = [
     { text: "THE",     green: false, index: 0 },
     { text: "FACES",   green: false, index: 1 },
@@ -35,38 +40,84 @@ function Trainers() {
     { text: "KINETIX", green: true,  index: 3 },
   ];
 
-  return (
-    <section className="trainers">
-      <div className="trainers-container">
+  // ============================================================
+  // ANIMATION VARIANTS — one by one flow
+  // ============================================================
 
+  // 1. Tag
+  const tagVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.5, ease: "easeOut", delay: 0.1 },
+    },
+  };
+
+  // 2. Heading words — one by one
+  const wordVariants = (i) => ({
+    hidden: { opacity: 0, y: 60, rotateX: -70 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+        delay: 0.3 + i * 0.15,   // ek ke baad ek
+      },
+    },
+  });
+
+  // 3. Controls
+  const controlsVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut", delay: 1.0 },
+    },
+  };
+
+  // 4. Cards — one by one
+  const cardVariants = (i) => ({
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+        delay: 0.6 + i * 0.12,
+      },
+    },
+  });
+
+  return (
+    <section ref={sectionRef} className="trainers">
+      <div className="trainers-container">
         {/* ===== LEFT SIDE ===== */}
         <div className="trainers-left">
-
           {/* Tag */}
           <motion.span
             className="trainers-tag"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            variants={tagVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
           >
             OUR TEAM
           </motion.span>
 
-          {/* Heading */}
+          {/* Heading — words one by one */}
           <h2 className="trainers-heading">
             {headingWords.map((word) => (
               <motion.span
                 key={word.index}
                 className={`word ${word.green ? "green" : ""}`}
-                initial={{ opacity: 0, y: 60, rotateX: -70 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{
-                  duration: 0.6,
-                  ease: [0.22, 1, 0.36, 1],
-                  delay: 0.15 + word.index * 0.12,
-                }}
+                variants={wordVariants(word.index)}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
               >
                 {word.text}
               </motion.span>
@@ -76,15 +127,22 @@ function Trainers() {
           {/* Controls */}
           <motion.div
             className="trainers-controls"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.7 }}
+            variants={controlsVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
           >
-            <button className="trainer-arrow" onClick={handlePrev} aria-label="Previous">
+            <button
+              className="trainer-arrow"
+              onClick={handlePrev}
+              aria-label="Previous"
+            >
               ←
             </button>
-            <button className="trainer-arrow" onClick={handleNext} aria-label="Next">
+            <button
+              className="trainer-arrow"
+              onClick={handleNext}
+              aria-label="Next"
+            >
               →
             </button>
           </motion.div>
@@ -103,16 +161,14 @@ function Trainers() {
               <motion.div
                 key={trainer.id}
                 className="trainer-card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.2 }}
-                transition={{
-                  duration: 0.5,
-                  ease: "easeOut",
-                  delay: idx * 0.1,
-                }}
+                variants={cardVariants(idx)}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
               >
-                <Link to={`/trainers/${trainer.id}`} className="trainer-card-link">
+                <Link
+                  to={`/trainers/${trainer.id}`}
+                  className="trainer-card-link"
+                >
                   <div className="trainer-card-image">
                     <img src={trainer.image} alt={trainer.name} />
 
@@ -133,7 +189,6 @@ function Trainers() {
             ))}
           </motion.div>
         </div>
-
       </div>
     </section>
   );

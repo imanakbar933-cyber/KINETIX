@@ -56,7 +56,7 @@
 }
 
 .aboutfaq-subtitle {
-  color: #4ade80;
+  color:#00ff00;
   font-size: 1.15rem;                    /* ✅ 0.9rem → 1.15rem */
   letter-spacing: 6px;                   /* ✅ 5px → 6px */
   font-weight: 800;                      /* ✅ 700 → 800 */
@@ -75,7 +75,7 @@
 }
 
 .aboutfaq-title.highlighted {
-  color: #4ade80;
+  color:#00ff00;
   position: relative;
   display: inline-block;
   margin-bottom: 30px;
@@ -109,7 +109,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #4ade80;
+  background:#00ff00;
   color: #0a0a0a;
   border: none;
   padding: 16px 32px;
@@ -241,7 +241,7 @@
 }
 
 .aboutfaq-item.open .aboutfaq-q-text {
-  color: #4ade80;
+  color:#00ff00;
 }
 
 /* Arrow Icon */
@@ -257,7 +257,7 @@
 }
 
 .aboutfaq-item.open .aboutfaq-icon {
-  color: #4ade80;
+  color:#00ff00;
 }
 
 .aboutfaq-icon svg {
@@ -286,7 +286,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #4ade80;
+  background:#00ff00;
   box-shadow: 0 0 15px rgba(74, 222, 128, 0.8);
   pointer-events: none;
 }
@@ -419,7 +419,7 @@
 }
 
 .aboutfaq-subtitle {
-  color: #4ade80;
+  color:#00ff00;
   font-size: 1.15rem;                    /* ✅ 0.9rem → 1.15rem */
   letter-spacing: 6px;                   /* ✅ 5px → 6px */
   font-weight: 800;                      /* ✅ 700 → 800 */
@@ -438,7 +438,7 @@
 }
 
 .aboutfaq-title.highlighted {
-  color: #4ade80;
+  color:#00ff00;
   position: relative;
   display: inline-block;
   margin-bottom: 30px;
@@ -472,7 +472,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #4ade80;
+  background:#00ff00;
   color: #0a0a0a;
   border: none;
   padding: 16px 32px;
@@ -605,7 +605,7 @@
 }
 
 .aboutfaq-item.open .aboutfaq-q-text {
-  color: #4ade80;
+  color:#00ff00;
 }
 
 /* Arrow Icon */
@@ -621,7 +621,7 @@
 }
 
 .aboutfaq-item.open .aboutfaq-icon {
-  color: #4ade80;
+  color:#00ff00;
 }
 
 .aboutfaq-icon svg {
@@ -650,7 +650,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #4ade80;
+  background:#00ff00;
   box-shadow: 0 0 15px rgba(74, 222, 128, 0.8);
   pointer-events: none;
 }

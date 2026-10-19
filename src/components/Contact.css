@@ -69,9 +69,9 @@
 }
 
 .contact-btn-green {
-  background: #4ade80;
+  background: #00ff00;
   color: #0a0a0a;
-  border: 2px solid #4ade80;
+  border: 2px solid #00ff00;
 }
 
 .contact-btn-green:hover {
@@ -86,8 +86,8 @@
 }
 
 .contact-btn-outline:hover {
-  border-color: #4ade80;
-  color: #4ade80;
+  border-color: #00ff00;
+  color: #00ff00;
   box-shadow: 0 8px 25px rgba(74, 222, 128, 0.25);
 }
 
@@ -122,11 +122,11 @@
   border-radius: 250px 250px 20px 20px;
   background: conic-gradient(
     from 0deg,
-    #4ade80,
+    #00ff00,
     transparent 40%,
     #22c55e,
     transparent 80%,
-    #4ade80
+    #00ff00
   );
   filter: blur(30px);
   opacity: 0.6;
@@ -141,7 +141,7 @@
   border-radius: 210px 210px 20px 20px;
   overflow: hidden;
   z-index: 2;
-  border: 3px solid #4ade80;
+  border: 3px solid #00ff00;
   box-shadow: 0 0 40px rgba(74, 222, 128, 0.4);
 }
 
