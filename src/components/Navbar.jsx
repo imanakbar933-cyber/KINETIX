@@ -137,7 +137,7 @@ function Navbar() {
             </div>
 
 
-            <Link to="/TrainersPage" className="nav-link">Trainers</Link>
+            <Link to="/trainers" className="nav-link">Trainers</Link>
 
             <a
               href="#membership"
