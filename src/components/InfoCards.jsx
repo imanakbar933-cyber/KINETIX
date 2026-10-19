@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import "./InfoCards.css";
 
@@ -17,63 +18,46 @@ function InfoCards() {
     },
   ];
 
-  // Container for stagger
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  // Card variants
+  // ===== Animations =====
   const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-    },
+    hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
-  // Number reveal
   const numberVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut", delay: 0.3 },
+      filter: "blur(0px)",
+      transition: { duration: 0.6, ease: "easeOut", delay: 0.25 },
     },
   };
 
-  // Title lines
   const titleLineVariants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 15, filter: "blur(6px)" },
     visible: (i) => ({
       opacity: 1,
       y: 0,
+      filter: "blur(0px)",
       transition: {
         duration: 0.5,
         ease: "easeOut",
-        delay: 0.4 + i * 0.1,
+        delay: 0.35 + i * 0.12,
       },
     }),
   };
 
-  // Description
   const descVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut", delay: 0.6 },
+      transition: { duration: 0.6, ease: "easeOut", delay: 0.6 },
     },
   };
 
@@ -87,17 +71,19 @@ function InfoCards() {
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.2 }}   // 👈 HAR BAAR
           >
             <div className="info-card-image">
               <img src={card.image} alt={card.title} />
 
+              {/* Hover effects */}
               <div className="glitch-layer"></div>
               <div className="scan-line"></div>
               <div className="cursor-glow"></div>
               <div className="ripple-ring"></div>
               <div className="info-card-overlay"></div>
 
+              {/* Content */}
               <div className="info-card-content">
                 <motion.span
                   className="info-card-number"

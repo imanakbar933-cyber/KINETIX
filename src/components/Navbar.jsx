@@ -137,13 +137,7 @@ function Navbar() {
             </div>
 
 
-            {/* OTHER NAV LINKS */}
-            <a
-              href="#trainers"
-              className="nav-link"
-            >
-              Trainers
-            </a>
+            <Link to="/trainers" className="nav-link">Trainers</Link>
 
             <a
               href="#membership"
@@ -152,12 +146,13 @@ function Navbar() {
               Membership
             </a>
 
-            <a
-              href="#contact"
-              className="nav-link"
-            >
-              Contact
-            </a>
+          <Link
+  to="/contact"
+  className="nav-link"
+  onClick={() => setMenuOpen(false)}
+>
+  Contact
+</Link>
 
 
             {/* MOBILE JOIN BUTTON */}

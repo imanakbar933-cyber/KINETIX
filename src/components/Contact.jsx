@@ -31,7 +31,7 @@ const Contact = () => {
           transition={{ duration: 1, delay: 0.2 }}
         >
           Ready to take the first step towards a healthier,
-          stronger you? hello this is Kinetix
+          stronger you?
         </motion.p>
 
         {/* Buttons — staggered fade-up */}
@@ -95,7 +95,7 @@ const Contact = () => {
         >
           {/* Image — infinite parallax float */}
           <motion.img
-            src="/gym-assets/Contact.jpg"
+            src="/assets/Contact.jpg"
             alt="Man working out"
             className="contact-img"
             animate={{
@@ -119,6 +119,4 @@ const Contact = () => {
   );
 };
 export default Contact;
-
-
 

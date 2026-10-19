@@ -12,28 +12,28 @@ const Exercises = () => {
       title: "AB CRUNCH MACHINE",
       description:
         "Sculpt your core with our premium ab crunch machine. Target your abs with controlled movements and adjustable resistance for maximum results.",
-      video: "/gym-assets/Ab crunch.mp4",
+      video: "/assets/Ab crunch.mp4",
     },
     {
       id: 2,
       title: "BARBELL",
       description:
         "Build raw strength with our full range of barbells and weight plates. Perfect for squats, deadlifts, bench press, and compound lifts.",
-      video: "/gym-assets/Barbell.mp4",
+      video: "/assets/Barbell.mp4",
     },
     {
       id: 3,
       title: "CARDIO",
       description:
         "Boost your heart health with our state-of-the-art cardio equipment — treadmills, ellipticals, bikes, and rowing machines.",
-      video: "/gym-assets/Cardio.mp4",
+      video: "/assets/Cardio.mp4",
     },
     {
       id: 4,
       title: "FLEXIBILITY & STRETCHING",
       description:
         "Improve mobility and prevent injuries with our dedicated stretching zone. Yoga mats, foam rollers, and resistance bands included.",
-      video: "/gym-assets/Flexibility.mp4",
+      video: "/assets/Flexibility.mp4",
     },
   ];
 
@@ -179,4 +179,3 @@ const Exercises = () => {
 };
 
 export default Exercises;
-

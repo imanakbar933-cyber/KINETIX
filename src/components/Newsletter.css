@@ -7,7 +7,7 @@
   align-items: center;
   padding: 60px 80px;
   min-height: 100vh;
- background: #050505;
+  background: #1c1c1c;
   color: #fff;
   overflow: hidden;
   gap: 40px;
@@ -52,7 +52,7 @@
 
 .newsletter-form:hover,
 .newsletter-form:focus-within {
-  border-color: #4ade80;
+  border-color: #00ff00;
   box-shadow: 0 0 15px rgba(74, 222, 128, 0.3);
 }
 
@@ -72,7 +72,7 @@
 .newsletter-arrow {
   background: transparent;
   border: none;
-  color: #4ade80;
+  color: #00ff00;
   font-size: 1.5rem;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -104,7 +104,7 @@
     rgba(74, 222, 128, 0.15) 45%,
     transparent 70%
   );
-  border: 2px solid #4ade80;
+  border: 2px solid #00ff00;
   filter: blur(1px);
   z-index: 1;
 }
@@ -117,7 +117,7 @@
   height: 440px;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid #4ade80;
+  border: 3px solid #00ff00;
   box-shadow: 0 0 40px rgba(74, 222, 128, 0.4);
 }
 

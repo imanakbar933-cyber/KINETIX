@@ -5,13 +5,14 @@
 .about-hero {
   position: relative;
   width: 100%;
-  height: 400px;                 /* thoda chota kiya */
-  margin-top: 80px;             /* navbar ke nicha gap */
+  height: 450px;                    /* 👈 same as Contact */
+  margin-top: 80px;
   overflow: hidden;
   background: #000;
   display: flex;
-  align-items: center;           /* vertical center */
+  align-items: flex-end;            /* 👈 TEXT NEECHE */
   isolation: isolate;
+  padding-bottom: 70px;             /* 👈 BOTTOM PADDING */
 }
 
 /* =========================================================
@@ -132,7 +133,6 @@
   width: 92%;
   max-width: 1400px;
   margin: 0 auto;
-  padding-top: 40px;              /* thoda nicha */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -159,11 +159,7 @@
 }
 
 /* =========================================================
-   ABOUT TITLE (Chota kiya)
-========================================================= */
-
-/* =========================================================
-   ABOUT TITLE — LATEST ANIMATIONS
+   ABOUT TITLE
 ========================================================= */
 
 .about-title {
@@ -177,7 +173,7 @@
   line-height: 1;
   letter-spacing: 1px;
   text-transform: uppercase;
-  perspective: 800px;              /* 3D ke liye */
+  perspective: 800px;
   cursor: default;
 }
 
@@ -218,7 +214,6 @@
   animation-delay: calc(1.2s + (var(--i) * 0.15s));
 }
 
-/* Letter reveal */
 @keyframes letterReveal {
   0% {
     opacity: 0;
@@ -236,7 +231,6 @@
   }
 }
 
-/* Shine sweep across letters */
 @keyframes shineSweep {
   0%   { background-position: -100% 0; }
   50%  { background-position: 200% 0; }
@@ -279,5 +273,39 @@
     box-shadow: 0 0 25px rgba(3, 234, 4, 0.95);
     opacity: 1;
     transform: scaleX(1);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1024px) {
+  .about-hero {
+    height: 400px;
+    padding-bottom: 60px;
+  }
+  .about-title {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    height: 340px;
+    padding-bottom: 50px;
+  }
+  .about-title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero {
+    height: 300px;
+    padding-bottom: 40px;
+  }
+  .about-title {
+    font-size: 22px;
   }
 }

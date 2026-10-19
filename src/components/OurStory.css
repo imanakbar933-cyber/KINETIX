@@ -113,7 +113,7 @@
 
 .our-story-tag {
   display: inline-block;
-  color: #03ea04;
+  color:#00ff00;
   font-family: Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
@@ -133,7 +133,7 @@
   transform: translateY(-50%);
   width: 30px;
   height: 2px;
-  background: #03ea04;
+  background:#00ff00;
   box-shadow: 0 0 12px rgba(3, 234, 4, 0.8);
   border-radius: 2px;
 }
@@ -146,7 +146,7 @@
   transform: translateY(-50%);
   width: 8px;
   height: 8px;
-  background: #03ea04;
+  background:#00ff00;
   border-radius: 50%;
   box-shadow: 0 0 12px rgba(3, 234, 4, 0.9);
   animation: dotPulse 2s ease-in-out infinite;
@@ -209,7 +209,7 @@
   top: 6px;
   bottom: 6px;
   width: 3px;
-  background: linear-gradient(180deg, #03ea04, transparent);
+  background: linear-gradient(180deg,#00ff00, transparent);
   border-radius: 3px;
   box-shadow: 0 0 14px rgba(3, 234, 4, 0.5);
   transform: scaleY(0);

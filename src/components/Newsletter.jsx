@@ -1,4 +1,4 @@
-// src/components/Newsletter.jsx
+
 
 import React from "react";
 import { motion } from "motion/react";
@@ -99,4 +99,5 @@ const Newsletter = () => {
 };
 
 export default Newsletter;
+
 

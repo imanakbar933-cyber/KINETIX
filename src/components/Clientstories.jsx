@@ -10,36 +10,36 @@ const ClientStories = () => {
       name: "Ayesha Khan",
       result: "Lost 25 KG",
       message: "KINETIX changed my life completely.",
-      before: "/gym-assets/ayesha.png",
-      after: "/gym-assets/ayeshaafter.png",
+      before: "/assets/ayesha.png",
+      after: "/assets/ayeshaafter.png",
     },
     {
       name: "Bilal Ahmed",
       result: "Lost 35 KG",
       message: "The trainers here are truly amazing.",
-      before: "/gym-assets/billalahmed.png",
-      after: "/gym-assets/billalahmedafter.png",
+      before: "/assets/billalahmed.png",
+      after: "/assets/billalahmedafter.png",
     },
     {
       name: "Hamza",
       result: "Lost 20 KG",
       message: "Best gym in town. Highly recommended!",
-      before: "/gym-assets/hamza.png",
-      after: "/gym-assets/hamzaafter.png",
+      before: "/assets/hamza.png",
+      after: "/assets/hamzaafter.png",
     },
     {
       name: "Ali",
       result: "Lost 30 KG",
       message: "I feel stronger and healthier than ever.",
-      before: "/gym-assets/ali.png",
-      after: "/gym-assets/aliafter.png",
+      before: "/assets/ali.png",
+      after: "/assets/aliafter.png",
     },
     {
       name: "Zani",
       result: "Lost 15 KG",
       message: "Amazing experience and great trainers!",
-      before: "/gym-assets/zani.png",
-      after: "/gym-assets/zaniafter.png",
+      before: "/assets/zani.png",
+      after: "/assets/zaniafter.png",
     },
   ];
 
@@ -128,4 +128,3 @@ const ClientCard = ({ client, index }) => {
 };
 
 export default ClientStories;
-
