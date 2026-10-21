@@ -3,7 +3,6 @@ import Hero from "../components/Hero";
 import Headlines from "../components/Headlines";
 import GymShowcase from "../components/GymShowcase";
 import About from "../components/About";
-
 import Contact from "../components/Contact";
 import FAQ from "../components/FAQ";
 import Newsletter from "../components/Newsletter";
@@ -15,11 +14,10 @@ function Home() {
       {/* Iman's Existing Home Components */}
       <Hero />
       <Headlines />
-      
       <GymShowcase />
       <About />
       <Headlines />
-      
+
       {/* Your Home Components */}
       <Schedule />
       <Contact />
