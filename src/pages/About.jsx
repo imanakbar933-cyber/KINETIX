@@ -8,7 +8,7 @@ import Trainers from "../components/Trainers";
 import Exercises from "../components/Exercises";
 import Features from "../components/Features";
 import AboutFAQ from "../components/AbouFAQ";
-import ClientStories from "../components/Clientstories";
+// import ClientStories from "../components/Clientstories";
 
 function About() {
   return (
@@ -23,7 +23,7 @@ function About() {
       <Exercises />
       <Features />
       <AboutFAQ />
-      <ClientStories />
+      {/* <ClientStories /> */}
     </>
   );
 }
