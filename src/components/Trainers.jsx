@@ -4,10 +4,27 @@ import "./Trainers.css";
 
 function Trainers() {
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, {
-    amount: 0.25,
-    once: false, // 👈 HAR BAAR animate
-  });
+  const [inView, setInView] = useState(false);
+
+  // ✅ Intersection Observer (Reliable & Har baar animate hoga)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+        } else {
+          setInView(false); // Scroll out hone par reset
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   // ✅ EXACT SAME ARRAY AS TEAMFACES
   const trainersData = [
@@ -32,7 +49,6 @@ function Trainers() {
       image: "/gym-assets/Fatimah.jpg",
       link: "/team/fatima",
     },
-    // Agar aur members add karne hain to yahan kar sakti hain
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -57,69 +73,19 @@ function Trainers() {
     { text: "KINETIX", green: true,  index: 3 },
   ];
 
-  // ============================================================
-  // ANIMATION VARIANTS
-  // ============================================================
-  const tagVariants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.5, ease: "easeOut", delay: 0.1 },
-    },
-  };
-
-  const wordVariants = (i) => ({
-    hidden: { opacity: 0, y: 60, rotateX: -70 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-        delay: 0.3 + i * 0.15,
-      },
-    },
-  });
-
-  const controlsVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut", delay: 1.0 },
-    },
-  };
-
-  const cardVariants = (i) => ({
-    hidden: { opacity: 0, y: 40, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-        delay: 0.6 + i * 0.12,
-      },
-    },
-  });
-
   return (
     <section ref={sectionRef} className={`trainers ${inView ? "in-view" : ""}`}>
       <div className="trainers-container">
+        
         {/* ===== LEFT SIDE ===== */}
         <div className="trainers-left">
-          <motion.span
-            className="trainers-tag"
-            variants={tagVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
+          
+          {/* Tag */}
+          <span className="trainers-tag">
             OUR TEAM
           </span>
 
+          {/* Heading Words */}
           <h2 className="trainers-heading">
             {headingWords.map((word) => (
               <span
@@ -132,12 +98,8 @@ function Trainers() {
             ))}
           </h2>
 
-          <motion.div
-            className="trainers-controls"
-            variants={controlsVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
+          {/* Controls */}
+          <div className="trainers-controls">
             <button
               className="trainer-arrow"
               onClick={handlePrev}
@@ -174,7 +136,7 @@ function Trainers() {
                     <div className="trainer-scan"></div>
                     <div className="trainer-card-overlay"></div>
 
-                    {/* ✅ Naam 2 lines mein (Team jaisa) */}
+                    {/* ✅ Naam 2 lines mein */}
                     <div className="trainer-name-block">
                       <h3 className="trainer-card-name">
                         {trainer.name.split(" ")[0]}
