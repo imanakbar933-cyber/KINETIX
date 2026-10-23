@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { motion, useInView } from "framer-motion";
 import "./Trainers.css";
 
 function Trainers() {
@@ -51,10 +52,10 @@ function Trainers() {
   };
 
   const headingWords = [
-    { text: "THE",     green: false, index: 0 },
-    { text: "FACES",   green: false, index: 1 },
-    { text: "BEHIND",  green: false, index: 2 },
-    { text: "KINETIX", green: true,  index: 3 },
+    { text: "THE", green: false, index: 0 },
+    { text: "FACES", green: false, index: 1 },
+    { text: "BEHIND", green: false, index: 2 },
+    { text: "KINETIX", green: true, index: 3 },
   ];
 
   // ============================================================
@@ -107,7 +108,8 @@ function Trainers() {
   });
 
   return (
-    <section ref={sectionRef} className={`trainers ${inView ? "in-view" : ""}`}>
+    // ✅ Section tag sahi kiya
+    <section ref={sectionRef} className="trainers">
       <div className="trainers-container">
         {/* ===== LEFT SIDE ===== */}
         <div className="trainers-left">
@@ -118,17 +120,19 @@ function Trainers() {
             animate={isInView ? "visible" : "hidden"}
           >
             OUR TEAM
-          </span>
+          </motion.span>
 
           <h2 className="trainers-heading">
             {headingWords.map((word) => (
-              <span
+              <motion.span
                 key={word.index}
                 className={`word ${word.green ? "green" : ""}`}
-                style={{ "--i": word.index }} // 👈 Index pass kiya for CSS delay
+                variants={wordVariants(word.index)}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
               >
                 {word.text}
-              </span>
+              </motion.span>
             ))}
           </h2>
 
@@ -145,26 +149,32 @@ function Trainers() {
             >
               ←
             </button>
-            <button className="trainer-arrow" onClick={handleNext} aria-label="Next">
+            <button
+              className="trainer-arrow"
+              onClick={handleNext}
+              aria-label="Next"
+            >
               →
             </button>
-          </div>
+          </motion.div>
         </div>
 
         {/* ===== RIGHT SIDE — SLIDER ===== */}
         <div className="trainers-slider">
-          <div
+          <motion.div
             className="trainers-track"
-            style={{
-              transform: `translateX(calc(-${currentIndex} * (100% / ${visibleCount} + 20px)))`,
-              transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)"
+            animate={{
+              x: `calc(-${currentIndex} * (100% / ${visibleCount} + 20px))`,
             }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             {trainersData.map((trainer, idx) => (
-              <div
+              <motion.div
                 key={trainer.id}
                 className="trainer-card"
-                style={{ "--i": idx }} // 👈 Index pass kiya for CSS delay
+                variants={cardVariants(idx)}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
               >
                 <Link to={trainer.link} className="trainer-card-link">
                   <div className="trainer-card-image">
@@ -194,9 +204,9 @@ function Trainers() {
                     <span className="t-corner t-br"></span>
                   </div>
                 </Link>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
