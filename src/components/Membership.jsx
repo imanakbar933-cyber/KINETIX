@@ -9,15 +9,15 @@ function Membership() {
   const monthlyPlans = [
     {
       name: "BASIC MEMBERSHIP",
-      price: "PKR4500",
+      price: "PKR4000",
     },
     {
       name: "PREMIUM MEMBERSHIP",
-      price: "PKR8500",
+      price: "PKR8000",
     },
     {
       name: "COUPLES MEMBERSHIP",
-      price: "PKR11000",
+      price: "PKR1000",
     },
     {
       name: "FAMILY MEMBERSHIP",
