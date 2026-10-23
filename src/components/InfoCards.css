@@ -5,7 +5,8 @@
 .info-cards {
   position: relative;
   width: 100%;
-  padding: 100px 5% 40px;
+  /* 👇 Blank space fix: Top padding kam ki hai, kyunki ye OurStory ke bilkul neeche aata hai */
+  padding: 20px 5% 80px; 
   background: #050505;
   font-family: Arial, sans-serif;
   overflow: hidden;
@@ -18,6 +19,56 @@
   max-width: 1400px;
   margin: 0 auto;
   perspective: 1200px;
+}
+
+/* =========================================================
+   SLOW REVEAL ANIMATIONS
+========================================================= */
+
+.info-card.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+  /* 👇 Bohot slow animation (1.5 seconds) */
+  transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.info-card.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Number & Title andar ka slow reveal */
+.info-card .info-card-number,
+.info-card .info-card-title .line {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(5px);
+  transition: opacity 1.2s ease-out,
+              transform 1.2s ease-out,
+              filter 1.2s ease-out;
+}
+
+/* Jab card view mein aaye toh andar ka text bhi show ho */
+.info-card.reveal.in-view .info-card-number {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.3s; /* Card aane ke baad text aaye */
+}
+
+.info-card.reveal.in-view .info-card-title .line:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.5s;
+}
+
+.info-card.reveal.in-view .info-card-title .line:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.7s;
 }
 
 /* =========================================================
@@ -35,11 +86,6 @@
 ========================================================= */
 
 .info-card-image {
-  --rx: 0deg;
-  --ry: 0deg;
-  --mx: 50%;
-  --my: 50%;
-
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -301,7 +347,7 @@
 
 @media (max-width: 900px) {
   .info-cards {
-    padding: 70px 5% 30px;
+    padding: 20px 5% 60px; /* Mobile/Tablet padding fix */
   }
 
   .info-cards-grid {
@@ -324,7 +370,7 @@
 
 @media (max-width: 600px) {
   .info-cards {
-    padding: 50px 20px 25px;
+    padding: 10px 20px 40px; /* Blank space khatam */
   }
 
   .info-card-image {

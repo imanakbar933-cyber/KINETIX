@@ -1,8 +1,29 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef } from "react";
 import "./InfoCards.css";
 
 function InfoCards() {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+          } else {
+            entry.target.classList.remove("in-view"); // Har baar animate hone ke liye
+          }
+        });
+      },
+      { threshold: 0.1 } // Jab 15% section view mein aaye
+    );
+
+    const elements = sectionRef.current.querySelectorAll(".reveal");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   const cardsData = [
     {
       number: "01",
@@ -18,60 +39,14 @@ function InfoCards() {
     },
   ];
 
-  // ===== Animations =====
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
-
-  const numberVariants = {
-    hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.6, ease: "easeOut", delay: 0.25 },
-    },
-  };
-
-  const titleLineVariants = {
-    hidden: { opacity: 0, y: 15, filter: "blur(6px)" },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-        delay: 0.35 + i * 0.12,
-      },
-    }),
-  };
-
-  const descVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut", delay: 0.6 },
-    },
-  };
-
   return (
-    <section className="info-cards">
+    <section className="info-cards" ref={sectionRef}>
       <div className="info-cards-grid">
         {cardsData.map((card, i) => (
-          <motion.div
-            className="info-card"
+          <div
+            className="info-card reveal"
             key={i}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}   // 👈 HAR BAAR
+            style={{ transitionDelay: `${i * 0.25}s` }} // Card 2 thoda late aaye
           >
             <div className="info-card-image">
               <img src={card.image} alt={card.title} />
@@ -85,44 +60,20 @@ function InfoCards() {
 
               {/* Content */}
               <div className="info-card-content">
-                <motion.span
-                  className="info-card-number"
-                  variants={numberVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: false, amount: 0.2 }}
-                >
-                  {card.number}
-                </motion.span>
+                <span className="info-card-number">{card.number}</span>
 
                 <h3 className="info-card-title">
                   {card.title.split("\n").map((line, idx) => (
-                    <motion.span
-                      key={idx}
-                      className="line"
-                      custom={idx}
-                      variants={titleLineVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false, amount: 0.2 }}
-                    >
+                    <span key={idx} className="line">
                       {line}
-                    </motion.span>
+                    </span>
                   ))}
                 </h3>
               </div>
             </div>
 
-            <motion.p
-              className="info-card-desc"
-              variants={descVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
-            >
-              {card.desc}
-            </motion.p>
-          </motion.div>
+            <p className="info-card-desc">{card.desc}</p>
+          </div>
         ))}
       </div>
     </section>

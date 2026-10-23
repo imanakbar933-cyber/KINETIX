@@ -1,191 +1,536 @@
-/* Facilities.css */
+/* =========================================================
+   FACILITIES SECTION
+========================================================= */
 
-.facilities-section {
-  background-color: #111111;
-  color: #ffffff;
-  padding: 4rem 2rem;
-  font-family: 'Lato', sans-serif;
+.facilities-wrapper {
+  width: 100%;
+  padding: 70px 5% 100px;
+  background: #050505;
+  font-family: Arial, sans-serif;
   overflow: hidden;
 }
 
+.facilities-container {
+  max-width: 1450px;
+  margin: 0 auto;/* =========================================================
+   FACILITIES SECTION
+========================================================= */
+
+.facilities-wrapper {
+  width: 100%;
+  /* 👇 Top padding kam ki gayi hai taake gap kam ho */
+  padding: 70px 5% 80px;
+  background: #050505;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.facilities-container {
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 .facilities-header {
-  max-width: 650px;
-  margin-bottom: 2.5rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
 }
 
-.facilities-heading {
-  font-size: 3.5rem;
-  font-weight: 900;
+.facilities-eyebrow {
+  color: #03ea04;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  margin: 0 0 1rem 0;
-  letter-spacing: 2px;
+  margin-bottom: 12px;
 }
 
-.facilities-description {
-  color: #888888;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin: 0;
+/* =========================================================
+   NEON TITLE ("OUR FACILITIES")
+========================================================= */
+
+/* =========================================================
+   NEON TITLE ("OUR FACILITIES") - SOLID GREEN + GLOW
+========================================================= */
+
+.facilities-title {
+  font-family: "Arial Black", "Helvetica", sans-serif;
+  font-size: clamp(42px, 6vw, 75px);
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  
+  /* Center align */
+  margin: 0 auto 18px;
+  display: block;
+  text-align: center;
+
+  /* 👇 LETTER KE ANDAR BHI GREEN */
+  color: #03ea04; 
+  
+  /* Bahar Glow */
+  text-shadow: 
+    0 0 10px rgba(3, 234, 4, 0.8),
+    0 0 25px rgba(3, 234, 4, 0.6),
+    0 0 45px rgba(3, 234, 4, 0.4);
+          
+  animation: facilitiesNeonPulse 3s ease-in-out infinite;
 }
 
-/* Slider Controls */
-.carousel-controls {
+/* 👇 Neon Pulse Animation */
+@keyframes facilitiesNeonPulse {
+  0%, 100% {
+    color: rgba(3, 234, 4, 0.85); /* Halka dim */
+    text-shadow: 
+      0 0 8px rgba(3, 234, 4, 0.5),
+      0 0 15px rgba(3, 234, 4, 0.3);
+  }
+  50% {
+    color: #03ea04; /* Full bright */
+    text-shadow: 
+      0 0 15px rgba(3, 234, 4, 1),
+      0 0 35px rgba(3, 234, 4, 0.8),
+      0 0 60px rgba(3, 234, 4, 0.5);
+  }
+}
+
+/* =========================================================
+   SHOWCASE (Expanding Panels)
+========================================================= */
+
+.facilities-showcase {
   display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  width: 100%;
+  height: 600px;
+  gap: 4px;
 }
 
-.nav-btn {
-  background: transparent;
-  border: 1px solid #333;
-  color: white;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1.2rem;
-}
+/* =========================================================
+   INDIVIDUAL PANEL
+========================================================= */
 
-.nav-btn:hover {
-  background-color: #39ff14; /* Theme color */
-  color: #111111;
-  border-color: #39ff14;
-}
-
-/* Carousel Container */
-.carousel-container {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
-  padding-bottom: 1rem;
-}
-
-.carousel-container::-webkit-scrollbar {
-  display: none; 
-}
-
-/* Individual Card */
-.facility-card {
+.facility-panel {
   position: relative;
-  min-width: 350px;
-  height: 480px;
-  flex: 0 0 auto;
-  scroll-snap-align: start;
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
   cursor: pointer;
   border-radius: 4px;
-}
-
-/* Images */
-.facility-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.5s ease, transform 0.6s ease;
-}
-
-.base-image {
-  z-index: 1;
-  opacity: 1;
-}
-
-.hover-image {
-  z-index: 2;
-  opacity: 0; /* Hidden by default */
-}
-
-/* 🔄 Image changes on hover */
-.facility-card:hover .hover-image {
-  opacity: 1; 
-}
-
-.facility-card:hover .base-image {
-  transform: scale(1.05);
-}
-
-/* 🟢 Vertical Text - Neon Green Stroke Style */
-.vertical-text {
-  position: absolute;
-  left: -35px;
-  top: 50%;
-  transform: translateY(-50%) rotate(-90deg);
-  transform-origin: center;
-  z-index: 3;
-  pointer-events: none;
-  white-space: nowrap;
-  transition: opacity 0.4s ease; /* Smooth transition for disappearing */
-}
-
-.vertical-text span {
-  font-size: 2.8rem;
-  font-weight: 900;
-  letter-spacing: 8px;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 2px #39ff14;
-  opacity: 0.9;
-}
-
-/* ✨ Vertical text disappears on hover */
-.facility-card:hover .vertical-text {
+  
+  /* Animation initial state */
   opacity: 0;
+  transform: translateY(60px);
+
+  /* Smooth expansion transition */
+  transition: 
+    flex 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s ease var(--delay),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--delay);
 }
 
-/* Black Overlay */
-.black-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 4;
-  transition: opacity 0.4s ease;
-}
-
-.facility-card:hover .black-overlay {
-  opacity: 0;
-}
-
-/* Hover Title Text */
-.hover-text {
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
-  z-index: 5;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.4s ease;
-}
-
-.hover-text h3 {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #ffffff;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-}
-
-.facility-card:hover .hover-text {
+/* Trigger animation when in view */
+.facilities-wrapper.in-view .facility-panel {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Bottom Gradient */
-.linear-black {
+/* Hover State: Expand */
+.facility-panel:hover {
+  flex: 3.5;
+}
+
+/* =========================================================
+   BACKGROUND IMAGE & OVERLAY
+========================================================= */
+
+.facility-image {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+}
+
+.facility-panel:hover .facility-image {
+  transform: scale(1.1);
+}
+
+.facility-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.1));
+  transition: background 0.6s ease;
+}
+
+.facility-panel:hover .facility-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.4));
+}
+
+/* =========================================================
+   VERTICAL TEXT (Neon Outline)
+========================================================= */
+
+.facility-vertical-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease, transform 0.6s ease;
+}
+
+.facility-vertical-title span {
+  color: transparent;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  -webkit-text-stroke: 1.5px #03ea04;
+  transition: -webkit-text-stroke 0.4s ease;
+}
+
+/* Hover par vertical text hide ho jaye */
+.facility-panel:hover .facility-vertical-title {
+  opacity: 0;
+  transform: translateY(-30px) scale(0.9);
+}
+
+/* =========================================================
+   CONTENT (Text on Hover)
+========================================================= */
+
+.facility-content {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.4s ease 0.15s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+
+.facility-panel:hover .facility-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.facility-content h3 {
+  color: #ffffff;
+  font-size: clamp(22px, 2vw, 32px);
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+.facility-content p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 400px;
+  margin: 0;
+}
+
+/* =========================================================
+   DARKEN OTHER PANELS ON HOVER
+========================================================= */
+
+.facilities-showcase:has(.facility-panel:hover) 
+.facility-panel:not(:hover) 
+.facility-image {
+  filter: brightness(0.4);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1024px) {
+  .facilities-showcase {
+    height: 500px;
+  }
+}
+
+@media (max-width: 800px) {
+  .facilities-wrapper {
+    padding: 50px 20px 60px; /* Mobile pe padding kam */
+  }
+
+  .facilities-title {
+    font-size: 38px; /* Chhota font */
+    -webkit-text-stroke: 1.5px #03ea04;
+  }
+
+  /* Mobile pe list view (No expanding panels) */
+  .facilities-showcase {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: 16px;
+  }
+
+  .facility-panel {
+    height: 350px;
+    flex: none !important;
+  }
+
+  .facility-vertical-title {
+    opacity: 0; /* Mobile pe outline text hide kardo taake content dikhe */
+  }
+
+  .facility-content {
+    opacity: 1;
+    transform: translateY(0);
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+  }
+}
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.facilities-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.facilities-eyebrow {
+  color: #03ea04;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.facilities-title {
+  color: #ffffff;
+  font-size: clamp(40px, 6vw, 70px);
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+
+.facilities-subtitle {
+  color: #999999;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   SHOWCASE (Expanding Panels)
+========================================================= */
+
+.facilities-showcase {
+  display: flex;
   width: 100%;
-  height: 40%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-  z-index: 4;
-  pointer-events: none;
+  height: 600px;
+  gap: 4px; /* Panels ke darmiyan gap */
+}
+
+/* =========================================================
+   INDIVIDUAL PANEL
+========================================================= */
+
+.facility-panel {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 4px;
+  
+  /* Animation initial state */
+  opacity: 0;
+  transform: translateY(60px);
+
+  /* Smooth expansion transition */
+  transition: 
+    flex 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.8s ease var(--delay),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--delay);
+}
+
+/* Trigger animation */
+.facilities-wrapper.in-view .facility-panel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover State: Expand */
+.facility-panel:hover {
+  flex: 3.5;
+}
+
+/* =========================================================
+   BACKGROUND IMAGE & OVERLAY
+========================================================= */
+
+.facility-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+}
+
+.facility-panel:hover .facility-image {
+  transform: scale(1.1);
+}
+
+.facility-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.1));
+  transition: background 0.6s ease;
+}
+
+.facility-panel:hover .facility-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.4));
+}
+
+/* =========================================================
+   VERTICAL TEXT (Neon Outline)
+========================================================= */
+
+.facility-vertical-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease, transform 0.6s ease;
+}
+
+.facility-vertical-title span {
+  color: transparent;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  -webkit-text-stroke: 1.5px #03ea04;
+  transition: -webkit-text-stroke 0.4s ease;
+}
+
+/* Hover par vertical text hide ho jaye */
+.facility-panel:hover .facility-vertical-title {
+  opacity: 0;
+  transform: translateY(-30px) scale(0.9);
+}
+
+/* =========================================================
+   CONTENT (Text on Hover)
+========================================================= */
+
+.facility-content {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.4s ease 0.15s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+
+.facility-panel:hover .facility-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.facility-content h3 {
+  color: #ffffff;
+  font-size: clamp(22px, 2vw, 32px);
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+.facility-content p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 400px;
+  margin: 0;
+}
+
+/* =========================================================
+   DARKEN OTHER PANELS ON HOVER
+========================================================= */
+
+.facilities-showcase:has(.facility-panel:hover) 
+.facility-panel:not(:hover) 
+.facility-image {
+  filter: brightness(0.4);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1024px) {
+  .facilities-showcase {
+    height: 500px;
+  }
+}
+
+@media (max-width: 800px) {
+  .facilities-wrapper {
+    padding: 80px 20px;
+  }
+
+  /* Mobile pe list view (No expanding panels) */
+  .facilities-showcase {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: 16px;
+  }
+
+  .facility-panel {
+    height: 350px;
+    flex: none !important;
+  }
+
+  .facility-vertical-title {
+    opacity: 1; /* Mobile pe text visible rahe */
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+  }
+
+  .facility-vertical-title span {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 20px;
+  }
+
+  .facility-content {
+    opacity: 1;
+    transform: translateY(0);
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .facility-vertical-title {
+    opacity: 0; /* Mobile pe outline text hide kardo taake content dikhe */
+  }
 }

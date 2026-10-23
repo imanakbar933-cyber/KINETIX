@@ -15,7 +15,7 @@ const Classroom= () => {
       description:
         "Join our energetic group fitness classes led by experienced instructors.",
       image: "/gym-assets/class1.jpg",
-      link: "/classroom/online-classes",
+     link: "/class-detail/online-classes", 
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ const Classroom= () => {
       description:
         "Join our energetic group fitness classes led by experienced instructors.",
       image: "/gym-assets/class2.jpg",
-      link: "/classroom/nutrition",
+     link: "/class-detail/nutrition",
     },
     {
       id: 3,
@@ -31,7 +31,7 @@ const Classroom= () => {
       description:
         "Join our energetic group fitness classes led by experienced instructors.",
       image: "/gym-assets/class3.jpg",
-      link: "/classroom/personal-training",
+     link: "/class-detail/personal-training",
     },
     {
       id: 4,
@@ -39,7 +39,7 @@ const Classroom= () => {
       description:
         "Join our energetic group fitness classes led by experienced instructors.",
       image: "/gym-assets/class4.jpg",
-      link: "/classroom/fitness-challenges",
+      link: "/class-detail/fitness-challenges",
     },
     {
       id: 5,
@@ -47,7 +47,7 @@ const Classroom= () => {
       description:
         "Join our energetic group fitness classes led by experienced instructors.",
       image: "/gym-assets/class5.jpg",
-      link: "/classroom/workshops",
+      link: "/class-detail/workshops", //
     },
     {
       id: 6,
@@ -55,7 +55,7 @@ const Classroom= () => {
       description:
         "Join our energetic group fitness classes led by experienced instructors.",
       image: "/gym-assets/class6.jpg",
-      link: "/classroom/group-fitness",
+      link: "/class-detail/group-fitness",
     },
   ];
 

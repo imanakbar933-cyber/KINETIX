@@ -1,25 +1,42 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, useInView } from "framer-motion";
 import "./Trainers.css";
 
 function Trainers() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, {
     amount: 0.25,
-    once: false,   // 👈 HAR BAAR animate
+    once: false, // 👈 HAR BAAR animate
   });
 
+  // ✅ EXACT SAME ARRAY AS TEAMFACES
   const trainersData = [
-    { id: 1, name: "HENRY",      image: "/images/trainer1.jpg" },
-    { id: 2, name: "JAMES",      image: "/images/trainer2.jpg" },
-    { id: 3, name: "MIKE",       image: "/images/trainer3.jpg" },
-    { id: 4, name: "DAVID KHAN", image: "/images/trainer4.jpg" },
-    { id: 5, name: "ALEX BROWN", image: "/images/trainer5.jpg" },
+    {
+      id: 1,
+      name: "AHMED RAZA",
+      role: "Head Trainer",
+      image: "/gym-assets/AHMED.jpg",
+      link: "/team/ahmed",
+    },
+    {
+      id: 2,
+      name: "BILAL KHAN",
+      role: "Fitness Coach",
+      image: "/gym-assets/Bilal.jpg",
+      link: "/team/bilal",
+    },
+    {
+      id: 3,
+      name: "FATIMA ALI",
+      role: "Yoga Instructor",
+      image: "/gym-assets/Fatimah.jpg",
+      link: "/team/fatima",
+    },
+    // Agar aur members add karne hain to yahan kar sakti hain
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCount = 3;
+  const visibleCount = 3; // 3 cards ek waqt mein dikhenge
 
   const handleNext = () => {
     setCurrentIndex((prev) =>
@@ -41,10 +58,8 @@ function Trainers() {
   ];
 
   // ============================================================
-  // ANIMATION VARIANTS — one by one flow
+  // ANIMATION VARIANTS
   // ============================================================
-
-  // 1. Tag
   const tagVariants = {
     hidden: { opacity: 0, x: -30 },
     visible: {
@@ -54,7 +69,6 @@ function Trainers() {
     },
   };
 
-  // 2. Heading words — one by one
   const wordVariants = (i) => ({
     hidden: { opacity: 0, y: 60, rotateX: -70 },
     visible: {
@@ -64,12 +78,11 @@ function Trainers() {
       transition: {
         duration: 0.6,
         ease: [0.22, 1, 0.36, 1],
-        delay: 0.3 + i * 0.15,   // ek ke baad ek
+        delay: 0.3 + i * 0.15,
       },
     },
   });
 
-  // 3. Controls
   const controlsVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -79,7 +92,6 @@ function Trainers() {
     },
   };
 
-  // 4. Cards — one by one
   const cardVariants = (i) => ({
     hidden: { opacity: 0, y: 40, scale: 0.95 },
     visible: {
@@ -95,11 +107,10 @@ function Trainers() {
   });
 
   return (
-    <section ref={sectionRef} className="trainers">
+    <section ref={sectionRef} className={`trainers ${inView ? "in-view" : ""}`}>
       <div className="trainers-container">
         {/* ===== LEFT SIDE ===== */}
         <div className="trainers-left">
-          {/* Tag */}
           <motion.span
             className="trainers-tag"
             variants={tagVariants}
@@ -107,24 +118,20 @@ function Trainers() {
             animate={isInView ? "visible" : "hidden"}
           >
             OUR TEAM
-          </motion.span>
+          </span>
 
-          {/* Heading — words one by one */}
           <h2 className="trainers-heading">
             {headingWords.map((word) => (
-              <motion.span
+              <span
                 key={word.index}
                 className={`word ${word.green ? "green" : ""}`}
-                variants={wordVariants(word.index)}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
+                style={{ "--i": word.index }} // 👈 Index pass kiya for CSS delay
               >
                 {word.text}
-              </motion.span>
+              </span>
             ))}
           </h2>
 
-          {/* Controls */}
           <motion.div
             className="trainers-controls"
             variants={controlsVariants}
@@ -138,37 +145,28 @@ function Trainers() {
             >
               ←
             </button>
-            <button
-              className="trainer-arrow"
-              onClick={handleNext}
-              aria-label="Next"
-            >
+            <button className="trainer-arrow" onClick={handleNext} aria-label="Next">
               →
             </button>
-          </motion.div>
+          </div>
         </div>
 
         {/* ===== RIGHT SIDE — SLIDER ===== */}
         <div className="trainers-slider">
-          <motion.div
+          <div
             className="trainers-track"
-            animate={{
-              x: `calc(-${currentIndex} * (100% / ${visibleCount} + 20px))`,
+            style={{
+              transform: `translateX(calc(-${currentIndex} * (100% / ${visibleCount} + 20px)))`,
+              transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)"
             }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             {trainersData.map((trainer, idx) => (
-              <motion.div
+              <div
                 key={trainer.id}
                 className="trainer-card"
-                variants={cardVariants(idx)}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
+                style={{ "--i": idx }} // 👈 Index pass kiya for CSS delay
               >
-                <Link
-                  to={`/trainers/${trainer.id}`}
-                  className="trainer-card-link"
-                >
+                <Link to={trainer.link} className="trainer-card-link">
                   <div className="trainer-card-image">
                     <img src={trainer.image} alt={trainer.name} />
 
@@ -176,7 +174,18 @@ function Trainers() {
                     <div className="trainer-scan"></div>
                     <div className="trainer-card-overlay"></div>
 
-                    <h3 className="trainer-card-name">{trainer.name}</h3>
+                    {/* ✅ Naam 2 lines mein (Team jaisa) */}
+                    <div className="trainer-name-block">
+                      <h3 className="trainer-card-name">
+                        {trainer.name.split(" ")[0]}
+                      </h3>
+                      {trainer.name.split(" ")[1] && (
+                        <h3 className="trainer-card-name">
+                          {trainer.name.split(" ").slice(1).join(" ")}
+                        </h3>
+                      )}
+                    </div>
+
                     <span className="trainer-card-arrow">↗</span>
 
                     <span className="t-corner t-tl"></span>
@@ -185,9 +194,9 @@ function Trainers() {
                     <span className="t-corner t-br"></span>
                   </div>
                 </Link>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
