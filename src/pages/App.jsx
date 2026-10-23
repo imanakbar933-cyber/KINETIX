@@ -7,7 +7,9 @@ import Contact from "../components/Contact";
 import FAQ from "../components/FAQ";
 import Newsletter from "../components/Newsletter";
 import Schedule from "../components/Schedule";
-
+import Facilities from "../components/Facilities";
+import ServicesSection from "../components/ServicesSection";
+import MembershipPlans from "../components/MembershipPlans";
 function Home() {
   return (
     <>
@@ -17,6 +19,10 @@ function Home() {
       <GymShowcase />
       <About />
       <Headlines />
+      {/* Muneeba's Existing Home Components */}
+      <Facilities />
+      <ServicesSection />
+      <MembershipPlans />
 
       {/* Your Home Components */}
       <Schedule />

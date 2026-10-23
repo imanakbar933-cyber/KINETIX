@@ -5,7 +5,8 @@
 .trainers {
   position: relative;
   width: 100%;
-  padding: 40px 5% 80px;
+  /* 👇 Blank space fix: top padding kam ki, bottom thoda kam kiya */
+  padding: 20px 5% 80px; 
   background: #050505;
   font-family: Arial, sans-serif;
   overflow: hidden;
@@ -30,12 +31,14 @@
   gap: 32px;
 }
 
-/* ---------- TAG ---------- */
+/* =========================================================
+   ANIMATION TRIGGERS (SLOW & RELIABLE)
+========================================================= */
 
+/* Tag Animation */
 .trainers-tag {
   display: inline-block;
   color: #03ea04;
-  font-family: Arial, sans-serif;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 4px;
@@ -43,6 +46,17 @@
   position: relative;
   padding-left: 40px;
   text-shadow: 0 0 12px rgba(3, 234, 4, 0.5);
+  
+  /* Start State */
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.trainers.in-view .trainers-tag {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.1s;
 }
 
 .trainers-tag::before {
@@ -62,30 +76,42 @@
    HEADING
 ========================================================= */
 
-/* =========================================================
-   HEADING
-========================================================= */
-
 .trainers-heading {
   margin: 0;
   color: #ffffff;
-  font-family: Arial, sans-serif;
   font-size: clamp(38px, 4.5vw, 64px);
   font-weight: 900;
   line-height: 1.1;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-
   display: flex;
-  flex-wrap: wrap;                /* ✅ words wrap honge */
-  gap: 0 14px;                    /* ✅ words ke beech gap */
+  flex-wrap: wrap;
+  gap: 0 14px;
   max-width: 100%;
   perspective: 800px;
 }
 
 .trainers-heading .word {
   display: inline-block;
-  white-space: nowrap;            /* ✅ har word ek line me */
+  white-space: nowrap;
+  
+  /* Start State */
+  opacity: 0;
+  transform: translateY(60px) rotateX(-70deg);
+  transform-origin: bottom center;
+  filter: blur(5px);
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), 
+              transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 1s ease-out;
+}
+
+/* Words one-by-one reveal */
+.trainers.in-view .trainers-heading .word {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+  filter: blur(0);
+  /* Delay calculate via CSS variable --i */
+  transition-delay: calc(0.3s + (var(--i) * 0.15s));
 }
 
 .trainers-heading .word.green {
@@ -95,13 +121,6 @@
     0 0 40px rgba(3, 234, 4, 0.4);
 }
 
-.trainers-heading:hover .word {
-  text-shadow:
-    0 0 18px rgba(3, 234, 4, 0.5),
-    0 0 40px rgba(3, 234, 4, 0.3);
-  transition: text-shadow 0.35s ease;
-}
-
 /* =========================================================
    ARROW BUTTONS
 ========================================================= */
@@ -109,6 +128,17 @@
 .trainers-controls {
   display: flex;
   gap: 12px;
+  
+  /* Start State */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.trainers.in-view .trainers-controls {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 1.1s;
 }
 
 .trainer-arrow {
@@ -150,10 +180,6 @@
   transform: translateY(-4px);
 }
 
-.trainer-arrow:active {
-  transform: translateY(-1px);
-}
-
 /* =========================================================
    SLIDER
 ========================================================= */
@@ -175,6 +201,20 @@
 
 .trainer-card {
   flex: 0 0 calc((100% - 40px) / 3);
+  
+  /* Start State */
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), 
+              transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Cards one-by-one reveal */
+.trainers.in-view .trainer-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  /* Delay calculate via CSS variable --i */
+  transition-delay: calc(0.6s + (var(--i) * 0.15s));
 }
 
 .trainer-card-link {
@@ -221,7 +261,7 @@
 }
 
 /* =========================================================
-   NEON SWEEP — only on hover
+   NEON SWEEP & SCAN (Hover Effects)
 ========================================================= */
 
 .trainer-sweep {
@@ -255,10 +295,6 @@
   100% { left: 130%; }
 }
 
-/* =========================================================
-   SCAN LINE — only on hover
-========================================================= */
-
 .trainer-scan {
   position: absolute;
   left: 0;
@@ -291,7 +327,7 @@
 }
 
 /* =========================================================
-   OVERLAY
+   OVERLAY & TEXT
 ========================================================= */
 
 .trainer-card-overlay {
@@ -316,10 +352,6 @@
   );
 }
 
-/* =========================================================
-   NAME
-========================================================= */
-
 .trainer-card-name {
   position: absolute;
   left: 20px;
@@ -327,7 +359,6 @@
   z-index: 5;
   margin: 0;
   color: #ffffff;
-  font-family: Arial, sans-serif;
   font-size: 18px;
   font-weight: 800;
   letter-spacing: 1px;
@@ -343,10 +374,6 @@
     0 0 15px rgba(3, 234, 4, 0.8),
     0 2px 12px rgba(0, 0, 0, 0.9);
 }
-
-/* =========================================================
-   ARROW BUTTON ON CARD
-========================================================= */
 
 .trainer-card-arrow {
   position: absolute;
@@ -403,7 +430,7 @@
 }
 
 /* =========================================================
-   TABLET
+   RESPONSIVE
 ========================================================= */
 
 @media (max-width: 1000px) {
@@ -411,35 +438,26 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
-
   .trainers-heading {
     font-size: 40px;
   }
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
 @media (max-width: 600px) {
   .trainers {
-    padding: 30px 20px 70px;
+    padding: 20px 20px 70px; /* Top padding kam ki */
   }
-
   .trainers-heading {
     font-size: 32px;
   }
-
   .trainer-card {
     flex: 0 0 100%;
   }
-
   .trainer-card-name {
     font-size: 13px;
     left: 12px;
     bottom: 14px;
   }
-
   .trainer-card-arrow {
     width: 32px;
     height: 32px;
@@ -447,13 +465,11 @@
     right: 10px;
     bottom: 10px;
   }
-
   .trainer-arrow {
     width: 44px;
     height: 44px;
     font-size: 16px;
   }
-
   .trainer-sweep,
   .trainer-scan {
     display: none;

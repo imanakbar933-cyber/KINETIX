@@ -44,12 +44,12 @@
 }
 
 /* =========================================================
-   WATERMARK — "OUR MISSION"
+   WATERMARK — "OUR MISSION" (NEON BORDER EFFECT)
 ========================================================= */
 
 .our-story-watermark {
   position: absolute;
-  bottom: 20px;
+  bottom: 80px;                       /* Upar shift */
   left: 0;
   right: 0;
   width: 100%;
@@ -61,26 +61,40 @@
   letter-spacing: 3px;
   line-height: 1;
   text-transform: uppercase;
+  
+  /* 1. Text ke andar transparent */
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.22);
+
+  /* 2. Sirf border pe solid neon green */
+  -webkit-text-stroke: 2.5px #03ea04;
+
+  /* 3. Border ke bahar neon glow */
+  filter: drop-shadow(0 0 10px rgba(3, 234, 4, 1))
+          drop-shadow(0 0 25px rgba(3, 234, 4, 0.6))
+          drop-shadow(0 0 50px rgba(3, 234, 4, 0.3));
+
   pointer-events: none;
   user-select: none;
   z-index: 0;
   white-space: nowrap;
   overflow: hidden;
-  animation: watermarkPulse 8s ease-in-out infinite;
+
+  /* 4. Breathing / Pulse effect */
+  animation: neonPulse 3s ease-in-out infinite;
 }
 
-@keyframes watermarkPulse {
+@keyframes neonPulse {
   0%, 100% {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.22);
-    text-shadow: none;
+    -webkit-text-stroke: 2.5px rgba(3, 234, 4, 0.7);
+    filter: drop-shadow(0 0 8px rgba(3, 234, 4, 0.8))
+            drop-shadow(0 0 20px rgba(3, 234, 4, 0.4))
+            drop-shadow(0 0 35px rgba(3, 234, 4, 0.2));
   }
   50% {
-    -webkit-text-stroke: 1px rgba(3, 234, 4, 0.3);
-    text-shadow:
-      0 0 8px rgba(3, 234, 4, 0.2),
-      0 0 18px rgba(3, 234, 4, 0.1);
+    -webkit-text-stroke: 2.5px #03ea04;
+    filter: drop-shadow(0 0 15px rgba(3, 234, 4, 1))
+            drop-shadow(0 0 35px rgba(3, 234, 4, 0.7))
+            drop-shadow(0 0 70px rgba(3, 234, 4, 0.4));
   }
 }
 
@@ -113,7 +127,7 @@
 
 .our-story-tag {
   display: inline-block;
-  color:#00ff00;
+  color: #00ff00;
   font-family: Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
@@ -133,7 +147,7 @@
   transform: translateY(-50%);
   width: 30px;
   height: 2px;
-  background:#00ff00;
+  background: #00ff00;
   box-shadow: 0 0 12px rgba(3, 234, 4, 0.8);
   border-radius: 2px;
 }
@@ -146,7 +160,7 @@
   transform: translateY(-50%);
   width: 8px;
   height: 8px;
-  background:#00ff00;
+  background: #00ff00;
   border-radius: 50%;
   box-shadow: 0 0 12px rgba(3, 234, 4, 0.9);
   animation: dotPulse 2s ease-in-out infinite;
@@ -209,7 +223,7 @@
   top: 6px;
   bottom: 6px;
   width: 3px;
-  background: linear-gradient(180deg,#00ff00, transparent);
+  background: linear-gradient(180deg, #00ff00, transparent);
   border-radius: 3px;
   box-shadow: 0 0 14px rgba(3, 234, 4, 0.5);
   transform: scaleY(0);
@@ -222,7 +236,7 @@
 }
 
 /* =========================================================
-   ✨ SCROLL REVEAL — NO BLUR (smooth)
+   SCROLL REVEAL
 ========================================================= */
 
 .reveal {
@@ -274,6 +288,11 @@
     max-width: 100%;
     font-size: 16px;
   }
+
+  .our-story-watermark {
+    bottom: 50px;
+    -webkit-text-stroke: 2px rgba(3, 234, 4, 0.8);
+  }
 }
 
 /* =========================================================
@@ -309,7 +328,8 @@
   .our-story-watermark {
     font-size: 36px;
     letter-spacing: 2px;
-    bottom: 10px;
+    bottom: 30px;
     padding: 0 15px;
+    -webkit-text-stroke: 1.5px rgba(3, 234, 4, 0.8);
   }
 }
