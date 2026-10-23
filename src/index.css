@@ -1,0 +1,37 @@
+/* =========================================================
+   GLOBAL RESET & PERFORMANCE
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background: #050505;
+  color: #ffffff;
+}
+
+/* Images smooth rendering */
+img, video {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  max-width: 100%;
+}
+
+/* Sections isolate for performance */
+.our-story,
+.info-cards,
+.trainers {
+  contain: layout style;
+  content-visibility: auto;
+  contain-intrinsic-size: 700px;
+}

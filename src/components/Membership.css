@@ -1,0 +1,1219 @@
+/* =========================================
+   MEMBERSHIP SECTION
+========================================= */
+
+.membership-section {
+  width: 100%;
+  min-height: 850px;
+
+  box-sizing: border-box;
+
+  background: #15161b;
+
+  color: #ffffff;
+
+  padding: 95px 5% 100px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================
+   BACKGROUND CURVED LINES
+========================================= */
+
+.membership-section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 2100px;
+  height: 1400px;
+
+  left: -300px;
+  top: -520px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.055);
+
+  box-shadow:
+    110px 0 0 rgba(255, 255, 255, 0.05),
+    220px 0 0 rgba(255, 255, 255, 0.045),
+    330px 0 0 rgba(255, 255, 255, 0.04),
+    440px 0 0 rgba(255, 255, 255, 0.035),
+    550px 0 0 rgba(255, 255, 255, 0.03),
+    660px 0 0 rgba(255, 255, 255, 0.025),
+    770px 0 0 rgba(255, 255, 255, 0.02);
+
+  transform: rotate(-16deg);
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.membership-container {
+  width: 100%;
+
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =========================================
+   TOP AREA
+========================================= */
+
+.membership-top {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  margin-bottom: 55px;
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.membership-intro {
+  width: 650px;
+}
+
+
+.membership-intro h1 {
+  margin: 0;
+
+  padding: 0;
+
+  color: #f5f5f5;
+
+  font-size: 58px;
+
+  line-height: 0.98;
+
+  font-weight: 800;
+
+  letter-spacing: -2px;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.membership-intro p {
+  width: 570px;
+
+  margin: 30px 0 0;
+
+  padding: 0;
+
+  color: #b5b5b5;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  font-weight: 400;
+}
+
+
+/* =========================================
+   CONTROLS
+========================================= */
+
+.membership-controls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 40px;
+
+  padding-bottom: 3px;
+}
+
+
+/* =========================================
+   BILLING
+========================================= */
+
+.billing-buttons {
+  display: flex;
+
+  align-items: center;
+}
+
+
+.billing-buttons button {
+  height: 48px;
+
+  padding: 0 27px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #999999;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+
+.billing-buttons button:hover {
+  color: #ffffff;
+}
+
+
+.billing-buttons .active-billing {
+  background: #00ed00;
+
+  color: #000000;
+}
+
+
+/* =========================================
+   ARROWS
+========================================= */
+
+.carousel-arrows {
+  display: flex;
+
+  gap: 8px;
+}
+
+
+.carousel-arrows button {
+  width: 43px;
+
+  height: 43px;
+
+  background: transparent;
+
+  border: 1px solid #505050;
+
+  color: #ffffff;
+
+  font-size: 23px;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition: 0.3s ease;
+}
+
+
+.carousel-arrows button:hover {
+  background: #00ed00;
+
+  border-color: #00ed00;
+
+  color: #000000;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
+   CAROUSEL VIEWPORT
+========================================= */
+
+.membership-viewport {
+  width: 100%;
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+
+/* =========================================
+   CAROUSEL TRACK
+========================================= */
+
+.membership-track {
+  display: flex;
+
+  gap: 12px;
+
+  width: max-content;
+
+  will-change: transform;
+}
+
+
+/*
+   THIS IS THE IMPORTANT PART
+
+   Card width:
+   40vw
+
+   Gap:
+   12px
+
+   Every click moves exactly:
+   40vw + 12px
+
+   So cards stay perfectly aligned.
+*/
+
+.membership-track.carousel-transition {
+  transition:
+    transform 0.65s cubic-bezier(
+      0.65,
+      0,
+      0.35,
+      1
+    );
+}
+
+
+/* =========================================
+   MEMBERSHIP CARD
+========================================= */
+
+.membership-card {
+  box-sizing: border-box;
+
+  flex: 0 0 calc(40vw - 20px);
+
+  width: calc(40vw - 20px);
+
+  min-height: 475px;
+
+  padding: 35px 30px 32px;
+
+  background: #0b0c0e;
+
+  border: 1px solid #55565a;
+
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+
+.membership-card:hover {
+  border-color: #00ed00;
+
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.5);
+
+  transform: translateY(-8px);
+}
+
+
+/* =========================================
+   CARD TITLE
+========================================= */
+
+.membership-card h3 {
+  margin: 0;
+
+  padding: 0;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================
+   PRICE
+========================================= */
+
+.membership-price {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 8px;
+
+  margin-top: 22px;
+
+  white-space: nowrap;
+}
+
+
+.membership-price strong {
+  color: #f5f5f5;
+
+  font-size: 53px;
+
+  line-height: 1;
+
+  font-weight: 800;
+}
+
+
+.membership-price span {
+  color: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================
+   SUBSCRIBE BUTTON
+========================================= */
+
+.subscribe-button {
+  width: 100%;
+
+  height: 46px;
+
+  margin-top: 35px;
+
+  background: transparent;
+
+  border: 1px solid #00ed00;
+
+  color: #00ed00;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 14px;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+
+.subscribe-button b {
+  font-size: 20px;
+
+  font-weight: 400;
+}
+
+
+.subscribe-button:hover {
+  background: #00ed00;
+
+  color: #000000;
+
+  box-shadow:
+    0 0 25px rgba(0, 237, 0, 0.25);
+}
+
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.membership-features {
+  margin-top: 36px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 19px;
+}
+
+
+/* =========================================
+   FEATURE
+========================================= */
+
+.membership-feature {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  color: #aaaaaa;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================
+   CHECK
+========================================= */
+
+.feature-check {
+  width: 14px;
+
+  height: 14px;
+
+  flex-shrink: 0;
+
+  background: #68696c;
+
+  color: #ffffff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1600px) {
+
+  .membership-section {
+    padding-left: 7%;
+    padding-right: 7%;
+  }
+
+  .membership-intro h1 {
+    font-size: 64px;
+  }
+
+  .membership-intro p {
+    font-size: 15px;
+
+    width: 620px;
+  }
+
+  .membership-card {
+    flex-basis: calc(40vw - 20px);
+
+    min-height: 500px;
+  }
+
+}
+
+
+/* =========================================
+   LAPTOP
+========================================= */
+
+@media (max-width: 1200px) {
+
+  .membership-section {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .membership-intro h1 {
+    font-size: 48px;
+  }
+
+  .membership-intro p {
+    width: 480px;
+
+    font-size: 12px;
+  }
+
+  .membership-controls {
+    gap: 15px;
+  }
+
+  .membership-card {
+    flex-basis: calc(40vw - 20px);
+  }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 800px) {
+
+  .membership-top {
+    display: block;
+  }
+
+  .membership-intro {
+    width: 100%;
+  }
+
+  .membership-intro h1 {
+    font-size: 44px;
+  }
+
+  .membership-intro p {
+    width: 100%;
+  }
+
+  .membership-controls {
+    margin-top: 35px;
+
+    justify-content: space-between;
+  }
+
+  .membership-card {
+    flex-basis: 70vw;
+
+    width: 70vw;
+
+    min-height: 450px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+  .membership-section {
+    padding: 60px 20px 70px;
+  }
+
+  .membership-intro h1 {
+    font-size: 34px;
+
+    letter-spacing: -1px;
+  }
+
+  .membership-intro p {
+    font-size: 11px;
+  }
+
+  .membership-controls {
+    display: block;
+  }
+
+  .billing-buttons {
+    margin-bottom: 20px;
+  }
+
+  .carousel-arrows {
+    justify-content: flex-end;
+  }
+
+  .membership-card {
+    flex-basis: 88vw;
+
+    width: 88vw;
+
+    min-height: 440px;
+
+    padding: 30px 24px;
+  }
+
+  .membership-price strong {
+    font-size: 45px;
+  }
+
+}
+/* =========================================
+   PREMIUM MEMBERSHIP ANIMATIONS
+========================================= */
+
+
+/* =========================================
+   FALLING PARTICLES
+========================================= */
+
+.membership-section::after {
+  content: "";
+
+  position: absolute;
+
+  top: -20px;
+  left: 0;
+
+  width: 100%;
+  height: 120%;
+
+  pointer-events: none;
+
+  z-index: 1;
+
+  opacity: 0.55;
+
+  background-image:
+    radial-gradient(circle, #00ed00 0 2px, transparent 3px),
+    radial-gradient(circle, #ffffff 0 1px, transparent 2px),
+    radial-gradient(circle, #00ed00 0 1px, transparent 2px),
+    radial-gradient(circle, #ffffff 0 2px, transparent 3px),
+    radial-gradient(circle, #00ed00 0 1px, transparent 2px);
+
+  background-size:
+    180px 260px,
+    230px 310px,
+    140px 220px,
+    300px 350px,
+    190px 280px;
+
+  background-position:
+    20px -100px,
+    80px -200px,
+    130px -150px,
+    200px -250px,
+    300px -100px;
+
+  animation: fallingParticles 12s linear infinite;
+}
+
+
+/* =========================================
+   PARTICLE FALLING
+========================================= */
+
+@keyframes fallingParticles {
+
+  0% {
+    transform: translateY(-120px);
+  }
+
+  100% {
+    transform: translateY(180px);
+  }
+
+}
+
+
+/* =========================================
+   FLOATING LIGHTS
+========================================= */
+
+.membership-container::before {
+  content: "";
+
+  position: absolute;
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #00ed00;
+
+  top: 30px;
+  left: 18%;
+
+  box-shadow:
+    0 0 10px #00ed00,
+    0 0 25px rgba(0, 237, 0, 0.7);
+
+  animation: floatingLight 4s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+
+.membership-container::after {
+  content: "";
+
+  position: absolute;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  top: 170px;
+  right: 25%;
+
+  box-shadow:
+    0 0 10px white,
+    0 0 20px rgba(255, 255, 255, 0.5);
+
+  animation: floatingLight2 5s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   FLOATING LIGHT 1
+========================================= */
+
+@keyframes floatingLight {
+
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translateY(70px) translateX(30px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.3;
+  }
+
+}
+
+
+/* =========================================
+   FLOATING LIGHT 2
+========================================= */
+
+@keyframes floatingLight2 {
+
+  0% {
+    transform: translateY(0);
+    opacity: 0.2;
+  }
+
+  50% {
+    transform: translateY(-60px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 0.2;
+  }
+
+}
+
+
+/* =========================================
+   CARD TOP LIGHT
+========================================= */
+
+.membership-card {
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+/* Moving shine */
+
+.membership-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: -100%;
+
+  left: -120%;
+
+  width: 70%;
+
+  height: 300%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 237, 0, 0.08),
+    transparent
+  );
+
+  transform: rotate(20deg);
+
+  transition: none;
+
+  pointer-events: none;
+}
+
+
+/* Shine animation */
+
+.membership-card:hover::before {
+  animation: cardShine 1.1s ease;
+}
+
+
+@keyframes cardShine {
+
+  0% {
+    left: -120%;
+  }
+
+  100% {
+    left: 150%;
+  }
+
+}
+
+
+/* =========================================
+   CARD FLOATING ANIMATION
+========================================= */
+
+.membership-card:nth-child(1) {
+  animation: cardFloat1 5s ease-in-out infinite;
+}
+
+
+.membership-card:nth-child(2) {
+  animation: cardFloat2 6s ease-in-out infinite;
+}
+
+
+.membership-card:nth-child(3) {
+  animation: cardFloat3 5.5s ease-in-out infinite;
+}
+
+
+.membership-card:nth-child(4) {
+  animation: cardFloat2 6.5s ease-in-out infinite;
+}
+
+
+.membership-card:nth-child(5) {
+  animation: cardFloat1 5.8s ease-in-out infinite;
+}
+
+
+@keyframes cardFloat1 {
+
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+
+}
+
+
+@keyframes cardFloat2 {
+
+  0% {
+    transform: translateY(-3px);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+
+  100% {
+    transform: translateY(-3px);
+  }
+
+}
+
+
+@keyframes cardFloat3 {
+
+  0% {
+    transform: translateY(2px);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
+
+  100% {
+    transform: translateY(2px);
+  }
+
+}
+
+
+/* =========================================
+   SUBSCRIBE BUTTON PULSE
+========================================= */
+
+.subscribe-button {
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.subscribe-button::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 70%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+
+  animation: buttonShine 4s infinite;
+}
+
+
+@keyframes buttonShine {
+
+  0% {
+    left: -100%;
+  }
+
+  25% {
+    left: 150%;
+  }
+
+  100% {
+    left: 150%;
+  }
+
+}
+
+
+/* =========================================
+   HEADING ENTRANCE
+========================================= */
+
+.membership-intro h1 {
+  animation: headingReveal 1s ease both;
+}
+
+
+@keyframes headingReveal {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================================
+   DESCRIPTION ENTRANCE
+========================================= */
+
+.membership-intro p {
+  animation: descriptionReveal 1.2s ease 0.2s both;
+}
+
+
+@keyframes descriptionReveal {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================================
+   BILLING ENTRANCE
+========================================= */
+
+.membership-controls {
+  animation: controlsReveal 1s ease 0.3s both;
+}
+
+
+@keyframes controlsReveal {
+
+  from {
+    opacity: 0;
+
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateX(0);
+  }
+
+}
+
+
+/* =========================================
+   CARD ENTRANCE
+========================================= */
+
+.membership-card {
+  animation:
+    cardEntrance 0.9s ease both,
+    cardFloat1 5s ease-in-out 1s infinite;
+}
+
+
+@keyframes cardEntrance {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(80px)
+      scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+/* =========================================
+   DIFFERENT CARD DELAYS
+========================================= */
+
+.membership-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+
+.membership-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+
+.membership-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+
+.membership-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+
+.membership-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+
+/* =========================================
+   ARROW HOVER
+========================================= */
+
+.carousel-arrows button {
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.carousel-arrows button::before {
+  content: "";
+
+  position: absolute;
+
+  width: 0;
+  height: 0;
+
+  border-radius: 50%;
+
+  background: rgba(0, 237, 0, 0.3);
+
+  transform: translate(-50%, -50%);
+
+  transition:
+    width 0.4s ease,
+    height 0.4s ease;
+}
+
+
+.carousel-arrows button:hover::before {
+  width: 100px;
+  height: 100px;
+}
+
+
+/* =========================================
+   BILLING ACTIVE GLOW
+========================================= */
+
+.billing-buttons .active-billing {
+  box-shadow:
+    0 0 15px rgba(0, 237, 0, 0.15);
+
+  animation: billingGlow 2.5s ease-in-out infinite;
+}
+
+
+@keyframes billingGlow {
+
+  0% {
+    box-shadow:
+      0 0 5px rgba(0, 237, 0, 0.1);
+  }
+
+  50% {
+    box-shadow:
+      0 0 20px rgba(0, 237, 0, 0.3);
+  }
+
+  100% {
+    box-shadow:
+      0 0 5px rgba(0, 237, 0, 0.1);
+  }
+
+}
