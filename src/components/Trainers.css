@@ -94,24 +94,6 @@
 .trainers-heading .word {
   display: inline-block;
   white-space: nowrap;
-  
-  /* Start State */
-  opacity: 0;
-  transform: translateY(60px) rotateX(-70deg);
-  transform-origin: bottom center;
-  filter: blur(5px);
-  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), 
-              transform 1s cubic-bezier(0.22, 1, 0.36, 1),
-              filter 1s ease-out;
-}
-
-/* Words one-by-one reveal */
-.trainers.in-view .trainers-heading .word {
-  opacity: 1;
-  transform: translateY(0) rotateX(0);
-  filter: blur(0);
-  /* Delay calculate via CSS variable --i */
-  transition-delay: calc(0.3s + (var(--i) * 0.15s));
 }
 
 .trainers-heading .word.green {
@@ -122,7 +104,7 @@
 }
 
 /* =========================================================
-   ARROW BUTTONS
+   ARROW BUTTONS (CONTROLS)
 ========================================================= */
 
 .trainers-controls {
@@ -352,23 +334,41 @@
   );
 }
 
-.trainer-card-name {
+/* =========================================================
+   ✅ NAME (FIXED FOR 2 LINES)
+========================================================= */
+
+/* Ye naya wrapper hai jo naam ko hold karega */
+.trainer-name-block {
   position: absolute;
   left: 20px;
   bottom: 22px;
   z-index: 5;
+  display: flex;
+  flex-direction: column; /* Dono lines ek ke neeche ek */
+  gap: 2px;
+  transition: transform 0.35s ease;
+}
+
+/* Dono lines ke liye style */
+.trainer-card-name {
   margin: 0;
   color: #ffffff;
   font-size: 18px;
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
+  line-height: 1.1; /* Overlap hone se bachata hai */
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-  transition: transform 0.35s ease, color 0.35s ease;
+  transition: color 0.35s ease;
+}
+
+/* Hover effect poore naam par */
+.trainer-card:hover .trainer-name-block {
+  transform: translateY(-4px);
 }
 
 .trainer-card:hover .trainer-card-name {
-  transform: translateY(-4px);
   color: #03ea04;
   text-shadow:
     0 0 15px rgba(3, 234, 4, 0.8),
@@ -453,10 +453,17 @@
   .trainer-card {
     flex: 0 0 100%;
   }
-  .trainer-card-name {
-    font-size: 13px;
+
+  /* ✅ Mobile Name Fix */
+  .trainer-name-block {
     left: 12px;
     bottom: 14px;
+    gap: 1px;
+  }
+
+  .trainer-card-name {
+    font-size: 14px;
+    letter-spacing: 0.5px;
   }
   .trainer-card-arrow {
     width: 32px;

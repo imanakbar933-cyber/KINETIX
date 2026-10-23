@@ -69,7 +69,7 @@ const TeamMember1 = () => {
 
   return (
     <div className="teammember-page">
-      <Navbar />
+  
 
       {/* ✅ TeamHero — Member Name Ke Saath */}
       <TeamHero title={member.name} breadcrumb={member.name} />
