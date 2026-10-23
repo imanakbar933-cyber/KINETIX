@@ -15,10 +15,10 @@ function Home() {
     <>
       {/* Iman's Existing Home Components */}
       <Hero />
-      <Headlines />
+      {/* <Headlines /> */}
       <GymShowcase />
       <About />
-      <Headlines />
+      {/* <Headlines /> */}
       {/* Muneeba's Existing Home Components */}
       <Facilities />
       <ServicesSection />
