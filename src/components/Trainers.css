@@ -62,10 +62,6 @@
    HEADING
 ========================================================= */
 
-/* =========================================================
-   HEADING
-========================================================= */
-
 .trainers-heading {
   margin: 0;
   color: #ffffff;
@@ -77,15 +73,15 @@
   text-transform: uppercase;
 
   display: flex;
-  flex-wrap: wrap;                /* ✅ words wrap honge */
-  gap: 0 14px;                    /* ✅ words ke beech gap */
+  flex-wrap: wrap;
+  gap: 0 14px;
   max-width: 100%;
   perspective: 800px;
 }
 
 .trainers-heading .word {
   display: inline-block;
-  white-space: nowrap;            /* ✅ har word ek line me */
+  white-space: nowrap;
 }
 
 .trainers-heading .word.green {
@@ -103,7 +99,7 @@
 }
 
 /* =========================================================
-   ARROW BUTTONS
+   ARROW BUTTONS (CONTROLS)
 ========================================================= */
 
 .trainers-controls {
@@ -317,14 +313,23 @@
 }
 
 /* =========================================================
-   NAME
+   ✅ NAME (FIXED FOR 2 LINES)
 ========================================================= */
 
-.trainer-card-name {
+/* Ye naya wrapper hai jo naam ko hold karega */
+.trainer-name-block {
   position: absolute;
   left: 20px;
   bottom: 22px;
   z-index: 5;
+  display: flex;
+  flex-direction: column; /* Dono lines ek ke neeche ek */
+  gap: 2px;
+  transition: transform 0.35s ease;
+}
+
+/* Dono lines ke liye style */
+.trainer-card-name {
   margin: 0;
   color: #ffffff;
   font-family: Arial, sans-serif;
@@ -332,12 +337,17 @@
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
+  line-height: 1.1; /* Overlap hone se bachata hai */
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-  transition: transform 0.35s ease, color 0.35s ease;
+  transition: color 0.35s ease;
+}
+
+/* Hover effect poore naam par */
+.trainer-card:hover .trainer-name-block {
+  transform: translateY(-4px);
 }
 
 .trainer-card:hover .trainer-card-name {
-  transform: translateY(-4px);
   color: #03ea04;
   text-shadow:
     0 0 15px rgba(3, 234, 4, 0.8),
@@ -434,10 +444,16 @@
     flex: 0 0 100%;
   }
 
-  .trainer-card-name {
-    font-size: 13px;
+  /* ✅ Mobile Name Fix */
+  .trainer-name-block {
     left: 12px;
     bottom: 14px;
+    gap: 1px;
+  }
+
+  .trainer-card-name {
+    font-size: 14px;
+    letter-spacing: 0.5px;
   }
 
   .trainer-card-arrow {
