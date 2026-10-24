@@ -1930,3 +1930,24 @@
   color: #050a07;
   box-shadow: 0 0 15px rgba(98, 255, 53, 0.35);
 }
+
+
+
+/* Keep Login and Join Us buttons in one row */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.login-nav-button {
+  margin-right: 0;
+  white-space: nowrap;
+}
+
+.join-button {
+  white-space: nowrap;
+}
