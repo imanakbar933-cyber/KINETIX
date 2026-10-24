@@ -1,57 +1,46 @@
 
-/* Basic reset */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
 
-* {
+.login-page,
+.login-page * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
-
-html,
-body,
-#root {
-  width: 100%;
-  min-height: 100%;
-}
-
-body {
-  min-width: 320px;
-  font-family: 'Inter', sans-serif;
-  background: #050a07;
-  color: #f5f7f5;
-  -webkit-font-smoothing: antialiased;
-}
-
-button,
-input {
-  font: inherit;
-}
-
-/* Main page */
 
 .login-page {
+  --neon: #62ff35;
+  --neon-light: #8aff70;
+
   position: relative;
   isolation: isolate;
+  width: 100%;
   min-height: 100vh;
   min-height: 100svh;
+  padding: 45px 7%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  padding: 45px 7%;
+  color: #f5f7f5;
+  background-color: #020704;
 
-  background:
+  /* Use the gym image saved in public/images */
+  background-image:
     linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.76) 0%,
-      rgba(0, 0, 0, 0.48) 42%,
-      rgba(0, 0, 0, 0.72) 100%
+      rgba(0, 0, 0, 0.57) 0%,
+      rgba(0, 0, 0, 0.30) 45%,
+      rgba(0, 0, 0, 0.58) 100%
     ),
-    url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=2400&q=90')
-    center / cover no-repeat;
+    url('/images/login-gym-bg.png');
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.gym-overlay {
+/* Neon lighting over the background */
+
+.login-page .gym-overlay {
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -59,77 +48,91 @@ input {
 
   background:
     radial-gradient(
-      ellipse at 85% 45%,
-      rgba(49, 255, 48, 0.16),
+      ellipse at 85% 35%,
+      rgba(51, 255, 35, 0.20),
       transparent 42%
     ),
     linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.55),
-      transparent 45%,
-      rgba(0, 0, 0, 0.18)
+      rgba(0, 0, 0, 0.52),
+      transparent 48%
     );
+
+  animation: neonAtmosphere 5s ease-in-out infinite alternate;
 }
 
-/* Main layout */
+/* Layout */
 
-.login-layout {
+.login-page .login-layout {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 1350px;
   margin: auto;
+
   display: grid;
-  grid-template-columns: 1fr minmax(380px, 510px);
+  grid-template-columns: minmax(0, 1fr) minmax(380px, 510px);
   align-items: center;
-  gap: clamp(40px, 8vw, 130px);
+  gap: clamp(40px, 8vw, 120px);
 }
 
-/* Left text */
+/* Motivational text */
 
-.login-message {
-  animation: slideIn 0.9s ease both;
+.login-page .login-message {
+  animation: textReveal 1s ease both;
 }
 
-.eyebrow {
+.login-page .eyebrow {
   margin-bottom: 22px;
-  color: #62ff35;
+  color: var(--neon);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 4px;
 }
 
-.login-message h2 {
+.login-page .login-message h2 {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(58px, 7vw, 105px);
   font-weight: 900;
   line-height: 0.91;
   letter-spacing: -1px;
   text-transform: uppercase;
-  text-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
 }
 
-.login-message h2 span {
-  color: #62ff35;
-  text-shadow: 0 0 25px rgba(98, 255, 53, 0.3);
+.login-page .login-message h2 span {
+  color: var(--neon);
+  text-shadow: 0 0 24px rgba(98, 255, 53, 0.45);
 }
 
-.message-description {
+.login-page .message-description {
   max-width: 370px;
   margin-top: 28px;
-  color: #c2c9c3;
+  color: #d0d7d1;
   font-size: 14px;
   line-height: 1.9;
 }
 
+/* Keep the card animation in LoginForm.css */
+
+.login-page .login-card {
+  animation: cardReveal 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both;
+}
+
 /* Footer */
 
-.login-footer {
+.login-page .login-footer {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 1350px;
-  margin: 40px auto 0;
+  margin: 35px auto 0;
+
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  color: #a3b0a5;
+
+  color: #c0c9c1;
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 2px;
@@ -137,15 +140,39 @@ input {
 
 /* Animations */
 
-@keyframes slideIn {
+@keyframes textReveal {
   from {
     opacity: 0;
-    transform: translateX(-35px);
+    transform: translateX(-45px);
+    filter: blur(5px);
   }
 
   to {
     opacity: 1;
     transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes neonAtmosphere {
+  from {
+    opacity: 0.65;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 
@@ -153,16 +180,16 @@ input {
 
 @media (max-width: 900px) {
   .login-page {
-    padding: 40px 5%;
+    padding: 35px 5%;
   }
 
-  .login-layout {
-    grid-template-columns: 1fr minmax(330px, 430px);
-    gap: 35px;
+  .login-page .login-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 430px);
+    gap: 30px;
   }
 
-  .login-message h2 {
-    font-size: clamp(52px, 7vw, 75px);
+  .login-page .login-message h2 {
+    font-size: clamp(48px, 6.5vw, 75px);
   }
 }
 
@@ -171,58 +198,46 @@ input {
 @media (max-width: 650px) {
   .login-page {
     padding: 35px 18px 24px;
-    background-position: center;
+    background-position: 58% center;
   }
 
-  .login-layout {
-    grid-template-columns: 1fr;
-    gap: 30px;
+  .login-page .login-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
     max-width: 440px;
   }
 
-  .login-message {
+  .login-page .login-message {
     text-align: center;
   }
 
-  .eyebrow {
+  .login-page .eyebrow {
     margin-bottom: 14px;
     font-size: 10px;
     letter-spacing: 3px;
   }
 
-  .login-message h2 {
+  .login-page .login-message h2 {
     font-size: clamp(43px, 12vw, 62px);
   }
 
-  .message-description {
+  .login-page .message-description {
     display: none;
   }
 
-  .login-footer {
-    margin-top: 28px;
+  .login-page .login-footer {
+    margin-top: 26px;
     font-size: 8px;
     letter-spacing: 1px;
   }
 }
 
-@media (max-width: 360px) {
-  .login-footer span:last-child {
-    text-align: right;
-  }
-}
-
-/* Accessibility */
+/* Reduced motion accessibility */
 
 @media (prefers-reduced-motion: reduce) {
-  .login-message,
-  .login-card {
+  .login-page .gym-overlay,
+  .login-page .login-message,
+  .login-page .login-card {
     animation: none;
-  }
-
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
   }
 }
