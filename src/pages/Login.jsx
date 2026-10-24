@@ -1,6 +1,7 @@
 
-import LoginForm from '../components/LoginForm'
-import './Login.css'
+import LoginForm from '../components/LoginForm';
+import './Login.css';
+
 function Login() {
   return (
     <main className="login-page">
@@ -34,7 +35,7 @@ function Login() {
         <span>TRAIN HARD. STAY STRONG.</span>
       </div>
     </main>
-  )
+  );
 }
 
-export default Login
+export default Login;
