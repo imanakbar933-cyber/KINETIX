@@ -9,33 +9,25 @@
 .login-page {
   --neon: #62ff35;
   --neon-light: #8aff70;
-
-  
-.login-page {
   position: relative;
   isolation: isolate;
-
   width: 100%;
   min-height: 100vh;
   min-height: 100svh;
   margin: 0;
   padding: 40px 6%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   overflow: hidden;
-  background-color: #020603;
 
-  background-image:
+  background:
     linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.58),
-      rgba(0, 0, 0, 0.20) 45%,
-      rgba(0, 0, 0, 0.62)
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.72)
     ),
-    url('/images/bg-img-login.png');
+    url("/images/login-gym-bg.png");
 
   background-position: center;
   background-size: cover;
@@ -43,8 +35,6 @@
 }
 
 
- 
-}
 
 /* Neon lighting over the background */
 
