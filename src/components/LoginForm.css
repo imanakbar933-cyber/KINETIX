@@ -1,0 +1,278 @@
+
+.login-card {
+  width: 100%;
+  padding: 38px 40px;
+  border: 1px solid rgba(98, 255, 53, 0.8);
+  border-radius: 18px;
+  background: rgba(2, 12, 6, 0.82);
+  box-shadow:
+    0 0 35px rgba(42, 255, 32, 0.09),
+    inset 0 0 30px rgba(42, 255, 32, 0.025);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: cardAppear 0.85s ease 0.12s both;
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.logo-icon {
+  color: #62ff35;
+  font-size: 45px;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(98, 255, 53, 0.5);
+}
+
+.login-logo h1 {
+  margin-top: 8px;
+  color: #62ff35;
+  font-size: 33px;
+  font-weight: 800;
+  letter-spacing: 5px;
+}
+
+.login-logo > span {
+  display: block;
+  margin-top: 4px;
+  color: #e1e9e2;
+  font-size: 10px;
+  letter-spacing: 4px;
+}
+
+.login-heading {
+  margin-bottom: 27px;
+}
+
+.login-heading h2 {
+  font-size: clamp(25px, 3vw, 32px);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.login-heading h2 span {
+  color: #62ff35;
+}
+
+.login-heading p {
+  margin-top: 9px;
+  color: #a0aaa3;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Form fields */
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 52px;
+  padding: 0 15px;
+  border: 1px solid rgba(192, 213, 196, 0.2);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.025);
+  transition: border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.input-box:focus-within {
+  border-color: #62ff35;
+  background: rgba(98, 255, 53, 0.045);
+  box-shadow: 0 0 14px rgba(98, 255, 53, 0.12);
+}
+
+.input-icon {
+  color: #c1cec3;
+  font-size: 20px;
+}
+
+.input-box input {
+  width: 100%;
+  min-width: 0;
+  color: white;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 13px;
+}
+
+.input-box input::placeholder {
+  color: #a5afa7;
+}
+
+.password-toggle {
+  flex-shrink: 0;
+  padding: 5px 0;
+  border: none;
+  background: transparent;
+  color: #8aff70;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* Remember me and forgot password */
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 3px 0 7px;
+  color: #c2cbc4;
+  font-size: 11px;
+}
+
+.remember-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.remember-option input {
+  width: 15px;
+  height: 15px;
+  accent-color: #62ff35;
+  cursor: pointer;
+}
+
+.login-options a {
+  color: #8aff70;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.login-options a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Neon login button */
+
+.login-button {
+  min-height: 53px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #62ff35;
+  border-radius: 9px;
+  background: #62ff35;
+  color: #061006;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(98, 255, 53, 0.2);
+  transition: transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.login-button span {
+  font-size: 22px;
+  transition: transform 0.25s ease;
+}
+
+.login-button:hover {
+  background: #8aff70;
+  box-shadow: 0 0 30px rgba(98, 255, 53, 0.4);
+  transform: translateY(-2px);
+}
+
+.login-button:hover span {
+  transform: translateX(5px);
+}
+
+.login-button:active {
+  transform: scale(0.98);
+}
+
+/* Divider */
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0;
+  color: #b8c1ba;
+  font-size: 12px;
+}
+
+.login-divider span {
+  flex: 1;
+  height: 1px;
+  background: rgba(210, 225, 212, 0.18);
+}
+
+/* Signup */
+
+.signup-text {
+  text-align: center;
+  color: #bac4bc;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.signup-text a {
+  color: #8aff70;
+  font-weight: 700;
+  text-decoration: none;
+  transition: text-shadow 0.2s ease;
+}
+
+.signup-text a:hover {
+  text-shadow: 0 0 12px #62ff35;
+}
+
+/* Mobile form */
+
+@media (max-width: 650px) {
+  .login-card {
+    padding: 28px 23px;
+    border-radius: 14px;
+  }
+
+  .login-logo {
+    margin-bottom: 25px;
+  }
+
+  .login-logo h1 {
+    font-size: 29px;
+  }
+
+  .login-heading {
+    margin-bottom: 22px;
+  }
+}
+
+@media (max-width: 360px) {
+  .login-card {
+    padding: 25px 17px;
+  }
+
+  .login-options {
+    font-size: 10px;
+  }
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
