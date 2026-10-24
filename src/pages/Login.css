@@ -10,32 +10,40 @@
   --neon: #62ff35;
   --neon-light: #8aff70;
 
+  
+.login-page {
   position: relative;
   isolation: isolate;
+
   width: 100%;
   min-height: 100vh;
   min-height: 100svh;
-  padding: 45px 7%;
+  margin: 0;
+  padding: 40px 6%;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
-  color: #f5f7f5;
-  background-color: #020704;
 
-  /* Use the gym image saved in public/images */
+  overflow: hidden;
+  background-color: #020603;
+
   background-image:
     linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.57) 0%,
-      rgba(0, 0, 0, 0.30) 45%,
-      rgba(0, 0, 0, 0.58) 100%
+      rgba(0, 0, 0, 0.58),
+      rgba(0, 0, 0, 0.20) 45%,
+      rgba(0, 0, 0, 0.62)
     ),
-    url('/images/login-gym-bg.png');
+    url('/images/bg-img-login.png');
 
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+
+ 
 }
 
 /* Neon lighting over the background */
@@ -240,4 +248,22 @@
   .login-page .login-card {
     animation: none;
   }
+}
+
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#root {
+  max-width: none;
 }
