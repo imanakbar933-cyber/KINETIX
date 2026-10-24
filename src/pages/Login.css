@@ -1,0 +1,228 @@
+
+/* Basic reset */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-width: 320px;
+  font-family: 'Inter', sans-serif;
+  background: #050a07;
+  color: #f5f7f5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+/* Main page */
+
+.login-page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 45px 7%;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.76) 0%,
+      rgba(0, 0, 0, 0.48) 42%,
+      rgba(0, 0, 0, 0.72) 100%
+    ),
+    url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=2400&q=90')
+    center / cover no-repeat;
+}
+
+.gym-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 85% 45%,
+      rgba(49, 255, 48, 0.16),
+      transparent 42%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.55),
+      transparent 45%,
+      rgba(0, 0, 0, 0.18)
+    );
+}
+
+/* Main layout */
+
+.login-layout {
+  width: 100%;
+  max-width: 1350px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr minmax(380px, 510px);
+  align-items: center;
+  gap: clamp(40px, 8vw, 130px);
+}
+
+/* Left text */
+
+.login-message {
+  animation: slideIn 0.9s ease both;
+}
+
+.eyebrow {
+  margin-bottom: 22px;
+  color: #62ff35;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.login-message h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(58px, 7vw, 105px);
+  font-weight: 900;
+  line-height: 0.91;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  text-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+.login-message h2 span {
+  color: #62ff35;
+  text-shadow: 0 0 25px rgba(98, 255, 53, 0.3);
+}
+
+.message-description {
+  max-width: 370px;
+  margin-top: 28px;
+  color: #c2c9c3;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* Footer */
+
+.login-footer {
+  width: 100%;
+  max-width: 1350px;
+  margin: 40px auto 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #a3b0a5;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+/* Animations */
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .login-page {
+    padding: 40px 5%;
+  }
+
+  .login-layout {
+    grid-template-columns: 1fr minmax(330px, 430px);
+    gap: 35px;
+  }
+
+  .login-message h2 {
+    font-size: clamp(52px, 7vw, 75px);
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 650px) {
+  .login-page {
+    padding: 35px 18px 24px;
+    background-position: center;
+  }
+
+  .login-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 440px;
+  }
+
+  .login-message {
+    text-align: center;
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+
+  .login-message h2 {
+    font-size: clamp(43px, 12vw, 62px);
+  }
+
+  .message-description {
+    display: none;
+  }
+
+  .login-footer {
+    margin-top: 28px;
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 360px) {
+  .login-footer span:last-child {
+    text-align: right;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .login-message,
+  .login-card {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
