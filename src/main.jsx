@@ -1,8 +1,14 @@
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import "./index.css";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+
+import "./index.css";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -22,15 +28,17 @@ import Contact from "./pages/Contact.jsx";
 import TrainersPage from "./pages/TrainersPage.jsx";
 import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx";
-
-// NEW: Login Page
 import Login from "./pages/Login.jsx";
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
+function AppLayout() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
+
+  return (
+    <>
       <ScrollToTop />
-      <Navbar />
+
+      {!isLoginPage && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -45,13 +53,18 @@ createRoot(document.getElementById("root")).render(
         <Route path="/contact" element={<Contact />} />
         <Route path="/trainers" element={<TrainersPage />} />
         <Route path="/schedules" element={<SchedulePage />} />
-
-        {/* NEW: Login Route */}
         <Route path="/login" element={<Login />} />
       </Routes>
 
-      <Footer />
-      {/* <Route path="/login" element={<Login />} /> */}
+      {!isLoginPage && <Footer />}
+    </>
+  );
+}
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <BrowserRouter>
+      <AppLayout />
     </BrowserRouter>
   </StrictMode>
 );
