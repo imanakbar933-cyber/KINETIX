@@ -1906,3 +1906,27 @@
   }
 
 }
+
+
+/* login button */
+.login-nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 22px;
+  margin-right: 12px;
+  border: 1px solid #62ff35;
+  border-radius: 5px;
+  color: #62ff35;
+  background: transparent;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-nav-button:hover {
+  background: #62ff35;
+  color: #050a07;
+  box-shadow: 0 0 15px rgba(98, 255, 53, 0.35);
+}

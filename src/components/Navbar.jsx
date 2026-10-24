@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import "./Navbar.css";
@@ -41,23 +42,16 @@ function Navbar() {
 
   return (
     <>
-      {/* =========================================
-          HOME CURTAIN ANIMATION
-      ========================================= */}
+      {/* HOME CURTAIN ANIMATION */}
 
       {homeCurtain && (
         <div className="home-curtain">
-
           <div className="curtain curtain-left"></div>
-
           <div className="curtain curtain-right"></div>
-
         </div>
       )}
 
-      {/* =========================================
-          NAVBAR
-      ========================================= */}
+      {/* NAVBAR */}
 
       <header
         className={`navbar ${
@@ -79,89 +73,96 @@ function Navbar() {
             />
           </Link>
 
-
           {/* NAVIGATION */}
           <nav
             className={`navbar-menu ${
               menuOpen ? "menu-open" : ""
             }`}
           >
+            <Link
+              to="/"
+              className="nav-link"
+              onClick={handleHomeClick}
+            >
+              Home
+            </Link>
 
-            {/* HOME */}
-            <Link to="/" className="nav-link" onClick={handleHomeClick}>Home</Link>
-            {/* ABOUT */}
-            <Link to="/about" className="nav-link"> About</Link>
-
+            <Link to="/about" className="nav-link">
+              About
+            </Link>
 
             {/* SERVICES DROPDOWN */}
             <div className="nav-item-dropdown">
-
               <button
                 className="nav-link dropdown-toggle"
                 onClick={toggleDropdown}
               >
                 Services{" "}
-                <span className="dropdown-arrow">
-                  ▼
-                </span>
+                <span className="dropdown-arrow">▼</span>
               </button>
-
 
               <div
                 className={`dropdown-menu ${
                   dropdownOpen ? "show" : ""
                 }`}
-              ><Link to="/team" className="dropdown-item">Team</Link>
-                  <Link to="/ClassroomPage" className="dropdown-item">ClassRoom</Link>
+              >
+                <Link to="/team" className="dropdown-item">
+                  Team
+                </Link>
 
-                <Link to="/schedules" className="dropdown-item">Schedules</Link>
-               <Link to="/GalleryPage" className="dropdown-item">Gallery</Link>
-              
+                <Link to="/ClassroomPage" className="dropdown-item">
+                  ClassRoom
+                </Link>
 
-                <Link to="/faqpage" className="dropdown-item">FAQ</Link>
+                <Link to="/schedules" className="dropdown-item">
+                  Schedules
+                </Link>
 
+                <Link to="/GalleryPage" className="dropdown-item">
+                  Gallery
+                </Link>
+
+                <Link to="/faqpage" className="dropdown-item">
+                  FAQ
+                </Link>
               </div>
             </div>
 
+            <Link to="/trainers" className="nav-link">
+              Trainers
+            </Link>
 
-            <Link to="/trainers" className="nav-link">Trainers</Link>
-
-            <a
-              href="#membership"
-              className="nav-link"
-            >
+            <a href="#membership" className="nav-link">
               Membership
             </a>
 
-          <Link to="/contact" className="nav-link" onClick={() => setMenuOpen(false)}> Contact</Link>
-
+            <Link
+              to="/contact"
+              className="nav-link"
+              onClick={() => setMenuOpen(false)}
+            >
+              Contact
+            </Link>
 
             {/* MOBILE JOIN BUTTON */}
-            <a
-              href="#membership"
-              className="mobile-join"
-            >
+            <a href="#membership" className="mobile-join">
               Join Us
             </a>
-
           </nav>
-
 
           {/* RIGHT SIDE */}
           <div className="navbar-right">
 
+            {/* LOGIN BUTTON - ADDED */}
+            <Link to="/login" className="login-nav-button">
+              Login
+            </Link>
+
             {/* JOIN BUTTON */}
-            <a
-              href="#membership"
-              className="join-button"
-            >
+            <a href="#membership" className="join-button">
               <span>Join Us</span>
-
-              <span className="join-arrow">
-                ↗
-              </span>
+              <span className="join-arrow">↗</span>
             </a>
-
 
             {/* MOBILE MENU TOGGLE */}
             <button
@@ -175,7 +176,6 @@ function Navbar() {
             </button>
 
           </div>
-
         </div>
       </header>
     </>
