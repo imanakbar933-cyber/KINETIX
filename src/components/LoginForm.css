@@ -1,288 +1,381 @@
 
-.kinetix-login-form {
+.kinetix-form {
+  position: relative;
+  z-index: 1;
   width: 100%;
+  margin: 0;
 }
 
-.login-input-group {
-  display: block;
-  margin-bottom: 19px;
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.input-label {
-  display: block;
-  margin-bottom: 9px;
-  color: #a8afa3;
-  font-size: 9px;
-  letter-spacing: 1.8px;
-  font-weight: 700;
-}
-
-.login-input-shell {
-  width: 100%;
-  min-height: 49px;
+.kinetix-field {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 0 14px;
-  border: 1px solid #424840;
-  border-radius: 9px;
-  background: #101310;
+  gap: 13px;
+  width: 100%;
+  height: 52px;
+  margin-bottom: 15px;
+  padding: 0 17px;
+  border: 1px solid rgba(112, 255, 83, 0.32);
+  border-radius: 10px;
+  background: rgba(0, 15, 7, 0.78);
   transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease,
     background 0.3s ease;
 }
 
-.login-input-shell:focus-within {
-  border-color: #b8ff35;
-  background: #131711;
-  box-shadow: 0 0 0 3px rgba(184, 255, 53, 0.07),
-    0 0 16px rgba(184, 255, 53, 0.06);
+.kinetix-field:focus-within {
+  border-color: #78ff19;
+  background: rgba(4, 25, 8, 0.95);
+  box-shadow:
+    0 0 0 2px rgba(120, 255, 25, 0.08),
+    0 0 18px rgba(120, 255, 25, 0.1);
 }
 
-.login-input-shell > svg {
-  width: 17px;
-  height: 17px;
-  flex-shrink: 0;
+.kinetix-field > svg {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
   fill: none;
-  stroke: #9ba394;
-  stroke-width: 1.5;
+  stroke: #f2fff0;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.login-input-shell input {
-  width: 100%;
+.kinetix-field input {
+  flex: 1;
   min-width: 0;
-  height: 46px;
+  width: 100%;
+  height: 100%;
   padding: 0;
+  border: 0;
   outline: none;
-  border: none;
   background: transparent;
-  color: #f5f7f1;
+  color: #fff;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 13px;
 }
 
-.login-input-shell input::placeholder {
-  color: #666d62;
+.kinetix-field input::placeholder {
+  color: #c0c9c0;
+  opacity: 1;
 }
 
-.login-input-shell input:-webkit-autofill,
-.login-input-shell input:-webkit-autofill:hover,
-.login-input-shell input:-webkit-autofill:focus {
-  -webkit-text-fill-color: #f5f7f1;
-  -webkit-box-shadow: 0 0 0 1000px #101310 inset;
-  transition: background-color 5000s ease-in-out 0s;
+.kinetix-field input:-webkit-autofill,
+.kinetix-field input:-webkit-autofill:hover,
+.kinetix-field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0 1000px #041107 inset;
+  transition: background-color 9999s ease-in-out 0s;
 }
 
-.password-toggle {
-  width: 27px;
-  height: 32px;
-  flex-shrink: 0;
+.password-eye {
   display: grid;
+  flex: 0 0 26px;
+  width: 26px;
+  height: 30px;
   place-items: center;
   padding: 0;
-  border: none;
+  border: 0;
+  outline-offset: 3px;
   background: transparent;
-  color: #aab1a3;
+  color: #78ff19;
   cursor: pointer;
-  transition: color 0.25s ease;
 }
 
-.password-toggle:hover {
-  color: #b8ff35;
-}
-
-.password-toggle svg {
-  width: 18px;
-  height: 18px;
+.password-eye svg {
+  display: block;
+  width: 22px;
+  height: 22px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.5;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.login-options {
+.password-eye:hover {
+  color: #c0ff9a;
+}
+
+.form-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  margin: 4px 0 23px;
+  margin: 20px 0 24px;
 }
 
-.remember-option {
+.remember-label {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  color: #a7ada2;
-  font-size: 10px;
+  gap: 9px;
+  color: #e2eae0;
+  font-size: 11px;
   cursor: pointer;
 }
 
-.remember-option input {
+.remember-label input {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: 18px;
+  height: 18px;
+  margin: 0;
   opacity: 0;
+  cursor: pointer;
 }
 
-.custom-checkbox {
-  width: 15px;
-  height: 15px;
+.remember-box {
   display: grid;
+  width: 18px;
+  height: 18px;
   place-items: center;
-  border: 1px solid #50564c;
-  border-radius: 4px;
-  transition: all 0.25s ease;
-}
-
-.remember-option input:checked + .custom-checkbox {
-  border-color: #b8ff35;
-  background: #b8ff35;
-}
-
-.remember-option input:checked + .custom-checkbox::after {
-  content: "✓";
-  color: #10130b;
-  font-size: 11px;
+  border: 1px solid #63705e;
+  border-radius: 3px;
+  color: transparent;
+  font-size: 13px;
   font-weight: 900;
+  transition: all 0.2s ease;
 }
 
-.remember-option input:focus-visible + .custom-checkbox {
-  outline: 2px solid #fff;
+.remember-label input:checked + .remember-box {
+  border-color: #78ff19;
+  background: #78ff19;
+  color: #061000;
+}
+
+.remember-label input:focus-visible + .remember-box {
+  outline: 2px solid white;
   outline-offset: 3px;
 }
 
-.forgot-link {
-  color: #b8ff35;
-  font-size: 10px;
+.forgot-password {
+  color: #78ff19;
+  font-size: 11px;
   text-decoration: none;
-  transition: color 0.25s ease;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
 }
 
-.forgot-link:hover {
-  color: #e1ffac;
-  text-decoration: underline;
+.forgot-password:hover {
+  color: #c3ff9e;
+  text-shadow: 0 0 9px rgba(120, 255, 25, 0.35);
 }
 
-.login-feedback {
-  margin: 0 0 15px;
-  color: #ffb0bd;
+.login-message {
+  margin: 0 0 14px;
+  color: #baff9a;
   font-size: 11px;
   line-height: 1.6;
 }
 
-.login-submit {
-  width: 100%;
-  min-height: 49px;
+.kinetix-submit {
+  position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 13px;
-  padding: 0 18px;
-  border: 1px solid #b8ff35;
-  border-radius: 9px;
-  background: #b8ff35;
-  color: #10130b;
+  width: 100%;
+  min-height: 55px;
+  padding: 12px 20px;
+  overflow: hidden;
+  border: 1px solid #8aff39;
+  border-radius: 10px;
+  background: linear-gradient(105deg, #67f000 0%, #a1ff57 65%, #76f522 100%);
+  color: #061000;
   font-family: inherit;
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 900;
-  letter-spacing: 2px;
   cursor: pointer;
+  box-shadow: 0 0 18px rgba(91, 255, 0, 0.12);
   transition:
-    background 0.3s ease,
-    color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
 }
 
-.login-submit:hover {
-  background: transparent;
-  color: #b8ff35;
-  box-shadow: 0 0 24px rgba(184, 255, 53, 0.2);
+.kinetix-submit::before {
+  position: absolute;
+  top: -50%;
+  left: -80%;
+  width: 40%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(24deg);
+  content: "";
+  transition: left 0.65s ease;
+}
+
+.kinetix-submit:hover::before {
+  left: 140%;
+}
+
+.kinetix-submit:hover {
   transform: translateY(-2px);
+  box-shadow:
+    0 0 20px rgba(120, 255, 25, 0.36),
+    0 5px 25px rgba(70, 255, 0, 0.13);
+  filter: brightness(1.06);
 }
 
-.login-submit:active {
+.kinetix-submit:active {
   transform: translateY(0) scale(0.99);
 }
 
+.kinetix-submit > span {
+  position: relative;
+}
+
 .submit-arrow {
-  font-size: 18px;
+  font-size: 23px;
   font-weight: 400;
-  transition: transform 0.3s ease;
-}
-
-.login-submit:hover .submit-arrow {
-  transform: translate(3px, -3px);
-}
-
-.login-divider {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  margin: 27px 0 19px;
-}
-
-.login-divider span {
-  flex: 1;
-  height: 1px;
-  background: #30352e;
-}
-
-.login-divider p {
-  margin: 0;
-  color: #7d8477;
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  white-space: nowrap;
-}
-
-.signup-prompt {
-  margin: 0;
-  color: #9ca297;
-  text-align: center;
-  font-size: 11px;
-}
-
-.signup-prompt a {
-  color: #f3f5ed;
-  font-weight: 700;
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
-
-.signup-prompt a:hover {
-  color: #b8ff35;
-}
-
-.signup-prompt a span {
-  display: inline-block;
-  color: #b8ff35;
+  line-height: 1;
   transition: transform 0.25s ease;
 }
 
-.signup-prompt a:hover span {
-  transform: translate(2px, -2px);
+.kinetix-submit:hover .submit-arrow {
+  transform: translateX(5px);
 }
 
-.login-security-note {
+.social-divider {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin: 25px 0 18px;
+}
+
+.social-divider span {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(140, 255, 115, 0.05),
+    rgba(140, 255, 115, 0.38)
+  );
+}
+
+.social-divider span:last-child {
+  transform: rotate(180deg);
+}
+
+.social-divider p {
+  margin: 0;
+  color: #f0f6ec;
+  font-size: 11px;
+}
+
+.social-login {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 7px;
-  margin: 24px 0 0;
-  color: #687064;
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
+  gap: 20px;
 }
 
-.login-security-note span {
-  color: #b8ff35;
+.social-login button {
+  display: grid;
+  width: 49px;
+  height: 49px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(120, 255, 25, 0.42);
+  border-radius: 50%;
+  background: rgba(0, 13, 4, 0.55);
+  color: #eaffdf;
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.social-login button:hover {
+  transform: translateY(-3px);
+  border-color: #78ff19;
+  background: rgba(120, 255, 25, 0.1);
+  color: #a4ff70;
+  box-shadow: 0 0 18px rgba(120, 255, 25, 0.15);
+}
+
+.google-letter {
+  font-family: Arial, sans-serif;
+  font-size: 27px;
+  font-weight: 800;
+}
+
+.facebook-letter {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.social-login svg {
+  width: 23px;
+  height: 23px;
+}
+
+.signup-text {
+  margin: 23px 0 0;
+  color: #c0c9bd;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.signup-text a {
+  color: #78ff19;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
+}
+
+.signup-text a:hover {
+  color: #d0ffb9;
+  text-shadow: 0 0 8px rgba(120, 255, 25, 0.3);
+}
+
+@media (max-width: 420px) {
+  .kinetix-field {
+    height: 49px;
+    padding: 0 12px;
+  }
+
+  .form-options {
+    gap: 10px;
+  }
+
+  .remember-label,
+  .forgot-password {
+    font-size: 10px;
+  }
+
+  .social-login {
+    gap: 16px;
+  }
+
+  .social-login button {
+    width: 45px;
+    height: 45px;
+  }
+
+  .kinetix-submit {
+    min-height: 51px;
+  }
 }
