@@ -2,7 +2,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./index.css";
+// import "./index.css";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -20,9 +20,11 @@ import GalleryPage from "./pages/GalleryPage.jsx";
 import ClassDetail from "./pages/ClassDetail.jsx";
 import Contact from "./pages/Contact.jsx";
 import TrainersPage from "./pages/TrainersPage.jsx";
-
 import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx";
+
+// NEW: Login Page
+import Login from "./pages/Login.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -42,11 +44,14 @@ createRoot(document.getElementById("root")).render(
         <Route path="/class-detail/:classId" element={<ClassDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/trainers" element={<TrainersPage />} />
-      
         <Route path="/schedules" element={<SchedulePage />} />
+
+        {/* NEW: Login Route */}
+        <Route path="/login" element={<Login />} />
       </Routes>
 
       <Footer />
+      {/* <Route path="/login" element={<Login />} /> */}
     </BrowserRouter>
   </StrictMode>
 );
