@@ -8,7 +8,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import "./index.css";
+// import "./index.css";
 
 // Components
 import Navbar from "./components/Navbar";
