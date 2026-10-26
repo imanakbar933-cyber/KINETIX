@@ -33,6 +33,7 @@ import Login from "./pages/Login.jsx";
 function AppLayout() {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
+  
 
   return (
     <>
@@ -54,6 +55,8 @@ function AppLayout() {
         <Route path="/trainers" element={<TrainersPage />} />
         <Route path="/schedules" element={<SchedulePage />} />
         <Route path="/login" element={<Login />} />
+
+
       </Routes>
 
       {!isLoginPage && <Footer />}
