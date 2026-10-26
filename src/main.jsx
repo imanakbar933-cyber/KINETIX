@@ -30,9 +30,13 @@ import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx";
 import Login from "./pages/Login.jsx";
 
+import Sidebar from "./components/Sidebar";
+import AdminDashboard from "./pages/AdminDashboard";
+
 function AppLayout() {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
+  const isAdminPage = location.pathname.startsWith("/admin");
 
   return (
     <>
@@ -54,6 +58,8 @@ function AppLayout() {
         <Route path="/trainers" element={<TrainersPage />} />
         <Route path="/schedules" element={<SchedulePage />} />
         <Route path="/login" element={<Login />} />
+
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
 
       {!isLoginPage && <Footer />}
