@@ -51,7 +51,7 @@
 }
 
 .classroomcontent-subtitle {
-  color: #4ade80;
+  color: #00ff00;
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 5px;
@@ -71,7 +71,7 @@
 }
 
 .classroomcontent-highlight {
-  color: #4ade80;
+  color: #00ff00;
   text-shadow: 0 0 40px rgba(74, 222, 128, 0.5);
 }
 
@@ -182,7 +182,7 @@
 }
 
 .classcard:hover .classcard-title {
-  color: #4ade80;
+  color: #00ff00;
 }
 
 .classcard-desc {
@@ -204,7 +204,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: #4ade80;
+  color: #00ff00;
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 1.2px;

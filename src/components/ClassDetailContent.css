@@ -77,7 +77,7 @@
   bottom: -1px;
   width: 60px;
   height: 2px;
-  background: #4ade80;
+  background: #00ff00;
   border-radius: 2px;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .classdetailcontent-features li:hover {
-  color: #4ade80;
+  color: #00ff00;
   transform: translateX(6px);
 }
 
@@ -124,7 +124,7 @@
   border-radius: 50%;
   background: rgba(74, 222, 128, 0.15);
   border: 1px solid rgba(74, 222, 128, 0.4);
-  color: #4ade80;
+  color: #00ff00;
   font-weight: 900;
   font-size: 0.85rem;
   flex-shrink: 0;
@@ -132,7 +132,7 @@
 }
 
 .classdetailcontent-features li:hover .feature-check {
-  background: #4ade80;
+  background: #00ff00;
   color: #0a0a0a;
   box-shadow: 0 0 15px rgba(74, 222, 128, 0.6);
 }
@@ -282,7 +282,7 @@
 }
 
 .box-price-value {
-  color: #4ade80;
+  color: #00ff00;
   font-size: 1.3rem;
   font-weight: 900;
   letter-spacing: 0.5px;
@@ -312,7 +312,7 @@
 }
 
 .box-buy-btn:hover {
-  background: #4ade80;
+  background: #00ff00;
   box-shadow: 0 15px 40px rgba(74, 222, 128, 0.5);
   transform: translateY(-3px);
 }

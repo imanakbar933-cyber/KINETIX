@@ -1,4 +1,3 @@
-
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -8,7 +7,8 @@ import {
   useLocation,
 } from "react-router-dom";
 
-// import "./index.css";
+// ✅ CSS Import (Yeh sabse zaroori tha)
+import "./index.css";
 
 // Components
 import Navbar from "./components/Navbar";
