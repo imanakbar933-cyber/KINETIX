@@ -6,14 +6,14 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  
-  // 👇 Nayi States (Sidebar & Theme)
+
+  // Sidebar & Theme
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   const navigate = useNavigate();
 
-  // 👇 Theme Change Effect
+  // Theme Change Effect
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
@@ -34,18 +34,33 @@ function Navbar() {
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
+  // ✅ Animation timing CSS se match (total ~1.7s)
   const handleHomeClick = () => {
     setHomeCurtain(false);
     setTimeout(() => setHomeCurtain(true), 20);
-    setTimeout(() => setHomeCurtain(false), 1450);
+    setTimeout(() => setHomeCurtain(false), 1700);
   };
 
   return (
     <>
+      {/* =========================================
+          SPLIT SCREEN 'K' ANIMATION
+      ========================================= */}
       {homeCurtain && (
-        <div className="home-curtain">
-          <div className="curtain curtain-left"></div>
-          <div className="curtain curtain-right"></div>
+        <div className="kinetix-split-transition">
+          {/* Left Curtain */}
+          <div className="split-curtain split-left"></div>
+
+          {/* Right Curtain */}
+          <div className="split-curtain split-right"></div>
+
+          {/* Center Green Laser Line */}
+          <div className="split-laser-line"></div>
+
+          {/* Bada 'K' Logo (Center) */}
+          <div className="split-center-logo">
+            <img src="/images/kinetix2.png" alt="K" />
+          </div>
         </div>
       )}
 
@@ -62,10 +77,9 @@ function Navbar() {
           <li><Link to="/dashboard" onClick={() => setSidebarOpen(false)}>Settings</Link></li>
         </ul>
       </div>
-      
+
       {/* Overlay jab sidebar open ho */}
       {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)}></div>}
-
 
       <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
         <div className="navbar-container">
@@ -102,16 +116,20 @@ function Navbar() {
             <Link to="/trainers" className="nav-link">Trainers</Link>
             <a href="#membership" className="nav-link">Membership</a>
             <Link to="/contact" className="nav-link" onClick={() => setMenuOpen(false)}>Contact</Link>
-            <a href="#membership" className="mobile-join">Register</a>
+
+            {/* ✅ Fixed: Mobile register link - no blue color */}
+            <a href="#membership" className="mobile-join" style={{ color: '#050706', textDecoration: 'none' }}>
+              Register
+            </a>
           </nav>
 
           {/* RIGHT SIDE */}
           <div className="navbar-right">
-            
+
             {/* 👇 THEME TOGGLE (Dark/Light) */}
             <button className="theme-toggle-btn" onClick={toggleTheme}>
               {theme === "dark" ? (
-                // Sun Icon (For Dark Mode -> click to go Light)
+                // Sun Icon (Dark Mode -> click to go Light)
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="5"></circle>
                   <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -124,7 +142,7 @@ function Navbar() {
                   <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                 </svg>
               ) : (
-                // Moon Icon (For Light Mode -> click to go Dark)
+                // Moon Icon (Light Mode -> click to go Dark)
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
@@ -134,11 +152,12 @@ function Navbar() {
             {/* LOGIN BUTTON */}
             <Link to="/login" className="login-nav-button">Login</Link>
 
-                      {/* 👇 REGISTER BUTTON (Login jesa) */}
+            {/* 👇 REGISTER BUTTON (Login jesa) */}
             <a href="#membership" className="register-button">
               <span>Register</span>
               <span className="join-arrow">↗</span>
             </a>
+
             {/* MOBILE MENU TOGGLE */}
             <button className={`menu-toggle ${menuOpen ? "active" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
               <span></span><span></span>
