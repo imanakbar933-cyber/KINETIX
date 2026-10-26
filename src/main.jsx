@@ -23,6 +23,7 @@ import TrainersPage from "./pages/TrainersPage.jsx";
 
 import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx";
+import SignUp from "./pages/SignUp.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -44,6 +45,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/trainers" element={<TrainersPage />} />
       
         <Route path="/schedules" element={<SchedulePage />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
 
       <Footer />
