@@ -47,7 +47,7 @@
 }
 
 .classroomcontent-highlight {
-  color: #4ade80;
+  color: #00ff00;
   position: relative;
   display: inline-block;
   text-shadow: 0 0 40px rgba(74, 222, 128, 0.5);
@@ -88,7 +88,7 @@
    ============================================ */
 .classroomcontent-frame {
   position: absolute;
-  background: #4ade80;
+  background: #00ff00;
   z-index: 3;
   pointer-events: none;
 }
@@ -112,7 +112,7 @@
 }
 
 .classroomcontent-buy:hover {
-  background: #4ade80;
+  background: #00ff00;
 }
 
 .buy-plus {
