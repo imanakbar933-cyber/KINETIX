@@ -9,15 +9,15 @@ function Membership() {
   const monthlyPlans = [
     {
       name: "BASIC MEMBERSHIP",
-      price: "PKR4500",
+      price: "PKR4000",
     },
     {
       name: "PREMIUM MEMBERSHIP",
-      price: "PKR8500",
+      price: "PKR8000",
     },
     {
       name: "COUPLES MEMBERSHIP",
-      price: "PKR11000",
+      price: "PKR1000",
     },
     {
       name: "FAMILY MEMBERSHIP",
@@ -32,19 +32,19 @@ function Membership() {
   const yearlyPlans = [
     {
       name: "BASIC MEMBERSHIP",
-      price: "PKR4500",
+      price: "PKR40000",
     },
     {
       name: "PREMIUM MEMBERSHIP",
-      price: "PKR8500",
+      price: "PKR80000",
     },
     {
       name: "COUPLES MEMBERSHIP",
-      price: "PKR11000",
+      price: "PKR110000",
     },
     {
       name: "FAMILY MEMBERSHIP",
-      price: "PKR22000",
+      price: "PKR25000",
     },
     {
       name: "VIP MEMBERSHIP",
@@ -59,7 +59,7 @@ function Membership() {
 
   const features = [
     "FULL ACCESS TO CARDIO",
-    "ACCESS TO GROUP FITNESS CLASSES",
+    "ACCESS TO FITNESS CLASSES group",
     "USE OF LOCKER ROOMS AND SHOWERS",
     "COMPLIMENTARY TOWEL SERVICE",
     "VIRTUAL WORKOUT ACCESS INCLUDED",

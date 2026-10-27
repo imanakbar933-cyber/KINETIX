@@ -1,0 +1,601 @@
+
+/* =========================================
+   KINETIX LOGIN FORM
+   Neon Green + Black Theme
+   Text Animations & Smooth Transitions
+========================================= */
+
+.kinetix-form {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  animation: formAppear 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* =========================================
+   TEXT AND ELEMENT ENTRANCE ANIMATIONS
+========================================= */
+
+.kinetix-form > .kinetix-field {
+  animation: textSlideUp 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.kinetix-form > .kinetix-field:nth-of-type(1) {
+  animation-delay: 0.12s;
+}
+
+.kinetix-form > .kinetix-field:nth-of-type(2) {
+  animation-delay: 0.22s;
+}
+
+.kinetix-form > .form-options {
+  animation: textSlideUp 0.6s 0.32s ease both;
+}
+
+.kinetix-form > .login-message {
+  animation: messageAppear 0.35s ease both;
+}
+
+.kinetix-form > .kinetix-submit {
+  animation: textSlideUp 0.6s 0.4s ease both;
+}
+
+.kinetix-form > .social-divider {
+  animation: textSlideUp 0.6s 0.48s ease both;
+}
+
+.kinetix-form > .social-login {
+  animation: textSlideUp 0.6s 0.56s ease both;
+}
+
+.kinetix-form > .signup-text {
+  animation: textSlideUp 0.6s 0.66s ease both;
+}
+
+@keyframes formAppear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes textSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =========================================
+   EMAIL AND PASSWORD FIELDS
+========================================= */
+
+.kinetix-field {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  height: 52px;
+  margin-bottom: 15px;
+  padding: 0 17px;
+  border: 1px solid rgba(112, 255, 83, 0.32);
+  border-radius: 10px;
+  background: rgba(0, 15, 7, 0.78);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.kinetix-field:focus-within {
+  border-color: #78ff19;
+  background: rgba(4, 25, 8, 0.95);
+  box-shadow:
+    0 0 0 2px rgba(120, 255, 25, 0.08),
+    0 0 18px rgba(120, 255, 25, 0.1);
+}
+
+.kinetix-field > svg {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #f2fff0;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition:
+    stroke 0.25s ease,
+    transform 0.25s ease;
+}
+
+.kinetix-field:focus-within > svg {
+  stroke: #78ff19;
+  transform: scale(1.08);
+}
+
+.kinetix-field input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.kinetix-field input::placeholder {
+  color: #c0c9c0;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.kinetix-field input:focus::placeholder {
+  opacity: 0.55;
+}
+
+.kinetix-field input:-webkit-autofill,
+.kinetix-field input:-webkit-autofill:hover,
+.kinetix-field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0 1000px #041107 inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* =========================================
+   SHOW / HIDE PASSWORD BUTTON
+========================================= */
+
+.password-eye {
+  display: grid;
+  flex: 0 0 26px;
+  width: 26px;
+  height: 30px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  outline-offset: 3px;
+  background: transparent;
+  color: #78ff19;
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.password-eye svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.25s ease;
+}
+
+.password-eye:hover {
+  color: #c0ff9a;
+  transform: scale(1.08);
+}
+
+.password-eye:active {
+  transform: scale(0.93);
+}
+
+/* =========================================
+   REMEMBER ME AND FORGOT PASSWORD
+========================================= */
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0 24px;
+}
+
+.remember-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #e2eae0;
+  font-size: 11px;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.remember-label:hover {
+  color: #baff9a;
+}
+
+.remember-label input {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.remember-box {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  border: 1px solid #63705e;
+  border-radius: 3px;
+  color: transparent;
+  font-size: 13px;
+  font-weight: 900;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.remember-label input:checked + .remember-box {
+  border-color: #78ff19;
+  background: #78ff19;
+  color: #061000;
+  animation: checkboxPop 0.25s ease;
+}
+
+@keyframes checkboxPop {
+  0% {
+    transform: scale(0.8);
+  }
+
+  65% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.remember-label input:focus-visible + .remember-box {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+.forgot-password {
+  color: #78ff19;
+  font-size: 11px;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
+}
+
+.forgot-password:hover {
+  color: #c3ff9e;
+  text-shadow: 0 0 9px rgba(120, 255, 25, 0.35);
+}
+
+/* =========================================
+   STATUS MESSAGE
+========================================= */
+
+.login-message {
+  margin: 0 0 14px;
+  color: #baff9a;
+  font-size: 11px;
+  line-height: 1.6;
+  animation: messageAppear 0.35s ease both;
+}
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+.kinetix-submit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  width: 100%;
+  min-height: 55px;
+  padding: 12px 20px;
+  overflow: hidden;
+  border: 1px solid #8aff39;
+  border-radius: 10px;
+  background: linear-gradient(
+    105deg,
+    #67f000 0%,
+    #a1ff57 65%,
+    #76f522 100%
+  );
+  color: #061000;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(91, 255, 0, 0.12);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+
+.kinetix-submit::before {
+  position: absolute;
+  top: -50%;
+  left: -80%;
+  width: 40%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(24deg);
+  content: "";
+  transition: left 0.65s ease;
+  pointer-events: none;
+}
+
+.kinetix-submit:hover::before {
+  left: 140%;
+}
+
+.kinetix-submit:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 20px rgba(120, 255, 25, 0.36),
+    0 5px 25px rgba(70, 255, 0, 0.13);
+  filter: brightness(1.06);
+}
+
+.kinetix-submit:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.kinetix-submit > span {
+  position: relative;
+}
+
+.submit-arrow {
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.kinetix-submit:hover .submit-arrow {
+  transform: translateX(5px);
+}
+
+/* =========================================
+   OR DIVIDER
+========================================= */
+
+.social-divider {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin: 25px 0 18px;
+}
+
+.social-divider span {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(140, 255, 115, 0.05),
+    rgba(140, 255, 115, 0.38)
+  );
+  transform-origin: center;
+  transition: background 0.3s ease;
+}
+
+.social-divider:hover span {
+  background: linear-gradient(
+    90deg,
+    rgba(140, 255, 115, 0.12),
+    rgba(140, 255, 115, 0.65)
+  );
+}
+
+.social-divider span:last-child {
+  transform: rotate(180deg);
+}
+
+.social-divider p {
+  margin: 0;
+  color: #f0f6ec;
+  font-size: 11px;
+  transition: color 0.25s ease;
+}
+
+/* =========================================
+   SOCIAL LOGIN BUTTONS
+========================================= */
+
+.social-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.social-login button {
+  display: grid;
+  width: 49px;
+  height: 49px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(120, 255, 25, 0.42);
+  border-radius: 50%;
+  background: rgba(0, 13, 4, 0.55);
+  color: #eaffdf;
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.social-login button:hover {
+  transform: translateY(-4px);
+  border-color: #78ff19;
+  background: rgba(120, 255, 25, 0.1);
+  color: #a4ff70;
+  box-shadow: 0 0 18px rgba(120, 255, 25, 0.15);
+}
+
+.social-login button:active {
+  transform: translateY(-1px) scale(0.95);
+}
+
+.google-letter {
+  font-family: Arial, sans-serif;
+  font-size: 27px;
+  font-weight: 800;
+}
+
+.facebook-letter {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.social-login svg {
+  width: 23px;
+  height: 23px;
+  transition: transform 0.25s ease;
+}
+
+.social-login button:hover svg {
+  transform: scale(1.12);
+}
+
+/* =========================================
+   SIGNUP TEXT
+========================================= */
+
+.signup-text {
+  margin: 23px 0 0;
+  color: #c0c9bd;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.signup-text a {
+  display: inline-block;
+  color: #78ff19;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.signup-text a:hover {
+  color: #d0ffb9;
+  text-shadow: 0 0 8px rgba(120, 255, 25, 0.3);
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 420px) {
+  .kinetix-field {
+    height: 49px;
+    padding: 0 12px;
+  }
+
+  .form-options {
+    gap: 10px;
+  }
+
+  .remember-label,
+  .forgot-password {
+    font-size: 10px;
+  }
+
+  .social-login {
+    gap: 16px;
+  }
+
+  .social-login button {
+    width: 45px;
+    height: 45px;
+  }
+
+  .kinetix-submit {
+    min-height: 51px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .kinetix-form,
+  .kinetix-form > *,
+  .login-message,
+  .remember-label input:checked + .remember-box {
+    animation: none !important;
+  }
+
+  .kinetix-form *,
+  .kinetix-form *::before,
+  .kinetix-form *::after {
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

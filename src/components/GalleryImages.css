@@ -26,7 +26,7 @@
 }
 
 .galleryimages-subtitle {
-  color: #4ade80;
+  color:  #00ff00;
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 5px;
@@ -46,7 +46,7 @@
 }
 
 .galleryimages-highlight {
-  color: #4ade80;
+  color:  #00ff00;
   text-shadow: 0 0 40px rgba(74, 222, 128, 0.5);
 }
 
@@ -147,7 +147,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #4ade80;
+  color:  #00ff00;
   transition: all 0.4s ease;
   transform: scale(0.5) rotate(-45deg);
   opacity: 0;
@@ -157,7 +157,7 @@
 .galleryimages-item:hover .galleryimages-plus {
   transform: scale(1) rotate(0deg);
   opacity: 1;
-  background: #4ade80;
+  background:  #00ff00;
   color: #0a0a0a;
   box-shadow: 0 0 30px rgba(74, 222, 128, 0.6);
 }
@@ -229,7 +229,7 @@
 }
 
 .gallery-modal-close:hover {
-  color: #4ade80; /* Aapki theme ka green */
+  color:  #00ff00; /* Aapki theme ka green */
 }
 
 /* ---------- Main Image + Arrows Area ---------- */
@@ -280,7 +280,7 @@
 .gallery-modal-arrow:hover {
   background: rgba(74, 222, 128, 0.2);
   border-color: rgba(74, 222, 128, 0.6);
-  color: #4ade80;
+  color:  #00ff00;
 }
 
 .gallery-modal-prev {
@@ -314,7 +314,7 @@
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   scrollbar-width: thin;
-  scrollbar-color: #4ade80 transparent;
+  scrollbar-color:  #00ff00 transparent;
 }
 
 .gallery-thumbnail-strip::-webkit-scrollbar {
@@ -322,7 +322,7 @@
 }
 
 .gallery-thumbnail-strip::-webkit-scrollbar-thumb {
-  background: #4ade80;
+  background:  #00ff00;
   border-radius: 10px;
 }
 
@@ -356,7 +356,7 @@
 
 .gallery-thumb.active {
   opacity: 1;
-  border-color: #4ade80;
+  border-color:  #00ff00;
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 6px 18px rgba(74, 222, 128, 0.35);
 }

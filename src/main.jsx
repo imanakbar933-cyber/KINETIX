@@ -1,7 +1,13 @@
-
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+
+// ✅ CSS Import (Yeh sabse zaroori tha)
 import "./index.css";
 
 // Components
@@ -20,16 +26,24 @@ import GalleryPage from "./pages/GalleryPage.jsx";
 import ClassDetail from "./pages/ClassDetail.jsx";
 import Contact from "./pages/Contact.jsx";
 import TrainersPage from "./pages/TrainersPage.jsx";
-
 import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx";
+<<<<<<< HEAD
 import SignUp from "./pages/SignUp.jsx";
+=======
+import Login from "./pages/Login.jsx";
+>>>>>>> 0012124aa373782314c93c999d819942228e7b60
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
+function AppLayout() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
+  
+
+  return (
+    <>
       <ScrollToTop />
-      <Navbar />
+
+      {!isLoginPage && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -43,12 +57,25 @@ createRoot(document.getElementById("root")).render(
         <Route path="/class-detail/:classId" element={<ClassDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/trainers" element={<TrainersPage />} />
-      
         <Route path="/schedules" element={<SchedulePage />} />
+<<<<<<< HEAD
         <Route path="/signup" element={<SignUp />} />
+=======
+        <Route path="/login" element={<Login />} />
+
+
+>>>>>>> 0012124aa373782314c93c999d819942228e7b60
       </Routes>
 
-      <Footer />
+      {!isLoginPage && <Footer />}
+    </>
+  );
+}
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <BrowserRouter>
+      <AppLayout />
     </BrowserRouter>
   </StrictMode>
 );
