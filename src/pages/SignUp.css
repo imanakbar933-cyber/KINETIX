@@ -14,17 +14,16 @@
   background-color: #050505;
   font-family: 'Inter', sans-serif;
   color: #ffffff;
-  padding-top: 60px; /* Navbar ke liye jagah */
+  padding-top: 60px;
 }
 
 /* ================= LEFT SIDE ================= */
 .signup-left {
-  flex: 1;
+  flex: 1.1;
   position: relative;
-  background: url('/gym-assets/signup.jpg') center/cover no-repeat;
+  background: url('/gym-assets/TrainHero.png') center/cover no-repeat;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 40px;
   overflow: hidden;
 }
@@ -32,7 +31,7 @@
 .left-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(5,5,5,0.2), rgba(5,5,5,0.9));
+  background: linear-gradient(to right, rgba(5,5,5,0.2), rgba(5,5,5,0.95));
   z-index: 1;
 }
 
@@ -52,7 +51,6 @@
   color: #d1d1d1;
   font-weight: 500;
   text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-  margin-top: 20px;
 }
 
 .left-bottom-text {
@@ -82,7 +80,7 @@
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 }
 
-/* ================= RIGHT SIDE (FORM) ================= */
+/* ================= RIGHT SIDE (FORM CONTAINER) ================= */
 .signup-right {
   flex: 1;
   display: flex;
@@ -92,64 +90,53 @@
   background: radial-gradient(circle at center, #0a1a0f 0%, #050505 100%);
 }
 
-/* ✅ FORM CONTAINER (Nayi Image jaisa) */
+/* ✅ FORM CONTAINER (Compact Shape) */
 .signup-form-container {
   width: 100%;
-  max-width: 440px;
-  background: #080d0a; /* Thoda greenish dark background */
-  padding: 35px 30px;
+  max-width: 420px; /* Width kam ki */
+  background: #080d0a;
+  padding: 30px 25px; /* Padding kam ki */
   border-radius: 12px;
   position: relative;
-  /* Neon Green Border */
-  border: 1px solid #4ade80; 
+  border: 1px solid rgba(74, 222, 128, 0.3); 
   box-shadow: 
-    0 0 30px rgba(74, 222, 128, 0.15), 
-    inset 0 0 20px rgba(74, 222, 128, 0.05);
+    0 0 30px rgba(74, 222, 128, 0.08), 
+    inset 0 0 20px rgba(74, 222, 128, 0.03);
 }
 
-/* ✅ NEON CORNERS (Jo image mein hain) */
+/* ✅ NEON CORNERS */
 .signup-form-container::before,
 .signup-form-container::after {
   content: '';
   position: absolute;
-  width: 25px;
-  height: 25px;
-  border: 3px solid #4ade80;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4ade80;
   pointer-events: none;
-  /* Green Glow */
-  filter: drop-shadow(0 0 5px rgba(74, 222, 128, 0.8)); 
+  filter: drop-shadow(0 0 4px rgba(74, 222, 128, 0.8)); 
 }
-
-/* Top Left Corner */
 .signup-form-container::before {
-  top: -2px;
-  left: -2px;
-  border-right: none;
-  border-bottom: none;
+  top: -2px; left: -2px;
+  border-right: none; border-bottom: none;
   border-top-left-radius: 12px;
 }
-
-/* Bottom Right Corner */
 .signup-form-container::after {
-  bottom: -2px;
-  right: -2px;
-  border-left: none;
-  border-top: none;
+  bottom: -2px; right: -2px;
+  border-left: none; border-top: none;
   border-bottom-right-radius: 12px;
 }
 
-/* Form Header */
+/* Header */
 .form-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
+  gap: 10px;
+  margin-bottom: 5px;
 }
 
 .form-header h2 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
-  letter-spacing: 0.5px;
 }
 
 .text-green {
@@ -157,32 +144,38 @@
 }
 
 .form-subtitle {
-  font-size: 12px;
+  font-size: 11px;
   color: #9ca3af;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   line-height: 1.4;
 }
 
-/* Inputs */
+/* ================= FORM ELEMENTS (COMPACT & EFFECTS) ================= */
+.compact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Gaps kam kiye */
+}
+
 .input-group {
   position: relative;
-  margin-bottom: 12px;
 }
 
 .input-icon {
   position: absolute;
-  left: 15px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #6b7280;
+  color: #4b5563;
   display: flex;
   align-items: center;
+  transition: color 0.3s ease;
 }
 
 .input-group input {
   width: 100%;
-  padding: 14px 14px 14px 42px;
-  background: #0f1712; /* Dark greenish-black input */
+  padding: 10px 12px 10px 38px; /* Input height kam ki */
+  background: #0f1712;
   border: 1px solid #1f2e24;
   border-radius: 6px;
   color: #fff;
@@ -190,61 +183,59 @@
   transition: all 0.3s ease;
 }
 
+.input-group input::placeholder {
+  color: #4b5563;
+}
+
+/* ✅ Input Focus Effect (Green Glow) */
 .input-group input:focus {
   outline: none;
   border-color: #4ade80;
-  box-shadow: 0 0 10px rgba(74, 222, 128, 0.1);
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.15);
+  background: #121c16;
 }
-
-.input-group input::placeholder {
-  color: #6b7280;
+.input-group input:focus ~ .input-icon {
+  color: #4ade80; /* Icon green ho jayega focus par */
 }
 
 .eye-icon {
   position: absolute;
-  right: 15px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 15px;
-  opacity: 0.6;
+  font-size: 14px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
 }
 .eye-icon:hover { opacity: 1; }
 
 /* Role Selection */
 .role-selection {
-  margin: 20px 0;
+  margin: 5px 0;
 }
 
 .role-selection p {
-  font-size: 12px;
-  color: #d1d5db;
-  margin-bottom: 10px;
-  font-weight: 500;
+  font-size: 11px;
+  color: #9ca3af;
+  margin-bottom: 8px;
 }
 
 .role-options {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .role-box {
   flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 12px 8px;
+  padding: 8px;
   background: #0f1712;
   border: 1px solid #1f2e24;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.role-box svg {
-  color: #6b7280;
   transition: all 0.3s ease;
 }
 
@@ -257,23 +248,23 @@
 .role-box.active {
   border-color: #4ade80;
   background: rgba(74, 222, 128, 0.1);
-  box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.1);
 }
 
-.role-box.active svg,
 .role-box.active span {
   color: #4ade80;
+  font-weight: 600;
 }
 
 /* Sign Up Button */
 .signup-btn {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   background: #4ade80;
   color: #000;
   border: none;
   border-radius: 6px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
@@ -284,100 +275,77 @@
   margin-top: 5px;
 }
 
-.signup-btn:hover {
-  background: #22c55e;
-  box-shadow: 0 5px 15px rgba(74, 222, 128, 0.3);
-}
-
 /* Divider */
 .divider {
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 20px 0;
-  color: #6b7280;
-  font-size: 11px;
+  margin: 12px 0;
+  color: #4b5563;
+  font-size: 10px;
   font-weight: 600;
 }
-
 .divider::before,
 .divider::after {
   content: '';
   flex: 1;
   border-bottom: 1px solid #1f2e24;
 }
-
-.divider span {
-  padding: 0 10px;
-}
+.divider span { padding: 0 10px; }
 
 /* Google Button */
 .google-btn {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background: transparent;
   border: 1px solid #1f2e24;
   border-radius: 6px;
   color: #fff;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .google-btn:hover {
   background: #0f1712;
   border-color: #4ade80;
 }
 
-/* Google Button Loading State */
-.google-btn.loading {
-  opacity: 0.8;
-  cursor: not-allowed;
+/* Google Loading */
+.google-btn.loading { cursor: not-allowed; }
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(74, 222, 128, 0.3);
+  border-top-color: #4ade80;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
 }
-.google-btn:disabled { pointer-events: none; }
-.spinner { animation: spin 1s linear infinite; }
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* Login Link */
 .login-link {
   text-align: center;
-  margin-top: 20px;
-  font-size: 12px;
+  margin-top: 12px;
+  font-size: 11px;
   color: #9ca3af;
 }
-
 .login-link a {
   color: #4ade80;
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.3s;
 }
-
-.login-link a:hover {
-  text-decoration: underline;
-}
+.login-link a:hover { text-decoration: underline; }
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
-  .signup-page {
-    flex-direction: column;
-    padding-top: 60px;
-  }
-  .signup-left {
-    min-height: 300px;
-    padding: 20px;
-  }
-  .left-top-text {
-    display: none;
-  }
-  .signup-right {
-    padding: 20px 10px;
-  }
+  .signup-page { flex-direction: column; padding-top: 0; }
+  .signup-left { min-height: 300px; padding: 20px; }
+  .left-top-text { display: none; }
+  .signup-right { padding: 15px; }
 }

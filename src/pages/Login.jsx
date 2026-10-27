@@ -1,6 +1,7 @@
 
 import LoginForm from "../components/LoginForm";
 import "./Login.css";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -92,6 +93,12 @@ export default function Login() {
             </div>
 
             <LoginForm />
+             <p className="login-switch" style={{ textAlign: "center", marginTop: "20px", fontSize: "14px", color: "#a3a3a3" }}>
+              Don't have an account?{" "}
+              <Link to="/SignUp" style={{ color: "#4ade80", fontWeight: "600", textDecoration: "none" }}>
+                SignUp
+              </Link>
+            </p>
           </div>
         </section>
       </div>
