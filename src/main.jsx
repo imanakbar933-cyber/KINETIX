@@ -36,7 +36,7 @@ function AppLayout() {
   const location = useLocation();
   
   // ✅ Sahi jagah par condition set ki
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/SignUp";
 
   return (
     <>
