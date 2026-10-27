@@ -28,7 +28,11 @@ import Contact from "./pages/Contact.jsx";
 import TrainersPage from "./pages/TrainersPage.jsx";
 import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx";
+<<<<<<< HEAD
+import SignUp from "./pages/SignUp.jsx";
+=======
 import Login from "./pages/Login.jsx";
+>>>>>>> 0012124aa373782314c93c999d819942228e7b60
 
 function AppLayout() {
   const location = useLocation();
@@ -54,9 +58,13 @@ function AppLayout() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/trainers" element={<TrainersPage />} />
         <Route path="/schedules" element={<SchedulePage />} />
+<<<<<<< HEAD
+        <Route path="/signup" element={<SignUp />} />
+=======
         <Route path="/login" element={<Login />} />
 
 
+>>>>>>> 0012124aa373782314c93c999d819942228e7b60
       </Routes>
 
       {!isLoginPage && <Footer />}

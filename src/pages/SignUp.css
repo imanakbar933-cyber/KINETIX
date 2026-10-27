@@ -1,0 +1,383 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ================= MAIN WRAPPER ================= */
+.signup-page {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #050505;
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  padding-top: 60px; /* Navbar ke liye jagah */
+}
+
+/* ================= LEFT SIDE ================= */
+.signup-left {
+  flex: 1;
+  position: relative;
+  background: url('/gym-assets/signup.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  overflow: hidden;
+}
+
+.left-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(5,5,5,0.2), rgba(5,5,5,0.9));
+  z-index: 1;
+}
+
+.left-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.left-top-text {
+  align-self: flex-end;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: #d1d1d1;
+  font-weight: 500;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+  margin-top: 20px;
+}
+
+.left-bottom-text {
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+.left-bottom-text h2 {
+  font-size: clamp(40px, 5vw, 70px);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  font-style: italic;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); 
+}
+
+.highlight-text {
+  color: #4ade80;
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.4), 0 4px 15px rgba(0, 0, 0, 0.9);
+}
+
+.left-bottom-text p {
+  margin-top: 20px;
+  font-size: 12px;
+  letter-spacing: 6px;
+  color: #ffffff;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+/* ================= RIGHT SIDE (FORM) ================= */
+.signup-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: radial-gradient(circle at center, #0a1a0f 0%, #050505 100%);
+}
+
+/* ✅ FORM CONTAINER (Nayi Image jaisa) */
+.signup-form-container {
+  width: 100%;
+  max-width: 440px;
+  background: #080d0a; /* Thoda greenish dark background */
+  padding: 35px 30px;
+  border-radius: 12px;
+  position: relative;
+  /* Neon Green Border */
+  border: 1px solid #4ade80; 
+  box-shadow: 
+    0 0 30px rgba(74, 222, 128, 0.15), 
+    inset 0 0 20px rgba(74, 222, 128, 0.05);
+}
+
+/* ✅ NEON CORNERS (Jo image mein hain) */
+.signup-form-container::before,
+.signup-form-container::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border: 3px solid #4ade80;
+  pointer-events: none;
+  /* Green Glow */
+  filter: drop-shadow(0 0 5px rgba(74, 222, 128, 0.8)); 
+}
+
+/* Top Left Corner */
+.signup-form-container::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 12px;
+}
+
+/* Bottom Right Corner */
+.signup-form-container::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+  border-bottom-right-radius: 12px;
+}
+
+/* Form Header */
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.form-header h2 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.text-green {
+  color: #4ade80;
+}
+
+.form-subtitle {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 25px;
+  line-height: 1.4;
+}
+
+/* Inputs */
+.input-group {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 14px 14px 42px;
+  background: #0f1712; /* Dark greenish-black input */
+  border: 1px solid #1f2e24;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #4ade80;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.1);
+}
+
+.input-group input::placeholder {
+  color: #6b7280;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 15px;
+  opacity: 0.6;
+}
+.eye-icon:hover { opacity: 1; }
+
+/* Role Selection */
+.role-selection {
+  margin: 20px 0;
+}
+
+.role-selection p {
+  font-size: 12px;
+  color: #d1d5db;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.role-options {
+  display: flex;
+  gap: 10px;
+}
+
+.role-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 8px;
+  background: #0f1712;
+  border: 1px solid #1f2e24;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.role-box svg {
+  color: #6b7280;
+  transition: all 0.3s ease;
+}
+
+.role-box span {
+  font-size: 11px;
+  color: #9ca3af;
+  transition: all 0.3s ease;
+}
+
+.role-box.active {
+  border-color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
+}
+
+.role-box.active svg,
+.role-box.active span {
+  color: #4ade80;
+}
+
+/* Sign Up Button */
+.signup-btn {
+  width: 100%;
+  padding: 14px;
+  background: #4ade80;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
+
+.signup-btn:hover {
+  background: #22c55e;
+  box-shadow: 0 5px 15px rgba(74, 222, 128, 0.3);
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: #6b7280;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #1f2e24;
+}
+
+.divider span {
+  padding: 0 10px;
+}
+
+/* Google Button */
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #1f2e24;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.google-btn:hover {
+  background: #0f1712;
+  border-color: #4ade80;
+}
+
+/* Google Button Loading State */
+.google-btn.loading {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+.google-btn:disabled { pointer-events: none; }
+.spinner { animation: spin 1s linear infinite; }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Login Link */
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.login-link a {
+  color: #4ade80;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .signup-page {
+    flex-direction: column;
+    padding-top: 60px;
+  }
+  .signup-left {
+    min-height: 300px;
+    padding: 20px;
+  }
+  .left-top-text {
+    display: none;
+  }
+  .signup-right {
+    padding: 20px 10px;
+  }
+}
