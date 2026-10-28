@@ -15,8 +15,8 @@ body:has(.kinetix-login) #root {
 }
 
 .kinetix-login {
-  --kinetix-green: #78ff19;
-  --kinetix-light-green: #a0ff5a;
+  --kinetix-green:        #03ea04;
+  --kinetix-light-green:#03ea04;
 
   position: relative;
   isolation: isolate;

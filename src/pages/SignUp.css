@@ -78,7 +78,7 @@
 }
 
 .highlight-text {
-  color: #4ade80;
+  color:  #03ea04;
   text-shadow: 0 0 30px rgba(74, 222, 128, 0.4), 0 10px 30px rgba(0, 0, 0, 1);
 }
 
@@ -86,7 +86,7 @@
   margin-top: 20px;
   font-size: 13px;
   letter-spacing: 6px;
-  color: #4ade80;
+  color:  #03ea04;
   font-weight: 600;
   text-shadow: 0 5px 15px rgba(0, 0, 0, 1);
 }
@@ -152,9 +152,9 @@
   content: '';
   position: absolute;
   width: 20px; height: 20px;
-  border: 3px solid #4ade80;
+  border: 3px solid  #03ea04;
   pointer-events: none;
-  filter: drop-shadow(0 0 10px #4ade80); 
+  filter: drop-shadow(0 0 10px  #03ea04); 
   z-index: 2;
 }
 .signup-form-container::before {
@@ -183,7 +183,7 @@
 }
 
 .text-green {
-  color: #4ade80;
+  color:  #03ea04;
   text-shadow: 0 0 15px rgba(74, 222, 128, 0.5);
 }
 
@@ -250,8 +250,8 @@
   left: 50%;
   width: 0%;
   height: 2px;
-  background: #4ade80;
-  box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade80;
+  background:  #03ea04;
+  box-shadow: 0 0 10px  #03ea04, 0 0 20px  #03ea04;
   transition: all 0.4s ease;
   transform: translateX(-50%);
   z-index: 3;
@@ -262,7 +262,7 @@
 }
 
 .input-group input:focus ~ .input-icon {
-  color: #4ade80;
+  color:  #03ea04;
 }
 
 .eye-icon {
@@ -309,12 +309,12 @@
 }
 
 .role-box.active {
-  border-color: #4ade80;
+  border-color:  #03ea04;
   background: rgba(74, 222, 128, 0.15);
 }
 
 .role-box.active span {
-  color: #4ade80;
+  color:  #03ea04;
   font-weight: 700;
 }
 
@@ -322,7 +322,7 @@
 .signup-btn {
   width: 100%;
   padding: 12px; /* ✅ Button chhota kiya */
-  background: #4ade80;
+  background:  #03ea04;
   color: #000;
   border: none;
   border-radius: 8px;
@@ -395,7 +395,7 @@
   z-index: 2;
 }
 .login-link a {
-  color: #4ade80;
+  color:  #03ea04;
   text-decoration: none;
   font-weight: 600;
 }
@@ -404,7 +404,7 @@
 .spinner {
   width: 14px; height: 14px;
   border: 2px solid rgba(74, 222, 128, 0.3);
-  border-top-color: #4ade80;
+  border-top-color:  #03ea04;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }

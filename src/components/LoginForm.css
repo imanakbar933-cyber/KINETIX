@@ -128,7 +128,7 @@
 }
 
 .kinetix-field:focus-within {
-  border-color: #78ff19;
+  border-color: #03ea04;
   background: rgba(4, 25, 8, 0.95);
   box-shadow:
     0 0 0 2px rgba(120, 255, 25, 0.08),
@@ -150,7 +150,7 @@
 }
 
 .kinetix-field:focus-within > svg {
-  stroke: #78ff19;
+  stroke: #03ea04;
   transform: scale(1.08);
 }
 
@@ -200,7 +200,7 @@
   border: 0;
   outline-offset: 3px;
   background: transparent;
-  color: #78ff19;
+  color: #03ea04;
   cursor: pointer;
   transition:
     color 0.25s ease,
@@ -283,8 +283,8 @@
 }
 
 .remember-label input:checked + .remember-box {
-  border-color: #78ff19;
-  background: #78ff19;
+  border-color: #03ea04;
+  background: #03ea04;
   color: #061000;
   animation: checkboxPop 0.25s ease;
 }
@@ -309,7 +309,7 @@
 }
 
 .forgot-password {
-  color: #78ff19;
+  color: #03ea04;
   font-size: 11px;
   text-decoration: none;
   transition:
@@ -486,7 +486,7 @@
 
 .social-login button:hover {
   transform: translateY(-4px);
-  border-color: #78ff19;
+  border-color: #03ea04;
   background: rgba(120, 255, 25, 0.1);
   color: #a4ff70;
   box-shadow: 0 0 18px rgba(120, 255, 25, 0.15);
@@ -532,7 +532,7 @@
 
 .signup-text a {
   display: inline-block;
-  color: #78ff19;
+  color: #03ea04;
   font-weight: 700;
   text-decoration: none;
   transition:
