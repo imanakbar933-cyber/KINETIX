@@ -3,10 +3,9 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutGrid, ShoppingCart, Box, DollarSign, FileText, 
   Tag, UserPlus, Users, Star, RefreshCw, LogIn, Ticket, 
-  Calendar, MessageSquare, Trophy, Gift, Megaphone, 
-  Activity, Users2, CalendarCheck, Zap, Apple, Ruler, 
-  Package, Truck, Wrench, PieChart, CreditCard, BarChart2, 
-  TrendingUp, UserCog, Lock, Building2, Settings, ChevronDown
+  Calendar, MessageSquare, Activity, Users2, CalendarCheck, 
+  Zap, Apple, Ruler, Package, Truck, Wrench, PieChart, 
+  CreditCard, TrendingUp, UserCog, Lock, Building2, Settings, ChevronDown
 } from 'lucide-react';
 import "./Navbar.css";
 
@@ -35,6 +34,7 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Page Load Transition
   useEffect(() => {
     const initialTimer = setTimeout(() => {
       setShowTransition(true);
@@ -52,19 +52,30 @@ function Navbar() {
 
   return (
     <>
+      {/* =========================================
+          3D WRAP TRANSITION ANIMATION
+      ========================================= */}
       {showTransition && (
-        <div className="kinetix-split-transition">
-          <div className="split-curtain split-left"></div>
-          <div className="split-curtain split-right"></div>
-          <div className="split-laser-line"></div>
-          <div className="split-center-logo">
-            <img src="/images/kinetix2.png" alt="Kinetix" />
-          </div>
+        <div 
+          style={{
+            position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
+            zIndex: 9999999, backgroundColor: '#050706', display: 'flex',
+            justifyContent: 'center', alignItems: 'center', overflow: 'hidden', perspective: '1000px'
+          }}
+        >
+          <img 
+            src="/images/kinetix2.png" 
+            alt="Kinetix Transition" 
+            style={{
+              width: '100vw', height: 'auto', objectFit: 'contain', display: 'block',
+              animation: 'wrapReveal 2s cubic-bezier(0.22, 1, 0.36, 1) forwards'
+            }} 
+          />
         </div>
       )}
 
       {/* =========================================
-          NEW PROFESSIONAL SIDEBAR
+          PROFESSIONAL DASHBOARD SIDEBAR
       ========================================= */}
       <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
         
@@ -72,9 +83,6 @@ function Navbar() {
         <div className="sidebar-header">
           <Link to="/" className="sidebar-logo" onClick={closeSidebar}>
             <img src="/images/kinetix.svg" alt="Kinetix" />
-            <div className="sidebar-logo-text">
-              <span className="pro-badge">PRO</span>
-            </div>
           </Link>
           <button className="close-btn" onClick={closeSidebar}>✕</button>
         </div>
@@ -105,7 +113,7 @@ function Navbar() {
               <DollarSign size={18} /> Orders
             </Link>
             <Link to="/payments" className="sidebar-item" onClick={closeSidebar}>
-              <CreditCard size={18} /> Payments <span className="sidebar-badge">3</span>
+              <CreditCard size={18} /> Payments
             </Link>
             <Link to="/invoices" className="sidebar-item" onClick={closeSidebar}>
               <FileText size={18} /> Invoices
@@ -228,7 +236,7 @@ function Navbar() {
       {sidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar}></div>}
 
       {/* =========================================
-          NAVBAR
+          MAIN NAVBAR
       ========================================= */}
       <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
         <div className="navbar-container">
