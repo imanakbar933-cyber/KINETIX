@@ -145,7 +145,7 @@ export default function LoginForm() {
 
       <p className="signup-text">
         Don't have an account?{" "}
-        <a href="/signup">Create an Account</a>
+        <a href="/SignUp">Create an Account</a>
       </p>
     </form>
   );

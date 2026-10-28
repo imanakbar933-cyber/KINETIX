@@ -1,5 +1,25 @@
 /* =========================================================
-   GLOBAL RESET & PERFORMANCE
+   1. GLOBAL THEME VARIABLES (Light/Dark)
+========================================================= */
+
+:root, [data-theme="dark"] {
+  --bg-main: #050706;       /* Main Background */
+  --bg-card: #111513;       /* Card Background */
+  --text-main: #ffffff;     /* Main Text */
+  --text-muted: #a0a0a0;    /* Paragraph / Muted text */
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] {
+  --bg-main: #f4f4f4;       /* Light Background */
+  --bg-card: #ffffff;       /* White Cards */
+  --text-main: #111111;     /* Dark Text */
+  --text-muted: #555555;
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================================
+   2. GLOBAL RESET & BASE STYLES
 ========================================================= */
 
 * {
@@ -15,8 +35,11 @@ html {
 body {
   overflow-x: hidden;
   font-family: Arial, sans-serif;
-  background: #050505;
-  color: #ffffff;
+  
+  /* 👇 Yahan Variables Apply kiye hain */
+  background-color: var(--bg-main) !important;
+  color: var(--text-main) !important;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* Images smooth rendering */
@@ -34,4 +57,86 @@ img, video {
   contain: layout style;
   content-visibility: auto;
   contain-intrinsic-size: 700px;
+}
+
+/* =========================================================
+   3. LIGHT MODE OVERRIDES (Sirf Light Mode ke liye)
+========================================================= */
+
+/* Backgrounds Light karein */
+[data-theme="light"] .our-story,
+[data-theme="light"] .trainers,
+[data-theme="light"] .info-cards,
+[data-theme="light"] .services-wrapper,
+[data-theme="light"] .facilities-wrapper,
+[data-theme="light"] .membership-wrapper {
+  background-color: var(--bg-main) !important;
+}
+
+/* Cards Background White */
+[data-theme="light"] .service-card,
+[data-theme="light"] .info-card,
+[data-theme="light"] .membership-plan-card,
+[data-theme="light"] .facility-panel {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Dropdown & Sidebar Background */
+[data-theme="light"] .dropdown-menu,
+[data-theme="light"] .sidebar {
+  background: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Dropdown & Sidebar Text */
+[data-theme="light"] .dropdown-item,
+[data-theme="light"] .sidebar-links a,
+[data-theme="light"] .sidebar-header h3 {
+  color: var(--text-main) !important;
+}
+
+/* =========================================================
+   4. TEXT COLORS (Normal Text Light mode mein black hoga)
+========================================================= */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6,
+[data-theme="light"] p,
+[data-theme="light"] li,
+[data-theme="light"] .nav-link,
+[data-theme="light"] .our-story-para,
+[data-theme="light"] .services-subtitle,
+[data-theme="light"] .facilities-subtitle,
+[data-theme="light"] .membership-subtitle {
+  color: var(--text-main) !important;
+}
+
+/* =========================================================
+   5. IMAGES KE UPAR WALA TEXT (Hamesha White Rahega)
+   ========================================================= */
+/* Inhe Light mode mein bhi white rakha hai taake images par nazar aayein */
+
+[data-theme="light"] .trainer-card-name,
+[data-theme="light"] .info-card-content h3,
+[data-theme="light"] .info-card-number,
+[data-theme="light"] .service-card h3,
+[data-theme="light"] .service-card p,
+[data-theme="light"] .facility-content h3,
+[data-theme="light"] .facility-content p,
+[data-theme="light"] .facility-vertical-title span,
+[data-theme="light"] .membership-plan-card h3,
+[data-theme="light"] .membership-plan-price strong {
+  color: #ffffff !important; 
+}
+
+/* Images ke peeche white background na aaye */
+[data-theme="light"] .trainer-card-image,
+[data-theme="light"] .info-card-image,
+[data-theme="light"] .service-image,
+[data-theme="light"] .facility-image {
+  background-color: transparent !important;
 }
