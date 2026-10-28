@@ -27,19 +27,23 @@ import ClassDetail from "./pages/ClassDetail.jsx";
 import Contact from "./pages/Contact.jsx";
 import TrainersPage from "./pages/TrainersPage.jsx";
 import TeamMember1 from "./pages/TeamMember1.jsx";
-import SchedulePage from "./pages/SchedulePage.jsx";
+import SchedulePage from "./pages/SchedulePage.jsx"; 
+import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
+
 
 function AppLayout() {
   const location = useLocation();
-  const isLoginPage = location.pathname === "/login";
   
+  // ✅ Sahi jagah par condition set ki
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/SignUp";
 
   return (
     <>
       <ScrollToTop />
 
-      {!isLoginPage && <Navbar />}
+      {/* Navbar tabhi dikhega jab Auth page na ho */}
+      {!isAuthPage && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -55,11 +59,11 @@ function AppLayout() {
         <Route path="/trainers" element={<TrainersPage />} />
         <Route path="/schedules" element={<SchedulePage />} />
         <Route path="/login" element={<Login />} />
-
-
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
 
-      {!isLoginPage && <Footer />}
+      {/* Footer tabhi dikhega jab Auth page na ho */}
+      {!isAuthPage && <Footer />}
     </>
   );
 }
