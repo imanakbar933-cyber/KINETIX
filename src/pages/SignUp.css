@@ -31,7 +31,7 @@
 .left-bg-image {
   position: absolute;
   inset: 0;
-  background: url('/gym-assets/TrainHero.png') center/cover no-repeat;
+  background: url('/images/login-bg.png') center/cover no-repeat;
   z-index: 0;
 }
 .left-overlay {
