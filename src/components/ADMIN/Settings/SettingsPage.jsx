@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import "./SettingsPage.css";
 import NotificationPreferences from "../NotificationPreferences";
+import SecuritySettings from "../SecuritySettings"; 
 
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState("Business");
@@ -251,7 +252,11 @@ const SettingsPage = () => {
                 <NotificationPreferences />
               </div>
             )}
-  
+   {activeTab === "Security" && (
+  <div className="security-tab-wrapper" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+    <SecuritySettings />
+  </div>
+)}
           </div>
         </div>
       </main>

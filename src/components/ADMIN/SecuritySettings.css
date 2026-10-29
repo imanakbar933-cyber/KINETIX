@@ -1,0 +1,290 @@
+.security-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 900px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Common Card Style */
+.security-card {
+  background-color: #0a0f0c; /* Dark Background */
+  border-radius: 16px;
+  border: 1px solid #1f2e24;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.title-bar {
+  width: 4px;
+  height: 24px;
+  background-color: #4ade80; /* Neon Green bar */
+  border-radius: 4px;
+}
+
+.card-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* ================= PASSWORD FORM ================= */
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input, 
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  background: #0f1712;
+  border: 1px solid #1f2e24;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-wrapper input {
+  padding-right: 45px; /* Icon ke liye space */
+}
+
+.form-group input:focus {
+  border-color: #4ade80;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.1);
+}
+
+.icon-btn {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  color: #4ade80;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.helper-text {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #4ade80;
+  color: #000;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #22c55e;
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.3);
+}
+
+/* Messages */
+.error-msg {
+  color: #ef4444;
+  font-size: 13px;
+  margin: 0;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.success-msg {
+  color: #4ade80;
+  font-size: 13px;
+  margin: 0;
+  background: rgba(74, 222, 128, 0.1);
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+/* ================= OPTIONS LIST ================= */
+.options-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.option-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #1f2e24;
+}
+
+.option-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.option-info h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.option-info p {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Custom Select */
+.custom-select {
+  padding: 10px 16px;
+  background: #0f1712;
+  border: 1px solid #1f2e24;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+.custom-select option {
+  background: #0a0f0c;
+}
+
+/* Action Buttons (Manage/Sign out) */
+.session-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-outline, .btn-danger {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #1f2e24;
+  background: #0f1712;
+  color: #e5e7eb;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #4b5563;
+}
+
+.btn-danger:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+/* ================= TOGGLE SWITCH ================= */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #1f2e24;
+  transition: .4s;
+  border-radius: 34px;
+  border: 1px solid #2a3f33;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #6b7280;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: rgba(74, 222, 128, 0.2);
+  border-color: #4ade80;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+  background-color: #4ade80;
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.8);
+}
+
+@media (max-width: 768px) {
+  .form-row { flex-direction: column; gap: 15px; }
+  .form-footer { flex-direction: column; align-items: flex-start; gap: 15px; }
+  .option-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+}
