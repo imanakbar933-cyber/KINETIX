@@ -10,12 +10,12 @@ import {
 import "./SettingsPage.css";
 
 const initialInvoices = [
-  { id: "INV-2026-010", date: "Oct 01, 2026", description: "Enterprise Plan", amount: 199, status: "Paid" },
-  { id: "INV-2026-009", date: "Sep 01, 2026", description: "Enterprise Plan", amount: 199, status: "Paid" },
-  { id: "INV-2026-008", date: "Aug 01, 2026", description: "Enterprise Plan", amount: 199, status: "Paid" },
+  { id: "INV-2026-010", date: "Oct 01, 2026", description: "Enterprise Plan", amount: 5999, status: "Paid" },
+  { id: "INV-2026-009", date: "Sep 01, 2026", description: "Enterprise Plan", amount: 5999, status: "Paid" },
+  { id: "INV-2026-008", date: "Aug 01, 2026", description: "Enterprise Plan", amount: 5999, status: "Paid" },
 ];
 
-const planPrices = { Starter: 49, Professional: 99, Enterprise: 199 };
+const planPrices = { Starter: 1499, Professional: 2999, Enterprise: 5999 };
 
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState("Business");
@@ -236,7 +236,7 @@ const SettingsPage = () => {
                     <div className="form-group"><label>Support Phone</label><input type="text" defaultValue="1-800-555-0199" /></div>
                   </div>
                   <div className="form-row">
-                    <div className="form-group"><label>Currency</label><select defaultValue="PKR"><option value="PKR"> PKR — US Dollar</option><option value="PKR">Rs PKR — Pakistani Rupee</option><option value="EUR">€ EUR — Euro</option></select></div>
+                    <div className="form-group"><label>Currency</label><select defaultValue="PKR"><option value="PKR">PKR — Pakistani Rupee</option><option value="USD">USD — US Dollar</option><option value="EUR">EUR — Euro</option></select></div>
                     <div className="form-group"><label>Timezone</label><select defaultValue="ET"><option value="ET">ET (GMT-5:00)</option><option value="PT">PT (GMT-8:00)</option><option value="PKT">PKT (GMT+5:00)</option></select></div>
                   </div>
                   <div className="form-group"><label>Registered Address</label><input type="text" defaultValue="400 Congress Ave, Austin, TX 78701" /></div>
@@ -269,11 +269,11 @@ const SettingsPage = () => {
                     <Crown className="billing-crown" size={23} />
                   </div>
                   <h3>{currentPlan} Plan</h3>
-                  <div className="billing-price"><strong>${displayedPrice}</strong><span>/{billingCycle === "yearly" ? "year" : "month"}</span></div>
+                  <div className="billing-price"><strong>PKR {displayedPrice.toLocaleString("en-PK")}</strong><span>/{billingCycle === "yearly" ? "year" : "month"}</span></div>
                   <p>{currentPlan === "Enterprise" ? "Unlimited members · 6 branches · Priority support" : currentPlan === "Professional" ? "Up to 1,000 members · 3 branches · Email support" : "Up to 200 members · 1 branch · Standard support"}</p>
                   <div className="billing-plan-meta">
                     <span><CheckCircle2 size={14} /> {cancelled ? "Subscription cancellation requested" : "Next billing date: Nov 01, 2026"}</span>
-                    <span>Demo subscription ·PKR</span>
+                    <span>Demo subscription · PKR</span>
                   </div>
                   <div className="billing-actions">
                     <button className="btn-solid" type="button" onClick={openUpgradeModal}><Crown size={15} /> {cancelled ? "Choose a Plan" : "Change Plan"}</button>
@@ -325,7 +325,7 @@ const SettingsPage = () => {
                         <tbody>{invoices.map((invoice) => (
                           <tr key={invoice.id}>
                             <td>{invoice.id}</td><td>{invoice.date}</td><td>{invoice.description}</td>
-                            <td className="billing-amount">PKR{invoice.amount.toFixed(2)}</td>
+                            <td className="billing-amount">PKR {invoice.amount.toLocaleString("en-PK")}</td>
                             <td><span className={`billing-status ${invoice.status.toLowerCase()}`}>{invoice.status}</span></td>
                           </tr>
                         ))}</tbody>
@@ -430,7 +430,7 @@ const SettingsPage = () => {
               {Object.entries(planPrices).map(([plan, price]) => (
                 <button type="button" key={plan} className={`billing-choice ${selectedPlan === plan ? "selected" : ""}`} onClick={() => setSelectedPlan(plan)}>
                   <span className="billing-choice-top">{plan}<span>{selectedPlan === plan ? "✓" : ""}</span></span>
-                  <strong>${billingCycle === "yearly" ? price * 10 : price}</strong>
+                  <strong>PKR {(billingCycle === "yearly" ? price * 10 : price).toLocaleString("en-PK")}</strong>
                   <small>/{billingCycle === "yearly" ? "year" : "month"}</small>
                   <span className="billing-choice-description">{plan === "Starter" ? "For one gym branch" : plan === "Professional" ? "For growing gym teams" : "For multi-branch gyms"}</span>
                 </button>
