@@ -69,7 +69,7 @@ const SettingsPage = () => {
 
   const handleExport = () => {
     const rows = [
-      ["Invoice", "Date", "Description", "Amount (USD)", "Status"],
+      ["Invoice", "Date", "Description", "Amount (PKR)", "Status"],
       ...invoices.map((invoice) => [
         invoice.id, invoice.date, invoice.description, invoice.amount, invoice.status,
       ]),
@@ -236,7 +236,7 @@ const SettingsPage = () => {
                     <div className="form-group"><label>Support Phone</label><input type="text" defaultValue="1-800-555-0199" /></div>
                   </div>
                   <div className="form-row">
-                    <div className="form-group"><label>Currency</label><select defaultValue="USD"><option value="USD">$ USD — US Dollar</option><option value="PKR">Rs PKR — Pakistani Rupee</option><option value="EUR">€ EUR — Euro</option></select></div>
+                    <div className="form-group"><label>Currency</label><select defaultValue="PKR"><option value="PKR"> PKR — US Dollar</option><option value="PKR">Rs PKR — Pakistani Rupee</option><option value="EUR">€ EUR — Euro</option></select></div>
                     <div className="form-group"><label>Timezone</label><select defaultValue="ET"><option value="ET">ET (GMT-5:00)</option><option value="PT">PT (GMT-8:00)</option><option value="PKT">PKT (GMT+5:00)</option></select></div>
                   </div>
                   <div className="form-group"><label>Registered Address</label><input type="text" defaultValue="400 Congress Ave, Austin, TX 78701" /></div>
@@ -273,7 +273,7 @@ const SettingsPage = () => {
                   <p>{currentPlan === "Enterprise" ? "Unlimited members · 6 branches · Priority support" : currentPlan === "Professional" ? "Up to 1,000 members · 3 branches · Email support" : "Up to 200 members · 1 branch · Standard support"}</p>
                   <div className="billing-plan-meta">
                     <span><CheckCircle2 size={14} /> {cancelled ? "Subscription cancellation requested" : "Next billing date: Nov 01, 2026"}</span>
-                    <span>Demo subscription · USD</span>
+                    <span>Demo subscription ·PKR</span>
                   </div>
                   <div className="billing-actions">
                     <button className="btn-solid" type="button" onClick={openUpgradeModal}><Crown size={15} /> {cancelled ? "Choose a Plan" : "Change Plan"}</button>
@@ -325,13 +325,13 @@ const SettingsPage = () => {
                         <tbody>{invoices.map((invoice) => (
                           <tr key={invoice.id}>
                             <td>{invoice.id}</td><td>{invoice.date}</td><td>{invoice.description}</td>
-                            <td className="billing-amount">${invoice.amount.toFixed(2)}</td>
+                            <td className="billing-amount">PKR{invoice.amount.toFixed(2)}</td>
                             <td><span className={`billing-status ${invoice.status.toLowerCase()}`}>{invoice.status}</span></td>
                           </tr>
                         ))}</tbody>
                       </table>
                     </div>
-                    <div className="billing-table-footer"><span>Showing {invoices.length} demo invoices</span><span>Currency: USD</span></div>
+                    <div className="billing-table-footer"><span>Showing {invoices.length} demo invoices</span><span>Currency: PKR</span></div>
                   </div>
                 </div>
 
