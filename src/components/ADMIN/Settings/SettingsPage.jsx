@@ -7,6 +7,7 @@ import {
   Key, Database
 } from "lucide-react";
 import "./SettingsPage.css";
+import NotificationPreferences from "../NotificationPreferences";
 
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState("Business");
@@ -243,13 +244,14 @@ const SettingsPage = () => {
             )}
 
             {/* 👇 OTHER TABS (Placeholder) */}
-            {activeTab !== "Profile" && activeTab !== "Business" && (
-              <div style={{ padding: '20px', color: '#888' }}>
-                <h2 className="content-title">{activeTab} Settings</h2>
-                <p>This section is under development.</p>
+             {/* ✅ NOTIFICATIONS TAB (Yahan component call hua hai) */}
+            {activeTab === "Notifications" && (
+              <div className="notifications-tab-wrapper">
+                <h2 className="content-title" style={{ marginBottom: '20px' }}>Notifications</h2>
+                <NotificationPreferences />
               </div>
             )}
-
+  
           </div>
         </div>
       </main>
