@@ -288,3 +288,381 @@ input:checked + .slider:before {
   .form-footer { flex-direction: column; align-items: flex-start; gap: 15px; }
   .option-item { flex-direction: column; align-items: flex-start; gap: 15px; }
 }
+/* ================= MODAL OVERLAY ================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(3, 5, 4, 0.85); /* Dark Kinetix Overlay */
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* ================= ACTIVE SESSIONS MODAL ================= */
+.modal-content {
+  background: #0a0f0c; /* Dark Background */
+  width: 100%;
+  max-width: 520px;
+  border-radius: 16px;
+  padding: 25px;
+  border: 1px solid #1f2e24;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(74, 222, 128, 0.05);
+  animation: slideUp 0.3s ease-out;
+  color: #ffffff; 
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0;
+  color: #fff;
+}
+
+.modal-close-btn {
+  background: #0f1712;
+  border: 1px solid #1f2e24;
+  cursor: pointer;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+/* Body List */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.session-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #1f2e24;
+  background: #0f1712;
+  transition: all 0.2s ease;
+}
+
+.session-card.active-session {
+  border-color: rgba(74, 222, 128, 0.3);
+  background: rgba(74, 222, 128, 0.05);
+}
+
+.session-icon {
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.active-session .session-icon {
+  color: #4ade80; /* Neon Green Icon */
+}
+
+.session-details {
+  flex: 1;
+}
+
+.session-details h4 {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.session-details p {
+  margin: 0;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.badge-this-device {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.btn-signout-single {
+  background: transparent;
+  border: 1px solid #1f2e24;
+  color: #ef4444;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-signout-single:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+}
+
+/* Footer Buttons */
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.btn-close-modal {
+  flex: 1;
+  padding: 12px;
+  background: #0f1712;
+  color: #9ca3af;
+  border: 1px solid #1f2e24;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-close-modal:hover {
+  background: #1a231d;
+  color: #fff;
+}
+
+.btn-signout-all {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: #ef4444; 
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+}
+
+.btn-signout-all:hover {
+  background: #dc2626;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+/* ================= CONFIRMATION MODAL ================= */
+.confirm-modal-content {
+  background: #0a0f0c; /* Dark Background */
+  width: 100%;
+  max-width: 450px;
+  border-radius: 16px;
+  padding: 35px 30px;
+  text-align: center;
+  border: 1px solid #1f2e24;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease-out;
+  color: #ffffff;
+}
+
+/* Icon Wrapper (Neon Green background) */
+.confirm-icon-wrapper {
+  width: 65px;
+  height: 65px;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+}
+
+.confirm-icon {
+  color: #4ade80; /* Neon Green Icon */
+}
+
+.confirm-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.confirm-text {
+  font-size: 14px;
+  color: #9ca3af;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Device List Box */
+.device-list-box {
+  background: #0f1712;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #d1d5db;
+  font-weight: 500;
+  margin-bottom: 25px;
+  text-align: left;
+  border: 1px solid #1f2e24;
+}
+
+/* Buttons */
+.confirm-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-cancel {
+  flex: 1;
+  padding: 14px;
+  background: #0f1712;
+  color: #9ca3af;
+  border: 1px solid #1f2e24;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #1a231d;
+  color: #fff;
+}
+
+/* Neon Green Button */
+.btn-gold {
+  flex: 1;
+  padding: 14px;
+  background: #4ade80; /* Theme Green */
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(74, 222, 128, 0.2);
+}
+
+.btn-gold:hover {
+  background: #22c55e;
+  box-shadow: 0 6px 20px rgba(74, 222, 128, 0.4);
+}
+
+/* ================= TOAST SUCCESS MESSAGE ================= */
+.toast-success {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #0a0f0c;
+  border: 1px solid #1f2e24;
+  border-left: 4px solid #4ade80;
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(74, 222, 128, 0.1);
+  z-index: 10000;
+  animation: slideInRight 0.3s ease-out;
+}
+
+.toast-success svg {
+  color: #4ade80;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .modal-content, .confirm-modal-content {
+    padding: 20px;
+    width: 90%;
+  }
+  .session-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .modal-footer, .confirm-actions {
+    flex-direction: column;
+  }
+}/* ================= PASSWORD STRENGTH METER ================= */
+.strength-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.strength-bars {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.strength-bar {
+  height: 4px;
+  flex: 1;
+  border-radius: 4px;
+  background-color: #1f2e24; /* Default dark track color */
+  transition: all 0.3s ease;
+}
+
+.strength-text {
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 50px;
+  text-align: right;
+  text-shadow: 0 0 10px currentColor;
+}
