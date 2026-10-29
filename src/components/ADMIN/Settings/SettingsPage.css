@@ -564,3 +564,100 @@
 @media (prefers-reduced-motion: reduce) {
   .settings-layout *, .settings-layout *::before, .settings-layout *::after { animation: none !important; transition: none !important; }
 }
+
+
+
+/* ===== Increased Font Sizes: Settings, Billing & Appearance ===== */
+
+.settings-page {
+  font-size: 16px;
+}
+
+.settings-page h1 {
+  font-size: 32px;
+}
+
+.settings-page h2 {
+  font-size: 25px;
+}
+
+.settings-page h3 {
+  font-size: 21px;
+}
+
+.settings-page p,
+.settings-page label,
+.settings-page span {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.settings-page input,
+.settings-page select,
+.settings-page textarea {
+  font-size: 16px;
+  padding: 13px 15px;
+}
+
+.settings-page button {
+  font-size: 16px;
+  padding: 12px 18px;
+}
+
+.settings-page .settings-tab {
+  font-size: 16px;
+}
+
+.settings-page .plan-price {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.settings-page .plan-card h3 {
+  font-size: 23px;
+}
+
+.settings-page .plan-card p,
+.settings-page .plan-card li {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.settings-page table {
+  font-size: 15px;
+}
+
+.settings-page th,
+.settings-page td {
+  padding: 15px;
+}
+
+.settings-page .modal-title {
+  font-size: 25px;
+}
+
+@media (max-width: 768px) {
+  .settings-page h1 {
+    font-size: 27px;
+  }
+
+  .settings-page h2 {
+    font-size: 22px;
+  }
+
+  .settings-page h3 {
+    font-size: 19px;
+  }
+
+  .settings-page p,
+  .settings-page label,
+  .settings-page input,
+  .settings-page select,
+  .settings-page button {
+    font-size: 15px;
+  }
+
+  .settings-page .plan-price {
+    font-size: 29px;
+  }
+}
