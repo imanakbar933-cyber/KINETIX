@@ -30,7 +30,7 @@ import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx"; 
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
-import SettingsPage from "./components/ADMIN/Settings/SettingsPage.jsx"; // 👈 Settings Page import kiya
+import SettingsPage from "./components/Admin/Settings/SettingsPage.jsx"; // 👈 Settings Page import kiya
 
 
 function AppLayout() {
