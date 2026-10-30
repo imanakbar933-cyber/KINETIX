@@ -265,7 +265,9 @@ function Navbar() {
               </div>
             </div>
             <Link to="/trainers" className="nav-link">Trainers</Link>
-            <a href="#membership" className="nav-link">Membership</a>
+            <Link to="/plans" className="nav-link">
+                 Membership
+            </Link>
             <Link to="/contact" className="nav-link" onClick={() => setMenuOpen(false)}>Contact</Link>
           </nav>
 

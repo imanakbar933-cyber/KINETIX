@@ -19,6 +19,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/App.jsx";
 import About from "./pages/About.jsx";
 import GymHome from "./pages/GymHome.jsx";
+import MembershipPlans from "./components/MembershipPlans.jsx";
 import FaqPage from "./pages/FaqPage.jsx";
 import ClassroomPage from "./pages/ClassroomPage";
 import Team from "./pages/Team.jsx";
@@ -84,6 +85,8 @@ function AppLayout() {
           
           {/* 👇 Settings Page Route */}
           <Route path="/settings" element={<SettingsPage />} />
+
+          <Route path="/plans" element={<MembershipPlans />} />
         </Routes>
       </div>
 
