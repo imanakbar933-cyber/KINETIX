@@ -25,6 +25,7 @@ import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx"; 
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
+import ServiceDetail from "./components/ServiceDetail.jsx";
 
 // 👇 Dashboard Page
 import DashboardPage from "./pages/ADMIN/DashboardPage.jsx"; 
@@ -119,6 +120,8 @@ function AppLayout() {
 
             </div>
           } />
+
+          <Route path="/services/:slug" element={<ServiceDetail />} />
           
         </Routes>
       </div>
