@@ -936,3 +936,125 @@
   transition: none !important;
   animation: none !important;
 }
+
+
+
+/* =========================================
+   UNSAVED APPEARANCE CONFIRMATION MODAL
+========================================= */
+
+.appearance-confirm-modal {
+  width: min(100% - 30px, 460px);
+  max-width: 460px;
+  text-align: center;
+  padding: 32px;
+}
+
+.appearance-confirm-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--settings-accent, #03ea04);
+  background: color-mix(
+    in srgb,
+    var(--settings-accent, #03ea04) 12%,
+    transparent
+  );
+  border: 1px solid color-mix(
+    in srgb,
+    var(--settings-accent, #03ea04) 35%,
+    transparent
+  );
+}
+
+.appearance-confirm-modal h3 {
+  margin: 0 0 12px;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.appearance-confirm-modal .billing-modal-description {
+  margin: 0 0 24px;
+  line-height: 1.7;
+  color: #9299a5;
+}
+
+.appearance-confirm-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.appearance-confirm-actions button {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.appearance-discard-btn {
+  padding: 10px 13px;
+  border: 1px solid rgba(255, 85, 95, 0.35);
+  border-radius: 8px;
+  background: rgba(255, 80, 90, 0.08);
+  color: #ff777e;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.appearance-discard-btn:hover {
+  background: rgba(255, 80, 90, 0.17);
+  border-color: rgba(255, 85, 95, 0.65);
+}
+
+/* Light theme */
+.settings-light-mode .appearance-confirm-modal {
+  background: #ffffff;
+  color: #20252d;
+}
+
+.settings-light-mode .appearance-confirm-modal h3 {
+  color: #20252d;
+}
+
+.settings-light-mode
+.appearance-confirm-modal
+.billing-modal-description {
+  color: #68717e;
+}
+
+.settings-light-mode .appearance-confirm-modal .btn-outline {
+  background: #ffffff;
+  color: #27313d;
+  border-color: #dce2e9;
+}
+
+.settings-light-mode .appearance-confirm-modal .btn-outline:hover {
+  background: #f3f5f7;
+}
+
+/* Mobile responsive */
+@media (max-width: 520px) {
+  .appearance-confirm-modal {
+    padding: 24px 18px;
+  }
+
+  .appearance-confirm-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .appearance-confirm-actions button {
+    width: 100%;
+  }
+}
