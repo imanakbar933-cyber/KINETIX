@@ -177,12 +177,12 @@
 .register-button:hover .join-arrow { transform: translate(3px, -3px); }
 
 /* =========================================================
-   7. NEW PROFESSIONAL DASHBOARD SIDEBAR
+   7. NEW PROFESSIONAL DASHBOARD SIDEBAR (Overlay Style)
 ========================================================= */
 .sidebar {
   position: fixed;
   top: 0;
-  left: -350px;
+  left: -350px; /* Default mein screen ke bahar chhupa rahega */
   width: 320px;
   height: 100vh;
   background: var(--bg-main, #050706); 
@@ -193,7 +193,7 @@
   flex-direction: column;
 }
 
-.sidebar.open { left: 0; }
+.sidebar.open { left: 0; } /* 3 lines click par open */
 
 /* Sidebar Header & Logo */
 .sidebar-header {
@@ -249,10 +249,9 @@
 }
 
 /* Menu Items */
-/* Menu Items */
 .sidebar-item {
   display: flex;
-  align-items: center; /* 👈 Icon aur text ko center align karega */
+  align-items: center;
   gap: 12px;
   padding: 10px 12px;
   color: var(--text-muted, #a0a0a0);
@@ -264,7 +263,6 @@
   margin-bottom: 2px;
 }
 
-/* 👇 Icons ko shrink hone se bachayein */
 .sidebar-item svg {
   flex-shrink: 0;
   width: 18px;
@@ -276,7 +274,6 @@
   background: rgba(3, 234, 4, 0.1);
   color: #03ea04;
 }
-
 .sidebar-item:hover svg { color: #03ea04; }
 
 /* Tags & Badges */
@@ -313,6 +310,7 @@
 .user-info h4 { margin: 0; color: var(--text-main, #fff); font-size: 14px; }
 .user-info p { margin: 0; color: #03ea04; font-size: 11px; font-weight: 600; }
 
+/* Sidebar Overlay (Peeche ka black background) */
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -322,9 +320,8 @@
 }
 
 /* =========================================================
-   8. 3D WRAP TRANSITION ANIMATION (PowerPoint Style)
+   8. 3D WRAP TRANSITION ANIMATION (Sirf Image)
 ========================================================= */
-
 @keyframes wrapReveal {
   0% {
     opacity: 0;

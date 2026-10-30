@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { 
   LayoutGrid, ShoppingCart, Box, DollarSign, FileText, 
   Tag, UserPlus, Users, Star, RefreshCw, LogIn, Ticket, 
@@ -17,9 +17,6 @@ function Navbar() {
   
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   const [showTransition, setShowTransition] = useState(false);
-  
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -53,21 +50,24 @@ function Navbar() {
   return (
     <>
       {/* =========================================
-          3D WRAP TRANSITION ANIMATION
+          3D WRAP TRANSITION ANIMATION (Sirf Image)
       ========================================= */}
+       
       {showTransition && (
         <div 
           style={{
             position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-            zIndex: 9999999, backgroundColor: '#050706', display: 'flex',
-            justifyContent: 'center', alignItems: 'center', overflow: 'hidden', perspective: '1000px'
+            zIndex: 9999999, 
+            backgroundColor: '#050706', // Black background taake gray flash na ho
+            display: 'flex', justifyContent: 'center', alignItems: 'center', 
+            overflow: 'hidden', perspective: '1000px'
           }}
         >
           <img 
             src="/images/kinetix2.png" 
             alt="Kinetix Transition" 
             style={{
-              width: '100vw', height: 'auto', objectFit: 'contain', display: 'block',
+              width: '80vw', height: 'auto', objectFit: 'contain', display: 'block',
               animation: 'wrapReveal 2s cubic-bezier(0.22, 1, 0.36, 1) forwards'
             }} 
           />
@@ -75,11 +75,10 @@ function Navbar() {
       )}
 
       {/* =========================================
-          PROFESSIONAL DASHBOARD SIDEBAR
+          PROFESSIONAL DASHBOARD SIDEBAR (Overlay)
       ========================================= */}
       <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
         
-        {/* Sidebar Header with Logo */}
         <div className="sidebar-header">
           <Link to="/" className="sidebar-logo" onClick={closeSidebar}>
             <img src="/images/kinetix.svg" alt="Kinetix" />
@@ -87,9 +86,7 @@ function Navbar() {
           <button className="close-btn" onClick={closeSidebar}>✕</button>
         </div>
 
-        {/* Sidebar Menu Items */}
         <div className="sidebar-menu">
-          
           <div className="sidebar-section">
             <span className="sidebar-section-title">OVERVIEW</span>
             <Link to="/dashboard" className="sidebar-item active" onClick={closeSidebar}>
@@ -220,10 +217,8 @@ function Navbar() {
               <Settings size={18} /> Settings
             </Link>
           </div>
-
         </div>
 
-        {/* Sidebar Footer (User Profile) */}
         <div className="sidebar-footer">
           <img src="/images/user.jpg" alt="Nathan Reeves" className="user-avatar" />
           <div className="user-info">
@@ -233,6 +228,7 @@ function Navbar() {
         </div>
       </div>
 
+      {/* Sidebar Overlay */}
       {sidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar}></div>}
 
       {/* =========================================
