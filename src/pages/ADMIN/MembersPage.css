@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.members-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #151521;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ================= SIDEBAR ================= */
+.members-sidebar {
+  width: 260px;
+  background-color: #1e1e2d;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #2b2b40;
+}
+
+.members-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+.members-logo h2 {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.members-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.members-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  color: #a2a3b7;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.members-menu-item:hover {
+  background-color: #2b2b40;
+  color: #fff;
+}
+
+.members-menu-item.active {
+  background-color: #ff7b1c;
+  color: #fff;
+}
+
+/* Upgrade Card */
+.sidebar-upgrade-card {
+  background-color: #2b2b40;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.sidebar-upgrade-card p {
+  font-size: 12px;
+  color: #a2a3b7;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sidebar-upgrade-card p span {
+  background-color: #ff7b1c;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.sidebar-upgrade-card h3 {
+  color: #fff;
+  margin: 10px 0 5px 0;
+  font-size: 18px;
+}
+
+.days-left {
+  font-size: 12px;
+  color: #a2a3b7;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  height: 5px;
+  background-color: #1e1e2d;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 30%;
+  height: 100%;
+  background-color: #ff7b1c;
+}
+
+.upgrade-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #e5e7eb;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #a2a3b7;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.sidebar-logout:hover {
+  color: #fff;
+}
+
+/* ================= MAIN CONTENT ================= */
+.members-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px 30px 30px;
+}
+
+/* Top Header */
+.members-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #2b2b40;
+  margin-bottom: 30px;
+}
+
+.header-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #1e1e2d;
+  padding: 10px 20px;
+  border-radius: 20px;
+  width: 400px;
+}
+
+.header-search input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  width: 100%;
+  font-size: 14px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.header-icon {
+  cursor: pointer;
+}
+
+.header-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.header-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header-profile h4 {
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.header-profile p {
+  color: #a2a3b7;
+  font-size: 11px;
+}
+
+/* Page Title */
+.page-title-section {
+  margin-bottom: 20px;
+}
+
+.page-title-section h1 {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.breadcrumb {
+  color: #a2a3b7;
+  font-size: 13px;
+}

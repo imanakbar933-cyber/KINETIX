@@ -1,0 +1,247 @@
+.member-list-container {
+  background-color: #1e1e2d; /* Dark background */
+  padding: 25px;
+  border-radius: 12px;
+  color: #a2a3b7;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  height: 100%;
+}
+
+/* Top Action Bar */
+.member-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.search-box {
+  position: relative;
+  width: 350px;
+}
+
+.search-box input {
+  width: 100%;
+  background-color: #2b2b40;
+  border: 1px solid #3f4254;
+  border-radius: 8px;
+  padding: 12px 15px 12px 45px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+  border-color: #ff7b1c; /* Orange border on focus */
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8c8ea7;
+}
+
+.add-member-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ff7b1c;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-member-btn:hover {
+  background-color: #e66a10;
+  box-shadow: 0 4px 15px rgba(255, 123, 28, 0.3);
+}
+
+/* Table Styles */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #2b2b40;
+}
+
+.member-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.member-table th {
+  background-color: #181820;
+  padding: 15px;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #b5b5c3;
+  border-bottom: 1px solid #2b2b40;
+}
+
+.member-table td {
+  padding: 15px;
+  border-bottom: 1px solid #2b2b40;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.table-row {
+  transition: background-color 0.2s ease;
+}
+
+.table-row:hover {
+  background-color: #2b2b40;
+}
+
+/* Avatar & Name */
+.member-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.member-name {
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.member-name:hover {
+  color: #ff7b1c;
+}
+
+.member-id {
+  color: #a2a3b7;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.paid {
+  background-color: rgba(50, 205, 50, 0.1);
+  color: #32cd32;
+}
+
+.status-badge.not-paid {
+  background-color: rgba(255, 60, 60, 0.1);
+  color: #ff3c3c;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: transparent;
+}
+
+.action-btn.view {
+  color: #32cd32;
+  border: 1px solid rgba(50, 205, 50, 0.3);
+}
+.action-btn.view:hover {
+  background-color: rgba(50, 205, 50, 0.1);
+}
+
+.action-btn.edit {
+  color: #f1c40f;
+  border: 1px solid rgba(241, 196, 15, 0.3);
+}
+.action-btn.edit:hover {
+  background-color: rgba(241, 196, 15, 0.1);
+}
+
+.action-btn.delete {
+  color: #ff3c3c;
+  border: 1px solid rgba(255, 60, 60, 0.3);
+}
+.action-btn.delete:hover {
+  background-color: rgba(255, 60, 60, 0.1);
+}
+
+/* Pagination */
+.pagination-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.showing-text {
+  font-size: 14px;
+  color: #a2a3b7;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.page-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  border: 1px solid #2b2b40;
+  background-color: transparent;
+  color: #a2a3b7;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.page-btn:hover {
+  background-color: #2b2b40;
+  color: #fff;
+}
+
+.page-btn.active {
+  background-color: #ff7b1c;
+  color: #fff;
+  border-color: #ff7b1c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .member-top-bar {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .search-box {
+    width: 100%;
+  }
+  .pagination-bar {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
