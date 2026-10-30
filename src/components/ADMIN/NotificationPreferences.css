@@ -343,3 +343,28 @@ input:checked + .slider:before {
   color: var(--notification-text);
   border-color: var(--notification-border);
 }
+
+/* Notification Toggle Theme Fix */
+
+.settings-layout .notification-card .toggle-switch .slider {
+  background-color: #68736b !important;
+  transition: 0.3s ease;
+}
+
+.settings-layout .notification-card .toggle-switch input:checked + .slider {
+  background-color: var(--settings-accent, #03ea04) !important;
+}
+
+.settings-layout.settings-light-mode
+.notification-card .toggle-switch .slider {
+  background-color: #cbd2cc !important;
+}
+
+.settings-layout.settings-light-mode
+.notification-card .toggle-switch input:checked + .slider {
+  background-color: var(--settings-accent, #03ea04) !important;
+}
+
+.settings-layout .notification-card .toggle-switch .slider::before {
+  background-color: #ffffff !important;
+}
