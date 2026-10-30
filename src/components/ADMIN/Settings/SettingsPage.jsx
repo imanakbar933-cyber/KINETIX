@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"; // ✅ useRef import kiya
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   LayoutDashboard, Calendar, MessageSquare, Megaphone,
@@ -10,6 +10,7 @@ import {
 import "./SettingsPage.css";
 import NotificationPreferences from "../NotificationPreferences";
 import SecuritySettings from "../SecuritySettings";
+
 const initialInvoices = [
   { id: "INV-2026-010", date: "Oct 01, 2026", description: "Enterprise Plan", amount: 5999, status: "Paid" },
   { id: "INV-2026-009", date: "Sep 01, 2026", description: "Enterprise Plan", amount: 5999, status: "Paid" },
@@ -78,24 +79,7 @@ const SettingsPage = () => {
     setBillingMessage("");
   };
 
-  const handleExport = () => {
-    const rows = [
-      ["Invoice", "Date", "Description", "Amount (PKR)", "Status"],
-      ...invoices.map((invoice) => [
-        invoice.id, invoice.date, invoice.description, invoice.amount, invoice.status,
-      ]),
-    ];
-    const csv = rows.map((row) =>
-      row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
-    ).join("\n");
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "kinetix-invoices.csv";
-    link.click();
-    URL.revokeObjectURL(url);
-  };
+  // ❌ handleExport function remove kar diya gaya hai
 
   const openUpgradeModal = () => {
     setSelectedPlan(currentPlan === "Enterprise" ? "Professional" : "Enterprise");
@@ -184,7 +168,7 @@ const SettingsPage = () => {
             <p>Manage your account, business &amp; preferences</p>
           </div>
           <div className="header-actions">
-            <button className="btn-outline" onClick={handleExport}><Download size={15} /> Export</button>
+            {/* ❌ Export Button removed from here */}
             <button className="btn-outline" onClick={handleReset}><RotateCcw size={15} /> Reset</button>
             <button className="btn-solid" onClick={handleSave}>
               <Check size={16} />
@@ -256,7 +240,6 @@ const SettingsPage = () => {
               </>
             )}
 
-            {/* ✅ Yahan ref pass kiya taaki handleSave function isko access kar sake */}
             {activeTab === "Notifications" && (
               <div className="notifications-tab-wrapper">
                 <h2 className="content-title" style={{ marginBottom: '20px' }}>Notifications</h2>
@@ -265,10 +248,11 @@ const SettingsPage = () => {
             )}
 
             {activeTab === "Security" && (
-  <div className="security-tab-wrapper" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-    <SecuritySettings activeTab={activeTab} /> {/* 👈 activeTab prop pass kiya */}
-  </div>
-)}
+              <div className="security-tab-wrapper" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                <SecuritySettings activeTab={activeTab} />
+              </div>
+            )}
+
             {activeTab === "Billing" && (
               <div className="billing-panel">
                 <div className="billing-heading">
@@ -340,7 +324,7 @@ const SettingsPage = () => {
                 <div className="billing-section-row" id="billing-invoices">
                   <div className="billing-section-heading">
                     <div><h3>Invoice History</h3><p>Download a CSV record of your recent invoices.</p></div>
-                    <button className="billing-update-btn" type="button" onClick={handleExport}><Download size={14} /> Export CSV</button>
+                    {/* ❌ Export CSV Button removed from here */}
                   </div>
                   <div className="billing-box billing-table-box">
                     <div className="billing-table-scroll">
