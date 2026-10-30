@@ -1,4 +1,4 @@
-import { StrictMode, useState } from "react"; // 👈 useState import kiya
+import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   BrowserRouter,
@@ -7,7 +7,6 @@ import {
   useLocation,
 } from "react-router-dom";
 
-// ✅ CSS Import
 import "./index.css";
 
 // Components
@@ -19,7 +18,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/App.jsx";
 import About from "./pages/About.jsx";
 import GymHome from "./pages/GymHome.jsx";
-import MembershipPlans from "./components/MembershipPlans.jsx";
+import MembershipPlans from "./components/MembershipPlans.jsx"; // Yeh wahi component hai jo home par bhi hai
 import FaqPage from "./pages/FaqPage.jsx";
 import ClassroomPage from "./pages/ClassroomPage";
 import Team from "./pages/Team.jsx";
@@ -31,16 +30,12 @@ import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx"; 
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
-import SettingsPage from "./components/Admin/Settings/SettingsPage.jsx"; // 👈 Settings Page import kiya
-
+import SettingsPage from "./components/Admin/Settings/SettingsPage.jsx";
 
 function AppLayout() {
   const location = useLocation();
-  
-  // 👇 Sidebar State yahan rakhi
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
 
-  // 👇 Settings aur Auth pages par Navbar/Footer hide honge
   const isAuthPage = 
     location.pathname === "/login" || 
     location.pathname === "/signup" || 
@@ -50,7 +45,6 @@ function AppLayout() {
     <>
       <ScrollToTop />
 
-      {/* Navbar tabhi dikhega jab Auth ya Settings page na ho */}
       {!isAuthPage && (
         <Navbar 
           sidebarExpanded={sidebarExpanded} 
@@ -58,7 +52,6 @@ function AppLayout() {
         />
       )}
 
-      {/* Main Content Wrapper (Sidebar ke hisaab se adjust hoga) */}
       <div 
         className="main-content-layout" 
         style={{ 
@@ -82,15 +75,31 @@ function AppLayout() {
           <Route path="/schedules" element={<SchedulePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          
-          {/* 👇 Settings Page Route */}
           <Route path="/settings" element={<SettingsPage />} />
 
-          <Route path="/plans" element={<MembershipPlans />} />
+          {/* 👇 Yahan humne Image aur Component dono wrap kar diye hain */}
+          
+          <Route path="/plans" element={
+  <div className="plans-page-wrapper">
+    
+    {/* HERO SECTION */}
+    <div className="plans-hero-section">
+      <div className="plans-hero-content">
+        <h1>MEMBERSHIP</h1>
+      </div>
+    </div>
+
+    {/* MEMBERSHIP PLANS COMPONENT */}
+    <div className="plans-content-container">
+      <MembershipPlans />
+    </div>
+
+  </div>
+} />
+          
         </Routes>
       </div>
 
-      {/* Footer tabhi dikhega jab Auth ya Settings page na ho */}
       {!isAuthPage && <Footer />}
     </>
   );
