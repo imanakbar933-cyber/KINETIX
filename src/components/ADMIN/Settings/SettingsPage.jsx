@@ -8,6 +8,8 @@ import {
   Monitor, Moon, Sun, CheckCircle2, AlertCircle, Trash2
 } from "lucide-react";
 import "./SettingsPage.css";
+import NotificationPreferences from "../NotificationPreferences";
+import SecuritySettings from "../SecuritySettings"; 
 
 const initialInvoices = [
   { id: "INV-2026-010", date: "Oct 01, 2026", description: "Enterprise Plan", amount: 5999, status: "Paid" },
@@ -245,6 +247,20 @@ const SettingsPage = () => {
               </>
             )}
 
+            {/* 👇 OTHER TABS (Placeholder) */}
+             {/* ✅ NOTIFICATIONS TAB (Yahan component call hua hai) */}
+            {activeTab === "Notifications" && (
+              <div className="notifications-tab-wrapper">
+                <h2 className="content-title" style={{ marginBottom: '20px' }}>Notifications</h2>
+                <NotificationPreferences />
+              </div>
+            )}
+   {activeTab === "Security" && (
+  <div className="security-tab-wrapper" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+    <SecuritySettings />
+  </div>
+)}
+          </div>
             {activeTab === "Billing" && (
               <div className="billing-panel">
                 <div className="billing-heading">
@@ -417,7 +433,7 @@ const SettingsPage = () => {
             )}
           </section>
         </div>
-      </main>
+     </main>
 
       {modal === "plan" && (
         <div className="billing-modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setModal(""); }}>
