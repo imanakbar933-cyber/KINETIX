@@ -18,7 +18,6 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); 
 }
 
-/* Moving Light on Top */
 .navbar::before {
   content: ""; position: absolute; top: 0; left: -30%; width: 35%; height: 1px;
   background: linear-gradient(90deg, transparent, #03ea04, white, #03ea04, transparent);
@@ -46,25 +45,9 @@
 }
 
 /* =========================================================
-   3. LEFT SIDE (Hamburger + Logo)
+   3. LEFT SIDE (Sirf Logo)
 ========================================================= */
-.navbar-left { display: flex; align-items: center; gap: 20px; }
-
-.sidebar-toggle {
-  background: transparent; border: none; cursor: pointer;
-  display: flex; flex-direction: column; gap: 6px; z-index: 10001;
-  padding: 5px; margin-left: -30px; transition: transform 0.3s ease;
-}
-.sidebar-toggle:hover { transform: scale(1.1); }
-.sidebar-toggle span { 
-  width: 24px; height: 2px; background-color: var(--text-main, #fff); 
-  border-radius: 2px; transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1); 
-  transform-origin: left center; 
-}
-.sidebar-toggle:hover span { background-color: #03ea04; }
-.sidebar-toggle.active span:nth-child(1) { transform: rotate(45deg) translateY(6px); background-color: #03ea04; }
-.sidebar-toggle.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
-.sidebar-toggle.active span:nth-child(3) { transform: rotate(-45deg) translateY(-6px); background-color: #03ea04; }
+.navbar-left { display: flex; align-items: center; }
 
 .navbar-logo { display: flex; align-items: center; justify-content: flex-start; position: relative; z-index: 10001; text-decoration: none; transition: transform 0.4s ease, filter 0.4s ease; }
 .kinetix-logo-image { width: 250px; height: auto; display: block; object-fit: contain; position: relative; z-index: 10001; transition: transform 0.4s ease, filter 0.4s ease; }
@@ -85,11 +68,18 @@
   animation: navLinkEntrance 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
+/* 👇 Dashboard Link ko thoda highlight kiya hai (optional) */
+.dashboard-link {
+  color: #03ea04;
+}
+
 .navbar-menu .nav-link:nth-child(1) { animation-delay: 0.15s; }
 .navbar-menu .nav-link:nth-child(2) { animation-delay: 0.22s; }
 .navbar-menu .nav-link:nth-child(3) { animation-delay: 0.29s; }
 .navbar-menu .nav-link:nth-child(4) { animation-delay: 0.36s; }
 .navbar-menu .nav-link:nth-child(5) { animation-delay: 0.43s; }
+.navbar-menu .nav-link:nth-child(6) { animation-delay: 0.50s; }
+.navbar-menu .nav-link:nth-child(7) { animation-delay: 0.57s; }
 
 @keyframes navLinkEntrance { 
   from { opacity: 0; transform: translateY(-12px); } 
@@ -111,7 +101,7 @@
 .nav-link:hover::after { width: 100%; }
 
 /* =========================================================
-   5. SERVICES DROPDOWN
+   5. DROPDOWN
 ========================================================= */
 .nav-item-dropdown { position: relative; display: inline-block; padding-bottom: 15px; margin-bottom: -15px; }
 .dropdown-toggle { display: flex; align-items: center; gap: 5px; }
@@ -147,7 +137,7 @@
 .dropdown-item:hover::before { height: 70%; }
 
 /* =========================================================
-   6. RIGHT SIDE (Buttons & Theme Toggle)
+   6. RIGHT SIDE
 ========================================================= */
 .navbar-right { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-shrink: 0; }
 
@@ -177,176 +167,17 @@
 .register-button:hover .join-arrow { transform: translate(3px, -3px); }
 
 /* =========================================================
-   7. NEW PROFESSIONAL DASHBOARD SIDEBAR (Overlay Style)
-========================================================= */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -350px; /* Default mein screen ke bahar chhupa rahega */
-  width: 320px;
-  height: 100vh;
-  background: var(--bg-main, #050706); 
-  border-right: 1px solid rgba(3, 234, 4, 0.2);
-  z-index: 100005;
-  transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar.open { left: 0; } /* 3 lines click par open */
-
-/* Sidebar Header & Logo */
-.sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.sidebar-logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-.sidebar-logo img {
-  width: 140px;
-  height: auto;
-}
-
-.close-btn {
-  background: transparent;
-  border: none;
-  color: #777;
-  font-size: 18px;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-.close-btn:hover { color: #03ea04; }
-
-/* Sidebar Menu Scrollable Area */
-.sidebar-menu {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px 15px;
-  scrollbar-width: thin;
-  scrollbar-color: #03ea04 transparent;
-}
-.sidebar-menu::-webkit-scrollbar { width: 4px; }
-.sidebar-menu::-webkit-scrollbar-thumb { background: rgba(3, 234, 4, 0.3); border-radius: 10px; }
-
-/* Sections */
-.sidebar-section { margin-bottom: 25px; }
-
-.sidebar-section-title {
-  display: block;
-  color: #555;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  margin-bottom: 10px;
-  padding-left: 10px;
-}
-
-/* Menu Items */
-.sidebar-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  color: var(--text-muted, #a0a0a0);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  margin-bottom: 2px;
-}
-
-.sidebar-item svg {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  transition: color 0.3s ease;
-}
-.sidebar-item:hover, 
-.sidebar-item.active {
-  background: rgba(3, 234, 4, 0.1);
-  color: #03ea04;
-}
-.sidebar-item:hover svg { color: #03ea04; }
-
-/* Tags & Badges */
-.sidebar-tag {
-  margin-left: auto;
-  background: rgba(3, 234, 4, 0.1);
-  color: #03ea04;
-  font-size: 9px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
-.arrow-icon { margin-left: auto; }
-
-/* Sidebar Footer (User Profile) */
-.sidebar-footer {
-  padding: 15px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--bg-main, #050706);
-}
-
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #03ea04;
-}
-
-.user-info h4 { margin: 0; color: var(--text-main, #fff); font-size: 14px; }
-.user-info p { margin: 0; color: #03ea04; font-size: 11px; font-weight: 600; }
-
-/* Sidebar Overlay (Peeche ka black background) */
-.sidebar-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
-  z-index: 100004;
-}
-
-/* =========================================================
-   8. 3D WRAP TRANSITION ANIMATION (Sirf Image)
+   7. 3D WRAP TRANSITION ANIMATION
 ========================================================= */
 @keyframes wrapReveal {
-  0% {
-    opacity: 0;
-    transform: rotateY(90deg) rotateX(20deg) scale(0.5);
-    filter: blur(10px);
-  }
-  30% {
-    opacity: 1;
-    transform: rotateY(0deg) rotateX(0deg) scale(1);
-    filter: blur(0);
-  }
-  70% {
-    opacity: 1;
-    transform: rotateY(0deg) rotateX(0deg) scale(1);
-    filter: blur(0);
-  }
-  100% {
-    opacity: 0;
-    transform: rotateY(-90deg) rotateX(-20deg) scale(1.5);
-    filter: blur(10px);
-  }
+  0% { opacity: 0; transform: rotateY(90deg) rotateX(20deg) scale(0.5); filter: blur(10px); }
+  30% { opacity: 1; transform: rotateY(0deg) rotateX(0deg) scale(1); filter: blur(0); }
+  70% { opacity: 1; transform: rotateY(0deg) rotateX(0deg) scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: rotateY(-90deg) rotateX(-20deg) scale(1.5); filter: blur(10px); }
 }
 
 /* =========================================================
-   9. MOBILE & TABLET RESPONSIVE
+   8. MOBILE RESPONSIVE
 ========================================================= */
 @media (max-width: 1000px) {
   .navbar-container { width: 94%; }
@@ -357,9 +188,9 @@
 @media (max-width: 800px) {
   .navbar { padding: 18px 0; }
   .navbar-scrolled { padding: 13px 0; }
-  .kinetix-logo-image { width: 280px; }
-  .sidebar-toggle { margin-left: 0; }
+  .kinetix-logo-image { width: 200px; }
 
+  /* Mobile Menu (Slide from right) */
   .navbar-menu {
     position: fixed; top: 0; right: 0; width: 100%; height: 100vh; margin: 0; padding: 110px 35px 40px;
     display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 27px;
@@ -373,6 +204,9 @@
   .menu-open .nav-link:nth-child(1) { transition-delay: 0.08s; }
   .menu-open .nav-link:nth-child(2) { transition-delay: 0.14s; }
   .menu-open .nav-link:nth-child(3) { transition-delay: 0.20s; }
+  .menu-open .nav-link:nth-child(4) { transition-delay: 0.26s; }
+  .menu-open .nav-link:nth-child(5) { transition-delay: 0.32s; }
+  .menu-open .nav-link:nth-child(6) { transition-delay: 0.38s; }
 
   .nav-item-dropdown { width: 100%; margin-left: 0; padding-bottom: 0; margin-bottom: 0; }
   .dropdown-toggle { width: 100%; justify-content: space-between; }
@@ -380,15 +214,10 @@
   .dropdown-menu.show { display: block; }
   .dropdown-item { font-size: 16px; padding: 8px 0; color: var(--text-muted, #a0a0a0); }
   .dropdown-item:hover { padding-left: 5px; }
-  .menu-open .nav-item-dropdown { opacity: 1; transform: translateX(0); transition: opacity 0.4s ease 0.26s, transform 0.5s ease 0.26s; }
-  .menu-open .nav-link:nth-child(5) { transition-delay: 0.32s; }
-  .menu-open .nav-link:nth-child(6) { transition-delay: 0.38s; }
 
-  .mobile-join { display: block; margin-top: 10px; padding: 15px 25px; background: #03ea04; color: #050706; text-decoration: none; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease 0.45s, transform 0.5s ease 0.45s, background 0.3s ease; }
-  .mobile-join:hover { background: #62ff35; color: #050706; }
-  .menu-open .mobile-join { opacity: 1; transform: translateY(0); }
   .navbar-right .login-nav-button, .navbar-right .register-button { display: none; }
 
+  /* Mobile Hamburger */
   .menu-toggle { display: block; width: 43px; height: 43px; border: 1px solid rgba(156, 255, 0, 0.35); background: rgba(156, 255, 0, 0.05); cursor: pointer; position: relative; z-index: 10002; }
   .menu-toggle span { position: absolute; left: 10px; width: 21px; height: 2px; background: #03ea04; transition: all 0.4s ease; }
   .menu-toggle span:first-child { top: 16px; }
@@ -399,68 +228,26 @@
 
 @media (max-width: 450px) {
   .navbar-container { width: 88%; }
-  .kinetix-logo-image { width: 220px; }
+  .kinetix-logo-image { width: 180px; }
   .navbar-menu { padding-left: 25px; }
   .nav-link { font-size: 24px; }
 }
 
 /* =========================================================
-   10. THEME VARIABLES & GLOBAL LIGHT MODE OVERRIDES
+   9. THEME VARIABLES
 ========================================================= */
 :root, [data-theme="dark"] {
-  --bg-main: #050706;
-  --bg-card: #111513;
-  --text-main: #ffffff;
-  --text-muted: #a0a0a0;
-  --border-color: rgba(255, 255, 255, 0.1);
+  --bg-main: #050706; --bg-card: #111513; --text-main: #ffffff; --text-muted: #a0a0a0; --border-color: rgba(255, 255, 255, 0.1);
 }
-
 [data-theme="light"] {
-  --bg-main: #f4f4f4;
-  --bg-card: #ffffff;
-  --text-main: #111111;
-  --text-muted: #555555;
-  --border-color: rgba(0, 0, 0, 0.1);
+  --bg-main: #f4f4f4; --bg-card: #ffffff; --text-main: #111111; --text-muted: #555555; --border-color: rgba(0, 0, 0, 0.1);
 }
 
-[data-theme="light"] .navbar {
-  background: rgba(244, 244, 244, 0.95) !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
-}
-[data-theme="light"] .navbar-scrolled {
-  background: rgba(244, 244, 244, 0.98) !important;
-}
-[data-theme="light"] .nav-link {
-  color: #111111 !important;
-}
-[data-theme="light"] .nav-link::after {
-  background: #000;
-}
-[data-theme="light"] .dropdown-menu {
-  background: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-[data-theme="light"] .dropdown-item {
-  color: #111 !important;
-}
-[data-theme="light"] .dropdown-item:hover {
-  color: #03ea04 !important;
-}
-[data-theme="light"] .theme-toggle-btn {
-  border-color: rgba(0, 0, 0, 0.2);
-}
-[data-theme="light"] .sidebar {
-  background: #ffffff !important;
-}
-[data-theme="light"] .sidebar-item {
-  color: #555 !important;
-}
-[data-theme="light"] .sidebar-section-title {
-  color: #888;
-}
-[data-theme="light"] .sidebar-footer {
-  background: #ffffff;
-}
-[data-theme="light"] .user-info h4 {
-  color: #111;
-}
+[data-theme="light"] .navbar { background: rgba(244, 244, 244, 0.95) !important; border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important; }
+[data-theme="light"] .navbar-scrolled { background: rgba(244, 244, 244, 0.98) !important; }
+[data-theme="light"] .nav-link { color: #111111 !important; }
+[data-theme="light"] .nav-link::after { background: #000; }
+[data-theme="light"] .dropdown-menu { background: #ffffff !important; border: 1px solid rgba(0, 0, 0, 0.1); }
+[data-theme="light"] .dropdown-item { color: #111 !important; }
+[data-theme="light"] .dropdown-item:hover { color: #03ea04 !important; }
+[data-theme="light"] .theme-toggle-btn { border-color: rgba(0, 0, 0, 0.2); }

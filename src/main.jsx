@@ -1,4 +1,4 @@
-import { StrictMode, useState } from "react"; // 👈 useState import kiya
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {
   BrowserRouter,
@@ -30,34 +30,35 @@ import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx"; 
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
-import SettingsPage from "./components/Admin/Settings/SettingsPage.jsx"; // 👈 Settings Page import kiya
 
+// 👇 Naya Dashboard Page import kiya (Aapke ADMIN folder se)
+import DashboardPage from "./pages/ADMIN/DashboardPage.jsx"; 
 
 function AppLayout() {
   const location = useLocation();
   
-  // 👇 Sidebar State yahan rakhi
-  const [sidebarExpanded, setSidebarExpanded] = useState(false);
-
-  // 👇 Settings aur Auth pages par Navbar/Footer hide honge
+  // 👇 Yahan /dashboard add kar diya hai. 
+  // Iska matlab jab bhi URL /dashboard hoga, isAuthPage TRUE ho jayega.
   const isAuthPage = 
     location.pathname === "/login" || 
     location.pathname === "/signup" || 
-    location.pathname === "/settings"; 
+    location.pathname === "/dashboard"; 
 
   return (
     <>
       <ScrollToTop />
 
-      {/* Navbar tabhi dikhega jab Auth ya Settings page na ho */}
-      {!isAuthPage && (
-        <Navbar 
-          sidebarExpanded={sidebarExpanded} 
-          setSidebarExpanded={setSidebarExpanded} 
-        />
-      )}
+      {/* 👇 Main Navbar sirf tab dikhega jab Dashboard ya Login/Signup page na ho */}
+      {!isAuthPage && <Navbar />}
 
-     
+      <div 
+        className="main-content-layout" 
+        style={{ 
+          // Dashboard pe padding top 0 hogi kyunki wahan main Navbar nahi hai
+          paddingTop: isAuthPage ? "0" : "80px",
+          transition: "padding-top 0.3s ease"
+        }}
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -74,12 +75,12 @@ function AppLayout() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           
-          {/* 👇 Settings Page Route */}
-          <Route path="/settings" element={<SettingsPage />} />
+          {/* 👇 Naya Dashboard Route */}
+          <Route path="/dashboard" element={<DashboardPage />} />
         </Routes>
-     
+      </div>
 
-      {/* Footer tabhi dikhega jab Auth ya Settings page na ho */}
+      {/* 👇 Main Footer sirf tab dikhega jab Dashboard ya Login/Signup page na ho */}
       {!isAuthPage && <Footer />}
     </>
   );
