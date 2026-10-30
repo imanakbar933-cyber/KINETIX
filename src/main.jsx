@@ -26,8 +26,11 @@ import SchedulePage from "./pages/SchedulePage.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
 
-// 👇 Dashboard Page (Aapke ADMIN folder se)
+// 👇 Dashboard Page
 import DashboardPage from "./pages/ADMIN/DashboardPage.jsx"; 
+
+// 👇 Settings Page (Aapke components folder se)
+import SettingsPage from "./components/ADMIN/Settings/SettingsPage.jsx"; 
 
 function AppLayout() {
   const location = useLocation();
@@ -60,7 +63,9 @@ function AppLayout() {
         <Route path="/trainers" element={<DashboardPage />} />
         <Route path="/billing" element={<DashboardPage />} />
         <Route path="/reports" element={<DashboardPage />} />
-        <Route path="/settings" element={<DashboardPage />} />
+        
+        {/* 👇 Settings ke liye naya page */}
+        <Route path="/settings" element={<SettingsPage />} />
       </Routes>
     );
   }

@@ -44,7 +44,7 @@ const DashboardSidebar = ({ isOpen }) => {
           <BarChart2 size={20} /> Report
         </Link>
         <Link to="/settings" className="dash-menu-item">
-          <Settings size={20} /> Setting
+          <Settings size={20} /> Settings
         </Link>
       </div>
 

@@ -1,32 +1,32 @@
 /* =========================================================
-   DASHBOARD SIDEBAR (Kinetix Theme)
+   DASHBOARD SIDEBAR
 ========================================================= */
-
 .dash-sidebar {
-  width: 260px;
-  height: calc(100vh - 90px); /* 👈 Navbar ki height (90px) minus ki */
-  background: #0a0d0b; /* Dark Background */
+  width: 280px;
+  height: 100vh; 
+  background: #0a0d0b; 
   border-right: 1px solid rgba(3, 234, 4, 0.2);
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 90px; /* 👈 Navbar ke bilkul neeche */
-  left: -300px; /* Default hidden */
-  z-index: 999;
+  top: 0; 
+  left: -300px; 
+  z-index: 1000; 
   transition: left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.dash-sidebar.open {
-  left: 0;
-}
+.dash-sidebar.open { left: 0; }
 
-/* Sidebar Header (Logo) */
+/* 👇 Sidebar Header (Logo Bada kiya) */
 .dash-sidebar-header {
-  padding: 20px;
+  padding: 30px 20px; /* 👈 Padding barhai */
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: center; /* Center align kiya */
 }
-.sidebar-logo img {
-  height: 35px;
+.sidebar-logo img { 
+  height: 50px; /* 👈 Logo ki height barhai (35px se 50px) */
+  object-fit: contain;
 }
 
 /* Menu */
@@ -64,12 +64,8 @@
   border-left: 3px solid #03ea04;
 }
 
-.dash-menu-item svg {
-  transition: color 0.3s ease;
-}
-.dash-menu-item:hover svg {
-  color: #03ea04;
-}
+.dash-menu-item svg { transition: color 0.3s ease; }
+.dash-menu-item:hover svg { color: #03ea04; }
 
 /* Footer */
 .dash-sidebar-footer {

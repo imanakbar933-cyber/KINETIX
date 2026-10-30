@@ -1,144 +1,31 @@
 /* =========================================================
-   DASHBOARD LAYOUT & CONTENT (Neon Theme)
+   DASHBOARD LAYOUT
 ========================================================= */
-
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
-  background: #050706; /* Kinetix Black */
-  color: #ffffff;
+  background: #050706; 
+  color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
 }
 
-/* Main Content Area */
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
 .dashboard-content {
   flex: 1;
-  margin-top: 90px; /* Navbar Height */
+  margin-top: 90px; /* Navbar ki height */
   margin-left: 0;
   padding: 30px;
+  background: #050706;
+  min-height: calc(100vh - 90px);
   transition: margin-left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  overflow-x: hidden;
 }
 
-/* 👇 Sidebar khulne par shift */
+/* 👇 Jab sidebar open ho, toh content right shift ho */
 .dashboard-content.shifted {
   margin-left: 280px;
-}
-
-/* =========================================================
-   HEADER ROW
-========================================================= */
-.dash-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.dash-header-left { display: flex; align-items: center; gap: 15px; }
-.header-icon-box { 
-  background: rgba(3, 234, 4, 0.1); color: #03ea04; 
-  width: 50px; height: 50px; border-radius: 12px; 
-  display: flex; align-items: center; justify-content: center; 
-}
-.dash-header-left h1 { font-size: 24px; margin: 0; font-weight: 800; }
-.dash-header-left p { margin: 5px 0 0; font-size: 13px; color: #888; display: flex; align-items: center; gap: 5px; }
-.status-green { color: #03ea04; font-weight: 700; margin-left: 15px; display: flex; align-items: center; gap: 5px; }
-
-/* Filter Buttons */
-.dash-header-right { display: flex; align-items: center; gap: 15px; }
-.filter-btns { display: flex; background: #111; padding: 5px; border-radius: 10px; border: 1px solid #222; }
-.filter-btns button { background: transparent; border: none; color: #888; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; }
-.filter-btns button.active { background: #03ea04; color: #050706; }
-.btn-outline { background: transparent; border: 1px solid #333; color: #fff; padding: 10px 18px; border-radius: 10px; font-weight: 600; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.3s; }
-.btn-outline:hover { background: #111; }
-.btn-solid { background: #03ea04; border: none; color: #050706; padding: 10px 18px; border-radius: 10px; font-weight: 800; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.3s; box-shadow: 0 0 15px rgba(3, 234, 4, 0.3); }
-.btn-solid:hover { box-shadow: 0 0 25px rgba(3, 234, 4, 0.5); transform: translateY(-2px); }
-
-/* =========================================================
-   MAIN GRID
-========================================================= */
-.dash-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
-  gap: 24px;
-  margin-bottom: 24px;
-}
-
-.dash-grid-bottom {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-/* Base Card */
-.dash-card {
-  background: #0a0d0b;
-  border-radius: 16px;
-  padding: 24px;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.dash-card:hover {
-  border-color: rgba(3, 234, 4, 0.3);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.dash-card h3 { color: #888; font-size: 14px; font-weight: 600; margin: 0 0 10px 0; }
-.dash-card h2 { font-size: 34px; font-weight: 800; margin: 0 0 5px 0; color: #fff; }
-.card-header-flex { display: flex; justify-content: space-between; align-items: flex-start; }
-
-/* Flex inner elements */
-.card-flex { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
-
-/* Circle Progress */
-.circle-progress { 
-  width: 70px; height: 70px; border-radius: 50%; 
-  background: conic-gradient(#03ea04 78%, #1a1a1a 0); 
-  display: flex; align-items: center; justify-content: center; 
-  font-weight: 800; font-size: 16px; color: #03ea04; 
-  position: relative;
-}
-
-/* Card Stats */
-.card-stats { display: flex; gap: 30px; margin-top: 20px; z-index: 2; position: relative; }
-.card-stats span { color: #888; font-size: 13px; }
-.card-stats h4 { font-size: 22px; font-weight: 800; margin: 5px 0 0 0; }
-
-/* Revenue Card Elements */
-.icon-box-green { background: rgba(3, 234, 4, 0.1); color: #03ea04; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; }
-.revenue-text { font-size: 42px !important; letter-spacing: -1px; margin-top: 15px !important; }
-.badges-row { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-.green-badge { background: rgba(3, 234, 4, 0.15); color: #03ea04; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
-
-/* Progress Bar */
-.progress-bar { width: 100%; height: 8px; background: #1a1a1a; border-radius: 10px; margin-bottom: 15px; overflow: hidden; }
-.progress { height: 100%; background: #03ea04; border-radius: 10px; box-shadow: 0 0 10px rgba(3, 234, 4, 0.5); }
-
-/* Avatars */
-.avatar-group { display: flex; margin-bottom: 20px; margin-top: 15px; }
-.avatar { width: 40px; height: 40px; border-radius: 50%; background: #222; border: 2px solid #0a0d0b; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; color: #fff; margin-right: -12px; }
-
-/* Small Bottom Cards */
-.small-card { display: flex; align-items: center; gap: 15px; }
-.green-text { color: #03ea04; font-size: 13px; font-weight: 600; margin: 0; }
-.muted-text { color: #888; font-size: 13px; margin: 0; }
-
-/* Card Internal Backgrounds (Optional Images) */
-.card-img-bg {
-  position: absolute;
-  bottom: -20px; right: -20px;
-  width: 120px; height: 120px;
-  background: radial-gradient(circle, rgba(3, 234, 4, 0.1), transparent);
-  border-radius: 50%;
-  z-index: 1;
-}
-.card-img-bg-right {
-  position: absolute;
-  bottom: 0; right: 0;
-  width: 150px; height: 150px;
-  background: radial-gradient(circle, rgba(3, 234, 4, 0.1), transparent);
-  z-index: 1;
 }
