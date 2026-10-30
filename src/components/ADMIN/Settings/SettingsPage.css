@@ -1259,3 +1259,349 @@
     font-size: 12px;
   }
 }
+
+
+
+/* =====================================================
+   GLOBAL APPEARANCE ACCENT COLOR FIX
+   Add at the VERY END of SettingsPage.css
+===================================================== */
+
+.settings-layout {
+  --settings-accent: #03ea04;
+  --settings-accent-soft: color-mix(
+    in srgb,
+    var(--settings-accent) 10%,
+    transparent
+  );
+  --settings-accent-border: color-mix(
+    in srgb,
+    var(--settings-accent) 35%,
+    transparent
+  );
+  --settings-accent-glow: color-mix(
+    in srgb,
+    var(--settings-accent) 30%,
+    transparent
+  );
+}
+
+/* ==============================
+   SIDEBAR
+============================== */
+
+.settings-layout .dashboard-sidebar {
+  border-right-color: var(--settings-accent-border);
+}
+
+.settings-layout .dash-item:hover,
+.settings-layout .dash-item.active {
+  background: var(--settings-accent-soft);
+  color: var(--settings-accent);
+}
+
+.settings-layout .dash-footer img {
+  border-color: var(--settings-accent);
+}
+
+.settings-layout .user-text p {
+  color: var(--settings-accent);
+}
+
+/* ==============================
+   MAIN BUTTONS
+============================== */
+
+.settings-layout .btn-solid {
+  background: var(--settings-accent);
+  border-color: var(--settings-accent);
+  color: #050706;
+}
+
+.settings-layout .btn-solid:hover {
+  background: var(--settings-accent);
+  box-shadow: 0 0 15px var(--settings-accent-glow);
+  filter: brightness(1.08);
+}
+
+.settings-layout .btn-outline:hover {
+  border-color: var(--settings-accent);
+  color: var(--settings-accent);
+}
+
+/* ==============================
+   SETTINGS TABS
+============================== */
+
+.settings-layout .settings-tabs,
+.settings-layout .settings-content {
+  border-color: var(--settings-accent-border);
+}
+
+.settings-layout .tab-btn.active {
+  background: var(--settings-accent-soft);
+  color: var(--settings-accent);
+  border-left-color: var(--settings-accent);
+}
+
+.settings-layout .tab-btn:hover {
+  color: var(--settings-accent);
+}
+
+/* ==============================
+   CONTENT TITLE
+============================== */
+
+.settings-layout .content-title {
+  border-left-color: var(--settings-accent);
+}
+
+/* ==============================
+   PROFILE
+============================== */
+
+.settings-layout .avatar-circle {
+  background: linear-gradient(
+    135deg,
+    var(--settings-accent),
+    color-mix(in srgb, var(--settings-accent) 45%, #050706)
+  );
+  border-color: var(--settings-accent);
+  box-shadow: 0 0 12px var(--settings-accent-glow);
+}
+
+/* ==============================
+   FORM INPUTS
+============================== */
+
+.settings-layout .form-group input:focus,
+.settings-layout .form-group textarea:focus,
+.settings-layout .form-group select:focus {
+  border-color: var(--settings-accent);
+  box-shadow: 0 0 0 3px var(--settings-accent-soft);
+}
+
+/* ==============================
+   FEEDBACK / ALERTS
+============================== */
+
+.settings-layout .settings-feedback,
+.settings-layout .billing-alert {
+  border-color: var(--settings-accent-border);
+  background: var(--settings-accent-soft);
+}
+
+.settings-layout .settings-feedback svg,
+.settings-layout .billing-alert > svg {
+  color: var(--settings-accent);
+}
+
+.settings-layout .billing-alert {
+  color: var(--settings-accent);
+}
+
+/* ==============================
+   BILLING
+============================== */
+
+.settings-layout .billing-eyebrow,
+.settings-layout .billing-price strong,
+.settings-layout .billing-crown,
+.settings-layout .billing-icon,
+.settings-layout .billing-card-icon {
+  color: var(--settings-accent);
+}
+
+.settings-layout .billing-plan-card {
+  border-color: var(--settings-accent-border);
+  background:
+    radial-gradient(
+      circle at 95% 5%,
+      var(--settings-accent-soft),
+      transparent 42%
+    ),
+    linear-gradient(125deg, #121a12, #0b0e0c 75%);
+}
+
+.settings-layout .billing-plan-card::before {
+  background: var(--settings-accent);
+  box-shadow: 0 0 12px var(--settings-accent);
+}
+
+.settings-layout .billing-badge,
+.settings-layout .billing-status {
+  color: var(--settings-accent);
+  border-color: var(--settings-accent-border);
+  background: var(--settings-accent-soft);
+}
+
+.settings-layout .billing-badge span,
+.settings-layout .billing-live span,
+.settings-layout .billing-default span {
+  background: var(--settings-accent);
+  box-shadow: 0 0 8px var(--settings-accent);
+}
+
+.settings-layout .billing-live,
+.settings-layout .billing-default {
+  border-color: var(--settings-accent-border);
+}
+
+.settings-layout .billing-cycle-switch button.active {
+  color: var(--settings-accent);
+  border-color: var(--settings-accent-border);
+  background: var(--settings-accent-soft);
+}
+
+.settings-layout .billing-cycle-switch button span {
+  color: var(--settings-accent);
+  background: var(--settings-accent-soft);
+}
+
+.settings-layout .billing-update-btn:hover {
+  color: var(--settings-accent);
+  border-color: var(--settings-accent);
+}
+
+.settings-layout .billing-icon,
+.settings-layout .billing-card-icon {
+  border-color: var(--settings-accent-border);
+  background: var(--settings-accent-soft);
+}
+
+.settings-layout .billing-choice.selected,
+.settings-layout .billing-choice:hover {
+  border-color: var(--settings-accent);
+  background: var(--settings-accent-soft);
+}
+
+.settings-layout .billing-choice-top span,
+.settings-layout .billing-choice > strong {
+  color: var(--settings-accent);
+}
+
+.settings-layout .billing-modal {
+  border-color: var(--settings-accent-border);
+}
+
+.settings-layout .billing-demo-note {
+  border-color: var(--settings-accent-border);
+  background: var(--settings-accent-soft);
+}
+
+/* ==============================
+   APPEARANCE
+============================== */
+
+.settings-layout .appearance-theme-card:hover,
+.settings-layout .appearance-theme-card.selected {
+  border-color: var(--settings-accent);
+  box-shadow: 0 0 14px var(--settings-accent-soft);
+}
+
+.settings-layout .appearance-choice-label > svg,
+.settings-layout .appearance-color-option > svg {
+  color: var(--settings-accent);
+}
+
+.settings-layout .appearance-color-option.selected {
+  border-color: var(--settings-accent);
+  background: var(--settings-accent-soft);
+}
+
+.settings-layout .appearance-preference-icon {
+  color: var(--settings-accent);
+  border-color: var(--settings-accent-border);
+  background: var(--settings-accent-soft);
+}
+
+.settings-layout .appearance-toggle.on {
+  border-color: var(--settings-accent);
+  background: var(--settings-accent-soft);
+}
+
+.settings-layout .appearance-toggle.on span {
+  background: var(--settings-accent);
+  box-shadow: 0 0 8px var(--settings-accent-glow);
+}
+
+.settings-layout .appearance-note svg {
+  color: var(--settings-accent);
+}
+
+/* ==============================
+   LIGHT THEME ACCENT FIX
+============================== */
+
+.settings-layout.settings-light-mode .tab-btn.active,
+.settings-layout.settings-light-mode .dash-item.active,
+.settings-layout.settings-light-mode .dash-item:hover {
+  color: var(--settings-accent) !important;
+  background: var(--settings-accent-soft) !important;
+}
+
+.settings-layout.settings-light-mode .tab-btn.active {
+  border-left-color: var(--settings-accent) !important;
+}
+
+.settings-layout.settings-light-mode .content-title {
+  border-left-color: var(--settings-accent) !important;
+}
+
+.settings-layout.settings-light-mode .btn-solid {
+  color: color-mix(in srgb, var(--settings-accent) 75%, #000000) !important;
+  background: var(--settings-accent-soft) !important;
+  border-color: var(--settings-accent-border) !important;
+}
+
+.settings-layout.settings-light-mode .billing-price strong,
+.settings-layout.settings-light-mode .billing-eyebrow,
+.settings-layout.settings-light-mode .billing-choice > strong,
+.settings-layout.settings-light-mode .billing-choice-top span {
+  color: var(--settings-accent) !important;
+}
+
+.settings-layout.settings-light-mode .billing-status,
+.settings-layout.settings-light-mode .billing-badge,
+.settings-layout.settings-light-mode .billing-cycle-switch button.active {
+  color: var(--settings-accent) !important;
+  border-color: var(--settings-accent-border) !important;
+  background: var(--settings-accent-soft) !important;
+}
+
+.settings-layout.settings-light-mode .appearance-theme-card.selected,
+.settings-layout.settings-light-mode .appearance-color-option.selected {
+  border-color: var(--settings-accent) !important;
+  background: var(--settings-accent-soft) !important;
+}
+
+.settings-layout.settings-light-mode .appearance-toggle.on {
+  background: var(--settings-accent-soft) !important;
+  border-color: var(--settings-accent) !important;
+}
+
+.settings-layout.settings-light-mode .appearance-toggle.on span {
+  background: var(--settings-accent) !important;
+}
+
+/* ==============================
+   GLOBAL TRANSITIONS
+============================== */
+
+.settings-layout .dash-item,
+.settings-layout .tab-btn,
+.settings-layout button,
+.settings-layout .billing-box,
+.settings-layout .billing-plan-card,
+.settings-layout .appearance-theme-card,
+.settings-layout .appearance-color-option,
+.settings-layout .appearance-toggle,
+.settings-layout input,
+.settings-layout textarea,
+.settings-layout select {
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
