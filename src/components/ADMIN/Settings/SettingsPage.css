@@ -661,3 +661,278 @@
     font-size: 29px;
   }
 }
+
+
+
+/* =====================================
+   LIGHT THEME - COMPLETE SETTINGS PAGE
+===================================== */
+
+.settings-layout.settings-light-mode {
+  background: #f4f6f8 !important;
+  color: #20252d !important;
+
+  --settings-surface: #ffffff;
+  --settings-text: #20252d;
+  --settings-muted: #697386;
+  --settings-border: #e1e5eb;
+  --settings-input: #f8fafc;
+}
+
+/* Main content */
+.settings-light-mode .settings-main {
+  background: #f4f6f8 !important;
+  color: #20252d !important;
+}
+
+/* Sidebar */
+.settings-light-mode .dashboard-sidebar {
+  background: #ffffff !important;
+  border-right: 1px solid #e1e5eb;
+  color: #20252d !important;
+}
+
+.settings-light-mode .dash-item {
+  color: #505968 !important;
+}
+
+.settings-light-mode .dash-item:hover,
+.settings-light-mode .dash-item.active {
+  background: #eaf8ed !important;
+  color: #168b37 !important;
+}
+
+.settings-light-mode .dash-section-title,
+.settings-light-mode .user-text p {
+  color: #7b8492 !important;
+}
+
+.settings-light-mode .user-text h4 {
+  color: #20252d !important;
+}
+
+/* Header */
+.settings-light-mode .settings-header h1,
+.settings-light-mode .settings-header p,
+.settings-light-mode .content-title {
+  color: #20252d !important;
+}
+
+/* Tabs */
+.settings-light-mode .settings-tabs {
+  background: #ffffff !important;
+  border-color: #e1e5eb !important;
+}
+
+.settings-light-mode .tab-btn {
+  background: #f5f7f9 !important;
+  color: #505968 !important;
+  border-color: #e1e5eb !important;
+}
+
+.settings-light-mode .tab-btn:hover {
+  background: #eaf8ed !important;
+  color: #168b37 !important;
+}
+
+.settings-light-mode .tab-btn.active {
+  background: #e5f7e9 !important;
+  color: #168b37 !important;
+  border-color: #b8e8c4 !important;
+}
+
+/* All cards and panels */
+.settings-light-mode .billing-plan-card,
+.settings-light-mode .billing-box,
+.settings-light-mode .appearance-section,
+.settings-light-mode .appearance-theme-card,
+.settings-light-mode .appearance-preference,
+.settings-light-mode .profile-top,
+.settings-light-mode .settings-form,
+.settings-light-mode .settings-placeholder,
+.settings-light-mode .notifications-tab-wrapper,
+.settings-light-mode .security-tab-wrapper {
+  background: #ffffff !important;
+  color: #20252d !important;
+  border-color: #e1e5eb !important;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.035);
+}
+
+/* Headings and paragraphs */
+.settings-light-mode h2,
+.settings-light-mode h3,
+.settings-light-mode h4,
+.settings-light-mode label {
+  color: #20252d !important;
+}
+
+.settings-light-mode p,
+.settings-light-mode .billing-subtitle,
+.settings-light-mode .appearance-preference-copy p,
+.settings-light-mode .billing-section-heading p {
+  color: #697386 !important;
+}
+
+/* Inputs */
+.settings-light-mode input,
+.settings-light-mode textarea,
+.settings-light-mode select {
+  background: #f8fafc !important;
+  color: #20252d !important;
+  border: 1px solid #dce2e9 !important;
+}
+
+.settings-light-mode input::placeholder,
+.settings-light-mode textarea::placeholder {
+  color: #929baa !important;
+}
+
+/* Buttons - Dark to Light */
+.settings-light-mode .btn-outline,
+.settings-light-mode .billing-update-btn,
+.settings-light-mode .billing-cycle-switch button,
+.settings-light-mode .billing-modal-actions .btn-outline {
+  background: #ffffff !important;
+  color: #27313d !important;
+  border: 1px solid #dce2e9 !important;
+}
+
+.settings-light-mode .btn-outline:hover,
+.settings-light-mode .billing-update-btn:hover,
+.settings-light-mode .billing-cycle-switch button:hover {
+  background: #eaf8ed !important;
+  color: #168b37 !important;
+  border-color: #b8e8c4 !important;
+}
+
+/* Main action buttons */
+.settings-light-mode .btn-solid {
+  background: #e5f7e9 !important;
+  color: #168b37 !important;
+  border: 1px solid #b8e8c4 !important;
+}
+
+.settings-light-mode .btn-solid:hover {
+  background: #d1f0d9 !important;
+  color: #106b2a !important;
+}
+
+/* Appearance theme cards */
+.settings-light-mode .appearance-theme-card {
+  background: #ffffff !important;
+  color: #20252d !important;
+  border: 1px solid #e1e5eb !important;
+}
+
+.settings-light-mode .appearance-theme-card.selected {
+  background: #f0faf2 !important;
+  border: 1px solid #25a34a !important;
+}
+
+.settings-light-mode .appearance-choice-label,
+.settings-light-mode .appearance-choice-label span {
+  color: #20252d !important;
+}
+
+/* Color options */
+.settings-light-mode .appearance-color-option {
+  background: #ffffff !important;
+  color: #20252d !important;
+  border-color: #e1e5eb !important;
+}
+
+.settings-light-mode .appearance-color-option.selected {
+  background: #eaf8ed !important;
+  border-color: #25a34a !important;
+  color: #168b37 !important;
+}
+
+/* Toggle switches */
+.settings-light-mode .appearance-toggle {
+  background: #dce2e9 !important;
+  border: 1px solid #cbd2dc !important;
+}
+
+.settings-light-mode .appearance-toggle span {
+  background: #ffffff !important;
+  border: 1px solid #cbd2dc !important;
+}
+
+.settings-light-mode .appearance-toggle.on {
+  background: #bce8c8 !important;
+  border-color: #72c98a !important;
+}
+
+.settings-light-mode .appearance-toggle.on span {
+  background: #ffffff !important;
+  border-color: #72c98a !important;
+}
+
+/* Billing cycle selected button */
+.settings-light-mode .billing-cycle-switch button.active {
+  background: #e5f7e9 !important;
+  color: #168b37 !important;
+  border-color: #b8e8c4 !important;
+}
+
+/* Billing table */
+.settings-light-mode .billing-table th {
+  background: #f1f4f7 !important;
+  color: #697386 !important;
+}
+
+.settings-light-mode .billing-table td {
+  color: #303945 !important;
+  border-color: #e1e5eb !important;
+}
+
+/* Modals */
+.settings-light-mode .billing-modal {
+  background: #ffffff !important;
+  color: #20252d !important;
+  border: 1px solid #e1e5eb !important;
+}
+
+.settings-light-mode .billing-choice {
+  background: #f8fafc !important;
+  color: #20252d !important;
+  border-color: #dce2e9 !important;
+}
+
+.settings-light-mode .billing-choice.selected {
+  background: #eaf8ed !important;
+  border-color: #25a34a !important;
+}
+
+.settings-light-mode .billing-choice strong,
+.settings-light-mode .billing-choice-top {
+  color: #20252d !important;
+}
+
+/* Danger button remains red */
+.settings-light-mode .billing-danger-btn {
+  background: #fff0f0 !important;
+  color: #dc3545 !important;
+  border: 1px solid #f2c4c4 !important;
+}
+
+/* Feedback */
+.settings-light-mode .settings-feedback,
+.settings-light-mode .billing-alert {
+  background: #eaf8ed !important;
+  color: #168b37 !important;
+  border-color: #b8e8c4 !important;
+}
+
+/* Appearance note */
+.settings-light-mode .appearance-note {
+  color: #697386 !important;
+}
+
+/* Compact and animation settings remain functional */
+.settings-light-mode.settings-no-animations *,
+.settings-light-mode.settings-no-animations *::before,
+.settings-light-mode.settings-no-animations *::after {
+  transition: none !important;
+  animation: none !important;
+}
