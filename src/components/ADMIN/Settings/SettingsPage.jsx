@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -7,6 +8,7 @@ import {
   Check, Download, RotateCcw, Crown, Pencil, X,
   Monitor, Moon, Sun, CheckCircle2, AlertCircle, Trash2
 } from "lucide-react";
+
 import "./SettingsPage.css";
 import NotificationPreferences from "../NotificationPreferences";
 import SecuritySettings from "../SecuritySettings";
@@ -30,6 +32,13 @@ const defaultAppearance = {
   animations: true,
 };
 
+const accentColors = [
+  { name: "Neon Green", value: "#03ea04" },
+  { name: "Electric Cyan", value: "#00e5ff" },
+  { name: "Neon Purple", value: "#b14cff" },
+  { name: "Energy Yellow", value: "#e8c323" },
+];
+
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState("Business");
   const [gymName, setGymName] = useState("Dreams GYM");
@@ -38,12 +47,14 @@ const SettingsPage = () => {
   // Billing state
   const [currentPlan, setCurrentPlan] = useState("Enterprise");
   const [billingCycle, setBillingCycle] = useState("monthly");
+
   const [paymentMethod, setPaymentMethod] = useState({
     name: "Nathan Reeves",
     cardNumber: "4821",
     expiry: "09/28",
     brand: "Visa",
   });
+
   const [invoices] = useState(initialInvoices);
   const [modal, setModal] = useState("");
   const [selectedPlan, setSelectedPlan] = useState("Professional");
@@ -52,32 +63,34 @@ const SettingsPage = () => {
   const [billingMessage, setBillingMessage] = useState("");
 
   // Appearance state
-  const [appearance, setAppearance] = useState({ ...defaultAppearance });
+  const [appearance, setAppearance] = useState({
+    ...defaultAppearance,
+  });
 
-  // Last saved appearance is used to detect unsaved changes
   const [savedAppearance, setSavedAppearance] = useState({
     ...defaultAppearance,
   });
 
   const [appearanceMessage, setAppearanceMessage] = useState("");
-
-  // Stores the tab the user wants to open after confirmation
   const [pendingTab, setPendingTab] = useState(null);
 
   const hasUnsavedAppearance =
     JSON.stringify(appearance) !== JSON.stringify(savedAppearance);
 
-  // General save function
+  // General save
   const handleSave = () => {
     setSaveStatus("saving");
 
     window.setTimeout(() => {
       setSaveStatus("saved");
-      window.setTimeout(() => setSaveStatus("idle"), 2500);
+
+      window.setTimeout(() => {
+        setSaveStatus("idle");
+      }, 2500);
     }, 500);
   };
 
-  // Header save button
+  // Header save
   const handleHeaderSave = () => {
     if (activeTab === "Appearance") {
       saveAppearance();
@@ -87,7 +100,7 @@ const SettingsPage = () => {
     handleSave();
   };
 
-  // Reset settings
+  // Reset all settings
   const handleReset = () => {
     setGymName("Dreams GYM");
     setAppearance({ ...defaultAppearance });
@@ -139,9 +152,11 @@ const SettingsPage = () => {
   const confirmPlanChange = () => {
     setCurrentPlan(selectedPlan);
     setCancelled(false);
+
     setBillingMessage(
       `Demo plan updated to ${selectedPlan}. No payment has been taken.`
     );
+
     setModal("");
   };
 
@@ -172,18 +187,21 @@ const SettingsPage = () => {
     setBillingMessage(
       "Payment method updated in this demo only. No real card was charged."
     );
+
     setModal("");
   };
 
   const confirmCancelPlan = () => {
     setCancelled(true);
+
     setBillingMessage(
       "Your demo subscription is marked as cancelled. No real subscription was changed."
     );
+
     setModal("");
   };
 
-  // Update appearance preview
+  // Update appearance
   const changeAppearance = (key, value) => {
     setAppearance((current) => ({
       ...current,
@@ -193,10 +211,26 @@ const SettingsPage = () => {
     setAppearanceMessage("");
   };
 
-  // Save current appearance
+  // Custom color handler
+  const handleCustomColor = (event) => {
+    const selectedColor = event.target.value;
+
+    changeAppearance("accent", selectedColor);
+  };
+
+  // Save appearance
   const saveAppearance = () => {
     setSavedAppearance({ ...appearance });
     setAppearanceMessage("Appearance preferences saved successfully.");
+  };
+
+  // Restore appearance defaults
+  const restoreAppearance = () => {
+    setAppearance({ ...defaultAppearance });
+
+    setAppearanceMessage(
+      "Default neon-green appearance restored."
+    );
   };
 
   // Request tab change
@@ -212,10 +246,13 @@ const SettingsPage = () => {
     setActiveTab(nextTab);
   };
 
-  // Save changes and open requested tab
+  // Save and open requested tab
   const saveAndOpenTab = () => {
     setSavedAppearance({ ...appearance });
-    setAppearanceMessage("Appearance preferences saved successfully.");
+
+    setAppearanceMessage(
+      "Appearance preferences saved successfully."
+    );
 
     if (pendingTab) {
       setActiveTab(pendingTab);
@@ -225,7 +262,7 @@ const SettingsPage = () => {
     setModal("");
   };
 
-  // Discard changes and open requested tab
+  // Discard and open requested tab
   const discardAndOpenTab = () => {
     setAppearance({ ...savedAppearance });
     setAppearanceMessage("");
@@ -238,7 +275,6 @@ const SettingsPage = () => {
     setModal("");
   };
 
-  // Stay on Appearance tab
   const cancelTabChange = () => {
     setPendingTab(null);
     setModal("");
@@ -258,7 +294,9 @@ const SettingsPage = () => {
       } ${appearance.compact ? "settings-compact-mode" : ""} ${
         appearance.animations ? "" : "settings-no-animations"
       }`}
-      style={{ "--settings-accent": appearance.accent }}
+      style={{
+        "--settings-accent": appearance.accent,
+      }}
     >
       <aside className="dashboard-sidebar">
         <div className="dash-logo">
@@ -311,6 +349,7 @@ const SettingsPage = () => {
 
         <div className="dash-footer">
           <img src="/images/user.jpg" alt="User avatar" />
+
           <div className="user-text">
             <h4>Nathan Reeves</h4>
             <p>Super Admin</p>
@@ -336,6 +375,7 @@ const SettingsPage = () => {
 
             <button className="btn-solid" onClick={handleHeaderSave}>
               <Check size={16} />
+
               {activeTab === "Appearance"
                 ? "Save Appearance"
                 : saveStatus === "saving"
@@ -356,59 +396,25 @@ const SettingsPage = () => {
 
         <div className="settings-grid">
           <nav className="settings-tabs" aria-label="Settings sections">
-            <button
-              className={`tab-btn ${
-                activeTab === "Profile" ? "active" : ""
-              }`}
-              onClick={() => requestTabChange("Profile")}
-            >
-              <User size={18} /> Profile
-            </button>
-
-            <button
-              className={`tab-btn ${
-                activeTab === "Business" ? "active" : ""
-              }`}
-              onClick={() => requestTabChange("Business")}
-            >
-              <Briefcase size={18} /> Business
-            </button>
-
-            <button
-              className={`tab-btn ${
-                activeTab === "Notifications" ? "active" : ""
-              }`}
-              onClick={() => requestTabChange("Notifications")}
-            >
-              <Bell size={18} /> Notifications
-            </button>
-
-            <button
-              className={`tab-btn ${
-                activeTab === "Security" ? "active" : ""
-              }`}
-              onClick={() => requestTabChange("Security")}
-            >
-              <Shield size={18} /> Security
-            </button>
-
-            <button
-              className={`tab-btn ${
-                activeTab === "Billing" ? "active" : ""
-              }`}
-              onClick={() => requestTabChange("Billing")}
-            >
-              <CreditCard size={18} /> Billing
-            </button>
-
-            <button
-              className={`tab-btn ${
-                activeTab === "Appearance" ? "active" : ""
-              }`}
-              onClick={() => requestTabChange("Appearance")}
-            >
-              <Palette size={18} /> Appearance
-            </button>
+            {[
+              { name: "Profile", icon: User },
+              { name: "Business", icon: Briefcase },
+              { name: "Notifications", icon: Bell },
+              { name: "Security", icon: Shield },
+              { name: "Billing", icon: CreditCard },
+              { name: "Appearance", icon: Palette },
+            ].map(({ name, icon: Icon }) => (
+              <button
+                key={name}
+                className={`tab-btn ${
+                  activeTab === name ? "active" : ""
+                }`}
+                onClick={() => requestTabChange(name)}
+              >
+                <Icon size={18} />
+                {name}
+              </button>
+            ))}
           </nav>
 
           <section className="settings-content">
@@ -427,9 +433,7 @@ const SettingsPage = () => {
                       className="btn-outline"
                       type="button"
                       onClick={() =>
-                        alert(
-                          "Connect profile photo upload to your backend."
-                        )
+                        alert("Connect profile photo upload to your backend.")
                       }
                     >
                       ↑ Change Photo
@@ -452,29 +456,20 @@ const SettingsPage = () => {
 
                     <div className="form-group">
                       <label>Email</label>
-                      <input
-                        type="email"
-                        defaultValue="nathan@example.com"
-                      />
+                      <input type="email" defaultValue="nathan@example.com" />
                     </div>
                   </div>
 
                   <div className="form-row">
                     <div className="form-group">
                       <label>Phone</label>
-                      <input
-                        type="text"
-                        defaultValue="(512) 555-0118"
-                      />
+                      <input type="text" defaultValue="(512) 555-0118" />
                     </div>
 
                     <div className="form-group">
                       <label>Role</label>
-                      <input
-                        type="text"
-                        defaultValue="Super Admin"
-                        readOnly
-                      />
+                      <input type="text" defaultValue="Super Admin" readOnly />
+
                       <span className="helper-text">
                         Roles are managed by your organisation owner.
                       </span>
@@ -522,28 +517,19 @@ const SettingsPage = () => {
 
                     <div className="form-group">
                       <label>Tax ID (EIN)</label>
-                      <input
-                        type="text"
-                        defaultValue="47-1234567"
-                      />
+                      <input type="text" defaultValue="47-1234567" />
                     </div>
                   </div>
 
                   <div className="form-row">
                     <div className="form-group">
                       <label>Contact Email</label>
-                      <input
-                        type="email"
-                        defaultValue="hello@example.com"
-                      />
+                      <input type="email" defaultValue="hello@example.com" />
                     </div>
 
                     <div className="form-group">
                       <label>Support Phone</label>
-                      <input
-                        type="text"
-                        defaultValue="1-800-555-0199"
-                      />
+                      <input type="text" defaultValue="1-800-555-0199" />
                     </div>
                   </div>
 
@@ -587,12 +573,10 @@ const SettingsPage = () => {
 
             {activeTab === "Notifications" && (
               <div className="notifications-tab-wrapper">
-                <h2
-                  className="content-title"
-                  style={{ marginBottom: "20px" }}
-                >
+                <h2 className="content-title" style={{ marginBottom: "20px" }}>
                   Notifications
                 </h2>
+
                 <NotificationPreferences />
               </div>
             )}
@@ -617,7 +601,9 @@ const SettingsPage = () => {
                     <span className="billing-eyebrow">
                       ACCOUNT &amp; SUBSCRIPTION
                     </span>
+
                     <h2 className="content-title">Billing &amp; Plans</h2>
+
                     <p className="billing-subtitle">
                       Manage your subscription, payment method and invoices.
                     </p>
@@ -632,6 +618,7 @@ const SettingsPage = () => {
                   <div className="billing-alert" role="status">
                     <CheckCircle2 size={17} />
                     <p>{billingMessage}</p>
+
                     <button
                       type="button"
                       aria-label="Dismiss message"
@@ -648,6 +635,7 @@ const SettingsPage = () => {
                       <span />
                       {cancelled ? "CANCELLED (DEMO)" : "CURRENT PLAN"}
                     </span>
+
                     <Crown className="billing-crown" size={23} />
                   </div>
 
@@ -657,6 +645,7 @@ const SettingsPage = () => {
                     <strong>
                       PKR {displayedPrice.toLocaleString("en-PK")}
                     </strong>
+
                     <span>
                       /{billingCycle === "yearly" ? "year" : "month"}
                     </span>
@@ -677,6 +666,7 @@ const SettingsPage = () => {
                         ? "Subscription cancellation requested"
                         : "Next billing date: Nov 01, 2026"}
                     </span>
+
                     <span>Demo subscription · PKR</span>
                   </div>
 
@@ -711,9 +701,7 @@ const SettingsPage = () => {
                   <div className="billing-section-heading">
                     <div>
                       <h3>Billing Cycle</h3>
-                      <p>
-                        Choose how often your subscription is billed.
-                      </p>
+                      <p>Choose how often your subscription is billed.</p>
                     </div>
                   </div>
 
@@ -729,6 +717,7 @@ const SettingsPage = () => {
                             ? "Monthly billing"
                             : "Yearly billing"}
                         </h4>
+
                         <p>
                           {billingCycle === "yearly"
                             ? "Pay for 10 months and get 2 months free."
@@ -744,9 +733,7 @@ const SettingsPage = () => {
                     >
                       <button
                         type="button"
-                        className={
-                          billingCycle === "monthly" ? "active" : ""
-                        }
+                        className={billingCycle === "monthly" ? "active" : ""}
                         onClick={() => setBillingCycle("monthly")}
                       >
                         Monthly
@@ -754,9 +741,7 @@ const SettingsPage = () => {
 
                       <button
                         type="button"
-                        className={
-                          billingCycle === "yearly" ? "active" : ""
-                        }
+                        className={billingCycle === "yearly" ? "active" : ""}
                         onClick={() => setBillingCycle("yearly")}
                       >
                         Yearly <span>Save 17%</span>
@@ -769,9 +754,7 @@ const SettingsPage = () => {
                   <div className="billing-section-heading">
                     <div>
                       <h3>Payment Method</h3>
-                      <p>
-                        Update the card used for subscription payments.
-                      </p>
+                      <p>Update the card used for subscription payments.</p>
                     </div>
 
                     <button
@@ -782,6 +765,7 @@ const SettingsPage = () => {
                           ...paymentMethod,
                           cardNumber: "",
                         });
+
                         setModal("payment");
                       }}
                     >
@@ -799,9 +783,11 @@ const SettingsPage = () => {
                         {paymentMethod.brand} ending in ••••{" "}
                         {paymentMethod.cardNumber}
                       </h4>
+
                       <p>
                         {paymentMethod.name} · Expires {paymentMethod.expiry}
                       </p>
+
                       <span className="billing-default">
                         <span /> Default payment method
                       </span>
@@ -817,9 +803,7 @@ const SettingsPage = () => {
                   <div className="billing-section-heading">
                     <div>
                       <h3>Invoice History</h3>
-                      <p>
-                        Download a CSV record of your recent invoices.
-                      </p>
+                      <p>Download a CSV record of your recent invoices.</p>
                     </div>
 
                     <button
@@ -850,10 +834,11 @@ const SettingsPage = () => {
                               <td>{invoice.id}</td>
                               <td>{invoice.date}</td>
                               <td>{invoice.description}</td>
+
                               <td className="billing-amount">
-                                PKR{" "}
-                                {invoice.amount.toLocaleString("en-PK")}
+                                PKR {invoice.amount.toLocaleString("en-PK")}
                               </td>
+
                               <td>
                                 <span
                                   className={`billing-status ${invoice.status.toLowerCase()}`}
@@ -881,6 +866,7 @@ const SettingsPage = () => {
                         ? "Subscription cancellation requested"
                         : "Cancel subscription"}
                     </h4>
+
                     <p>
                       {cancelled
                         ? "You can select a plan above to restart this demo subscription."
@@ -921,13 +907,12 @@ const SettingsPage = () => {
                   </div>
                 )}
 
+                {/* Display Theme */}
                 <div className="appearance-section">
                   <div className="billing-section-heading">
                     <div>
                       <h3>Display Theme</h3>
-                      <p>
-                        Choose your preferred dashboard appearance.
-                      </p>
+                      <p>Choose your preferred dashboard appearance.</p>
                     </div>
                   </div>
 
@@ -948,6 +933,7 @@ const SettingsPage = () => {
                       <div className="appearance-choice-label">
                         <Moon size={16} />
                         <span>Dark Neon</span>
+
                         {appearance.theme === "dark" && (
                           <CheckCircle2 size={16} />
                         )}
@@ -972,6 +958,7 @@ const SettingsPage = () => {
                       <div className="appearance-choice-label">
                         <Sun size={16} />
                         <span>Light</span>
+
                         {appearance.theme === "light" && (
                           <CheckCircle2 size={16} />
                         )}
@@ -982,29 +969,25 @@ const SettingsPage = () => {
                   </div>
                 </div>
 
+                {/* Accent Color */}
                 <div className="appearance-section">
                   <div className="billing-section-heading">
                     <div>
                       <h3>Accent Color</h3>
                       <p>
-                        Select the glow color used for highlights and active
-                        states.
+                        Select a preset color or choose your own custom color.
                       </p>
                     </div>
                   </div>
 
                   <div className="appearance-colors">
-                    {[
-                      { name: "Neon Green", value: "#03ea04" },
-                      { name: "Electric Cyan", value: "#00e5ff" },
-                      { name: "Neon Purple", value: "#b14cff" },
-                      { name: "Energy Yellow", value: "#e8c323" },
-                    ].map((color) => (
+                    {accentColors.map((color) => (
                       <button
                         key={color.value}
                         type="button"
                         className={`appearance-color-option ${
-                          appearance.accent === color.value
+                          appearance.accent.toLowerCase() ===
+                          color.value.toLowerCase()
                             ? "selected"
                             : ""
                         }`}
@@ -1012,30 +995,82 @@ const SettingsPage = () => {
                           changeAppearance("accent", color.value)
                         }
                         aria-pressed={
-                          appearance.accent === color.value
+                          appearance.accent.toLowerCase() ===
+                          color.value.toLowerCase()
                         }
                       >
                         <span
                           className="appearance-color-swatch"
-                          style={{ "--swatch-color": color.value }}
+                          style={{
+                            "--swatch-color": color.value,
+                          }}
                         />
+
                         <span>{color.name}</span>
 
-                        {appearance.accent === color.value && (
+                        {appearance.accent.toLowerCase() ===
+                          color.value.toLowerCase() && (
                           <Check size={15} />
                         )}
                       </button>
                     ))}
+
+                    {/* Custom Color Picker */}
+                    <label
+                      className={`appearance-color-option appearance-custom-color ${
+                        !accentColors.some(
+                          (color) =>
+                            color.value.toLowerCase() ===
+                            appearance.accent.toLowerCase()
+                        )
+                          ? "selected"
+                          : ""
+                      }`}
+                    >
+                      <input
+                        type="color"
+                        value={appearance.accent}
+                        onChange={handleCustomColor}
+                        aria-label="Choose custom accent color"
+                      />
+
+                      <span
+                        className="appearance-color-swatch"
+                        style={{
+                          "--swatch-color": appearance.accent,
+                        }}
+                      />
+
+                      <span>Custom Color</span>
+
+                      {!accentColors.some(
+                        (color) =>
+                          color.value.toLowerCase() ===
+                          appearance.accent.toLowerCase()
+                      ) && <Check size={15} />}
+                    </label>
+                  </div>
+
+                  <div className="custom-color-preview">
+                    <span
+                      className="custom-color-preview-dot"
+                      style={{
+                        backgroundColor: appearance.accent,
+                      }}
+                    />
+
+                    <span>Selected color:</span>
+
+                    <strong>{appearance.accent.toUpperCase()}</strong>
                   </div>
                 </div>
 
+                {/* Interface Preferences */}
                 <div className="appearance-section">
                   <div className="billing-section-heading">
                     <div>
                       <h3>Interface Preferences</h3>
-                      <p>
-                        Make the dashboard more comfortable to use.
-                      </p>
+                      <p>Make the dashboard more comfortable to use.</p>
                     </div>
                   </div>
 
@@ -1061,10 +1096,7 @@ const SettingsPage = () => {
                           appearance.compact ? "on" : ""
                         }`}
                         onClick={() =>
-                          changeAppearance(
-                            "compact",
-                            !appearance.compact
-                          )
+                          changeAppearance("compact", !appearance.compact)
                         }
                       >
                         <span />
@@ -1103,16 +1135,12 @@ const SettingsPage = () => {
                   </div>
                 </div>
 
+                {/* Appearance Actions */}
                 <div className="appearance-actions">
                   <button
                     type="button"
                     className="btn-outline"
-                    onClick={() => {
-                      setAppearance({ ...defaultAppearance });
-                      setAppearanceMessage(
-                        "Default neon-green appearance restored."
-                      );
-                    }}
+                    onClick={restoreAppearance}
                   >
                     <RotateCcw size={15} /> Restore Defaults
                   </button>
@@ -1128,8 +1156,8 @@ const SettingsPage = () => {
 
                 <p className="appearance-note">
                   <AlertCircle size={14} />
-                  These appearance choices are currently held in React
-                  state and reset when the page reloads.
+                  These appearance choices are currently held in React state
+                  and reset when the page reloads.
                 </p>
               </div>
             )}
@@ -1410,7 +1438,7 @@ const SettingsPage = () => {
         </div>
       )}
 
-      {/* Unsaved Appearance Changes Confirmation */}
+      {/* Unsaved Appearance Confirmation */}
       {modal === "appearance-confirm" && (
         <div
           className="billing-modal-backdrop"
