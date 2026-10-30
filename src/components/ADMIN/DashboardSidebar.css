@@ -1,0 +1,90 @@
+/* =========================================================
+   DASHBOARD SIDEBAR
+========================================================= */
+.dash-sidebar {
+  width: 280px;
+  height: 100vh; 
+  background: #0a0d0b; 
+  border-right: 1px solid rgba(3, 234, 4, 0.2);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; 
+  left: -300px; 
+  z-index: 1000; 
+  transition: left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dash-sidebar.open { left: 0; }
+
+/* 👇 Sidebar Header (Logo Bada kiya) */
+.dash-sidebar-header {
+  padding: 30px 20px; /* 👈 Padding barhai */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: center; /* Center align kiya */
+}
+.sidebar-logo img { 
+  height: 50px; /* 👈 Logo ki height barhai (35px se 50px) */
+  object-fit: contain;
+}
+
+/* Menu */
+.dash-sidebar-menu {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 15px;
+}
+.dash-sidebar-menu::-webkit-scrollbar { width: 4px; }
+.dash-sidebar-menu::-webkit-scrollbar-thumb { background: rgba(3, 234, 4, 0.3); border-radius: 10px; }
+
+.dash-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 20px;
+  color: #a0a0a0;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+}
+
+.dash-menu-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  padding-left: 25px;
+}
+
+.dash-menu-item.active {
+  background: rgba(3, 234, 4, 0.1);
+  color: #03ea04;
+  border-left: 3px solid #03ea04;
+}
+
+.dash-menu-item svg { transition: color 0.3s ease; }
+.dash-menu-item:hover svg { color: #03ea04; }
+
+/* Footer */
+.dash-sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #a0a0a0;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.logout-btn:hover {
+  background: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+}

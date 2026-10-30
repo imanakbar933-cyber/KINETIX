@@ -1,11 +1,10 @@
+<<<<<<< HEAD
 import { StrictMode, useState } from "react";
+=======
+import { StrictMode } from "react";
+>>>>>>> 4130d8a8ab24b856254dec63b5eec8bb29141a02
 import { createRoot } from "react-dom/client";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import "./index.css";
 
@@ -30,6 +29,7 @@ import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx"; 
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
+<<<<<<< HEAD
 import SettingsPage from "./components/Admin/Settings/SettingsPage.jsx";
 
 function AppLayout() {
@@ -40,24 +40,76 @@ function AppLayout() {
     location.pathname === "/login" || 
     location.pathname === "/signup" || 
     location.pathname === "/settings"; 
+=======
 
+// 👇 Dashboard Page
+import DashboardPage from "./pages/ADMIN/DashboardPage.jsx"; 
+
+// 👇 Settings Page (Aapke components folder se)
+import SettingsPage from "./components/ADMIN/Settings/SettingsPage.jsx"; 
+
+function AppLayout() {
+  const location = useLocation();
+  
+  // 👇 Check karein ke kya hum Dashboard ke kisi bhi page par hain
+  const isDashboard = location.pathname.startsWith("/dashboard") || 
+                      location.pathname.startsWith("/members") ||
+                      location.pathname.startsWith("/workouts") ||
+                      location.pathname.startsWith("/diet") ||
+                      location.pathname.startsWith("/schedule") ||
+                      location.pathname.startsWith("/trainers") ||
+                      location.pathname.startsWith("/billing") ||
+                      location.pathname.startsWith("/reports") ||
+                      location.pathname.startsWith("/settings");
+
+  // 👇 Auth pages (Login/Signup)
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+>>>>>>> 4130d8a8ab24b856254dec63b5eec8bb29141a02
+
+  // =========================================================
+  // AGAR DASHBOARD HAI TOH SIRF DASHBOARD PAGE DIKHAO
+  // =========================================================
+  if (isDashboard) {
+    return (
+      <Routes>
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/members" element={<DashboardPage />} />
+        <Route path="/workouts" element={<DashboardPage />} />
+        <Route path="/diet" element={<DashboardPage />} />
+        <Route path="/schedule" element={<DashboardPage />} />
+        <Route path="/trainers" element={<DashboardPage />} />
+        <Route path="/billing" element={<DashboardPage />} />
+        <Route path="/reports" element={<DashboardPage />} />
+        
+        {/* 👇 Settings ke liye naya page */}
+        <Route path="/settings" element={<SettingsPage />} />
+      </Routes>
+    );
+  }
+
+  // =========================================================
+  // BAQI SAARE PAGES (Main Website)
+  // =========================================================
   return (
     <>
       <ScrollToTop />
 
+<<<<<<< HEAD
       {!isAuthPage && (
         <Navbar 
           sidebarExpanded={sidebarExpanded} 
           setSidebarExpanded={setSidebarExpanded} 
         />
       )}
+=======
+      {!isAuthPage && <Navbar />}
+>>>>>>> 4130d8a8ab24b856254dec63b5eec8bb29141a02
 
       <div 
         className="main-content-layout" 
         style={{ 
-          paddingLeft: isAuthPage ? "0" : (sidebarExpanded ? "260px" : "80px"),
           paddingTop: isAuthPage ? "0" : "80px",
-          transition: "padding-left 0.3s ease, padding-top 0.3s ease"
+          transition: "padding-top 0.3s ease"
         }}
       >
         <Routes>
@@ -71,7 +123,7 @@ function AppLayout() {
           <Route path="/GalleryPage" element={<GalleryPage />} />
           <Route path="/class-detail/:classId" element={<ClassDetail />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/trainers" element={<TrainersPage />} />
+          <Route path="/trainers-page" element={<TrainersPage />} />
           <Route path="/schedules" element={<SchedulePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
