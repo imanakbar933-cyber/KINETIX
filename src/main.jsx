@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { StrictMode, useState } from "react";
-=======
 import { StrictMode } from "react";
->>>>>>> 4130d8a8ab24b856254dec63b5eec8bb29141a02
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
@@ -29,18 +25,6 @@ import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx"; 
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
-<<<<<<< HEAD
-import SettingsPage from "./components/Admin/Settings/SettingsPage.jsx";
-
-function AppLayout() {
-  const location = useLocation();
-  const [sidebarExpanded, setSidebarExpanded] = useState(false);
-
-  const isAuthPage = 
-    location.pathname === "/login" || 
-    location.pathname === "/signup" || 
-    location.pathname === "/settings"; 
-=======
 
 // 👇 Dashboard Page
 import DashboardPage from "./pages/ADMIN/DashboardPage.jsx"; 
@@ -64,7 +48,6 @@ function AppLayout() {
 
   // 👇 Auth pages (Login/Signup)
   const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
->>>>>>> 4130d8a8ab24b856254dec63b5eec8bb29141a02
 
   // =========================================================
   // AGAR DASHBOARD HAI TOH SIRF DASHBOARD PAGE DIKHAO
@@ -94,16 +77,7 @@ function AppLayout() {
     <>
       <ScrollToTop />
 
-<<<<<<< HEAD
-      {!isAuthPage && (
-        <Navbar 
-          sidebarExpanded={sidebarExpanded} 
-          setSidebarExpanded={setSidebarExpanded} 
-        />
-      )}
-=======
       {!isAuthPage && <Navbar />}
->>>>>>> 4130d8a8ab24b856254dec63b5eec8bb29141a02
 
       <div 
         className="main-content-layout" 
