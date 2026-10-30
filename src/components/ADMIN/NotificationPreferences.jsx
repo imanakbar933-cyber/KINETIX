@@ -1,23 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import { 
   UserPlus, CreditCard, AlertTriangle, CalendarX, 
   CalendarCheck, Mail, Megaphone, Check, X, Bell
 } from "lucide-react";
 import "./NotificationPreferences.css";
 
-const NotificationPreferences = () => {
-  // Default settings
-  const initialPreferences = [
-    { id: "registrations", icon: <UserPlus size={20} />, title: "New Member Registrations", desc: "When a new member signs up", isActive: true },
-    { id: "payments", icon: <CreditCard size={20} />, title: "Payment Received", desc: "Successful payments & renewals", isActive: true },
-    { id: "stock", icon: <AlertTriangle size={20} />, title: "Low Stock Alerts", desc: "When products fall below reorder level", isActive: true },
-    { id: "expiries", icon: <CalendarX size={20} />, title: "Membership Expiries", desc: "Upcoming and lapsed memberships", isActive: true },
-    { id: "bookings", icon: <CalendarCheck size={20} />, title: "Class Bookings", desc: "When members book or cancel classes", isActive: false },
-    { id: "summary", icon: <Mail size={20} />, title: "Daily Summary Email", desc: "End-of-day revenue & activity digest", isActive: true },
-    { id: "marketing", icon: <Megaphone size={20} />, title: "Marketing Updates", desc: "Product news and feature announcements", isActive: false },
-  ];
+// ✅ Icon Map (Taaki saved data wapas aate waqt icons attach ho sakein)
+const iconMap = {
+  registrations: <UserPlus size={20} />,
+  payments: <CreditCard size={20} />,
+  stock: <AlertTriangle size={20} />,
+  expiries: <CalendarX size={20} />,
+  bookings: <CalendarCheck size={20} />,
+  summary: <Mail size={20} />,
+  marketing: <Megaphone size={20} />,
+};
 
-  const [preferences, setPreferences] = useState(initialPreferences);
+const initialPreferences = [
+  { id: "registrations", title: "New Member Registrations", desc: "When a new member signs up", isActive: true },
+  { id: "payments", title: "Payment Received", desc: "Successful payments & renewals", isActive: true },
+  { id: "stock", title: "Low Stock Alerts", desc: "When products fall below reorder level", isActive: true },
+  { id: "expiries", title: "Membership Expiries", desc: "Upcoming and lapsed memberships", isActive: true },
+  { id: "bookings", title: "Class Bookings", desc: "When members book or cancel classes", isActive: false },
+  { id: "summary", title: "Daily Summary Email", desc: "End-of-day revenue & activity digest", isActive: true },
+  { id: "marketing", title: "Marketing Updates", desc: "Product news and feature announcements", isActive: false },
+];
+
+const NotificationPreferences = forwardRef((props, ref) => {
+  
+  const [preferences, setPreferences] = useState(() => {
+    // ✅ Naya key use kiya (v3) taaki browser ka purana data (bina icons wala) ignore ho jaye
+    const saved = localStorage.getItem("kinetix_notifications_v3");
+    
+    if (saved) {
+      const parsedData = JSON.parse(saved);
+      // ✅ Yahan hum icon wapas add kar rahe hain uski 'id' ke hisaab se
+      return parsedData.map(item => ({
+        ...item,
+        icon: iconMap[item.id] 
+      }));
+    }
+    
+    // Agar kuch save nahi hai, toh default list (icons ke sath) show karo
+    return initialPreferences.map(item => ({
+      ...item,
+      icon: iconMap[item.id]
+    }));
+  });
 
   const toggleSwitch = (id) => {
     setPreferences((prev) =>
@@ -35,13 +64,19 @@ const NotificationPreferences = () => {
     setPreferences((prev) => prev.map((pref) => ({ ...pref, isActive: false })));
   };
 
-  // Kitne ON hain (Counter ke liye)
+  useImperativeHandle(ref, () => ({
+    saveChanges() {
+      // Save karte waqt icon ko nikal kar baaki data save karo
+      const dataToSave = preferences.map(({ icon, ...rest }) => rest);
+      localStorage.setItem("kinetix_notifications_v3", JSON.stringify(dataToSave));
+      return true; 
+    }
+  }));
+
   const activeCount = preferences.filter((p) => p.isActive).length;
 
   return (
     <div className="notification-card">
-      
-      {/* Header */}
       <div className="notification-header">
         <div className="header-title">
           <div className="title-icon"><Bell size={20} /></div>
@@ -60,21 +95,22 @@ const NotificationPreferences = () => {
         </div>
       </div>
 
-      {/* List */}
       <div className="notification-list">
         {preferences.map((pref) => (
           <div className="notification-item" key={pref.id}>
             <div className="item-left">
+              
+              {/* ✅ Icon Yahan Render Hoga */}
               <div className={`item-icon-box ${pref.isActive ? 'active-icon' : ''}`}>
-                {pref.icon}
+                {pref.icon} 
               </div>
+
               <div className="item-text">
                 <h3>{pref.title}</h3>
                 <p>{pref.desc}</p>
               </div>
             </div>
             
-            {/* Custom Toggle Switch */}
             <label className="toggle-switch">
               <input 
                 type="checkbox" 
@@ -86,9 +122,8 @@ const NotificationPreferences = () => {
           </div>
         ))}
       </div>
-
     </div>
   );
-};
+});
 
 export default NotificationPreferences;

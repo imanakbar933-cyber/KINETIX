@@ -13,7 +13,7 @@
   overflow: hidden;
 }
 
-/* Thoda sa glow form ke corner mein (optional) */
+/* Thoda sa glow form ke corner mein */
 .notification-card::before {
   content: '';
   position: absolute;
@@ -133,11 +133,11 @@
   gap: 15px;
 }
 
-/* Icon Box */
+/* ✅ ICON BOX */
 .item-icon-box {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
   background: #0f1712;
   border: 1px solid #1f2e24;
   display: flex;
@@ -145,6 +145,14 @@
   justify-content: center;
   color: #6b7280;
   transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* ✅ SVG Icon Size Fix */
+.item-icon-box svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2px;
 }
 
 /* Jab Toggle ON ho toh icon green ho jaye */
@@ -223,5 +231,6 @@ input:checked + .slider:before {
   .notification-card { padding: 20px; }
   .notification-header { flex-direction: column; align-items: flex-start; gap: 15px; }
   .notification-item { padding: 15px 0; }
-  .item-icon-box { display: none; } /* Mobile par icons hide kar diye taaki space bache */
+  .item-icon-box { width: 35px; height: 35px; border-radius: 8px; }
+  .item-icon-box svg { width: 18px; height: 18px; }
 }

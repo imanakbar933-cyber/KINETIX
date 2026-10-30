@@ -665,4 +665,16 @@ input:checked + .slider:before {
   min-width: 50px;
   text-align: right;
   text-shadow: 0 0 10px currentColor;
+}.success-msg-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 500;
 }
