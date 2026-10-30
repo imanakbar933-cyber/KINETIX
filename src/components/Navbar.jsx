@@ -69,8 +69,9 @@ function Navbar() {
             </div>
 
             <Link to="/trainers" className="nav-link">Trainers</Link>
-            <Link to="/dashboard" className="nav-link dashboard-link">Dashboard</Link>
-            <a href="#membership" className="nav-link">Membership</a>
+            <Link to="/plans" className="nav-link">
+                 Membership
+            </Link>
             <Link to="/contact" className="nav-link" onClick={() => setMenuOpen(false)}>Contact</Link>
           </nav>
 
