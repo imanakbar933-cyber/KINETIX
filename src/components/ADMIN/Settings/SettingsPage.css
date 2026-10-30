@@ -1058,3 +1058,204 @@
     width: 100%;
   }
 }
+
+
+
+/* =================================
+   BILLING BUTTONS - SIZE IMPROVEMENT
+================================= */
+
+/* Main billing action buttons */
+.billing-panel .btn-solid,
+.billing-panel .btn-outline {
+  min-height: 44px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  gap: 9px;
+  border-radius: 9px;
+  white-space: nowrap;
+}
+
+.billing-panel .btn-solid svg,
+.billing-panel .btn-outline svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Change plan and View invoices */
+.billing-actions .btn-solid,
+.billing-actions .btn-outline {
+  min-height: 46px;
+  padding: 13px 22px;
+  font-size: 14px;
+}
+
+/* Edit payment and Export CSV */
+.billing-update-btn {
+  min-height: 38px;
+  padding: 9px 15px;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 8px;
+  border-radius: 8px;
+}
+
+.billing-update-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Cancel Plan button */
+.billing-danger-btn {
+  min-height: 42px;
+  padding: 11px 19px;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 8px;
+  border-radius: 8px;
+}
+
+.billing-danger-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* Monthly / Yearly buttons */
+.billing-cycle-switch button {
+  min-height: 40px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.billing-cycle-switch button span {
+  font-size: 11px;
+}
+
+/* Modal buttons */
+.billing-modal-actions .btn-solid,
+.billing-modal-actions .btn-outline,
+.billing-modal-actions .billing-danger-btn {
+  min-height: 43px;
+  padding: 11px 19px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Hover interaction */
+.billing-panel button {
+  transition: all 0.25s ease;
+}
+
+.billing-panel .btn-solid:hover,
+.billing-panel .btn-outline:hover,
+.billing-panel .billing-update-btn:hover,
+.billing-panel .billing-danger-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .billing-panel .btn-solid,
+  .billing-panel .btn-outline {
+    min-height: 42px;
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+
+  .billing-actions {
+    flex-wrap: wrap;
+  }
+
+  .billing-update-btn {
+    font-size: 12px;
+    padding: 8px 11px;
+  }
+}
+
+
+/* =========================================
+   BILLING & APPEARANCE - SUBTEXT FONT SIZE
+========================================= */
+
+/* Billing descriptions */
+.billing-subtitle,
+.billing-plan-card > p,
+.billing-plan-meta,
+.billing-section-heading p,
+.billing-item-info p,
+.billing-card-info p,
+.billing-cancel-box p,
+.billing-table-footer,
+.billing-demo-note,
+.billing-modal-description,
+.billing-choice-description,
+.billing-choice > small {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Billing small labels and badges */
+.billing-eyebrow,
+.billing-live,
+.billing-badge,
+.billing-status,
+.billing-default,
+.billing-secure {
+  font-size: 11px;
+}
+
+/* Billing table */
+.billing-table th {
+  font-size: 11px;
+}
+
+.billing-table td {
+  font-size: 12px;
+}
+
+/* Appearance descriptions */
+.appearance-theme-card p,
+.appearance-preference-copy p,
+.appearance-note,
+.settings-placeholder > p,
+.settings-placeholder .appearance-preference small {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Appearance labels */
+.appearance-choice-label,
+.appearance-color-option {
+  font-size: 13px;
+}
+
+/* Feedback and alert text */
+.settings-feedback,
+.billing-alert p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Modal field labels */
+.billing-field {
+  font-size: 13px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .billing-subtitle,
+  .billing-plan-card > p,
+  .billing-section-heading p,
+  .billing-item-info p,
+  .billing-card-info p,
+  .billing-cancel-box p,
+  .appearance-theme-card p,
+  .appearance-preference-copy p,
+  .appearance-note,
+  .billing-modal-description {
+    font-size: 12px;
+  }
+}
