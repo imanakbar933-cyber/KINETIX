@@ -665,16 +665,197 @@ input:checked + .slider:before {
   min-width: 50px;
   text-align: right;
   text-shadow: 0 0 10px currentColor;
-}.success-msg-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(74, 222, 128, 0.1);
-  color: #4ade80;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(74, 222, 128, 0.3);
-  margin-top: 15px;
-  font-size: 14px;
-  font-weight: 500;
+}
+
+
+/* =================================
+   SECURITY THEME OVERRIDES
+================================= */
+
+.settings-layout {
+  --security-accent: var(--settings-accent, #03ea04);
+  --security-bg: #0a0f0c;
+  --security-card: #111a14;
+  --security-hover: #19251c;
+  --security-text: #ffffff;
+  --security-muted: #a1aaa3;
+  --security-border: #29352c;
+  --security-input: #0d1510;
+}
+
+.settings-layout.settings-light-mode {
+  --security-bg: #ffffff;
+  --security-card: #f5f7f5;
+  --security-hover: #e9eee9;
+  --security-text: #172019;
+  --security-muted: #667168;
+  --security-border: #dce3dc;
+  --security-input: #ffffff;
+}
+
+/* Main wrapper and cards */
+.settings-layout .security-wrapper,
+.settings-layout .security-card {
+  background: var(--security-card);
+  color: var(--security-text);
+  border-color: var(--security-border);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Headings */
+.settings-layout .security-wrapper h1,
+.settings-layout .security-wrapper h2,
+.settings-layout .security-wrapper h3,
+.settings-layout .security-card h1,
+.settings-layout .security-card h2,
+.settings-layout .security-card h3,
+.settings-layout .security-card strong {
+  color: var(--security-text);
+}
+
+/* Paragraphs and labels */
+.settings-layout .security-wrapper p,
+.settings-layout .security-wrapper small,
+.settings-layout .security-card p,
+.settings-layout .security-card small,
+.settings-layout .security-card label,
+.settings-layout .security-card .helper-text {
+  color: var(--security-muted);
+}
+
+/* Inputs */
+.settings-layout .security-card input,
+.settings-layout .security-card select {
+  background: var(--security-input);
+  color: var(--security-text);
+  border: 1px solid var(--security-border);
+}
+
+.settings-layout .security-card input:focus,
+.settings-layout .security-card select:focus {
+  border-color: var(--security-accent);
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--security-accent) 15%, transparent);
+}
+
+/* Icon buttons */
+.settings-layout .security-card .icon-button {
+  color: var(--security-muted);
+  background: var(--security-hover);
+  border-color: var(--security-border);
+}
+
+.settings-layout .security-card .icon-button:hover {
+  color: var(--security-accent);
+  border-color: var(--security-accent);
+}
+
+/* Primary buttons */
+.settings-layout .security-card .btn-primary {
+  background: var(--security-accent);
+  color: #071008;
+  border-color: var(--security-accent);
+}
+
+.settings-layout .security-card .btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+/* Outline buttons */
+.settings-layout .security-card .btn-outline {
+  background: transparent;
+  color: var(--security-text);
+  border-color: var(--security-border);
+}
+
+.settings-layout .security-card .btn-outline:hover {
+  color: var(--security-accent);
+  border-color: var(--security-accent);
+}
+
+/* Danger buttons */
+.settings-layout .security-card .btn-danger {
+  background: #dc3545;
+  color: #ffffff;
+  border-color: #dc3545;
+}
+
+/* Options and sessions */
+.settings-layout .security-card .security-option,
+.settings-layout .security-card .session-item,
+.settings-layout .security-card .device-item {
+  background: var(--security-bg);
+  color: var(--security-text);
+  border-color: var(--security-border);
+}
+
+.settings-layout .security-card .security-option:hover,
+.settings-layout .security-card .session-item:hover {
+  background: var(--security-hover);
+}
+
+/* Toggle switches */
+.settings-layout .security-card .toggle-switch input:checked + .slider {
+  background: var(--security-accent);
+}
+
+.settings-layout .security-card .slider {
+  background: var(--security-border);
+}
+
+/* Modal */
+.settings-layout .modal-content,
+.settings-layout .confirm-modal-content {
+  background: var(--security-card);
+  color: var(--security-text);
+  border: 1px solid var(--security-border);
+}
+
+.settings-layout .modal-content h2,
+.settings-layout .confirm-modal-content h2 {
+  color: var(--security-text);
+}
+
+.settings-layout .modal-content p,
+.settings-layout .confirm-modal-content p {
+  color: var(--security-muted);
+}
+
+/* Toast and success messages */
+.settings-layout .toast-success,
+.settings-layout .success-message {
+  background: var(--security-card);
+  color: var(--security-text);
+  border-color: var(--security-accent);
+}
+
+.settings-layout .confirmation-icon {
+  color: var(--security-accent);
+}
+
+
+
+/* Security Toggle Theme Fix */
+
+.settings-layout .security-card .toggle-switch .slider {
+  background-color: #68736b !important;
+  transition: 0.3s ease;
+}
+
+.settings-layout .security-card .toggle-switch input:checked + .slider {
+  background-color: var(--settings-accent, #03ea04) !important;
+}
+
+.settings-layout.settings-light-mode
+.security-card .toggle-switch .slider {
+  background-color: #cbd2cc !important;
+}
+
+.settings-layout.settings-light-mode
+.security-card .toggle-switch input:checked + .slider {
+  background-color: var(--settings-accent, #03ea04) !important;
+}
+
+.settings-layout .security-card .toggle-switch .slider::before {
+  background-color: #ffffff !important;
 }

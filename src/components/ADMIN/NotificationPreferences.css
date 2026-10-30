@@ -231,6 +231,148 @@ input:checked + .slider:before {
   .notification-card { padding: 20px; }
   .notification-header { flex-direction: column; align-items: flex-start; gap: 15px; }
   .notification-item { padding: 15px 0; }
-  .item-icon-box { width: 35px; height: 35px; border-radius: 8px; }
-  .item-icon-box svg { width: 18px; height: 18px; }
+  .item-icon-box { display: none; } /* Mobile par icons hide kar diye taaki space bache */
+}
+
+
+
+/* =================================
+   NOTIFICATION THEME OVERRIDES
+================================= */
+
+.settings-layout {
+  --notification-accent: var(--settings-accent, #03ea04);
+  --notification-bg: #0a0f0c;
+  --notification-card: #111a14;
+  --notification-hover: #19251c;
+  --notification-text: #ffffff;
+  --notification-muted: #a1aaa3;
+  --notification-border: #29352c;
+  --notification-input: #0d1510;
+}
+
+.settings-layout.settings-light-mode {
+  --notification-bg: #ffffff;
+  --notification-card: #f5f7f5;
+  --notification-hover: #e9eee9;
+  --notification-text: #172019;
+  --notification-muted: #667168;
+  --notification-border: #dce3dc;
+  --notification-input: #ffffff;
+}
+
+/* Main card */
+.settings-layout .notification-card {
+  background: var(--notification-card);
+  color: var(--notification-text);
+  border-color: var(--notification-border);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.settings-layout .notification-card h1,
+.settings-layout .notification-card h2,
+.settings-layout .notification-card h3,
+.settings-layout .notification-card h4,
+.settings-layout .notification-card strong {
+  color: var(--notification-text);
+}
+
+.settings-layout .notification-card p,
+.settings-layout .notification-card small,
+.settings-layout .notification-card label {
+  color: var(--notification-muted);
+}
+
+/* Notification items */
+.settings-layout .notification-item {
+  background: var(--notification-bg);
+  border-color: var(--notification-border);
+  color: var(--notification-text);
+}
+
+.settings-layout .notification-item:hover {
+  background: var(--notification-hover);
+}
+
+/* Icons */
+.settings-layout .notification-icon {
+  color: var(--notification-accent);
+  background: color-mix(in srgb, var(--notification-accent) 12%, transparent);
+}
+
+/* Status */
+.settings-layout .notification-status,
+.settings-layout .status-badge {
+  color: var(--notification-accent);
+  background: color-mix(in srgb, var(--notification-accent) 12%, transparent);
+}
+
+/* Buttons */
+.settings-layout .notification-card button {
+  transition: all 0.3s ease;
+}
+
+.settings-layout .notification-card .btn-primary,
+.settings-layout .notification-card .btn-action {
+  background: var(--notification-accent);
+  border-color: var(--notification-accent);
+  color: #071008;
+}
+
+.settings-layout .notification-card .btn-primary:hover,
+.settings-layout .notification-card .btn-action:hover {
+  filter: brightness(1.1);
+}
+
+.settings-layout .notification-card .btn-outline {
+  background: transparent;
+  border-color: var(--notification-border);
+  color: var(--notification-text);
+}
+
+.settings-layout .notification-card .btn-outline:hover {
+  border-color: var(--notification-accent);
+  color: var(--notification-accent);
+}
+
+/* Toggle */
+.settings-layout .notification-card .toggle-switch input:checked + .slider {
+  background: var(--notification-accent);
+}
+
+.settings-layout .notification-card .slider {
+  background: var(--notification-border);
+}
+
+/* Inputs */
+.settings-layout .notification-card input,
+.settings-layout .notification-card select {
+  background: var(--notification-input);
+  color: var(--notification-text);
+  border-color: var(--notification-border);
+}
+
+/* Notification Toggle Theme Fix */
+
+.settings-layout .notification-card .toggle-switch .slider {
+  background-color: #68736b !important;
+  transition: 0.3s ease;
+}
+
+.settings-layout .notification-card .toggle-switch input:checked + .slider {
+  background-color: var(--settings-accent, #03ea04) !important;
+}
+
+.settings-layout.settings-light-mode
+.notification-card .toggle-switch .slider {
+  background-color: #cbd2cc !important;
+}
+
+.settings-layout.settings-light-mode
+.notification-card .toggle-switch input:checked + .slider {
+  background-color: var(--settings-accent, #03ea04) !important;
+}
+
+.settings-layout .notification-card .toggle-switch .slider::before {
+  background-color: #ffffff !important;
 }
