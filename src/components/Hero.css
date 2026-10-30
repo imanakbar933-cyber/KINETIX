@@ -9,8 +9,13 @@
   background-color: #15161b;
   overflow: hidden;
   position: relative;
+  
+  /* 👇 Yeh 2 lines add karein upar shift karne ke liye */
+  margin-top: -80px; /* Jitna upar karna hai utna negative margin dein */
+  padding-top: 80px; /* Content ko Navbar ke neeche se shuru karne ke liye */
+  
+  box-sizing: border-box;
 }
-
 /* =========================================================
    NEON LIGHT BACKGROUND
 ========================================================= */
