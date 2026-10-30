@@ -47,12 +47,6 @@ img, video {
   max-width: 100%;
 }
 
-.our-story, .info-cards, .trainers {
-  contain: layout style;
-  content-visibility: auto;
-  contain-intrinsic-size: 700px;
-}
-
 /* Light Mode Overrides */
 [data-theme="light"] .our-story,
 [data-theme="light"] .trainers,
@@ -102,4 +96,106 @@ img, video {
 [data-theme="light"] .trainer-card-image, [data-theme="light"] .info-card-image,
 [data-theme="light"] .service-image, [data-theme="light"] .facility-image {
   background-color: transparent !important;
+}
+
+/* =========================================
+   PLANS HERO SECTION (Full Width & Larger)
+========================================= */
+
+.plans-hero-section {
+  position: relative;
+  width: 100%; /* 👈 Full width kar diya hai */
+  height: 75vh; /* 👈 Height barha di hai taake bari nazar aaye */
+  
+  /* Background Image */
+  background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  display: flex;
+  align-items: flex-end; 
+  justify-content: flex-start; 
+  padding: 60px 80px; 
+  overflow: hidden;
+  
+  /* 👈 NAVBAR AUR IMAGE KE DARMIYAN SPACE */
+  margin-top: 120px; /* Agar navbar 80px hai, toh 20px ka gap banega */
+  
+  /* Agar aap chahte hain ke image screen ke kinaron se bilkul touch kare (bina gap ke), 
+     toh neechay wali 3 lines hata dein. Agar thora sa gap chahiye toh rehne dein. */
+  width: 100%;
+  /* margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px; */
+}
+
+/* Left side Dark Gradient */
+.plans-hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%; 
+  height: 100%;
+  background: linear-gradient(90deg, rgba(4, 20, 10, 0.95) 0%, rgba(4, 20, 10, 0.6) 50%, transparent 100%);
+  z-index: 1;
+}
+
+.plans-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* TEXT STYLING */
+.plans-hero-content h1 {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 4.5rem; /* Text ka size bhi thora bara kiya hai */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin: 0;
+  position: relative;
+  padding: 20px 0; 
+  display: inline-block;
+  color: #ffffff; 
+  cursor: pointer;
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+/* NEON LINES (Exact About page style) */
+.plans-hero-content h1::before,
+.plans-hero-content h1::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  height: 3px; /* Thick lines */
+  background-color: #39FF14; /* Neon Green */
+  width: 60px; 
+  transition: width 0.4s ease-in-out, background-color 0.4s ease; 
+}
+
+.plans-hero-content h1::before {
+  top: 0;
+}
+
+.plans-hero-content h1::after {
+  bottom: 0;
+}
+
+/* HOVER EFFECTS */
+.plans-hero-content h1:hover {
+  color: #39FF14; 
+  text-shadow: 0 0 15px rgba(57, 255, 20, 0.6); /* Neon Glow */
+}
+
+.plans-hero-content h1:hover::before,
+.plans-hero-content h1:hover::after {
+  width: 100%; 
+}
+
+/* Plans Container */
+.plans-content-container {
+  padding: 60px 20px;
+  background-color: var(--bg-main);
 }

@@ -13,7 +13,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/App.jsx";
 import About from "./pages/About.jsx";
 import GymHome from "./pages/GymHome.jsx";
-import MembershipPlans from "./components/MembershipPlans.jsx"; // Yeh wahi component hai jo home par bhi hai
+import MembershipPlans from "./components/MembershipPlans.jsx"; 
 import FaqPage from "./pages/FaqPage.jsx";
 import ClassroomPage from "./pages/ClassroomPage";
 import Team from "./pages/Team.jsx";
@@ -28,14 +28,11 @@ import Login from "./pages/Login.jsx";
 
 // 👇 Dashboard Page
 import DashboardPage from "./pages/ADMIN/DashboardPage.jsx"; 
-
-// 👇 Settings Page (Aapke components folder se)
 import SettingsPage from "./components/ADMIN/Settings/SettingsPage.jsx"; 
 
 function AppLayout() {
   const location = useLocation();
   
-  // 👇 Check karein ke kya hum Dashboard ke kisi bhi page par hain
   const isDashboard = location.pathname.startsWith("/dashboard") || 
                       location.pathname.startsWith("/members") ||
                       location.pathname.startsWith("/workouts") ||
@@ -46,8 +43,10 @@ function AppLayout() {
                       location.pathname.startsWith("/reports") ||
                       location.pathname.startsWith("/settings");
 
-  // 👇 Auth pages (Login/Signup)
   const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+  
+  // 👇 Plans page check
+  const isPlansPage = location.pathname === "/plans";
 
   // =========================================================
   // AGAR DASHBOARD HAI TOH SIRF DASHBOARD PAGE DIKHAO
@@ -63,8 +62,6 @@ function AppLayout() {
         <Route path="/trainers" element={<DashboardPage />} />
         <Route path="/billing" element={<DashboardPage />} />
         <Route path="/reports" element={<DashboardPage />} />
-        
-        {/* 👇 Settings ke liye naya page */}
         <Route path="/settings" element={<SettingsPage />} />
       </Routes>
     );
@@ -82,7 +79,8 @@ function AppLayout() {
       <div 
         className="main-content-layout" 
         style={{ 
-          paddingTop: isAuthPage ? "0" : "80px",
+          // Plans page ki padding 0 hai taake image navbar ke peechay na jaye
+          paddingTop: isAuthPage || isPlansPage ? "0" : "80px",
           transition: "padding-top 0.3s ease"
         }}
       >
@@ -103,25 +101,24 @@ function AppLayout() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/settings" element={<SettingsPage />} />
 
-          {/* 👇 Yahan humne Image aur Component dono wrap kar diye hain */}
-          
+          {/* 👇 Membership (Plans) ka Route */}
           <Route path="/plans" element={
-  <div className="plans-page-wrapper">
-    
-    {/* HERO SECTION */}
-    <div className="plans-hero-section">
-      <div className="plans-hero-content">
-        <h1>MEMBERSHIP</h1>
-      </div>
-    </div>
+            <div className="plans-page-wrapper">
+              
+              {/* HERO SECTION */}
+              <div className="plans-hero-section">
+                <div className="plans-hero-content">
+                  <h1>MEMBERSHIP</h1>
+                </div>
+              </div>
 
-    {/* MEMBERSHIP PLANS COMPONENT */}
-    <div className="plans-content-container">
-      <MembershipPlans />
-    </div>
+              {/* MEMBERSHIP PLANS COMPONENT */}
+              <div className="plans-content-container">
+                <MembershipPlans />
+              </div>
 
-  </div>
-} />
+            </div>
+          } />
           
         </Routes>
       </div>
