@@ -9,18 +9,18 @@
 .members-layout {
   display: flex;
   min-height: 100vh;
-  background-color: #151521;
+  background-color: #030504; /* Kinetix Dark Background */
   font-family: 'Inter', sans-serif;
 }
 
 /* ================= SIDEBAR ================= */
 .members-sidebar {
   width: 260px;
-  background-color: #1e1e2d;
+  background-color: #0a0f0c; /* Dark greenish black */
   padding: 25px 20px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #2b2b40;
+  border-right: 1px solid #1f2e24;
 }
 
 .members-logo {
@@ -34,6 +34,7 @@
 .members-logo h2 {
   font-size: 22px;
   font-weight: 800;
+  letter-spacing: 1px;
 }
 
 .members-menu {
@@ -48,7 +49,7 @@
   align-items: center;
   gap: 12px;
   padding: 12px 15px;
-  color: #a2a3b7;
+  color: #9ca3af;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
@@ -57,38 +58,41 @@
 }
 
 .members-menu-item:hover {
-  background-color: #2b2b40;
+  background-color: #0f1712;
   color: #fff;
 }
 
+/* ✅ Kinetix Neon Green Active State */
 .members-menu-item.active {
-  background-color: #ff7b1c;
-  color: #fff;
+  background-color: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  border-left: 3px solid #4ade80;
 }
 
 /* Upgrade Card */
 .sidebar-upgrade-card {
-  background-color: #2b2b40;
+  background-color: #0f1712;
   padding: 20px;
   border-radius: 12px;
   margin-bottom: 20px;
+  border: 1px solid #1f2e24;
 }
 
 .sidebar-upgrade-card p {
   font-size: 12px;
-  color: #a2a3b7;
+  color: #9ca3af;
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
 .sidebar-upgrade-card p span {
-  background-color: #ff7b1c;
-  color: #fff;
+  background-color: #4ade80; /* Neon Green */
+  color: #000;
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .sidebar-upgrade-card h3 {
@@ -99,13 +103,13 @@
 
 .days-left {
   font-size: 12px;
-  color: #a2a3b7;
+  color: #9ca3af;
   margin-bottom: 10px;
 }
 
 .progress-bar {
   height: 5px;
-  background-color: #1e1e2d;
+  background-color: #1f2e24;
   border-radius: 10px;
   margin-bottom: 15px;
   overflow: hidden;
@@ -114,31 +118,39 @@
 .progress-fill {
   width: 30%;
   height: 100%;
-  background-color: #ff7b1c;
+  background-color: #4ade80; /* Neon Green Progress */
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
 }
 
 .upgrade-btn {
   width: 100%;
   padding: 10px;
-  background-color: #e5e7eb;
+  background-color: #fff;
+  color: #000;
   border: none;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  transition: all 0.3s;
+}
+
+.upgrade-btn:hover {
+  background-color: #4ade80;
 }
 
 .sidebar-logout {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #a2a3b7;
+  color: #9ca3af;
   font-size: 14px;
   cursor: pointer;
   padding: 10px;
+  transition: all 0.3s;
 }
 
 .sidebar-logout:hover {
-  color: #fff;
+  color: #ef4444; /* Red on hover */
 }
 
 /* ================= MAIN CONTENT ================= */
@@ -147,6 +159,7 @@
   display: flex;
   flex-direction: column;
   padding: 0 30px 30px 30px;
+  background-color: #050706;
 }
 
 /* Top Header */
@@ -155,7 +168,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #2b2b40;
+  border-bottom: 1px solid #1f2e24;
   margin-bottom: 30px;
 }
 
@@ -163,10 +176,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: #1e1e2d;
+  background-color: #0f1712;
   padding: 10px 20px;
   border-radius: 20px;
   width: 400px;
+  border: 1px solid #1f2e24;
 }
 
 .header-search input {
@@ -178,6 +192,10 @@
   font-size: 14px;
 }
 
+.header-search input::placeholder {
+  color: #6b7280;
+}
+
 .header-right {
   display: flex;
   align-items: center;
@@ -186,6 +204,12 @@
 
 .header-icon {
   cursor: pointer;
+  color: #9ca3af;
+  transition: color 0.3s;
+}
+
+.header-icon:hover {
+  color: #4ade80;
 }
 
 .header-profile {
@@ -200,6 +224,7 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #4ade80;
 }
 
 .header-profile h4 {
@@ -209,7 +234,7 @@
 }
 
 .header-profile p {
-  color: #a2a3b7;
+  color: #9ca3af;
   font-size: 11px;
 }
 
@@ -226,6 +251,6 @@
 }
 
 .breadcrumb {
-  color: #a2a3b7;
+  color: #9ca3af;
   font-size: 13px;
 }
