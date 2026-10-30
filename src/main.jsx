@@ -57,15 +57,7 @@ function AppLayout() {
         />
       )}
 
-      {/* Main Content Wrapper (Sidebar ke hisaab se adjust hoga) */}
-      <div 
-        className="main-content-layout" 
-        style={{ 
-          paddingLeft: isAuthPage ? "0" : (sidebarExpanded ? "260px" : "80px"),
-          paddingTop: isAuthPage ? "0" : "80px",
-          transition: "padding-left 0.3s ease, padding-top 0.3s ease"
-        }}
-      >
+     
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -85,7 +77,7 @@ function AppLayout() {
           {/* 👇 Settings Page Route */}
           <Route path="/settings" element={<SettingsPage />} />
         </Routes>
-      </div>
+     
 
       {/* Footer tabhi dikhega jab Auth ya Settings page na ho */}
       {!isAuthPage && <Footer />}

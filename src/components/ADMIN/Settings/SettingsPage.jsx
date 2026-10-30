@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import "./SettingsPage.css";
 import NotificationPreferences from "../NotificationPreferences";
-import SecuritySettings from "../SecuritySettings"; 
+import SecuritySettings from "../SecuritySettings";
 
 const initialInvoices = [
   { id: "INV-2026-010", date: "Oct 01, 2026", description: "Enterprise Plan", amount: 5999, status: "Paid" },
@@ -247,20 +247,19 @@ const SettingsPage = () => {
               </>
             )}
 
-            {/* 👇 OTHER TABS (Placeholder) */}
-             {/* ✅ NOTIFICATIONS TAB (Yahan component call hua hai) */}
             {activeTab === "Notifications" && (
               <div className="notifications-tab-wrapper">
-                <h2 className="content-title" style={{ marginBottom: '20px' }}>Notifications</h2>
+                <h2 className="content-title" style={{ marginBottom: "20px" }}>Notifications</h2>
                 <NotificationPreferences />
               </div>
             )}
-   {activeTab === "Security" && (
-  <div className="security-tab-wrapper" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-    <SecuritySettings />
-  </div>
-)}
-          </div>
+
+            {activeTab === "Security" && (
+              <div className="security-tab-wrapper" style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                <SecuritySettings />
+              </div>
+            )}
+
             {activeTab === "Billing" && (
               <div className="billing-panel">
                 <div className="billing-heading">
@@ -423,17 +422,9 @@ const SettingsPage = () => {
                 <p className="appearance-note"><AlertCircle size={14} /> These appearance choices are currently held in React state and reset when the page reloads.</p>
               </div>
             )}
-
-            {activeTab === "Notifications" && (
-              <div className="settings-placeholder"><h2 className="content-title">Notifications</h2><p>Notification preferences can be configured here.</p><label className="appearance-preference"><span><strong>Email notifications</strong><small>Receive gym and account updates by email.</small></span><input type="checkbox" defaultChecked /></label><label className="appearance-preference"><span><strong>Membership alerts</strong><small>Get notified about membership changes.</small></span><input type="checkbox" defaultChecked /></label></div>
-            )}
-
-            {activeTab === "Security" && (
-              <div className="settings-placeholder"><h2 className="content-title">Security</h2><p>Manage account security preferences.</p><div className="form-group"><label>Current Password</label><input type="password" placeholder="Enter current password" /></div><div className="form-row"><div className="form-group"><label>New Password</label><input type="password" placeholder="Enter new password" /></div><div className="form-group"><label>Confirm Password</label><input type="password" placeholder="Confirm new password" /></div></div><label className="appearance-preference"><span><strong>Two-factor authentication</strong><small>Extra protection for your account (visual demo).</small></span><input type="checkbox" /></label><button className="btn-solid settings-form-submit" type="button" onClick={() => alert("Connect password changes to your authentication backend.")}>Update Security</button></div>
-            )}
           </section>
         </div>
-     </main>
+      </main>
 
       {modal === "plan" && (
         <div className="billing-modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setModal(""); }}>
