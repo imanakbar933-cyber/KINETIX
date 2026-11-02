@@ -34,23 +34,25 @@ import SettingsPage from "./components/ADMIN/Settings/SettingsPage.jsx";
 function AppLayout() {
   const location = useLocation();
   
-  const isDashboard = location.pathname.startsWith("/dashboard") || 
-                      location.pathname.startsWith("/members") ||
-                      location.pathname.startsWith("/workouts") ||
-                      location.pathname.startsWith("/diet") ||
-                      location.pathname.startsWith("/schedule") ||
-                      location.pathname.startsWith("/trainers") ||
-                      location.pathname.startsWith("/billing") ||
-                      location.pathname.startsWith("/reports") ||
-                      location.pathname.startsWith("/settings");
-
+  // ✅ 1. Auth Pages (Login aur Signup) par Navbar/Footer nahi honge
   const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
-  
-  // 👇 Plans page check
+
+  // ✅ 2. Admin Dashboard Routes
+  const isDashboard = 
+    location.pathname === "/dashboard" || 
+    location.pathname === "/members" ||
+    location.pathname === "/workouts" ||
+    location.pathname === "/diet" ||
+    location.pathname === "/schedule" ||
+    location.pathname === "/trainers" ||
+    location.pathname === "/billing" ||
+    location.pathname === "/reports" ||
+    location.pathname === "/settings";
+
   const isPlansPage = location.pathname === "/plans";
 
   // =========================================================
-  // AGAR DASHBOARD HAI TOH SIRF DASHBOARD PAGE DIKHAO
+  // DASHBOARD LAYOUT (No Navbar, No Footer)
   // =========================================================
   if (isDashboard) {
     return (
@@ -69,18 +71,18 @@ function AppLayout() {
   }
 
   // =========================================================
-  // BAQI SAARE PAGES (Main Website)
+  // MAIN WEBSITE LAYOUT (With Navbar & Footer)
   // =========================================================
   return (
     <>
       <ScrollToTop />
 
+      {/* ✅ Navbar sirf tab dikhega jab Login/Signup page NA ho */}
       {!isAuthPage && <Navbar />}
 
       <div 
         className="main-content-layout" 
         style={{ 
-          // Plans page ki padding 0 hai taake image navbar ke peechay na jaye
           paddingTop: isAuthPage || isPlansPage ? "0" : "80px",
           transition: "padding-top 0.3s ease"
         }}
@@ -98,34 +100,30 @@ function AppLayout() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/trainers-page" element={<TrainersPage />} />
           <Route path="/schedules" element={<SchedulePage />} />
+          
+          {/* ✅ Auth Pages */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/settings" element={<SettingsPage />} />
 
-          {/* 👇 Membership (Plans) ka Route */}
+          {/* Membership Plans Route */}
           <Route path="/plans" element={
             <div className="plans-page-wrapper">
-              
-              {/* HERO SECTION */}
               <div className="plans-hero-section">
                 <div className="plans-hero-content">
                   <h1>MEMBERSHIP</h1>
                 </div>
               </div>
-
-              {/* MEMBERSHIP PLANS COMPONENT */}
               <div className="plans-content-container">
                 <MembershipPlans />
               </div>
-
             </div>
           } />
 
           <Route path="/services/:slug" element={<ServiceDetail />} />
-          
         </Routes>
       </div>
 
+      {/* ✅ Footer sirf tab dikhega jab Login/Signup page NA ho */}
       {!isAuthPage && <Footer />}
     </>
   );
