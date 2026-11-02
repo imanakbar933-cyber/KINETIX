@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from 'react-router-dom'; // 👈 useLocation import kiya
+import { Link } from 'react-router-dom';
 import "./Navbar.css";
 
 function Navbar() {
@@ -8,8 +8,7 @@ function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-  
-  const location = useLocation(); // 👈 Location check karne ke liye
+  const [showTransition, setShowTransition] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -24,35 +23,58 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 👇 NAYA: Home Click Handler (Jo Hero ko signal bhejega)
+  // Page Load Transition
+  useEffect(() => {
+    const initialTimer = setTimeout(() => {
+      setShowTransition(true);
+      setTimeout(() => setShowTransition(false), 2000);
+    }, 500);
+    return () => clearTimeout(initialTimer);
+  }, []);
+
   const handleHomeClick = () => {
-    if (location.pathname === "/") {
-      // Agar pehle se Home page par hain, toh direct animation trigger karein
-      window.dispatchEvent(new Event("triggerHomeAnimation"));
-    }
-    // Agar kisi aur page par hain, toh Link "/" par le jayega, 
-    // aur Hero load hote hi apni animation chala dega.
+    setShowTransition(true);
+    setTimeout(() => setShowTransition(false), 2000);
   };
 
   return (
     <>
+      {/* 3D WRAP TRANSITION ANIMATION */}
+      {showTransition && (
+        <div 
+          style={{
+            position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
+            zIndex: 9999999, 
+            backgroundColor: '#050706',
+            display: 'flex', justifyContent: 'center', alignItems: 'center', 
+            overflow: 'hidden', perspective: '1000px'
+          }}
+        >
+          <img 
+            src="/images/kinetix2.png" 
+            alt="Kinetix Transition" 
+            style={{
+              width: '80vw', height: 'auto', objectFit: 'contain', display: 'block',
+              animation: 'wrapReveal 2s cubic-bezier(0.22, 1, 0.36, 1) forwards'
+            }} 
+          />
+        </div>
+      )}
+
       {/* NAVBAR */}
       <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
         <div className="navbar-container">
           
           {/* LEFT SIDE (Sirf Logo) */}
           <div className="navbar-left">
-            {/* 👇 Logo par click karne par animation trigger hogi */}
             <Link to="/" className="navbar-logo" onClick={handleHomeClick}>
               <img src="/images/kinetix.svg" alt="Kinetix" className="kinetix-logo-image" />
             </Link>
           </div>
 
-          {/* MENU LINKS */}
+          {/* MENU LINKS (Dashboard add kiya) */}
           <nav className={`navbar-menu ${menuOpen ? "menu-open" : ""}`}>
-            {/* 👇 Home Link par click karne par animation trigger hogi */}
             <Link to="/" className="nav-link" onClick={handleHomeClick}>Home</Link>
-            
             <Link to="/about" className="nav-link">About</Link>
             
             <div className="nav-item-dropdown">
@@ -69,9 +91,13 @@ function Navbar() {
             </div>
 
             <Link to="/trainers" className="nav-link">Trainers</Link>
-            <Link to="/plans" className="nav-link">
-                 Membership
+            
+            {/* 👇 NAYA DASHBOARD LINK */}
+            <Link to="/settings" className="nav-link dashboard-link">
+              Dashboard
             </Link>
+
+            <Link to ="/plans" className ="nav-link">Membership</Link>
             <Link to="/contact" className="nav-link" onClick={() => setMenuOpen(false)}>Contact</Link>
           </nav>
 
