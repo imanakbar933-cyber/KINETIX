@@ -1,0 +1,237 @@
+/* =========================================================
+   DASHBOARD TOP NAVBAR
+========================================================= */
+.dash-navbar {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px; 
+  background: #0a0d0b; 
+  z-index: 900; 
+  border-bottom: 1px solid rgba(3, 234, 4, 0.4);
+  box-shadow: 0 0 20px rgba(3, 234, 4, 0.15);
+  transition: width 0.4s ease, left 0.4s ease;
+}
+
+/* 👇 JAB SIDEBAR OPEN HO (Navbar chota ho jaye ga) */
+.dash-navbar.sidebar-open {
+  width: calc(100% - 280px); 
+  left: 280px; 
+  border-left: 1px solid rgba(3, 234, 4, 0.4);
+}
+
+/* Navbar Inner */
+.dash-nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px; /* 👈 Padding kam ki taake zyada jagah bache */
+  width: 100%;
+  gap: 15px;
+}
+
+/* =========================================================
+   LEFT SIDE
+========================================================= */
+.dash-nav-left { display: flex; align-items: center; gap: 15px; flex-shrink: 0; }
+
+.dash-icon-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 45px; 
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a0a0a0;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  text-decoration: none;
+}
+
+.dash-icon-btn:hover {
+  background: rgba(3, 234, 4, 0.15);
+  color: #03ea04;
+  border-color: #03ea04;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(3, 234, 4, 0.3);
+}
+
+.home-btn {
+  color: #03ea04;
+  border-color: rgba(3, 234, 4, 0.4);
+  background: rgba(3, 234, 4, 0.05);
+}
+.home-btn:hover {
+  background: #03ea04;
+  color: #050706;
+  box-shadow: 0 0 25px rgba(3, 234, 4, 0.6);
+}
+
+.dash-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; white-space: nowrap; }
+.home-text { color: #a0a0a0; cursor: pointer; text-decoration: none; transition: all 0.3s ease; }
+.home-text:hover { color: #03ea04; text-shadow: 0 0 10px rgba(3, 234, 4, 0.5); }
+.separator { color: #555; }
+.current-text { color: #fff; font-weight: 700; letter-spacing: 0.5px; }
+
+/* =========================================================
+   RIGHT SIDE (Flexible area)
+========================================================= */
+.dash-nav-right { 
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
+  flex: 1; /* 👈 Bachi hui jagah lega */
+  justify-content: flex-end; /* 👈 Sab kuch right mein push karega */
+}
+
+/* Search Bar (Responsive Width) */
+.dash-search {
+  display: flex;
+  align-items: center;
+  background: #050706;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 15px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 300px; /* 👈 Max width fix ki taake zyada jagah na le */
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dash-search:focus-within {
+  border-color: #03ea04;
+  box-shadow: 0 0 20px rgba(3, 234, 4, 0.25);
+}
+
+.search-icon { color: #777; margin-right: 10px; }
+.dash-search input { background: transparent; border: none; outline: none; color: #fff; font-size: 14px; width: 100%; }
+.dash-search input::placeholder { color: #666; }
+.search-shortcut { font-size: 11px; color: #666; background: rgba(255, 255, 255, 0.05); padding: 3px 6px; border-radius: 6px; margin-left: 8px; border: 1px solid rgba(255, 255, 255, 0.1); }
+
+.dash-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+.notification-dot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  background: #03ea04;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(3, 234, 4, 0.9);
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(3, 234, 4, 0.7); }
+  70% { transform: scale(1.2); box-shadow: 0 0 0 8px rgba(3, 234, 4, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(3, 234, 4, 0); }
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -38px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+  border: 1px solid rgba(3, 234, 4, 0.3);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* =========================================================
+   PROFILE SECTION
+========================================================= */
+.dash-profile { position: relative; flex-shrink: 0; }
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 5px 12px 5px 5px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.profile-trigger:hover {
+  background: rgba(3, 234, 4, 0.05);
+  border-color: rgba(3, 234, 4, 0.3);
+}
+
+.profile-image-wrapper { position: relative; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; flex-shrink: 0; }
+.profile-pic { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid #03ea04; transition: all 0.3s ease; }
+.image-upload-overlay { position: absolute; inset: 0; border-radius: 50%; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; color: #fff; opacity: 0; transition: opacity 0.3s ease; }
+.profile-image-wrapper:hover .profile-pic { transform: scale(1.05); filter: brightness(0.8); }
+.profile-image-wrapper:hover .image-upload-overlay { opacity: 1; }
+
+.profile-info h4 { margin: 0 0 2px 0; font-size: 14px; color: #fff; white-space: nowrap; }
+.profile-info p { margin: 0; font-size: 12px; color: #03ea04; font-weight: 600; white-space: nowrap; }
+.arrow { color: #777; transition: transform 0.4s; }
+.arrow.open { transform: rotate(180deg); color: #03ea04; }
+
+/* Dropdown Menu */
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 15px);
+  right: 0;
+  width: 240px; 
+  background: #0a0d0b;
+  border: 1px solid rgba(3, 234, 4, 0.4);
+  border-radius: 16px;
+  padding: 10px 0;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(3, 234, 4, 0.15);
+  animation: fadeInScale 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  z-index: 100;
+  transform-origin: top right;
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9) translateY(-10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.dropdown-header { padding: 10px 15px; }
+.dropdown-header h4 { margin: 0 0 4px; font-size: 15px; color: #fff; }
+.dropdown-header p { margin: 0; font-size: 12px; color: #777; }
+.dropdown-divider { height: 1px; background: rgba(255, 255, 255, 0.08); margin: 8px 0; }
+
+.dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 15px;
+  background: transparent;
+  border: none;
+  color: #a0a0a0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  text-decoration: none;
+}
+
+.dropdown-link:hover { background: rgba(3, 234, 4, 0.1); color: #03ea04; padding-left: 20px; }
+.dropdown-link.logout:hover { background: rgba(255, 59, 48, 0.1); color: #ff3b30; padding-left: 20px; }

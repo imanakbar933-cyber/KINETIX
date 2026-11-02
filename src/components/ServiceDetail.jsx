@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { getService, services } from './servicesData';
+import { getService, services } from './ServicesData';
 import './ServiceDetail.css';
 import Nutrient from './Nutrient';
 import SupplementConsultation from './SupplementConsultation';

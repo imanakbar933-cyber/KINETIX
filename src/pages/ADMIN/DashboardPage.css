@@ -1,0 +1,31 @@
+/* =========================================================
+   DASHBOARD LAYOUT
+========================================================= */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #050706; 
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+.dashboard-content {
+  flex: 1;
+  margin-top: 90px; /* Navbar ki height */
+  margin-left: 0;
+  padding: 30px;
+  background: #050706;
+  min-height: calc(100vh - 90px);
+  transition: margin-left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* 👇 Jab sidebar open ho, toh content right shift ho */
+.dashboard-content.shifted {
+  margin-left: 280px;
+}
