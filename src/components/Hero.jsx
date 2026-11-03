@@ -2,66 +2,32 @@ import React, { useState, useEffect } from "react";
 import "./Hero.css";
 
 function Hero() {
-  const [showTransition, setShowTransition] = useState(true);
+  const [showCurtain, setShowCurtain] = useState(true);
 
-  // 1. Page load hote hi transition chalao
+  const playCurtainAnimation = () => {
+    setShowCurtain(false);
+    setTimeout(() => setShowCurtain(true), 50);
+    setTimeout(() => setShowCurtain(false), 2200);
+  };
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowTransition(false);
-    }, 1500);
+    const timer = setTimeout(() => setShowCurtain(false), 2200);
     return () => clearTimeout(timer);
   }, []);
 
-  // 2. Navbar se aane wale signal ko suno (jab Home click ho)
   useEffect(() => {
-    const playAnimation = () => {
-      setShowTransition(true);
-      // Animation ko 2.5 second baad band karo
-      setTimeout(() => {
-        setShowTransition(false);
-      }, 1500);
-    };
-
-    // Event listener add karo
-    window.addEventListener("triggerHomeAnimation", playAnimation);
-
-    // Cleanup: Component unmount hone par listener hatao
+    window.addEventListener("triggerHomeAnimation", playCurtainAnimation);
     return () => {
-      window.removeEventListener("triggerHomeAnimation", playAnimation);
+      window.removeEventListener("triggerHomeAnimation", playCurtainAnimation);
     };
   }, []);
 
   return (
     <>
-      {/* 👇 3D WRAP IMAGE TRANSITION (Sabse upar) */}
-      {showTransition && (
-        <div 
-          style={{
-            position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-            zIndex: 9999999, 
-            backgroundColor: '#050706',
-            display: 'flex', justifyContent: 'center', alignItems: 'center', 
-            overflow: 'hidden', perspective: '1000px'
-          }}
-        >
-          <img 
-            src="/images/kinetix2.png" 
-            alt="Kinetix Transition" 
-            style={{
-              width: '80vw', height: 'auto', objectFit: 'contain', display: 'block',
-              animation: 'wrapReveal 2s cubic-bezier(0.22, 1, 0.36, 1) forwards'
-            }} 
-          />
-        </div>
-      )}
-
-      {/* HERO SECTION */}
+      {/* ================= HERO SECTION ================= */}
       <section className="hero">
         <div className="hero-left">
-          <div className="outline-text">
-            <br />
-            GET FIT
-          </div>
+          <div className="outline-text"><br />GET FIT</div>
           <div className="outline-text">WITH</div>
           <h1>
             KINETIX
@@ -82,6 +48,24 @@ function Hero() {
           />
         </div>
       </section>
+
+      {/* ================= CURTAIN ANIMATION (NEW APPROACH) ================= */}
+      {showCurtain && (
+        <div className="curtain-overlay">
+          {/* Full image as background */}
+          <img 
+            src="/images/kinetix2.png" 
+            alt="Kinetix" 
+            className="curtain-full-image"
+          />
+
+          {/* Left black curtain */}
+          <div className="curtain-black curtain-black-left"></div>
+
+          {/* Right black curtain */}
+          <div className="curtain-black curtain-black-right"></div>
+        </div>
+      )}
     </>
   );
 }

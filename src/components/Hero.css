@@ -4,113 +4,14 @@
 
 .hero {
   width: 100%;
-  height: 100vh;
+  height: 120vh;
   display: flex;
   background-color: #15161b;
   overflow: hidden;
   position: relative;
-  
-  /* 👇 Yeh 2 lines add karein upar shift karne ke liye */
-  margin-top: -80px; /* Jitna upar karna hai utna negative margin dein */
-  padding-top: 80px; /* Content ko Navbar ke neeche se shuru karne ke liye */
-  
+  margin-top: -80px;
+  padding-top: 80px;
   box-sizing: border-box;
-}
-/* =========================================================
-   NEON LIGHT BACKGROUND
-========================================================= */
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -20%;
-  width: 140%;
-  height: 200%;
-  background:
-    radial-gradient(
-      circle at 20% 50%,
-      rgba(0, 255, 0, 0.18),
-      transparent 25%
-    ),
-    radial-gradient(
-      circle at 80% 50%,
-      rgba(0, 255, 0, 0.12),
-      transparent 25%
-    );
-  filter: blur(40px);
-  animation: neonGlow 5s ease-in-out infinite alternate;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* =========================================================
-   MOVING NEON LIGHT
-========================================================= */
-
-.hero::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -30%;
-  width: 30%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0, 255, 0, 0.12),
-    rgba(0, 255, 0, 0.35),
-    rgba(0, 255, 0, 0.12),
-    transparent
-  );
-  filter: blur(18px);
-  transform: skewX(-15deg);
-  animation: neonSweep 5s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* =========================================================
-   NEON GLOW ANIMATION
-========================================================= */
-
-@keyframes neonGlow {
-  0% {
-    transform: translateX(-5%) scale(1);
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 0.9;
-  }
-  100% {
-    transform: translateX(5%) scale(1.08);
-    opacity: 0.6;
-  }
-}
-
-/* =========================================================
-   NEON LIGHT SWEEP
-========================================================= */
-
-@keyframes neonSweep {
-  0% {
-    left: -30%;
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  50% {
-    left: 100%;
-    opacity: 0.8;
-  }
-  70% {
-    opacity: 0;
-  }
-  100% {
-    left: 100%;
-    opacity: 0;
-  }
 }
 
 /* =========================================================
@@ -127,10 +28,6 @@
   z-index: 2;
 }
 
-/* =========================================================
-   OUTLINE TEXT
-========================================================= */
-
 .outline-text {
   color: transparent;
   -webkit-text-stroke: 3px #00ff00;
@@ -138,14 +35,11 @@
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: 2px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: textReveal 0.8s ease-out 0.5s forwards;
+  text-shadow:
+    0 0 5px rgba(0, 255, 0, 0.4),
+    0 0 15px rgba(0, 255, 0, 0.25);
+  animation: neonTextPulse 3s ease-in-out infinite alternate;
 }
-
-/* =========================================================
-   MAIN HEADING
-========================================================= */
 
 .hero-left h1 {
   color: white;
@@ -153,42 +47,7 @@
   font-weight: 900;
   line-height: 0.95;
   margin-top: 30px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: textReveal 0.8s ease-out 0.7s forwards;
 }
-
-/* =========================================================
-   TEXT REVEAL
-========================================================= */
-
-@keyframes textReveal {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* =========================================================
-   NEON TEXT GLOW
-========================================================= */
-
-.outline-text {
-  text-shadow:
-    0 0 5px rgba(0, 255, 0, 0.4),
-    0 0 15px rgba(0, 255, 0, 0.25);
-  animation:
-    textReveal 0.8s ease-out 0.5s forwards,
-    neonTextPulse 3s ease-in-out 1.5s infinite alternate;
-}
-
-/* =========================================================
-   NEON TEXT PULSE
-========================================================= */
 
 @keyframes neonTextPulse {
   0% {
@@ -213,30 +72,8 @@
   height: 100%;
   position: relative;
   overflow: hidden;
-  opacity: 0;
-  transform: scale(1.05);
-  animation: videoReveal 1s ease-out 0.5s forwards;
   z-index: 2;
 }
-
-/* =========================================================
-   VIDEO REVEAL
-========================================================= */
-
-@keyframes videoReveal {
-  0% {
-    opacity: 0;
-    transform: scale(1.05);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* =========================================================
-   VIDEO
-========================================================= */
 
 .hero-right video {
   width: 100%;
@@ -246,10 +83,6 @@
   display: block;
   transition: transform 0.6s ease;
 }
-
-/* =========================================================
-   VIDEO HOVER
-========================================================= */
 
 .hero-right:hover video {
   transform: scale(1.02);
@@ -282,4 +115,65 @@
   .hero-left h1 {
     font-size: 60px;
   }
+}
+
+/* =========================================================
+   CURTAIN ANIMATION (GAP-FREE)
+========================================================= */
+
+.curtain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999999;
+  overflow: hidden;
+  background-color: #050706;
+}
+
+/* Full image - ek hi image, poori screen par */
+.curtain-full-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* Black curtains - dono taraf */
+.curtain-black {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 50vw;
+  background-color: #050706;
+  z-index: 2;
+}
+
+.curtain-black-left {
+  left: 0;
+  animation: openLeft 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.8s forwards;
+}
+
+.curtain-black-right {
+  right: 0;
+  animation: openRight 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.8s forwards;
+}
+
+/* LEFT CURTAIN OPENS TO LEFT */
+@keyframes openLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* RIGHT CURTAIN OPENS TO RIGHT */
+@keyframes openRight {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
 }

@@ -82,7 +82,7 @@ function AppLayout() {
       <div 
         className="main-content-layout" 
         style={{ 
-          paddingTop: isAuthPage || isPlansPage ? "0" : "80px",
+          paddingTop: isAuthPage || isPlansPage ? "0" : "0px",
           transition: "padding-top 0.3s ease"
         }}
       >
