@@ -20,7 +20,8 @@ import Team from "./pages/Team.jsx";
 import GalleryPage from "./pages/GalleryPage.jsx";
 import ClassDetail from "./pages/ClassDetail.jsx";
 import Contact from "./pages/Contact.jsx";
-import TrainersPage from "./pages/TrainersPage.jsx";
+// 👇 TrainersPage ka import hata diya hai kyunke home ka trainer page nahi chahiye
+// import TrainersPage from "./pages/TrainersPage.jsx"; 
 import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx"; 
 import SignUp from "./pages/SignUp.jsx";
@@ -33,13 +34,13 @@ import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
 function AppLayout() {
   const location = useLocation();
   
-  // 👇 Yahan se "/trainers" hata diya hai taake main website ka trainers page khul sake
+  // 👇 Yahan "/trainers" wapas add kar diya hai taake ye Dashboard ke andar hi khule
   const isDashboard = location.pathname.startsWith("/dashboard") || 
                       location.pathname.startsWith("/members") ||
                       location.pathname.startsWith("/workouts") ||
                       location.pathname.startsWith("/diet") ||
                       location.pathname.startsWith("/schedule") ||
-                      // location.pathname.startsWith("/trainers") || 👈 YEH HATA DIYA
+                      location.pathname.startsWith("/trainers") || // 👈 YEH WAPAS ADD KIYA
                       location.pathname.startsWith("/billing") ||
                       location.pathname.startsWith("/reports") ||
                       location.pathname.startsWith("/settings"); 
@@ -59,10 +60,7 @@ function AppLayout() {
         <Route path="/diet" element={<DashboardPage />} />
         <Route path="/schedule" element={<DashboardPage />} />
         
-        {/* Note: Dashboard ke andar Trainer List ka link /trainers par jata hai, 
-            ab woh /trainers par jayega toh main website ka page khulega. 
-            Agar aap chahti hain ke Dashboard ke andar alag trainers page ho, 
-            toh DashboardSidebar mein link /dashboard-trainers kar dein */}
+        {/* 👇 Ab /trainers par Dashboard wala page khulega */}
         <Route path="/trainers" element={<DashboardPage />} /> 
         
         <Route path="/billing" element={<DashboardPage />} />
@@ -100,8 +98,9 @@ function AppLayout() {
           <Route path="/class-detail/:classId" element={<ClassDetail />} />
           <Route path="/contact" element={<Contact />} />
           
-          {/* 👇 Ab /trainers main website ka TrainersPage kholega */}
-          <Route path="/trainers" element={<TrainersPage />} /> 
+          {/* 👇 Yahan se TrainersPage ka route hata diya hai. 
+              Ab main website par /trainers nahi khulega, sirf Dashboard khulega. */}
+          {/* <Route path="/trainers" element={<TrainersPage />} />  👈 YEH HATA DIYA */}
           
           <Route path="/schedules" element={<SchedulePage />} />
           <Route path="/login" element={<Login />} />
