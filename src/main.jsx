@@ -21,7 +21,8 @@ import Team from "./pages/Team.jsx";
 import GalleryPage from "./pages/GalleryPage.jsx";
 import ClassDetail from "./pages/ClassDetail.jsx";
 import Contact from "./pages/Contact.jsx";
-import TrainersPage from "./pages/TrainersPage.jsx";
+// 👇 TrainersPage ka import hata diya hai kyunke home ka trainer page nahi chahiye
+// import TrainersPage from "./pages/TrainersPage.jsx"; 
 import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx"; 
 import SignUp from "./pages/SignUp.jsx";
@@ -30,28 +31,26 @@ import ServiceDetail from "./components/ServiceDetail.jsx";
 
 // 👇 Dashboard Page
 import DashboardPage from "./pages/ADMIN/DashboardPage.jsx"; 
-import SettingsPage from "./components/ADMIN/Settings/SettingsPage.jsx"; 
 
 function AppLayout() {
   const location = useLocation();
   
+  // 👇 Yahan "/trainers" wapas add kar diya hai taake ye Dashboard ke andar hi khule
   const isDashboard = location.pathname.startsWith("/dashboard") || 
                       location.pathname.startsWith("/members") ||
                       location.pathname.startsWith("/workouts") ||
                       location.pathname.startsWith("/diet") ||
                       location.pathname.startsWith("/schedule") ||
-                      location.pathname.startsWith("/trainers") ||
+                      location.pathname.startsWith("/trainers") || // 👈 YEH WAPAS ADD KIYA
                       location.pathname.startsWith("/billing") ||
                       location.pathname.startsWith("/reports") ||
-                      location.pathname.startsWith("/settings");
+                      location.pathname.startsWith("/settings"); 
 
   const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
-  
-  // 👇 Plans page check
   const isPlansPage = location.pathname === "/plans";
 
   // =========================================================
-  // AGAR DASHBOARD HAI TOH SIRF DASHBOARD PAGE DIKHAO
+  // AGAR DASHBOARD YA SETTINGS HAI TOH SIRF DASHBOARD PAGE DIKHAO
   // =========================================================
   if (isDashboard) {
     return (
@@ -61,10 +60,13 @@ function AppLayout() {
         <Route path="/workouts" element={<DashboardPage />} />
         <Route path="/diet" element={<DashboardPage />} />
         <Route path="/schedule" element={<DashboardPage />} />
-        <Route path="/trainers" element={<DashboardPage />} />
+        
+        {/* 👇 Ab /trainers par Dashboard wala page khulega */}
+        <Route path="/trainers" element={<DashboardPage />} /> 
+        
         <Route path="/billing" element={<DashboardPage />} />
         <Route path="/reports" element={<DashboardPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/settings" element={<DashboardPage />} /> 
       </Routes>
     );
   }
@@ -81,8 +83,7 @@ function AppLayout() {
       <div 
         className="main-content-layout" 
         style={{ 
-          // Plans page ki padding 0 hai taake image navbar ke peechay na jaye
-          paddingTop: isAuthPage || isPlansPage ? "0" : "80px",
+          paddingTop: isAuthPage || isPlansPage ? "0" : "0px",
           transition: "padding-top 0.3s ease"
         }}
       >
@@ -97,33 +98,30 @@ function AppLayout() {
           <Route path="/GalleryPage" element={<GalleryPage />} />
           <Route path="/class-detail/:classId" element={<ClassDetail />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/trainers-page" element={<TrainersPage />} />
+          
+          {/* 👇 Yahan se TrainersPage ka route hata diya hai. 
+              Ab main website par /trainers nahi khulega, sirf Dashboard khulega. */}
+          {/* <Route path="/trainers" element={<TrainersPage />} />  👈 YEH HATA DIYA */}
+          
           <Route path="/schedules" element={<SchedulePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/settings" element={<SettingsPage />} />
 
-          {/* 👇 Membership (Plans) ka Route */}
+          {/* Membership (Plans) ka Route */}
           <Route path="/plans" element={
             <div className="plans-page-wrapper">
-              
-              {/* HERO SECTION */}
               <div className="plans-hero-section">
                 <div className="plans-hero-content">
                   <h1>MEMBERSHIP</h1>
                 </div>
               </div>
-
-              {/* MEMBERSHIP PLANS COMPONENT */}
               <div className="plans-content-container">
                 <MembershipPlans />
               </div>
-
             </div>
           } />
 
           <Route path="/services/:slug" element={<ServiceDetail />} />
-          
         </Routes>
       </div>
 

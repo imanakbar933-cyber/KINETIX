@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from 'react-router-dom'; // 👈 useLocation import kiya
+import { Link } from 'react-router-dom';
 import "./Navbar.css";
 
 function Navbar() {
@@ -8,8 +8,6 @@ function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-  
-  const location = useLocation(); // 👈 Location check karne ke liye
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -24,14 +22,9 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 👇 NAYA: Home Click Handler (Jo Hero ko signal bhejega)
+  // 👇 Sirf yeh line add hui hai (purani showTransition hata di)
   const handleHomeClick = () => {
-    if (location.pathname === "/") {
-      // Agar pehle se Home page par hain, toh direct animation trigger karein
-      window.dispatchEvent(new Event("triggerHomeAnimation"));
-    }
-    // Agar kisi aur page par hain, toh Link "/" par le jayega, 
-    // aur Hero load hote hi apni animation chala dega.
+    window.dispatchEvent(new Event("triggerHomeAnimation"));
   };
 
   return (
@@ -42,17 +35,14 @@ function Navbar() {
           
           {/* LEFT SIDE (Sirf Logo) */}
           <div className="navbar-left">
-            {/* 👇 Logo par click karne par animation trigger hogi */}
             <Link to="/" className="navbar-logo" onClick={handleHomeClick}>
               <img src="/images/kinetix.svg" alt="Kinetix" className="kinetix-logo-image" />
             </Link>
           </div>
 
-          {/* MENU LINKS */}
+          {/* MENU LINKS (Dashboard add kiya) */}
           <nav className={`navbar-menu ${menuOpen ? "menu-open" : ""}`}>
-            {/* 👇 Home Link par click karne par animation trigger hogi */}
             <Link to="/" className="nav-link" onClick={handleHomeClick}>Home</Link>
-            
             <Link to="/about" className="nav-link">About</Link>
             
             <div className="nav-item-dropdown">
@@ -69,9 +59,13 @@ function Navbar() {
             </div>
 
             <Link to="/trainers" className="nav-link">Trainers</Link>
-            <Link to="/plans" className="nav-link">
-                 Membership
+            
+            {/* 👇 NAYA DASHBOARD LINK */}
+            <Link to="/settings" className="nav-link dashboard-link">
+              Dashboard
             </Link>
+
+            <Link to ="/plans" className ="nav-link">Membership</Link>
             <Link to="/contact" className="nav-link" onClick={() => setMenuOpen(false)}>Contact</Link>
           </nav>
 
