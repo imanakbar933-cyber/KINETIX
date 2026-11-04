@@ -4,7 +4,7 @@ import {
   LayoutDashboard, Users, Calendar, FileText, 
   User, Settings, LogOut, Search, Bell, Flame, ChevronDown 
 } from "lucide-react";
-import MemberList from "../components/MemberList";
+import MembersList from "../../components/ADMIN/MembersList.jsx";
 import "./MembersPage.css";
 
 const MembersPage = () => {
@@ -14,7 +14,7 @@ const MembersPage = () => {
       {/* ================= SIDEBAR ================= */}
       <aside className="members-sidebar">
         <div className="members-logo">
-          <Flame size={28} color="#ff7b1c" />
+          <Flame size={28} color=" #03ea04" />
           <h2>FitFlow</h2>
         </div>
 
@@ -54,8 +54,8 @@ const MembersPage = () => {
           </div>
 
           <div className="header-right">
-            <div className="header-icon"><Flame size={20} color="#ff7b1c" /></div>
-            <div className="header-icon"><Bell size={20} color="#ff7b1c" /></div>
+            <div className="header-icon"><Flame size={20} color=" #03ea04" /></div>
+            <div className="header-icon"><Bell size={20} color=" #03ea04 "/> </div>
             <div className="header-profile">
               <img src="https://i.pravatar.cc/150?img=12" alt="User" />
               <div>
@@ -74,7 +74,7 @@ const MembersPage = () => {
         </div>
 
         {/* ✅ MEMBER LIST COMPONENT YAHAN CALL HUA HAI */}
-        <MemberList />
+        <MembersList />
 
       </main>
     </div>
