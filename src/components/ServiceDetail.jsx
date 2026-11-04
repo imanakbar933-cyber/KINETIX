@@ -9,10 +9,14 @@ export default function ServiceDetail() {
   const service = getService(slug);
 
   useEffect(() => {
-    const elements = document.querySelectorAll(".sd-reveal");
+    if (!service) return;
+
+    const elements = document.querySelectorAll(
+      ".service-detail-page .sd-motion"
+    );
 
     if (!("IntersectionObserver" in window)) {
-      elements.forEach((element) => element.classList.add("sd-visible"));
+      elements.forEach((element) => element.classList.add("sd-in"));
       return;
     }
 
@@ -20,17 +24,26 @@ export default function ServiceDetail() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("sd-visible");
+            entry.target.classList.add("sd-in");
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12 }
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -35px 0px",
+      }
     );
 
     elements.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
+  }, [slug, service]);
+
+  useEffect(() => {
+    if (service) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
   }, [slug]);
 
   if (!service) {
@@ -38,7 +51,7 @@ export default function ServiceDetail() {
       <main className="sd-not-found">
         <span>404 / SERVICE NOT FOUND</span>
         <h1>This service doesn't exist.</h1>
-        <Link to="/">Back to Home</Link>
+        <Link to="/">Back to Home ↗</Link>
       </main>
     );
   }
@@ -49,24 +62,33 @@ export default function ServiceDetail() {
 
   return (
     <main className="service-detail-page">
-      {/* HERO */}
+
+      {/* ==================================
+          HERO SECTION
+      ================================== */}
+
       <section className="sd-hero">
+
         <img
           className="sd-hero-image"
           src={service.image}
-          alt={service.title}
+          alt={`${service.title} at KINETIX`}
         />
+
         <div className="sd-hero-overlay" />
 
         <div className="sd-hero-content">
+
           <div className="sd-breadcrumb">
             <Link to="/">HOME</Link>
             <span>/</span>
-            <span>SERVICES</span>
+            <Link to="/#services">SERVICES</Link>
+            <span>/</span>
+            <span>{service.title.toUpperCase()}</span>
           </div>
 
           <span className="sd-eyebrow">
-            KINETIX FITNESS CLUB / OUR SERVICES
+            KINETIX FITNESS CLUB / {service.category}
           </span>
 
           <h1>{service.title}</h1>
@@ -74,193 +96,368 @@ export default function ServiceDetail() {
           <p>{service.shortDescription}</p>
 
           <div className="sd-hero-actions">
+
             <a href="#what-we-offer" className="sd-primary-btn">
               EXPLORE SERVICE <span>↘</span>
             </a>
+
             <Link to="/contact" className="sd-text-link">
               GET IN TOUCH <span>↗</span>
             </Link>
+
           </div>
+
+          <div className="sd-hero-accent" />
+
         </div>
 
         <div className="sd-hero-bottom">
           <span>TRAIN SMARTER. GET STRONGER.</span>
-          <span>01 — 06</span>
+          <span>KINETIX / FITNESS CLUB</span>
         </div>
-        <span className="sd-hero-side-text">KINETIX / FITNESS CLUB</span>
+
+        <span className="sd-hero-side-text">
+          FITNESS REDEFINED
+        </span>
+
       </section>
 
-      {/* INTRO */}
-      <section className="sd-intro sd-section">
-        <div className="sd-intro-number sd-reveal">01</div>
 
-        <div className="sd-intro-content sd-reveal">
-          <span className="sd-eyebrow">BUILT AROUND YOUR GOALS</span>
+      {/* ==================================
+          INTRODUCTION
+      ================================== */}
+
+      <section className="sd-intro sd-section">
+
+        <div className="sd-intro-number sd-motion">
+          <span>01</span>
+          <small>INTRODUCTION</small>
+        </div>
+
+        <div className="sd-intro-content sd-motion">
+
+          <span className="sd-eyebrow">
+            {service.category}
+          </span>
+
           <h2>{service.heading}</h2>
+
           <p>{service.description}</p>
+
         </div>
 
         <div className="sd-intro-mark">K</div>
+
       </section>
 
-      {/* WHAT WE OFFER */}
-      <section className="sd-offer-section sd-section" id="what-we-offer">
-        <div className="sd-section-heading sd-reveal">
+
+      {/* ==================================
+          WHAT WE OFFER
+      ================================== */}
+
+      <section
+        className="sd-offer-section sd-section"
+        id="what-we-offer"
+      >
+
+        <div className="sd-section-heading sd-motion">
+
           <div>
-            <span className="sd-eyebrow">02 / THE EXPERIENCE</span>
+            <span className="sd-eyebrow">
+              02 / SERVICE EXPERIENCE
+            </span>
+
             <h2>
-              WHAT WE <span>OFFER.</span>
+              {service.offerHeading}
             </h2>
           </div>
-          <p>
-            Everything you need to make every session count.
-          </p>
+
+          <p>{service.offerDescription}</p>
+
         </div>
 
+
         <div className="sd-offer-layout">
-          <div className="sd-offer-visual sd-reveal">
-            <img src={service.image} alt={`${service.title} at Kinetix`} />
+
+          {/* SERVICE IMAGE */}
+
+          <div className="sd-offer-visual sd-motion">
+
+            <img
+              src={service.image}
+              alt={`${service.title} service experience`}
+              loading="lazy"
+            />
+
             <div className="sd-image-shade" />
+
             <div className="sd-image-caption">
-              <span>THE KINETIX EXPERIENCE</span>
+
+              <span>{service.offerCaption}</span>
+
               <strong>{service.title}</strong>
+
             </div>
-            <div className="sd-image-corner">K.</div>
+
+            <div className="sd-image-corner">
+              K.
+            </div>
+
           </div>
 
+
+          {/* SERVICE FEATURES */}
+
           <div className="sd-offer-list">
-            {service.features?.map((feature, index) => (
+
+            {service.features.map((feature, index) => (
+
               <article
-                className="sd-offer-card sd-reveal"
-                key={`${feature.title}-${index}`}
-                style={{ "--sd-delay": `${index * 0.1}s` }}
+                className="sd-offer-card sd-motion"
+                key={feature.title}
+                style={{
+                  "--sd-delay": `${index * 0.12}s`,
+                }}
               >
+
                 <span className="sd-offer-index">
-                  {String(index + 1).padStart(2, "0")}
+                  0{index + 1}
                 </span>
 
                 <div className="sd-offer-copy">
+
                   <h3>{feature.title}</h3>
+
                   <p>{feature.text}</p>
+
                 </div>
 
-        
+
               </article>
+
             ))}
+
           </div>
+
         </div>
+
       </section>
 
-      {/* BENEFITS */}
-      {service.benefits?.length > 0 && (
-        <section className="sd-benefits-section">
-          <div className="sd-benefits-inner sd-section">
-            <div className="sd-benefits-heading sd-reveal">
-              <span className="sd-eyebrow">03 / WHY IT MATTERS</span>
-              <h2>
-                MORE THAN
-                <br />
-                <span>JUST A WORKOUT.</span>
-              </h2>
-              <p>
-                A better experience. A stronger routine. Progress that matters.
-              </p>
-            </div>
 
-            <div className="sd-benefits-list">
-              {service.benefits.map((benefit, index) => (
-                <div
-                  className="sd-benefit-item sd-reveal"
-                  key={`${benefit}-${index}`}
-                >
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <h3>{benefit}</h3>
-                  
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* ==================================
+          BENEFITS
+      ================================== */}
 
-      {/* HOW IT WORKS */}
-      {service.steps?.length > 0 && (
-        <section className="sd-process-section sd-section">
-          <div className="sd-section-heading sd-reveal">
-            <div>
-              <span className="sd-eyebrow">04 / YOUR NEXT MOVE</span>
-              <h2>
-                HOW IT <span>WORKS.</span>
-              </h2>
-            </div>
-            <p>A simple approach to getting started.</p>
+      <section className="sd-benefits-section">
+
+        <div className="sd-benefits-inner sd-section">
+
+          <div className="sd-benefits-heading sd-motion">
+
+            <span className="sd-eyebrow">
+              03 / WHY IT MATTERS
+            </span>
+
+            <h2>
+              {service.benefitsHeading}
+            </h2>
+
+            <p>{service.benefitsDescription}</p>
+
+            <div className="sd-benefit-accent" />
+
           </div>
 
-          <div className="sd-process-grid">
-            {service.steps.map((step, index) => (
-              <article className="sd-process-card sd-reveal" key={index}>
-                <span className="sd-process-number">
-                  {String(index + 1).padStart(2, "0")}
+
+          <div className="sd-benefits-list">
+
+            {service.benefits.map((benefit, index) => (
+
+              <div
+                className="sd-benefit-item sd-motion"
+                key={benefit}
+                style={{
+                  "--sd-delay": `${index * 0.1}s`,
+                }}
+              >
+
+                <span className="sd-benefit-index">
+                  0{index + 1}
                 </span>
-                <div className="sd-process-line" />
-                <h3>{step}</h3>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
 
-      {/* CTA */}
+                <h3>{benefit}</h3>
+
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* ==================================
+          HOW IT WORKS
+      ================================== */}
+
+      <section className="sd-process-section sd-section">
+
+        <div className="sd-section-heading sd-motion">
+
+          <div>
+
+            <span className="sd-eyebrow">
+              04 / YOUR EXPERIENCE
+            </span>
+
+            <h2>
+              HOW IT <span>WORKS.</span>
+            </h2>
+
+          </div>
+
+          <p>{service.processDescription}</p>
+
+        </div>
+
+
+        <div className="sd-process-grid">
+
+          {service.steps.map((step, index) => (
+
+            <article
+              className="sd-process-card sd-motion"
+              key={step.title}
+              style={{
+                "--sd-delay": `${index * 0.12}s`,
+              }}
+            >
+
+              <span className="sd-process-number">
+                0{index + 1}
+              </span>
+
+              <div className="sd-process-line" />
+
+              <h3>{step.title}</h3>
+
+              <p>{step.text}</p>
+
+              <span className="sd-process-watermark">
+                0{index + 1}
+              </span>
+
+            </article>
+
+          ))}
+
+        </div>
+
+      </section>
+
+
+      {/* ==================================
+          CALL TO ACTION
+      ================================== */}
+
       <section className="sd-cta-section">
-        <div className="sd-cta-watermark">K</div>
-        <div className="sd-cta-content sd-reveal">
-          <span className="sd-eyebrow">READY TO LEVEL UP?</span>
+
+        <div className="sd-cta-watermark">
+          K
+        </div>
+
+        <div className="sd-cta-content sd-motion">
+
+          <span className="sd-eyebrow">
+            KINETIX / YOUR FITNESS JOURNEY
+          </span>
+
           <h2>
-            YOUR NEXT
-            <br />
-            <span>MOVE STARTS HERE.</span>
+            {service.ctaHeading}
           </h2>
-          <p>Take the first step. We'll help you make it count.</p>
+
+          <p>{service.ctaDescription}</p>
+
           <Link to="/contact" className="sd-primary-btn">
             START YOUR JOURNEY <span>↗</span>
           </Link>
+
         </div>
+
       </section>
 
-      {/* RELATED SERVICES */}
+
+      {/* ==================================
+          RELATED SERVICES
+      ================================== */}
+
       <section className="sd-related-section sd-section">
-        <div className="sd-section-heading sd-reveal">
+
+        <div className="sd-section-heading sd-motion">
+
           <div>
-            <span className="sd-eyebrow">05 / KEEP EXPLORING</span>
+
+            <span className="sd-eyebrow">
+              05 / KEEP EXPLORING
+            </span>
+
             <h2>
               MORE TO <span>DISCOVER.</span>
             </h2>
+
           </div>
-          <Link to="/" className="sd-text-link">
-            BACK TO HOME ↗
+
+          <Link to="/#services" className="sd-text-link">
+            ALL SERVICES ↗
           </Link>
+
         </div>
 
+
         <div className="sd-related-grid">
+
           {relatedServices.map((item, index) => (
+
             <Link
               to={`/services/${item.slug}`}
-              className="sd-related-card sd-reveal"
+              className="sd-related-card sd-motion"
               key={item.slug}
+              style={{
+                "--sd-delay": `${index * 0.12}s`,
+              }}
             >
-              <img src={item.image} alt={item.title} loading="lazy" />
+
+              <img
+                src={item.image}
+                alt={item.title}
+                loading="lazy"
+              />
+
               <div className="sd-related-overlay" />
+
               <span className="sd-related-number">
-                0{index + 1} / SERVICE
+                0{index + 1} / EXPLORE
               </span>
+
               <div className="sd-related-info">
+
                 <h3>{item.title}</h3>
+
                 <span>EXPLORE ↗</span>
+
               </div>
+
             </Link>
+
           ))}
+
         </div>
+
       </section>
+
     </main>
   );
 }

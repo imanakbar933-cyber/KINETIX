@@ -1,10 +1,17 @@
 
+/* =========================================
+   KINETIX SERVICE DETAIL
+   PREMIUM CINEMATIC DESIGN
+========================================= */
+
 .service-detail-page {
   --sd-green: #03ea04;
   --sd-black: #070907;
-  --sd-panel: #101410;
+  --sd-panel: #111611;
   --sd-white: #f4f7f2;
   --sd-muted: #a0aaa0;
+  --sd-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
   background: var(--sd-black);
   color: var(--sd-white);
   overflow: hidden;
@@ -29,7 +36,9 @@
   text-transform: uppercase;
 }
 
-/* HERO */
+/* =========================================
+   HERO
+========================================= */
 
 .sd-hero {
   min-height: 690px;
@@ -54,21 +63,31 @@
   z-index: -2;
   object-fit: cover;
   object-position: center;
-  animation: sd-hero-zoom 1.2s ease-out both;
+  transform: scale(1.12);
+  animation: sd-cinematic-image 2.4s var(--sd-ease) forwards;
 }
 
 .sd-hero-overlay {
   z-index: -1;
   background:
-    linear-gradient(90deg, rgba(3, 7, 3, .96) 0%, rgba(3, 7, 3, .78) 43%, rgba(3, 7, 3, .15) 100%),
-    linear-gradient(0deg, rgba(3, 7, 3, .75), transparent 35%);
+    linear-gradient(
+      90deg,
+      rgba(3, 7, 3, .96) 0%,
+      rgba(3, 7, 3, .78) 43%,
+      rgba(3, 7, 3, .15) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(3, 7, 3, .75),
+      transparent 35%
+    );
+  animation: sd-overlay-in 1.5s ease both;
 }
 
 .sd-hero-content {
   width: min(760px, 100%);
   position: relative;
   z-index: 2;
-  animation: sd-content-in .8s ease both;
 }
 
 .sd-breadcrumb {
@@ -79,11 +98,16 @@
   color: #c3c9c2;
   font-size: 11px;
   letter-spacing: 1.8px;
+  animation: sd-small-in .9s .2s var(--sd-ease) both;
 }
 
 .sd-breadcrumb a {
   color: var(--sd-green);
   text-decoration: none;
+}
+
+.sd-hero-content > .sd-eyebrow {
+  animation: sd-small-in .9s .35s var(--sd-ease) both;
 }
 
 .sd-hero h1 {
@@ -95,6 +119,7 @@
   letter-spacing: -4px;
   font-weight: 900;
   text-transform: uppercase;
+  animation: sd-heading-in 1.2s .45s var(--sd-ease) both;
 }
 
 .sd-hero-content > p {
@@ -103,6 +128,7 @@
   color: #d0d5cf;
   font-size: clamp(17px, 1.6vw, 21px);
   line-height: 1.7;
+  animation: sd-small-in 1s .65s var(--sd-ease) both;
 }
 
 .sd-hero-actions {
@@ -110,6 +136,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 30px;
+  animation: sd-small-in 1s .8s var(--sd-ease) both;
 }
 
 .sd-primary-btn {
@@ -125,17 +152,27 @@
   font-weight: 900;
   letter-spacing: 1.2px;
   text-decoration: none;
-  transition: .3s ease;
+  transition:
+    background .35s ease,
+    color .35s ease,
+    transform .5s var(--sd-ease),
+    box-shadow .35s ease;
 }
 
 .sd-primary-btn span {
   font-size: 19px;
+  transition: transform .4s var(--sd-ease);
 }
 
 .sd-primary-btn:hover {
   background: #fff;
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(3, 234, 4, .15);
+  color: #050805;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(3, 234, 4, .12);
+}
+
+.sd-primary-btn:hover span {
+  transform: translate(3px, -3px);
 }
 
 .sd-text-link {
@@ -155,6 +192,15 @@
 
 .sd-text-link:hover {
   color: var(--sd-green);
+}
+
+.sd-hero-accent {
+  width: 75px;
+  height: 2px;
+  margin-top: 28px;
+  background: var(--sd-green);
+  transform-origin: left;
+  animation: sd-line-in 1s 1s var(--sd-ease) both;
 }
 
 .sd-hero-bottom {
@@ -179,7 +225,9 @@
   letter-spacing: 4px;
 }
 
-/* INTRO */
+/* =========================================
+   INTRO
+========================================= */
 
 .sd-intro {
   position: relative;
@@ -233,7 +281,9 @@
   pointer-events: none;
 }
 
-/* SECTION HEADINGS */
+/* =========================================
+   SECTION HEADINGS
+========================================= */
 
 .sd-section-heading {
   display: flex;
@@ -267,7 +317,9 @@
   line-height: 1.7;
 }
 
-/* WHAT WE OFFER */
+/* =========================================
+   WHAT WE OFFER
+========================================= */
 
 .sd-offer-section {
   padding-top: 115px;
@@ -296,7 +348,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform .8s ease;
+  transition: transform 1.3s var(--sd-ease);
 }
 
 .sd-offer-visual:hover > img {
@@ -321,6 +373,11 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  transition: transform .7s var(--sd-ease);
+}
+
+.sd-offer-visual:hover .sd-image-caption {
+  transform: translateY(-7px);
 }
 
 .sd-image-caption span {
@@ -363,19 +420,41 @@
   flex: 1;
   min-height: 115px;
   padding: 23px 22px;
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 38px 1fr 25px;
   align-items: center;
   gap: 15px;
   background: #111611;
   border: 1px solid rgba(255, 255, 255, .08);
-  transition: .3s ease;
+  transition:
+    transform .55s var(--sd-ease),
+    background .55s ease,
+    border-color .55s ease;
+}
+
+.sd-offer-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--sd-green);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .55s var(--sd-ease);
+}
+
+.sd-offer-card:hover::before {
+  transform: scaleY(1);
 }
 
 .sd-offer-card:hover {
   background: #172117;
-  border-color: rgba(3, 234, 4, .6);
-  transform: translateX(6px);
+  border-color: rgba(3, 234, 4, .4);
+  transform: translateX(7px);
 }
 
 .sd-offer-index {
@@ -404,14 +483,16 @@
 .sd-offer-arrow {
   color: var(--sd-green);
   font-size: 21px;
-  transition: transform .3s ease;
+  transition: transform .45s var(--sd-ease);
 }
 
 .sd-offer-card:hover .sd-offer-arrow {
-  transform: translate(3px, -3px);
+  transform: translate(4px, -4px);
 }
 
-/* BENEFITS */
+/* =========================================
+   BENEFITS
+========================================= */
 
 .sd-benefits-section {
   padding: 115px 0;
@@ -448,16 +529,35 @@
 
 .sd-benefit-item {
   min-height: 85px;
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 45px 1fr 25px;
   gap: 15px;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, .15);
-  transition: padding .3s ease;
+  transition: padding .4s var(--sd-ease);
+}
+
+.sd-benefit-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--sd-green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .7s var(--sd-ease);
+}
+
+.sd-benefit-item:hover::after {
+  transform: scaleX(1);
 }
 
 .sd-benefit-item:hover {
-  padding-left: 10px;
+  padding-left: 8px;
 }
 
 .sd-benefit-item > span:first-child {
@@ -471,6 +571,11 @@
   color: #f4f7f2;
   font-size: clamp(17px, 1.7vw, 22px);
   font-weight: 750;
+  transition: color .4s ease;
+}
+
+.sd-benefit-item:hover h3 {
+  color: var(--sd-green);
 }
 
 .sd-benefit-check {
@@ -478,7 +583,9 @@
   font-size: 25px;
 }
 
-/* PROCESS */
+/* =========================================
+   PROCESS
+========================================= */
 
 .sd-process-section {
   padding-top: 120px;
@@ -495,20 +602,31 @@
   min-height: 225px;
   padding: 28px;
   position: relative;
+  overflow: hidden;
   background: #111611;
   border: 1px solid rgba(255, 255, 255, .08);
-  transition: .3s ease;
+  transition:
+    transform .6s var(--sd-ease),
+    border-color .6s ease,
+    background .6s ease;
 }
 
 .sd-process-card:hover {
-  border-color: var(--sd-green);
+  border-color: rgba(3, 234, 4, .65);
+  background: #151c15;
   transform: translateY(-6px);
 }
 
 .sd-process-number {
+  display: inline-block;
   color: var(--sd-green);
   font-size: 35px;
   font-weight: 900;
+  transition: transform .6s var(--sd-ease);
+}
+
+.sd-process-card:hover .sd-process-number {
+  transform: translateY(-5px);
 }
 
 .sd-process-line {
@@ -516,6 +634,12 @@
   height: 3px;
   margin: 24px 0;
   background: var(--sd-green);
+  transform-origin: left;
+  transition: width .65s var(--sd-ease);
+}
+
+.sd-process-card:hover .sd-process-line {
+  width: 85px;
 }
 
 .sd-process-card h3 {
@@ -527,7 +651,9 @@
   font-weight: 800;
 }
 
-/* CTA */
+/* =========================================
+   CTA
+========================================= */
 
 .sd-cta-section {
   min-height: 480px;
@@ -538,7 +664,11 @@
   overflow: hidden;
   padding: 90px 5%;
   background:
-    radial-gradient(ellipse at 85% 50%, rgba(3, 234, 4, .12), transparent 40%),
+    radial-gradient(
+      ellipse at 85% 50%,
+      rgba(3, 234, 4, .12),
+      transparent 40%
+    ),
     #0d120d;
   border-top: 1px solid rgba(3, 234, 4, .15);
   border-bottom: 1px solid rgba(3, 234, 4, .15);
@@ -560,6 +690,10 @@
   font-weight: 950;
 }
 
+.sd-cta-content h2 span {
+  color: var(--sd-green);
+}
+
 .sd-cta-content p {
   margin: 0 0 30px;
   color: #aab4a9;
@@ -575,9 +709,16 @@
   line-height: 1;
   font-weight: 1000;
   pointer-events: none;
+  transition: transform 1.5s var(--sd-ease);
 }
 
-/* RELATED SERVICES */
+.sd-cta-section:hover .sd-cta-watermark {
+  transform: translateX(-18px);
+}
+
+/* =========================================
+   RELATED SERVICES
+========================================= */
 
 .sd-related-section {
   padding-top: 120px;
@@ -595,6 +736,7 @@
   position: relative;
   display: block;
   overflow: hidden;
+  isolation: isolate;
   background: #151a15;
   text-decoration: none;
 }
@@ -605,11 +747,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform .7s ease;
+  transition: transform 1.2s var(--sd-ease);
 }
 
 .sd-related-card:hover > img {
-  transform: scale(1.08);
+  transform: scale(1.07);
 }
 
 .sd-related-overlay {
@@ -649,6 +791,11 @@
   font-size: clamp(19px, 2vw, 25px);
   line-height: 1.2;
   font-weight: 900;
+  transition: transform .55s var(--sd-ease);
+}
+
+.sd-related-card:hover .sd-related-info h3 {
+  transform: translateY(-5px);
 }
 
 .sd-related-info > span {
@@ -657,25 +804,38 @@
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 1px;
+  transition: letter-spacing .4s ease;
 }
 
-/* REVEAL ANIMATION */
+.sd-related-card:hover .sd-related-info > span {
+  letter-spacing: 2px;
+}
 
-.sd-reveal {
+/* =========================================
+   SCROLL REVEAL ANIMATION
+========================================= */
+
+.sd-motion {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translate3d(0, 38px, 0);
+  filter: blur(5px);
   transition:
-    opacity .7s ease,
-    transform .7s ease;
+    opacity 1s var(--sd-ease),
+    transform 1.1s var(--sd-ease),
+    filter 1s var(--sd-ease);
   transition-delay: var(--sd-delay, 0s);
+  will-change: opacity, transform, filter;
 }
 
-.sd-reveal.sd-visible {
+.sd-motion.sd-in {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
 }
 
-/* NOT FOUND */
+/* =========================================
+   NOT FOUND
+========================================= */
 
 .sd-not-found {
   min-height: 70vh;
@@ -706,29 +866,64 @@
   text-decoration: none;
 }
 
-/* ANIMATIONS */
+/* =========================================
+   KEYFRAMES
+========================================= */
 
-@keyframes sd-hero-zoom {
+@keyframes sd-cinematic-image {
   from {
-    transform: scale(1.08);
+    transform: scale(1.12);
   }
   to {
     transform: scale(1);
   }
 }
 
-@keyframes sd-content-in {
+@keyframes sd-overlay-in {
   from {
-    opacity: 0;
-    transform: translateY(25px);
+    opacity: .3;
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
-/* RESPONSIVE */
+@keyframes sd-small-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes sd-heading-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 45px, 0);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes sd-line-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
 
 @media (max-width: 900px) {
   .sd-hero {
@@ -761,6 +956,10 @@
   }
 }
 
+/* =========================================
+   MOBILE
+========================================= */
+
 @media (max-width: 600px) {
   .sd-section {
     width: 90%;
@@ -774,8 +973,16 @@
 
   .sd-hero-overlay {
     background:
-      linear-gradient(90deg, rgba(3, 7, 3, .9), rgba(3, 7, 3, .45)),
-      linear-gradient(0deg, rgba(3, 7, 3, .75), transparent);
+      linear-gradient(
+        90deg,
+        rgba(3, 7, 3, .9),
+        rgba(3, 7, 3, .45)
+      ),
+      linear-gradient(
+        0deg,
+        rgba(3, 7, 3, .75),
+        transparent
+      );
   }
 
   .sd-breadcrumb {
@@ -925,23 +1132,350 @@
   }
 }
 
+/* =========================================
+   REDUCED MOTION ACCESSIBILITY
+========================================= */
+
 @media (prefers-reduced-motion: reduce) {
-  .sd-reveal {
+  .service-detail-page *,
+  .service-detail-page *::before,
+  .service-detail-page *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .sd-motion {
     opacity: 1;
     transform: none;
-    transition: none;
+    filter: none;
+  }
+}
+
+
+
+
+/* =========================================
+   KINETIX SERVICE DETAIL - CONTENT UPGRADE
+========================================= */
+
+/* INTRO NUMBER */
+
+.sd-intro-number {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 5px;
+}
+
+.sd-intro-number small {
+  color: #788278;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+}
+
+/* BETTER INTRO TYPOGRAPHY */
+
+.sd-intro-content p {
+  max-width: 780px;
+  font-size: 18px;
+  line-height: 1.95;
+  letter-spacing: .1px;
+  color: #b4beb3;
+}
+
+/* SERVICE SPECIFIC OFFER HEADING */
+
+.sd-offer-section .sd-section-heading {
+  align-items: center;
+}
+
+.sd-offer-section .sd-section-heading h2 {
+  max-width: 680px;
+  font-size: clamp(36px, 4.5vw, 59px);
+  line-height: 1.08;
+  letter-spacing: -2px;
+  text-transform: none;
+}
+
+.sd-offer-section .sd-section-heading > p {
+  max-width: 390px;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+/* FEATURE CARDS */
+
+.sd-offer-card {
+  min-height: 130px;
+  padding: 25px;
+}
+
+.sd-offer-copy h3 {
+  font-size: 21px;
+  letter-spacing: -.3px;
+}
+
+.sd-offer-copy p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #aeb8ae;
+}
+
+/* BENEFITS HEADING */
+
+.sd-benefits-heading h2 {
+  font-size: clamp(36px, 4.5vw, 59px);
+  line-height: 1.12;
+  letter-spacing: -1.8px;
+}
+
+.sd-benefits-heading > p {
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+.sd-benefit-accent {
+  width: 65px;
+  height: 3px;
+  margin-top: 30px;
+  background: #03ea04;
+  box-shadow: 0 0 15px rgba(3, 234, 4, .35);
+}
+
+/* BENEFIT LIST */
+
+.sd-benefit-item {
+  grid-template-columns: 42px 1fr 25px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.sd-benefit-index {
+  color: #03ea04;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.sd-benefit-item h3 {
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 650;
+}
+
+/* PROCESS CARDS */
+
+.sd-process-grid {
+  gap: 18px;
+}
+
+.sd-process-card {
+  min-height: 300px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.sd-process-card h3 {
+  max-width: 300px;
+  font-size: 23px;
+  line-height: 1.35;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.sd-process-card p {
+  position: relative;
+  z-index: 2;
+  max-width: 320px;
+  margin: 0;
+  color: #aab5a9;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.sd-process-number {
+  position: relative;
+  z-index: 2;
+  font-size: 39px;
+}
+
+.sd-process-watermark {
+  position: absolute;
+  right: 15px;
+  bottom: -35px;
+  color: rgba(3, 234, 4, .045);
+  font-size: 130px;
+  font-weight: 950;
+  line-height: 1;
+  pointer-events: none;
+  transition: transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+
+.sd-process-card:hover .sd-process-watermark {
+  transform: translateY(-10px);
+}
+
+.sd-process-card:hover {
+  transform: translateY(-9px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, .2);
+}
+
+/* SECTION HEADING READABILITY */
+
+.sd-section-heading h2 {
+  max-width: 760px;
+  line-height: 1.12;
+  overflow-wrap: break-word;
+}
+
+.sd-section-heading > p {
+  line-height: 1.85;
+}
+
+/* CTA TYPOGRAPHY */
+
+.sd-cta-content h2 {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1.12;
+  letter-spacing: -2px;
+  overflow-wrap: break-word;
+}
+
+.sd-cta-content p {
+  max-width: 620px;
+  margin: 0 auto 32px;
+  line-height: 1.8;
+}
+
+/* RELATED SERVICE CARDS */
+
+.sd-related-card {
+  border: 1px solid rgba(255, 255, 255, .07);
+  transition:
+    border-color .5s ease,
+    transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+
+.sd-related-card:hover {
+  border-color: rgba(3, 234, 4, .5);
+  transform: translateY(-6px);
+}
+
+/* PREMIUM HOVER EFFECT */
+
+.sd-offer-visual::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(255, 255, 255, .15);
+  pointer-events: none;
+  transition: border-color .5s ease;
+}
+
+.sd-offer-visual:hover::after {
+  border-color: rgba(3, 234, 4, .55);
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+  .sd-process-card {
+    min-height: 270px;
   }
 
-  .sd-hero-image {
-    animation: none;
+  .sd-offer-section .sd-section-heading {
+    align-items: flex-start;
   }
 
-  .sd-hero-content {
-    animation: none;
+  .sd-benefit-item h3 {
+    font-size: 16px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .sd-intro-content p {
+    font-size: 15px;
+    line-height: 1.85;
   }
 
-  .sd-related-card > img,
-  .sd-offer-visual > img {
-    transition: none;
+  .sd-intro-number {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sd-offer-section .sd-section-heading h2 {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+
+  .sd-offer-section .sd-section-heading > p {
+    font-size: 15px;
+  }
+
+  .sd-offer-card {
+    min-height: 125px;
+    padding: 18px 14px;
+  }
+
+  .sd-offer-copy h3 {
+    font-size: 18px;
+  }
+
+  .sd-offer-copy p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .sd-benefits-heading h2 {
+    font-size: 37px;
+  }
+
+  .sd-benefit-item {
+    grid-template-columns: 30px 1fr 20px;
+  }
+
+  .sd-benefit-item h3 {
+    font-size: 15px;
+  }
+
+  .sd-process-card {
+    min-height: 240px;
+    padding: 25px;
+  }
+
+  .sd-process-card h3 {
+    font-size: 21px;
+  }
+
+  .sd-process-card p {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .sd-cta-content h2 {
+    font-size: 39px;
+    letter-spacing: -1px;
+  }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+  .sd-process-watermark,
+  .sd-process-card,
+  .sd-related-card {
+    transform: none !important;
   }
 }
