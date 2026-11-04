@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"; 
 import { 
   Menu, Search, Bell, Mail, Maximize, Minimize, ChevronDown, 
@@ -11,10 +11,28 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   
-  const [profilePic, setProfilePic] = useState("/images/user.jpg");
-  const fileInputRef = useRef(null);
+  // 👇 1. Navbar mein Profile LocalStorage se load hoga
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem("userProfile");
+    return saved ? JSON.parse(saved) : {
+      name: "Nathan Reeves",
+      email: "nathan@example.com",
+      photo: "/images/user.jpg"
+    };
+  });
 
+  const fileInputRef = useRef(null);
   const navigate = useNavigate();
+
+  // 👇 2. Jab Settings page se Save ho, toh Navbar update ho jaye
+  useEffect(() => {
+    const loadProfile = () => {
+      const saved = localStorage.getItem("userProfile");
+      if (saved) setUser(JSON.parse(saved));
+    };
+    window.addEventListener("profileUpdated", loadProfile);
+    return () => window.removeEventListener("profileUpdated", loadProfile);
+  }, []);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -39,11 +57,14 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
     }
   };
 
+  // 👇 3. Image change karne par direct user state update karo
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
-      setProfilePic(imageUrl);
+      setUser({ ...user, photo: imageUrl });
+      // Note: Yeh change direct navbar par apply hoga, 
+      // agar isay permanent save karna hai toh Settings page se Save karein.
     }
   };
 
@@ -93,7 +114,6 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
               <Mail size={22} />
             </button>
             
-            {/* 👇 Yahan se green dot (span) hata diya gaya hai */}
             <button className="dash-icon-btn tooltip" data-tooltip="Notifications" onClick={() => alert("You have 1 new notification!")}>
               <Bell size={22} />
             </button>
@@ -102,7 +122,8 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
           <div className="dash-profile">
             <div className="profile-trigger" onClick={() => setProfileOpen(!profileOpen)}>
               <div className="profile-image-wrapper">
-                <img src={profilePic} alt="User" className="profile-pic" />
+                {/* 👇 Dynamic Image */}
+                <img src={user.photo} alt="User" className="profile-pic" />
                 <div className="image-upload-overlay" onClick={triggerFileInput}>
                   <Camera size={16} />
                 </div>
@@ -110,7 +131,8 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
               </div>
 
               <div className="profile-info">
-                <h4>Nathan Reeves</h4>
+                {/* 👇 Dynamic Name */}
+                <h4>{user.name}</h4>
                 <p>Super Admin</p>
               </div>
               <ChevronDown size={18} className={`arrow ${profileOpen ? "open" : ""}`} />
@@ -119,8 +141,9 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
             {profileOpen && (
               <div className="profile-dropdown">
                 <div className="dropdown-header">
-                  <h4>Nathan Reeves</h4>
-                  <p>nathan@example.com</p>
+                  {/* 👇 Dynamic Name & Email */}
+                  <h4>{user.name}</h4>
+                  <p>{user.email}</p>
                 </div>
                 <div className="dropdown-divider"></div>
                 
@@ -132,7 +155,7 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
                   <User size={18} /> My Profile
                 </button>
                 
-                <button className="dropdown-link" onClick={() => alert("Opening Account Settings...")}>
+                <button className="dropdown-link" onClick={() => navigate("/settings")}>
                   <Settings size={18} /> Account Settings
                 </button>
                 

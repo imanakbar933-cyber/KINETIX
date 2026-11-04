@@ -29,11 +29,11 @@ import ServiceDetail from "./components/ServiceDetail.jsx";
 
 // 👇 Dashboard Page
 import DashboardPage from "./pages/ADMIN/DashboardPage.jsx"; 
-import SettingsPage from "./components/ADMIN/Settings/SettingsPage.jsx"; 
 
 function AppLayout() {
   const location = useLocation();
   
+<<<<<<< HEAD
   // ✅ 1. Auth Pages (Login aur Signup) par Navbar/Footer nahi honge
   const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
 
@@ -53,6 +53,24 @@ function AppLayout() {
 
   // =========================================================
   // DASHBOARD LAYOUT (No Navbar, No Footer)
+=======
+  // 👇 Yahan se "/trainers" hata diya hai taake main website ka trainers page khul sake
+  const isDashboard = location.pathname.startsWith("/dashboard") || 
+                      location.pathname.startsWith("/members") ||
+                      location.pathname.startsWith("/workouts") ||
+                      location.pathname.startsWith("/diet") ||
+                      location.pathname.startsWith("/schedule") ||
+                      // location.pathname.startsWith("/trainers") || 👈 YEH HATA DIYA
+                      location.pathname.startsWith("/billing") ||
+                      location.pathname.startsWith("/reports") ||
+                      location.pathname.startsWith("/settings"); 
+
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+  const isPlansPage = location.pathname === "/plans";
+
+  // =========================================================
+  // AGAR DASHBOARD YA SETTINGS HAI TOH SIRF DASHBOARD PAGE DIKHAO
+>>>>>>> cc5a3be7452bd2afee3a53ba9f3cbdf2ede36527
   // =========================================================
   if (isDashboard) {
     return (
@@ -62,10 +80,16 @@ function AppLayout() {
         <Route path="/workouts" element={<DashboardPage />} />
         <Route path="/diet" element={<DashboardPage />} />
         <Route path="/schedule" element={<DashboardPage />} />
-        <Route path="/trainers" element={<DashboardPage />} />
+        
+        {/* Note: Dashboard ke andar Trainer List ka link /trainers par jata hai, 
+            ab woh /trainers par jayega toh main website ka page khulega. 
+            Agar aap chahti hain ke Dashboard ke andar alag trainers page ho, 
+            toh DashboardSidebar mein link /dashboard-trainers kar dein */}
+        <Route path="/trainers" element={<DashboardPage />} /> 
+        
         <Route path="/billing" element={<DashboardPage />} />
         <Route path="/reports" element={<DashboardPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/settings" element={<DashboardPage />} /> 
       </Routes>
     );
   }
@@ -98,14 +122,21 @@ function AppLayout() {
           <Route path="/GalleryPage" element={<GalleryPage />} />
           <Route path="/class-detail/:classId" element={<ClassDetail />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/trainers-page" element={<TrainersPage />} />
+          
+          {/* 👇 Ab /trainers main website ka TrainersPage kholega */}
+          <Route path="/trainers" element={<TrainersPage />} /> 
+          
           <Route path="/schedules" element={<SchedulePage />} />
           
           {/* ✅ Auth Pages */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
 
+<<<<<<< HEAD
           {/* Membership Plans Route */}
+=======
+          {/* Membership (Plans) ka Route */}
+>>>>>>> cc5a3be7452bd2afee3a53ba9f3cbdf2ede36527
           <Route path="/plans" element={
             <div className="plans-page-wrapper">
               <div className="plans-hero-section">
