@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { 
-  LayoutGrid, Users, Dumbbell, Utensils, Calendar, 
-  UserCircle, FileText, BarChart2, Settings, LogOut 
+import {
+  LayoutGrid, Users, Dumbbell, Utensils, Calendar,
+  UserCircle, FileText, BarChart2, Settings, LogOut
 } from "lucide-react";
 import "./DashboardSidebar.css";
 
-const DashboardSidebar = ({ isOpen }) => {
+const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
   const location = useLocation();
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem("userProfile");
-    return saved ? JSON.parse(saved) : { name: "Nathan Reeves", photo: "/images/user.jpg" };
+    return saved
+      ? JSON.parse(saved)
+      : { name: "Nathan Reeves", photo: "/images/user.jpg" };
   });
 
   useEffect(() => {
@@ -22,7 +24,8 @@ const DashboardSidebar = ({ isOpen }) => {
     return () => window.removeEventListener("profileUpdated", loadProfile);
   }, []);
 
-  const isActive = (path) => location.pathname === path ? "dash-menu-item active" : "dash-menu-item";
+  const isActive = (path) =>
+    location.pathname === path ? "dash-menu-item active" : "dash-menu-item";
 
   return (
     <aside className={`dash-sidebar ${isOpen ? "open" : ""}`}>
@@ -51,6 +54,24 @@ const DashboardSidebar = ({ isOpen }) => {
           <p>Super Admin</p>
         </div>
       </div>
+
+      {/* ✅ RIGHT EDGE — Invisible Width drag handle (No lines) */}
+      {isOpen && (
+        <div
+          className="dash-sidebar-resize-handle"
+          onMouseDown={onResizeStart}
+          title="Drag to resize width"
+        ></div>
+      )}
+
+      {/* ✅ BOTTOM EDGE — Invisible Height drag handle (No lines) */}
+      {isOpen && (
+        <div
+          className="dash-sidebar-height-handle"
+          onMouseDown={onHeightResizeStart}
+          title="Drag to resize height"
+        ></div>
+      )}
     </aside>
   );
 };
