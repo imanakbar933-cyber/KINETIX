@@ -12,7 +12,6 @@ import "./DashboardPage.css";
 
 
 
-
 import WorkoutPlans from "../../components/Admin/WorkoutPlans"; 
 import DietPlans from "../../components/Admin/DietPlans";
 
@@ -178,7 +177,7 @@ const DashboardPage = ({ page }) => {
         return <WorkoutPlans />;  // ✅ Ab yeh aapka page render karega
 
       case "diet":
-        return <Placeholder title="Diet" />;
+        return <DietPlans />;
       default:
         return <Placeholder title="Page Not Found" />;
     }
