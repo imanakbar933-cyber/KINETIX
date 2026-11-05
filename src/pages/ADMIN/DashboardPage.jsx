@@ -13,7 +13,8 @@ import "./DashboardPage.css";
 
 
 
-import WorkoutPlans from "../../components/Admin/WorkoutPlans"; // ✅ IMPORT KIYA
+import WorkoutPlans from "../../components/Admin/WorkoutPlans"; 
+import DietPlans from "../../components/Admin/DietPlans";
 
 
 const DEFAULT_APPEARANCE = {
