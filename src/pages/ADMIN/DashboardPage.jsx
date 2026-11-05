@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import DashboardNavbar from "../../components/ADMIN/Settings/DashboardNavbar";
 import DashboardSidebar from "../../components/ADMIN/DashboardSidebar";
+
+// Pages
 import SettingsPage from "../../components/ADMIN/Settings/SettingsPage";
 import ReportsPage from "../../components/ADMIN/ReportsPage"; // ✅ IMPORT KIYA
 
 import "./DashboardPage.css";
 
 import MembersList from "../../components/ADMIN/MembersList";
-import BatchSchedulepage from "./BatchSchedulepage";
+
 
 // 👇 1. APNA WORKOUT PAGE YAHAN IMPORT KAREIN
 import WorkoutRoutine from "./WorkoutRoutine";
