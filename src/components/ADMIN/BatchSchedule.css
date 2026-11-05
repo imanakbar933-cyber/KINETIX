@@ -1,0 +1,231 @@
+/* ================= MAIN CONTAINER ================= */
+.batch-schedule-container {
+  background-color: #0a0f0c;
+  padding: 25px;
+  border-radius: 12px;
+  color: #9ca3af;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  border: 1px solid #1f2e24;
+  box-sizing: border-box;
+}
+
+/* Top Action Bar */
+.batch-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.batch-search-box {
+  display: flex;
+  align-items: center;
+  background-color: #0f1712;
+  border: 1px solid #1f2e24;
+  border-radius: 8px;
+  width: 400px;
+  padding: 5px 15px;
+  position: relative;
+}
+
+.batch-search-icon {
+  color: #6b7280;
+  margin-right: 10px;
+}
+
+.batch-search-box input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  padding: 10px 0;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+.add-batch-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #4ade80;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-batch-btn:hover {
+  background-color: #22c55e;
+  box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+}
+
+/* ================= TABLE ================= */
+.batch-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #1f2e24;
+}
+
+.batch-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse !important;
+  text-align: left;
+  table-layout: fixed;
+}
+
+.batch-table th {
+  background-color: #080d0a;
+  padding: 15px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #9ca3af;
+  border-bottom: 1px solid #1f2e24;
+  white-space: nowrap;
+}
+
+.batch-table td {
+  padding: 15px;
+  border-bottom: 1px solid #1f2e24;
+  vertical-align: middle;
+  font-size: 13px;
+  color: #d1d5db;
+  white-space: nowrap;
+}
+
+.batch-row {
+  transition: background-color 0.2s ease;
+}
+.batch-row:hover {
+  background-color: #0f1712;
+}
+
+/* Column Widths */
+.batch-table th:nth-child(1), .batch-table td:nth-child(1) { width: 25%; } /* Class Name */
+.batch-table th:nth-child(2), .batch-table td:nth-child(2) { width: 20%; } /* Trainer */
+.batch-table th:nth-child(3), .batch-table td:nth-child(3) { width: 12%; } /* Day */
+.batch-table th:nth-child(4), .batch-table td:nth-child(4) { width: 20%; } /* Time */
+.batch-table th:nth-child(5), .batch-table td:nth-child(5) { width: 15%; } /* Capacity */
+.batch-table th:nth-child(6), .batch-table td:nth-child(6) { width: 8%; }  /* Action */
+
+/* Class Name Box */
+.class-name-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.class-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.class-title {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Trainer Box */
+.trainer-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.text-green { color: #4ade80; }
+.text-gray { color: #9ca3af; }
+
+/* Day Badge */
+.day-badge {
+  background-color: #1f2e24;
+  color: #d1d5db;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.time-text {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+/* Capacity Box */
+.capacity-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.capacity-box span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.capacity-bar {
+  width: 80px;
+  height: 4px;
+  background-color: #1f2e24;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.capacity-fill {
+  height: 100%;
+  background-color: #4ade80;
+  border-radius: 4px;
+}
+
+.capacity-fill.full {
+  background-color: #ef4444; /* Full hone par red */
+}
+
+/* Action Buttons */
+.batch-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.batch-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.2s;
+}
+
+.batch-btn.edit {
+  color: #facc15;
+  border: 1px solid rgba(250, 204, 21, 0.3);
+}
+.batch-btn.edit:hover { background-color: rgba(250, 204, 21, 0.1); }
+
+.batch-btn.delete {
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.batch-btn.delete:hover { background-color: rgba(239, 68, 68, 0.1); }

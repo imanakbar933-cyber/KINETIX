@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, Plus, Eye, Pencil, Trash2, ChevronLeft, ChevronRight } from "lucide-react";
 import "./MembersList.css";
 
-// Demo Data (Aapki image ke mutabik)
+// Demo Data (20 members)
 const initialMembers = [
   { id: 1, name: "Cody Fisher", memberId: "3536", package: "Gold Membership", joinDate: "8/21/15", expireDate: "12/4/17", paid: "$450", due: "$450", status: "Not paid", image: "https://i.pravatar.cc/150?img=1" },
   { id: 2, name: "Marvin McKinney", memberId: "4152", package: "Silver Membership", joinDate: "5/19/12", expireDate: "2/11/12", paid: "$450", due: "$450", status: "Not paid", image: "https://i.pravatar.cc/150?img=2" },
@@ -15,76 +15,88 @@ const initialMembers = [
   { id: 8, name: "Leslie Alexander", memberId: "6690", package: "Silver Membership", joinDate: "5/27/15", expireDate: "12/10/13", paid: "$450", due: "$450", status: "Paid", image: "https://i.pravatar.cc/150?img=8" },
   { id: 9, name: "Floyd Miles", memberId: "1439", package: "Platinum Membership", joinDate: "10/6/13", expireDate: "4/4/18", paid: "$450", due: "$450", status: "Paid", image: "https://i.pravatar.cc/150?img=9" },
   { id: 10, name: "Albert Flores", memberId: "4349", package: "Gold Membership", joinDate: "7/27/13", expireDate: "3/4/16", paid: "$450", due: "$450", status: "Paid", image: "https://i.pravatar.cc/150?img=10" },
+  { id: 11, name: "Jenny Wilson", memberId: "1122", package: "Gold Membership", joinDate: "1/1/20", expireDate: "1/1/21", paid: "$450", due: "$0", status: "Paid", image: "https://i.pravatar.cc/150?img=11" },
+  { id: 12, name: "Guy Hawkins", memberId: "3344", package: "Silver Membership", joinDate: "2/2/20", expireDate: "2/2/21", paid: "$450", due: "$0", status: "Paid", image: "https://i.pravatar.cc/150?img=12" },
+  { id: 13, name: "Robert Fox", memberId: "5566", package: "Platinum Membership", joinDate: "3/3/20", expireDate: "3/3/21", paid: "$450", due: "$0", status: "Paid", image: "https://i.pravatar.cc/150?img=13" },
+  { id: 14, name: "Cameron Williamson", memberId: "7788", package: "Gold Membership", joinDate: "4/4/20", expireDate: "4/4/21", paid: "$450", due: "$0", status: "Paid", image: "https://i.pravatar.cc/150?img=14" },
+  { id: 15, name: "Brooklyn Simmons", memberId: "9900", package: "Silver Membership", joinDate: "5/5/20", expireDate: "5/5/21", paid: "$450", due: "$0", status: "Paid", image: "https://i.pravatar.cc/150?img=15" },
+  { id: 16, name: "Jerome Bell", memberId: "2233", package: "Platinum Membership", joinDate: "6/6/20", expireDate: "6/6/21", paid: "$450", due: "$0", status: "Paid", image: "https://i.pravatar.cc/150?img=16" },
+  { id: 17, name: "Kathryn Murphy", memberId: "4455", package: "Gold Membership", joinDate: "7/7/20", expireDate: "7/7/21", paid: "$450", due: "$0", status: "Paid", image: "https://i.pravatar.cc/150?img=17" },
+  { id: 18, name: "Jacob Jones", memberId: "6677", package: "Silver Membership", joinDate: "8/8/20", expireDate: "8/8/21", paid: "$450", due: "$0", status: "Paid", image: "https://i.pravatar.cc/150?img=18" },
+  { id: 19, name: "Kristin Watson", memberId: "8899", package: "Platinum Membership", joinDate: "9/9/20", expireDate: "9/9/21", paid: "$450", due: "$0", status: "Paid", image: "https://i.pravatar.cc/150?img=19" },
+  { id: 20, name: "Devon Lane", memberId: "1234", package: "Gold Membership", joinDate: "10/10/20", expireDate: "10/10/21", paid: "$450", due: "$0", status: "Paid", image: "https://i.pravatar.cc/150?img=20" },
 ];
 
 const MembersList = () => {
   const [members, setMembers] = useState(initialMembers);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
-  // Delete Member Function
+  // Delete
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this member?")) {
       setMembers(members.filter((member) => member.id !== id));
     }
   };
 
-  // Search Filter
+  // Search
+  const handleSearch = () => {
+    setSearchQuery(searchInput);
+    setCurrentPage(1);
+  };
+
+  // Filter
   const filteredMembers = members.filter((member) =>
-    member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    member.memberId.includes(searchTerm)
+    member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    member.memberId.includes(searchQuery)
   );
+
+  // Pagination Logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredMembers.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredMembers.length / itemsPerPage);
 
   return (
     <div className="member-list-container">
       
-      {/* --- Top Action Bar --- */}
+      {/* Top Bar */}
       <div className="member-top-bar">
         <div className="search-box">
           <Search size={18} className="search-icon" />
           <input 
-            type="text" 
-            placeholder="Search here..." 
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            type="text" placeholder="Search here..." 
+            value={searchInput} onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           />
+          <button className="search-btn" onClick={handleSearch}>Search</button>
         </div>
         <button className="add-member-btn">
           <Plus size={18} /> Add Member
         </button>
       </div>
 
-      {/* --- Data Table --- */}
+      {/* Table */}
       <div className="table-wrapper">
         <table className="member-table">
           <thead>
             <tr>
-              <th>Photo</th>
-              <th>Name</th>
-              <th>Member Id</th>
-              <th>Package</th>
-              <th>Joining Date</th>
-              <th>Expire Date</th>
-              <th>Paid</th>
-              <th>Due</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th>Photo</th><th>Name</th><th>Member Id</th><th>Package</th>
+              <th>Joining Date</th><th>Expire Date</th><th>Paid</th><th>Due</th>
+              <th>Status</th><th>Action</th>
             </tr>
           </thead>
-          
           <tbody>
             <AnimatePresence>
-              {filteredMembers.map((member, index) => (
+              {currentItems.map((member, index) => (
                 <motion.tr 
-                  key={member.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
+                  key={member.id} className="table-row"
+                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -50 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className="table-row"
                 >
-                  <td>
-                    <img src={member.image} alt={member.name} className="member-avatar" />
-                  </td>
+                  <td><img src={member.image} alt={member.name} className="member-avatar" /></td>
                   <td className="member-name">{member.name}</td>
                   <td className="member-id">{member.memberId}</td>
                   <td>{member.package}</td>
@@ -99,29 +111,37 @@ const MembersList = () => {
                   </td>
                   <td>
                     <div className="action-buttons">
-                      <button className="action-btn view" title="View"><Eye size={16} /></button>
-                      <button className="action-btn edit" title="Edit"><Pencil size={16} /></button>
-                      <button className="action-btn delete" onClick={() => handleDelete(member.id)} title="Delete"><Trash2 size={16} /></button>
+                      <button className="action-btn view" title="View" onClick={() => alert(`Viewing ${member.name}`)}><Eye size={16} /></button>
+                      <button className="action-btn edit" title="Edit" onClick={() => alert(`Editing ${member.name}`)}><Pencil size={16} /></button>
+                      <button className="action-btn delete" title="Delete" onClick={() => handleDelete(member.id)}><Trash2 size={16} /></button>
                     </div>
                   </td>
                 </motion.tr>
               ))}
             </AnimatePresence>
+            {currentItems.length === 0 && (
+              <tr><td colSpan="10" style={{ textAlign: "center", padding: "30px", color: "#9ca3af" }}>No members found!</td></tr>
+            )}
           </tbody>
         </table>
       </div>
 
-      {/* --- Pagination --- */}
+      {/* Pagination */}
       <div className="pagination-bar">
-        <span className="showing-text">Showing 1-{filteredMembers.length} from 100</span>
+        <span className="showing-text">
+          Showing {filteredMembers.length > 0 ? indexOfFirstItem + 1 : 0}-{indexOfLastItem > filteredMembers.length ? filteredMembers.length : indexOfLastItem} from {filteredMembers.length}
+        </span>
+        
         <div className="pagination-controls">
-          <button className="page-btn nav"><ChevronLeft size={16} /></button>
-          <button className="page-btn active">1</button>
-          <button className="page-btn">2</button>
-          <button className="page-btn">3</button>
-          <button className="page-btn">4</button>
-          <button className="page-btn">5</button>
-          <button className="page-btn nav"><ChevronRight size={16} /></button>
+          <button className="page-btn nav" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}><ChevronLeft size={16} /></button>
+          
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+            <button key={number} className={`page-btn ${currentPage === number ? "active" : ""}`} onClick={() => setCurrentPage(number)}>
+              {number}
+            </button>
+          ))}
+
+          <button className="page-btn nav" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages || totalPages === 0}><ChevronRight size={16} /></button>
         </div>
       </div>
 

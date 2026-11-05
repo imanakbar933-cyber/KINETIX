@@ -1,256 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-.members-layout {
+/* ✅ POORA LAYOUT */
+.admin-layout {
   display: flex;
   min-height: 100vh;
-  background-color: #030504; /* Kinetix Dark Background */
+  background-color: #050706;
   font-family: 'Inter', sans-serif;
 }
 
-/* ================= SIDEBAR ================= */
-.members-sidebar {
-  width: 260px;
-  background-color: #0a0f0c; /* Dark greenish black */
-  padding: 25px 20px;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid #1f2e24;
-}
-
-.members-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 40px;
-  color: #fff;
-}
-
-.members-logo h2 {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
-.members-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
-}
-
-.members-menu-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 15px;
-  color: #9ca3af;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.members-menu-item:hover {
-  background-color: #0f1712;
-  color: #fff;
-}
-
-/* ✅ Kinetix Neon Green Active State */
-.members-menu-item.active {
-  background-color: rgba(74, 222, 128, 0.15);
-  color: #4ade80;
-  border-left: 3px solid #4ade80;
-}
-
-/* Upgrade Card */
-.sidebar-upgrade-card {
-  background-color: #0f1712;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #1f2e24;
-}
-
-.sidebar-upgrade-card p {
-  font-size: 12px;
-  color: #9ca3af;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.sidebar-upgrade-card p span {
-  background-color: #4ade80; /* Neon Green */
-  color: #000;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 10px;
-  font-weight: 800;
-}
-
-.sidebar-upgrade-card h3 {
-  color: #fff;
-  margin: 10px 0 5px 0;
-  font-size: 18px;
-}
-
-.days-left {
-  font-size: 12px;
-  color: #9ca3af;
-  margin-bottom: 10px;
-}
-
-.progress-bar {
-  height: 5px;
-  background-color: #1f2e24;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  width: 30%;
-  height: 100%;
-  background-color: #4ade80; /* Neon Green Progress */
-  box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
-}
-
-.upgrade-btn {
-  width: 100%;
-  padding: 10px;
-  background-color: #fff;
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.upgrade-btn:hover {
-  background-color: #4ade80;
-}
-
-.sidebar-logout {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #9ca3af;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 10px;
-  transition: all 0.3s;
-}
-
-.sidebar-logout:hover {
-  color: #ef4444; /* Red on hover */
-}
-
-/* ================= MAIN CONTENT ================= */
-.members-main {
+/* ✅ MAIN CONTENT AREA */
+.admin-main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 0 30px 30px 30px;
-  background-color: #050706;
-}
-
-/* Top Header */
-.members-header {
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #1f2e24;
-  margin-bottom: 30px;
-}
-
-.header-search {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background-color: #0f1712;
-  padding: 10px 20px;
-  border-radius: 20px;
-  width: 400px;
-  border: 1px solid #1f2e24;
-}
-
-.header-search input {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #fff;
+  transition: margin-left 0.3s ease;
   width: 100%;
-  font-size: 14px;
 }
 
-.header-search input::placeholder {
-  color: #6b7280;
+/* Jab sidebar open ho */
+.admin-main.sidebar-open {
+  margin-left: 260px; 
 }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 25px;
+/* Jab sidebar closed ho */
+.admin-main.sidebar-closed {
+  margin-left: 0; 
 }
 
-.header-icon {
-  cursor: pointer;
-  color: #9ca3af;
-  transition: color 0.3s;
+/* ✅ PAGE CONTENT PADDING (Navbar ke neeche se shuru) */
+.admin-content-area {
+  padding: 30px;
+  margin-top: 80px; /* Navbar ki height ke barabar, taaki content dhake na */
+  box-sizing: border-box;
 }
 
-.header-icon:hover {
-  color: #4ade80;
+.page-header {
+  margin-bottom: 25px;
 }
 
-.header-profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
-
-.header-profile img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #4ade80;
-}
-
-.header-profile h4 {
-  color: #fff;
-  font-size: 14px;
-  margin-bottom: 2px;
-}
-
-.header-profile p {
-  color: #9ca3af;
-  font-size: 11px;
-}
-
-/* Page Title */
-.page-title-section {
-  margin-bottom: 20px;
-}
-
-.page-title-section h1 {
-  color: #fff;
+.page-header h1 {
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 5px;
+  color: #ffffff;
+  margin-bottom: 8px;
 }
 
 .breadcrumb {
-  color: #9ca3af;
   font-size: 13px;
+  color: #9ca3af;
+}
+
+/* Mobile ke liye */
+@media (max-width: 992px) {
+  .admin-main.sidebar-open {
+    margin-left: 0; 
+  }
 }

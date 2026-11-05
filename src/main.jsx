@@ -1,8 +1,14 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation
+} from "react-router-dom";
 
 import "./index.css";
+import "./components/global.css";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -13,7 +19,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/App.jsx";
 import About from "./pages/About.jsx";
 import GymHome from "./pages/GymHome.jsx";
-import MembershipPlans from "./components/MembershipPlans.jsx"; 
+import MembershipPlans from "./components/MembershipPlans.jsx";
 import FaqPage from "./pages/FaqPage.jsx";
 import ClassroomPage from "./pages/ClassroomPage";
 import Team from "./pages/Team.jsx";
@@ -21,53 +27,67 @@ import GalleryPage from "./pages/GalleryPage.jsx";
 import ClassDetail from "./pages/ClassDetail.jsx";
 import Contact from "./pages/Contact.jsx";
 import TeamMember1 from "./pages/TeamMember1.jsx";
-import SchedulePage from "./pages/SchedulePage.jsx"; 
+import SchedulePage from "./pages/SchedulePage.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
 import ServiceDetail from "./components/ServiceDetail.jsx";
 
-// 👇 Dashboard Page (Yeh andar se decide karega ke Dashboard dikhana hai ya Settings)
-import DashboardPage from "./pages/ADMIN/DashboardPage.jsx"; 
+// Admin Dashboard
+import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
+import MembersPage from "./pages/ADMIN/MembersPage.jsx";
+import BatchSchedulepage from "./pages/ADMIN/BatchSchedulepage.jsx";
 
 function AppLayout() {
   const location = useLocation();
   
-  // 👇 Dashboard ke saare links yahan hain
-  const isDashboardRoute = location.pathname.startsWith("/dashboard") || 
-                           location.pathname.startsWith("/members") ||
-                           location.pathname.startsWith("/workouts") ||
-                           location.pathname.startsWith("/diet") ||
-                           location.pathname.startsWith("/schedule") ||
-                           location.pathname.startsWith("/trainers") || 
-                           location.pathname.startsWith("/billing") ||
-                           location.pathname.startsWith("/reports") ||
-                           location.pathname.startsWith("/settings"); 
-
+  // ==========================================
+  // ✅ 1. AUTH PAGES (No Navbar, No Footer)
+  // ==========================================
   const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+
+  // ==========================================
+  // ✅ 2. DASHBOARD PAGES (No Navbar, No Footer)
+  // ==========================================
+  const isDashboard = 
+    location.pathname.startsWith("/dashboard") || 
+    location.pathname.startsWith("/members") ||
+    location.pathname.startsWith("/workouts") ||
+    location.pathname.startsWith("/diet") ||
+    location.pathname.startsWith("/schedule") ||
+    location.pathname.startsWith("/batch-schedule") ||
+    location.pathname.startsWith("/billing") ||
+    location.pathname.startsWith("/reports") ||
+    location.pathname.startsWith("/settings");
+
+  // ==========================================
+  // ✅ 3. PLANS PAGE
+  // ==========================================
   const isPlansPage = location.pathname === "/plans";
 
-  // =========================================================
-  // AGAR DASHBOARD KA KOI BHI ROUTE HAI (INCLUDING /settings)
-  // TOH SIRF DASHBOARD PAGE DIKHAO
-  // =========================================================
- if (isDashboardRoute) {
-  return (
-    <Routes>
-      <Route path="/dashboard" element={<DashboardPage page="dashboard" />} />
-      <Route path="/members" element={<DashboardPage page="members" />} />
-      <Route path="/workouts" element={<DashboardPage page="workouts" />} />
-      <Route path="/diet" element={<DashboardPage page="diet" />} />
-      <Route path="/schedule" element={<DashboardPage page="schedule" />} />
-      <Route path="/trainers" element={<DashboardPage page="trainers" />} /> 
-      <Route path="/billing" element={<DashboardPage page="billing" />} />
-      <Route path="/reports" element={<DashboardPage page="reports" />} />
-      <Route path="/settings" element={<DashboardPage page="settings" />} /> 
-    </Routes>
-  );
-}
-  // =========================================================
-  // BAQI SAARE PAGES (Main Website)
-  // =========================================================
+  // ==========================================
+  // ✅ DASHBOARD LAYOUT
+  // ==========================================
+  if (isDashboard) {
+    return (
+      <Routes>
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/members" element={<MembersPage />} />
+        <Route path="/workouts" element={<DashboardPage />} />
+        <Route path="/diet" element={<DashboardPage />} />
+        <Route path="/schedule" element={<DashboardPage />} />
+        {/* ✅ Batch Schedule Route */}
+        <Route path="/batch-schedule" element={<DashboardPage />} />
+        
+        <Route path="/billing" element={<DashboardPage />} />
+        <Route path="/reports" element={<DashboardPage />} />
+        <Route path="/settings" element={<DashboardPage />} />
+      </Routes>
+    );
+  }
+
+  // ==========================================
+  // ✅ MAIN WEBSITE LAYOUT
+  // ==========================================
   return (
     <>
       <ScrollToTop />
