@@ -39,25 +39,27 @@ import BatchSchedulepage from "./pages/ADMIN/BatchSchedulepage.jsx";
 
 function AppLayout() {
   const location = useLocation();
-  
+
   // ==========================================
   // ✅ 1. AUTH PAGES (No Navbar, No Footer)
   // ==========================================
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/signup";
 
   // ==========================================
   // ✅ 2. DASHBOARD PAGES (No Navbar, No Footer)
   // ==========================================
-  const isDashboard = 
-    location.pathname.startsWith("/dashboard") || 
-    location.pathname.startsWith("/members") ||
-    location.pathname.startsWith("/workouts") ||
-    location.pathname.startsWith("/diet") ||
-    location.pathname.startsWith("/schedule") ||
-    location.pathname.startsWith("/batch-schedule") ||
-    location.pathname.startsWith("/billing") ||
-    location.pathname.startsWith("/reports") ||
-    location.pathname.startsWith("/settings");
+ const isDashboard =
+  location.pathname.startsWith("/dashboard") ||
+  location.pathname.startsWith("/members") ||
+  location.pathname.startsWith("/workouts") ||
+  location.pathname.startsWith("/diet") ||
+  location.pathname.startsWith("/schedule") ||
+  location.pathname.startsWith("/batch-schedule") ||
+  location.pathname.startsWith("/billing") ||
+  location.pathname.startsWith("/reports") ||
+  location.pathname.startsWith("/settings") ||
+  location.pathname.startsWith("/trainers");   // ✅ ADD THIS
 
   // ==========================================
   // ✅ 3. PLANS PAGE
@@ -66,21 +68,20 @@ function AppLayout() {
 
   // ==========================================
   // ✅ DASHBOARD LAYOUT
+  // 👇 Har route pe `page` prop pass karo
   // ==========================================
   if (isDashboard) {
     return (
       <Routes>
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/members" element={<MembersPage />} />
-        <Route path="/workouts" element={<DashboardPage />} />
-        <Route path="/diet" element={<DashboardPage />} />
-        <Route path="/schedule" element={<DashboardPage />} />
-        {/* ✅ Batch Schedule Route */}
-        <Route path="/batch-schedule" element={<DashboardPage />} />
-        
-        <Route path="/billing" element={<DashboardPage />} />
-        <Route path="/reports" element={<DashboardPage />} />
-        <Route path="/settings" element={<DashboardPage />} />
+        <Route path="/dashboard" element={<DashboardPage page="dashboard" />} />
+        <Route path="/members" element={<DashboardPage page="members" />} />
+        <Route path="/batch-schedule" element={<DashboardPage page="batch-schedule" />} />
+        <Route path="/workouts" element={<DashboardPage page="workouts" />} />
+        <Route path="/diet" element={<DashboardPage page="diet" />} />
+        <Route path="/schedule" element={<DashboardPage page="schedule" />} />
+        <Route path="/billing" element={<DashboardPage page="billing" />} />
+        <Route path="/reports" element={<DashboardPage page="reports" />} />
+        <Route path="/settings" element={<DashboardPage page="settings" />} />
       </Routes>
     );
   }
@@ -93,10 +94,10 @@ function AppLayout() {
       <ScrollToTop />
       {!isAuthPage && <Navbar />}
 
-      <div 
-        className="main-content-layout" 
-        style={{ 
-          paddingTop: isAuthPage || isPlansPage ? "0" : "0px", // 👈 Padding 0 kar di taake black space khatam ho
+      <div
+        className="main-content-layout"
+        style={{
+          paddingTop: isAuthPage || isPlansPage ? "0" : "0px",
           transition: "padding-top 0.3s ease"
         }}
       >
@@ -115,18 +116,21 @@ function AppLayout() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
 
-          <Route path="/plans" element={
-            <div className="plans-page-wrapper">
-              <div className="plans-hero-section">
-                <div className="plans-hero-content">
-                  <h1>MEMBERSHIP</h1>
+          <Route
+            path="/plans"
+            element={
+              <div className="plans-page-wrapper">
+                <div className="plans-hero-section">
+                  <div className="plans-hero-content">
+                    <h1>MEMBERSHIP</h1>
+                  </div>
+                </div>
+                <div className="plans-content-container">
+                  <MembershipPlans />
                 </div>
               </div>
-              <div className="plans-content-container">
-                <MembershipPlans />
-              </div>
-            </div>
-          } />
+            }
+          />
 
           <Route path="/services/:slug" element={<ServiceDetail />} />
         </Routes>

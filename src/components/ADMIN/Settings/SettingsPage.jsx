@@ -86,12 +86,19 @@ const SettingsPage = () => {
   const [billingMessage, setBillingMessage] = useState("");
 
   // ================= APPEARANCE =================
-  const [appearance, setAppearance] = useState({ ...defaultAppearance });
-  const [savedAppearance, setSavedAppearance] = useState({ ...defaultAppearance });
+  const [appearance, setAppearance] = useState(() => {
+    const saved = localStorage.getItem("kinetix_appearance");
+    return saved ? JSON.parse(saved) : { ...defaultAppearance };
+  });
+  const [savedAppearance, setSavedAppearance] = useState(() => {
+    const saved = localStorage.getItem("kinetix_appearance");
+    return saved ? JSON.parse(saved) : { ...defaultAppearance };
+  });
   const [appearanceMessage, setAppearanceMessage] = useState("");
   const [pendingTab, setPendingTab] = useState(null);
 
-  const hasUnsavedAppearance = JSON.stringify(appearance) !== JSON.stringify(savedAppearance);
+  const hasUnsavedAppearance =
+    JSON.stringify(appearance) !== JSON.stringify(savedAppearance);
 
   // ================= IMAGE =================
   const handleImageChange = (e) => {
@@ -118,14 +125,37 @@ const SettingsPage = () => {
   };
 
   const handleHeaderSave = () => {
-    if (activeTab === "Appearance") { saveAppearance(); return; }
+    if (activeTab === "Appearance") {
+      saveAppearance();
+      return;
+    }
     handleSave();
   };
 
   const handleReset = () => {
-    setProfile({ name: "Nathan Reeves", email: "nathan@example.com", phone: "(512) 555-0118", bio: "Gym owner & fitness enthusiast running Dreams GYM across 6 branches.", photo: "/images/user.jpg" });
-    setBusiness({ gymName: "Dreams GYM", taxId: "47-1234567", contactEmail: "hello@example.com", supportPhone: "1-800-555-0199", address: "400 Congress Ave, Austin, TX 78701", currency: "PKR", timezone: "ET" });
+    setProfile({
+      name: "Nathan Reeves",
+      email: "nathan@example.com",
+      phone: "(512) 555-0118",
+      bio: "Gym owner & fitness enthusiast running Dreams GYM across 6 branches.",
+      photo: "/images/user.jpg",
+    });
+    setBusiness({
+      gymName: "Dreams GYM",
+      taxId: "47-1234567",
+      contactEmail: "hello@example.com",
+      supportPhone: "1-800-555-0199",
+      address: "400 Congress Ave, Austin, TX 78701",
+      currency: "PKR",
+      timezone: "ET",
+    });
+
+    // ✅ Appearance bhi reset + save + notify
     setAppearance({ ...defaultAppearance });
+    setSavedAppearance({ ...defaultAppearance });
+    localStorage.setItem("kinetix_appearance", JSON.stringify(defaultAppearance));
+    window.dispatchEvent(new Event("appearanceUpdated"));
+
     setAppearanceMessage("Appearance preferences restored to defaults.");
     setBillingMessage("");
   };
@@ -136,20 +166,26 @@ const SettingsPage = () => {
     setModal("plan");
   };
   const confirmPlanChange = () => {
-    setCurrentPlan(selectedPlan); setCancelled(false);
-    setBillingMessage(`Demo plan updated to ${selectedPlan}.`); setModal("");
+    setCurrentPlan(selectedPlan);
+    setCancelled(false);
+    setBillingMessage(`Demo plan updated to ${selectedPlan}.`);
+    setModal("");
   };
   const savePaymentMethod = (event) => {
     event.preventDefault();
     const lastFour = paymentForm.cardNumber.replace(/\D/g, "").slice(-4);
     if (!paymentForm.name.trim() || lastFour.length !== 4 || !paymentForm.expiry.trim()) {
-      setBillingMessage("Please enter details."); return;
+      setBillingMessage("Please enter details.");
+      return;
     }
     setPaymentMethod({ ...paymentForm, cardNumber: lastFour, brand: paymentForm.brand || "Visa" });
-    setBillingMessage("Payment updated."); setModal("");
+    setBillingMessage("Payment updated.");
+    setModal("");
   };
   const confirmCancelPlan = () => {
-    setCancelled(true); setBillingMessage("Subscription cancelled."); setModal("");
+    setCancelled(true);
+    setBillingMessage("Subscription cancelled.");
+    setModal("");
   };
 
   // ================= APPEARANCE FUNCTIONS =================
@@ -157,37 +193,61 @@ const SettingsPage = () => {
     setAppearance((current) => ({ ...current, [key]: value }));
     setAppearanceMessage("");
   };
-  const handleCustomColor = (event) => { changeAppearance("accent", event.target.value); };
+
+  const handleCustomColor = (event) => {
+    changeAppearance("accent", event.target.value);
+  };
+
+  // ✅ Save + notify Dashboard
   const saveAppearance = () => {
     setSavedAppearance({ ...appearance });
     setAppearanceMessage("Appearance saved successfully.");
     localStorage.setItem("kinetix_appearance", JSON.stringify(appearance));
+    window.dispatchEvent(new Event("appearanceUpdated"));
   };
+
+  // ✅ Restore + save + notify
   const restoreAppearance = () => {
     setAppearance({ ...defaultAppearance });
     setAppearanceMessage("Default restored.");
+    localStorage.setItem("kinetix_appearance", JSON.stringify(defaultAppearance));
+    window.dispatchEvent(new Event("appearanceUpdated"));
   };
+
   const requestTabChange = (nextTab) => {
     if (nextTab === activeTab) return;
     if (activeTab === "Appearance" && hasUnsavedAppearance) {
-      setPendingTab(nextTab); setModal("appearance-confirm"); return;
+      setPendingTab(nextTab);
+      setModal("appearance-confirm");
+      return;
     }
     setActiveTab(nextTab);
   };
+
   const saveAndOpenTab = () => {
     setSavedAppearance({ ...appearance });
+    localStorage.setItem("kinetix_appearance", JSON.stringify(appearance));
+    window.dispatchEvent(new Event("appearanceUpdated"));
     if (pendingTab) setActiveTab(pendingTab);
-    setPendingTab(null); setModal("");
+    setPendingTab(null);
+    setModal("");
   };
+
   const discardAndOpenTab = () => {
     setAppearance({ ...savedAppearance });
     if (pendingTab) setActiveTab(pendingTab);
-    setPendingTab(null); setModal("");
+    setPendingTab(null);
+    setModal("");
   };
-  const cancelTabChange = () => { setPendingTab(null); setModal(""); };
+
+  const cancelTabChange = () => {
+    setPendingTab(null);
+    setModal("");
+  };
 
   const monthlyPrice = planPrices[currentPlan];
-  const displayedPrice = billingCycle === "yearly" ? Math.round(monthlyPrice * 10) : monthlyPrice;
+  const displayedPrice =
+    billingCycle === "yearly" ? Math.round(monthlyPrice * 10) : monthlyPrice;
 
   return (
     <div
@@ -210,9 +270,13 @@ const SettingsPage = () => {
             </button>
             <button className="btn-solid" onClick={handleHeaderSave}>
               <Check size={16} />
-              {activeTab === "Appearance" ? "Save Appearance"
-                : saveStatus === "saving" ? "Saving..."
-                : saveStatus === "saved" ? "Saved!" : "Save Changes"}
+              {activeTab === "Appearance"
+                ? "Save Appearance"
+                : saveStatus === "saving"
+                ? "Saving..."
+                : saveStatus === "saved"
+                ? "Saved!"
+                : "Save Changes"}
             </button>
           </div>
         </header>
@@ -246,52 +310,105 @@ const SettingsPage = () => {
 
           {/* ================= RIGHT CONTENT ================= */}
           <section className="settings-content">
-
             {/* ================= PROFILE ================= */}
             {activeTab === "Profile" && (
               <>
                 <h2 className="content-title">Profile Information</h2>
                 <div className="profile-top">
-                  <div className="avatar-circle" style={{ overflow: "hidden", padding: 0 }}>
-                    <img src={profile.photo} alt="User" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <div
+                    className="avatar-circle"
+                    style={{ overflow: "hidden", padding: 0 }}
+                  >
+                    <img
+                      src={profile.photo}
+                      alt="User"
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
                   </div>
                   <div className="profile-info">
                     <h3>{profile.name}</h3>
                     <p>Super Admin · {profile.email}</p>
-                    <button className="btn-outline" type="button" onClick={() => fileInputRef.current.click()}>
+                    <button
+                      className="btn-outline"
+                      type="button"
+                      onClick={() => fileInputRef.current.click()}
+                    >
                       ↑ Change Photo
                     </button>
-                    <input type="file" ref={fileInputRef} onChange={handleImageChange} accept="image/*" style={{ display: "none" }} />
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleImageChange}
+                      accept="image/*"
+                      style={{ display: "none" }}
+                    />
                   </div>
                 </div>
 
-                <form className="settings-form" onSubmit={(e) => { e.preventDefault(); handleSave(); }}>
+                <form
+                  className="settings-form"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSave();
+                  }}
+                >
                   <div className="form-row">
                     <div className="form-group">
                       <label>Full Name</label>
-                      <input type="text" value={profile.name} onChange={(e) => setProfile({ ...profile, name: e.target.value })} />
+                      <input
+                        type="text"
+                        value={profile.name}
+                        onChange={(e) =>
+                          setProfile({ ...profile, name: e.target.value })
+                        }
+                      />
                     </div>
                     <div className="form-group">
                       <label>Email</label>
-                      <input type="email" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} />
+                      <input
+                        type="email"
+                        value={profile.email}
+                        onChange={(e) =>
+                          setProfile({ ...profile, email: e.target.value })
+                        }
+                      />
                     </div>
                   </div>
                   <div className="form-row">
                     <div className="form-group">
                       <label>Phone</label>
-                      <input type="text" value={profile.phone} onChange={(e) => setProfile({ ...profile, phone: e.target.value })} />
+                      <input
+                        type="text"
+                        value={profile.phone}
+                        onChange={(e) =>
+                          setProfile({ ...profile, phone: e.target.value })
+                        }
+                      />
                     </div>
                     <div className="form-group">
                       <label>Role</label>
                       <input type="text" defaultValue="Super Admin" readOnly />
-                      <span className="helper-text">Roles are managed by your organisation owner.</span>
+                      <span className="helper-text">
+                        Roles are managed by your organisation owner.
+                      </span>
                     </div>
                   </div>
                   <div className="form-group">
                     <label>Bio</label>
-                    <textarea rows="3" value={profile.bio} onChange={(e) => setProfile({ ...profile, bio: e.target.value })} />
+                    <textarea
+                      rows="3"
+                      value={profile.bio}
+                      onChange={(e) =>
+                        setProfile({ ...profile, bio: e.target.value })
+                      }
+                    />
                   </div>
-                  <button className="btn-solid settings-form-submit" type="submit">Save Profile</button>
+                  <button
+                    className="btn-solid settings-form-submit"
+                    type="submit"
+                  >
+                    Save Profile
+                  </button>
                 </form>
               </>
             )}
@@ -300,31 +417,75 @@ const SettingsPage = () => {
             {activeTab === "Business" && (
               <>
                 <h2 className="content-title">Business Details</h2>
-                <form className="settings-form" onSubmit={(e) => { e.preventDefault(); handleSave(); }}>
+                <form
+                  className="settings-form"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSave();
+                  }}
+                >
                   <div className="form-row">
                     <div className="form-group">
                       <label>Gym Name</label>
-                      <input type="text" value={business.gymName} onChange={(e) => setBusiness({ ...business, gymName: e.target.value })} />
+                      <input
+                        type="text"
+                        value={business.gymName}
+                        onChange={(e) =>
+                          setBusiness({ ...business, gymName: e.target.value })
+                        }
+                      />
                     </div>
                     <div className="form-group">
                       <label>Tax ID (EIN)</label>
-                      <input type="text" value={business.taxId} onChange={(e) => setBusiness({ ...business, taxId: e.target.value })} />
+                      <input
+                        type="text"
+                        value={business.taxId}
+                        onChange={(e) =>
+                          setBusiness({ ...business, taxId: e.target.value })
+                        }
+                      />
                     </div>
                   </div>
                   <div className="form-row">
                     <div className="form-group">
                       <label>Contact Email</label>
-                      <input type="email" value={business.contactEmail} onChange={(e) => setBusiness({ ...business, contactEmail: e.target.value })} />
+                      <input
+                        type="email"
+                        value={business.contactEmail}
+                        onChange={(e) =>
+                          setBusiness({
+                            ...business,
+                            contactEmail: e.target.value,
+                          })
+                        }
+                      />
                     </div>
                     <div className="form-group">
                       <label>Support Phone</label>
-                      <input type="text" value={business.supportPhone} onChange={(e) => setBusiness({ ...business, supportPhone: e.target.value })} />
+                      <input
+                        type="text"
+                        value={business.supportPhone}
+                        onChange={(e) =>
+                          setBusiness({
+                            ...business,
+                            supportPhone: e.target.value,
+                          })
+                        }
+                      />
                     </div>
                   </div>
                   <div className="form-row">
                     <div className="form-group">
                       <label>Currency</label>
-                      <select value={business.currency} onChange={(e) => setBusiness({ ...business, currency: e.target.value })}>
+                      <select
+                        value={business.currency}
+                        onChange={(e) =>
+                          setBusiness({
+                            ...business,
+                            currency: e.target.value,
+                          })
+                        }
+                      >
                         <option value="PKR">PKR — Pakistani Rupee</option>
                         <option value="USD">USD — US Dollar</option>
                         <option value="EUR">EUR — Euro</option>
@@ -332,7 +493,15 @@ const SettingsPage = () => {
                     </div>
                     <div className="form-group">
                       <label>Timezone</label>
-                      <select value={business.timezone} onChange={(e) => setBusiness({ ...business, timezone: e.target.value })}>
+                      <select
+                        value={business.timezone}
+                        onChange={(e) =>
+                          setBusiness({
+                            ...business,
+                            timezone: e.target.value,
+                          })
+                        }
+                      >
                         <option value="ET">ET (GMT-5:00)</option>
                         <option value="PT">PT (GMT-8:00)</option>
                         <option value="PKT">PKT (GMT+5:00)</option>
@@ -341,9 +510,20 @@ const SettingsPage = () => {
                   </div>
                   <div className="form-group">
                     <label>Registered Address</label>
-                    <input type="text" value={business.address} onChange={(e) => setBusiness({ ...business, address: e.target.value })} />
+                    <input
+                      type="text"
+                      value={business.address}
+                      onChange={(e) =>
+                        setBusiness({ ...business, address: e.target.value })
+                      }
+                    />
                   </div>
-                  <button className="btn-solid settings-form-submit" type="submit">Save Business Details</button>
+                  <button
+                    className="btn-solid settings-form-submit"
+                    type="submit"
+                  >
+                    Save Business Details
+                  </button>
                 </form>
               </>
             )}
@@ -351,7 +531,12 @@ const SettingsPage = () => {
             {/* ================= NOTIFICATIONS ================= */}
             {activeTab === "Notifications" && (
               <div className="notifications-tab-wrapper">
-                <h2 className="content-title" style={{ marginBottom: "20px" }}>Notifications</h2>
+                <h2
+                  className="content-title"
+                  style={{ marginBottom: "20px" }}
+                >
+                  Notifications
+                </h2>
                 <NotificationPreferences ref={notificationRef} />
               </div>
             )}
@@ -363,45 +548,70 @@ const SettingsPage = () => {
               </div>
             )}
 
-            {/* ================= BILLING (Functional) ================= */}
+            {/* ================= BILLING ================= */}
             {activeTab === "Billing" && (
               <div className="billing-panel">
                 <div className="billing-heading">
                   <div>
                     <span className="billing-eyebrow">FINANCE</span>
                     <h2 className="content-title">Billing & Subscription</h2>
-                    <p className="billing-subtitle">Manage your subscription plan, payment method and invoice history.</p>
+                    <p className="billing-subtitle">
+                      Manage your subscription plan, payment method and
+                      invoice history.
+                    </p>
                   </div>
-                  <span className="billing-live"><span></span> SECURE</span>
+                  <span className="billing-live">
+                    <span></span> SECURE
+                  </span>
                 </div>
 
                 {billingMessage && (
                   <div className="billing-alert">
                     <CheckCircle2 size={16} />
                     <p>{billingMessage}</p>
-                    <button onClick={() => setBillingMessage("")}><X size={14} /></button>
+                    <button onClick={() => setBillingMessage("")}>
+                      <X size={14} />
+                    </button>
                   </div>
                 )}
 
                 {/* Plan Card */}
                 <div className="billing-plan-card">
                   <div className="billing-plan-top">
-                    <span className="billing-badge"><span></span> CURRENT PLAN</span>
+                    <span className="billing-badge">
+                      <span></span> CURRENT PLAN
+                    </span>
                     <Crown size={20} className="billing-crown" />
                   </div>
                   <h3>{currentPlan} Plan</h3>
                   <div className="billing-price">
                     <strong>PKR {displayedPrice}</strong>
-                    <span>/ {billingCycle === "yearly" ? "year" : "month"}</span>
+                    <span>
+                      / {billingCycle === "yearly" ? "year" : "month"}
+                    </span>
                   </div>
-                  <p>Full access to all gym management features including members, billing and reports.</p>
+                  <p>
+                    Full access to all gym management features including
+                    members, billing and reports.
+                  </p>
                   <div className="billing-plan-meta">
-                    <span><Calendar size={13} /> Renews on Nov 1, 2026</span>
-                    <span>{cancelled ? "Cancelled" : "Active Subscription"}</span>
+                    <span>
+                      <Calendar size={13} /> Renews on Nov 1, 2026
+                    </span>
+                    <span>
+                      {cancelled ? "Cancelled" : "Active Subscription"}
+                    </span>
                   </div>
                   <div className="billing-actions">
-                    <button className="btn-solid" onClick={openUpgradeModal}>Change Plan</button>
-                    <button className="btn-outline" onClick={() => setModal("cancel")}>Cancel Plan</button>
+                    <button className="btn-solid" onClick={openUpgradeModal}>
+                      Change Plan
+                    </button>
+                    <button
+                      className="btn-outline"
+                      onClick={() => setModal("cancel")}
+                    >
+                      Cancel Plan
+                    </button>
                   </div>
                 </div>
 
@@ -415,15 +625,31 @@ const SettingsPage = () => {
                   </div>
                   <div className="billing-box billing-cycle-box">
                     <div className="billing-item-info">
-                      <div className="billing-icon"><Wallet size={20} /></div>
+                      <div className="billing-icon">
+                        <Wallet size={20} />
+                      </div>
                       <div>
                         <h4>Billing Frequency</h4>
                         <p>Yearly saves 2 months of subscription.</p>
                       </div>
                     </div>
                     <div className="billing-cycle-switch">
-                      <button className={billingCycle === "monthly" ? "active" : ""} onClick={() => setBillingCycle("monthly")}>Monthly</button>
-                      <button className={billingCycle === "yearly" ? "active" : ""} onClick={() => setBillingCycle("yearly")}>Yearly <span>-17%</span></button>
+                      <button
+                        className={
+                          billingCycle === "monthly" ? "active" : ""
+                        }
+                        onClick={() => setBillingCycle("monthly")}
+                      >
+                        Monthly
+                      </button>
+                      <button
+                        className={
+                          billingCycle === "yearly" ? "active" : ""
+                        }
+                        onClick={() => setBillingCycle("yearly")}
+                      >
+                        Yearly <span>-17%</span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -435,18 +661,30 @@ const SettingsPage = () => {
                       <h3>Payment Method</h3>
                       <p>Update your saved card information.</p>
                     </div>
-                    <button className="billing-update-btn" onClick={() => setModal("payment")}>
+                    <button
+                      className="billing-update-btn"
+                      onClick={() => setModal("payment")}
+                    >
                       <Pencil size={14} /> Update
                     </button>
                   </div>
                   <div className="billing-box billing-payment-box">
-                    <div className="billing-card-icon"><CreditCard size={22} /></div>
-                    <div className="billing-card-info">
-                      <h4>{paymentMethod.brand} ending in **** {paymentMethod.cardNumber}</h4>
-                      <p>Expires {paymentMethod.expiry}</p>
-                      <span className="billing-default"><span></span> Default payment method</span>
+                    <div className="billing-card-icon">
+                      <CreditCard size={22} />
                     </div>
-                    <span className="billing-secure"><Lock size={12} /> Encrypted</span>
+                    <div className="billing-card-info">
+                      <h4>
+                        {paymentMethod.brand} ending in ****{" "}
+                        {paymentMethod.cardNumber}
+                      </h4>
+                      <p>Expires {paymentMethod.expiry}</p>
+                      <span className="billing-default">
+                        <span></span> Default payment method
+                      </span>
+                    </div>
+                    <span className="billing-secure">
+                      <Lock size={12} /> Encrypted
+                    </span>
                   </div>
                 </div>
 
@@ -463,8 +701,12 @@ const SettingsPage = () => {
                       <table className="billing-table">
                         <thead>
                           <tr>
-                            <th>Invoice</th><th>Date</th><th>Description</th>
-                            <th>Amount</th><th>Status</th><th></th>
+                            <th>Invoice</th>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -473,9 +715,24 @@ const SettingsPage = () => {
                               <td>{inv.id}</td>
                               <td>{inv.date}</td>
                               <td>{inv.description}</td>
-                              <td className="billing-amount">PKR {inv.amount}</td>
-                              <td><span className="billing-status">{inv.status}</span></td>
-                              <td><button className="billing-update-btn" onClick={() => alert("Downloading invoice...")}><Download size={13} /></button></td>
+                              <td className="billing-amount">
+                                PKR {inv.amount}
+                              </td>
+                              <td>
+                                <span className="billing-status">
+                                  {inv.status}
+                                </span>
+                              </td>
+                              <td>
+                                <button
+                                  className="billing-update-btn"
+                                  onClick={() =>
+                                    alert("Downloading invoice...")
+                                  }
+                                >
+                                  <Download size={13} />
+                                </button>
+                              </td>
                             </tr>
                           ))}
                         </tbody>
@@ -492,40 +749,66 @@ const SettingsPage = () => {
                 <div className="billing-cancel-box">
                   <div>
                     <h4>Danger Zone</h4>
-                    <p>Once you cancel, you will lose access to premium features at the end of your billing cycle.</p>
+                    <p>
+                      Once you cancel, you will lose access to premium
+                      features at the end of your billing cycle.
+                    </p>
                   </div>
-                  <button className="billing-danger-btn" onClick={() => setModal("cancel")}>
+                  <button
+                    className="billing-danger-btn"
+                    onClick={() => setModal("cancel")}
+                  >
                     <Trash2 size={15} /> Cancel Subscription
                   </button>
                 </div>
               </div>
             )}
 
-            {/* ================= APPEARANCE (Functional) ================= */}
+            {/* ================= APPEARANCE ================= */}
             {activeTab === "Appearance" && (
               <div className="appearance-panel">
                 <div className="appearance-intro">
                   <h2 className="content-title">Appearance</h2>
-                  <p className="billing-subtitle">Customize how your dashboard looks and feels.</p>
+                  <p className="billing-subtitle">
+                    Customize how your dashboard looks and feels.
+                  </p>
                 </div>
 
                 {/* Theme */}
                 <div className="appearance-section">
                   <div className="billing-section-heading">
-                    <div><h3>Theme</h3><p>Choose your preferred color mode.</p></div>
+                    <div>
+                      <h3>Theme</h3>
+                      <p>Choose your preferred color mode.</p>
+                    </div>
                   </div>
                   <div className="appearance-theme-grid">
                     {[
-                      { id: "dark", name: "Dark Mode", desc: "Best for low light", icon: Moon },
-                      { id: "light", name: "Light Mode", desc: "Bright and clean", icon: Sun },
+                      {
+                        id: "dark",
+                        name: "Dark Mode",
+                        desc: "Best for low light",
+                        icon: Moon,
+                      },
+                      {
+                        id: "light",
+                        name: "Light Mode",
+                        desc: "Bright and clean",
+                        icon: Sun,
+                      },
                     ].map((t) => (
                       <button
                         key={t.id}
-                        className={`appearance-theme-card ${appearance.theme === t.id ? "selected" : ""}`}
+                        className={`appearance-theme-card ${
+                          appearance.theme === t.id ? "selected" : ""
+                        }`}
                         onClick={() => changeAppearance("theme", t.id)}
                       >
-                        <div className={`theme-preview theme-preview-${t.id}`}>
-                          <span></span><span></span>
+                        <div
+                          className={`theme-preview theme-preview-${t.id}`}
+                        >
+                          <span></span>
+                          <span></span>
                         </div>
                         <span className="appearance-choice-label">
                           <t.icon size={16} /> {t.name}
@@ -540,28 +823,47 @@ const SettingsPage = () => {
                 {/* Accent Colors */}
                 <div className="appearance-section">
                   <div className="billing-section-heading">
-                    <div><h3>Accent Color</h3><p>Pick a highlight color for buttons and links.</p></div>
+                    <div>
+                      <h3>Accent Color</h3>
+                      <p>
+                        Pick a highlight color for buttons and links.
+                      </p>
+                    </div>
                   </div>
                   <div className="appearance-colors">
                     {accentColors.map((color) => (
                       <button
                         key={color.value}
-                        className={`appearance-color-option ${appearance.accent === color.value ? "selected" : ""}`}
+                        className={`appearance-color-option ${
+                          appearance.accent === color.value ? "selected" : ""
+                        }`}
                         style={{ "--swatch-color": color.value }}
                         onClick={() => changeAppearance("accent", color.value)}
                       >
                         <span className="appearance-color-swatch"></span>
                         {color.name}
-                        {appearance.accent === color.value && <Check size={16} />}
+                        {appearance.accent === color.value && (
+                          <Check size={16} />
+                        )}
                       </button>
                     ))}
                     <label
-                      className={`appearance-color-option appearance-custom-color ${!accentColors.some(c => c.value === appearance.accent) ? "selected" : ""}`}
+                      className={`appearance-color-option appearance-custom-color ${
+                        !accentColors.some(
+                          (c) => c.value === appearance.accent
+                        )
+                          ? "selected"
+                          : ""
+                      }`}
                       style={{ "--swatch-color": appearance.accent }}
                     >
                       <span className="appearance-color-swatch"></span>
                       Custom Color
-                      <input type="color" value={appearance.accent} onChange={handleCustomColor} />
+                      <input
+                        type="color"
+                        value={appearance.accent}
+                        onChange={handleCustomColor}
+                      />
                     </label>
                   </div>
                 </div>
@@ -569,32 +871,50 @@ const SettingsPage = () => {
                 {/* Preferences */}
                 <div className="appearance-section">
                   <div className="billing-section-heading">
-                    <div><h3>Preferences</h3><p>Adjust layout density and animations.</p></div>
+                    <div>
+                      <h3>Preferences</h3>
+                      <p>Adjust layout density and animations.</p>
+                    </div>
                   </div>
                   <div className="appearance-preference-list">
                     <div className="appearance-preference">
-                      <div className="appearance-preference-icon"><Zap size={18} /></div>
+                      <div className="appearance-preference-icon">
+                        <Zap size={18} />
+                      </div>
                       <div className="appearance-preference-copy">
                         <h4>Compact Mode</h4>
                         <p>Reduce spacing to fit more on screen.</p>
                       </div>
                       <button
-                        className={`appearance-toggle ${appearance.compact ? "on" : ""}`}
-                        onClick={() => changeAppearance("compact", !appearance.compact)}
+                        className={`appearance-toggle ${
+                          appearance.compact ? "on" : ""
+                        }`}
+                        onClick={() =>
+                          changeAppearance("compact", !appearance.compact)
+                        }
                         aria-label="Toggle compact mode"
                       >
                         <span></span>
                       </button>
                     </div>
                     <div className="appearance-preference">
-                      <div className="appearance-preference-icon"><Eye size={18} /></div>
+                      <div className="appearance-preference-icon">
+                        <Eye size={18} />
+                      </div>
                       <div className="appearance-preference-copy">
                         <h4>Animations</h4>
                         <p>Enable smooth transitions across the UI.</p>
                       </div>
                       <button
-                        className={`appearance-toggle ${appearance.animations ? "on" : ""}`}
-                        onClick={() => changeAppearance("animations", !appearance.animations)}
+                        className={`appearance-toggle ${
+                          appearance.animations ? "on" : ""
+                        }`}
+                        onClick={() =>
+                          changeAppearance(
+                            "animations",
+                            !appearance.animations
+                          )
+                        }
                         aria-label="Toggle animations"
                       >
                         <span></span>
@@ -629,33 +949,48 @@ const SettingsPage = () => {
       {modal === "plan" && (
         <div className="billing-modal-backdrop">
           <div className="billing-modal">
-            <button className="billing-close" onClick={() => setModal("")}><X size={16} /></button>
+            <button className="billing-close" onClick={() => setModal("")}>
+              <X size={16} />
+            </button>
             <h3>Change Plan</h3>
-            <p className="billing-modal-description">Select a plan that fits your gym.</p>
+            <p className="billing-modal-description">
+              Select a plan that fits your gym.
+            </p>
             <div className="billing-plan-choices">
               {Object.entries(planPrices).map(([name, price]) => (
                 <button
                   key={name}
-                  className={`billing-choice ${selectedPlan === name ? "selected" : ""}`}
+                  className={`billing-choice ${
+                    selectedPlan === name ? "selected" : ""
+                  }`}
                   onClick={() => setSelectedPlan(name)}
                 >
                   <div className="billing-choice-top">
-                    {name} {selectedPlan === name && <span>SELECTED</span>}
+                    {name}{" "}
+                    {selectedPlan === name && <span>SELECTED</span>}
                   </div>
                   <strong>PKR {price}</strong>
                   <small>/month</small>
                   <span className="billing-choice-description">
-                    {name === "Starter" ? "Basic features for small gyms." :
-                     name === "Professional" ? "Advanced tools for growing gyms." :
-                     "Everything unlocked for large teams."}
+                    {name === "Starter"
+                      ? "Basic features for small gyms."
+                      : name === "Professional"
+                      ? "Advanced tools for growing gyms."
+                      : "Everything unlocked for large teams."}
                   </span>
                 </button>
               ))}
             </div>
-            <p className="billing-demo-note">This is a demo — no real payment will be charged.</p>
+            <p className="billing-demo-note">
+              This is a demo — no real payment will be charged.
+            </p>
             <div className="billing-modal-actions">
-              <button className="btn-outline" onClick={() => setModal("")}>Cancel</button>
-              <button className="btn-solid" onClick={confirmPlanChange}>Confirm Plan</button>
+              <button className="btn-outline" onClick={() => setModal("")}>
+                Cancel
+              </button>
+              <button className="btn-solid" onClick={confirmPlanChange}>
+                Confirm Plan
+              </button>
             </div>
           </div>
         </div>
@@ -665,25 +1000,65 @@ const SettingsPage = () => {
       {modal === "payment" && (
         <div className="billing-modal-backdrop">
           <div className="billing-modal">
-            <button className="billing-close" onClick={() => setModal("")}><X size={16} /></button>
+            <button className="billing-close" onClick={() => setModal("")}>
+              <X size={16} />
+            </button>
             <h3>Update Payment Method</h3>
-            <p className="billing-modal-description">Enter new card details.</p>
+            <p className="billing-modal-description">
+              Enter new card details.
+            </p>
             <form onSubmit={savePaymentMethod}>
               <label className="billing-field">
                 Cardholder Name
-                <input type="text" value={paymentForm.name} onChange={(e) => setPaymentForm({...paymentForm, name: e.target.value})} placeholder="Nathan Reeves" />
+                <input
+                  type="text"
+                  value={paymentForm.name}
+                  onChange={(e) =>
+                    setPaymentForm({ ...paymentForm, name: e.target.value })
+                  }
+                  placeholder="Nathan Reeves"
+                />
               </label>
               <label className="billing-field">
                 Card Number (Last 4 digits)
-                <input type="text" maxLength="4" value={paymentForm.cardNumber} onChange={(e) => setPaymentForm({...paymentForm, cardNumber: e.target.value})} placeholder="4821" />
+                <input
+                  type="text"
+                  maxLength="4"
+                  value={paymentForm.cardNumber}
+                  onChange={(e) =>
+                    setPaymentForm({
+                      ...paymentForm,
+                      cardNumber: e.target.value,
+                    })
+                  }
+                  placeholder="4821"
+                />
               </label>
               <label className="billing-field">
                 Expiry (MM/YY)
-                <input type="text" value={paymentForm.expiry} onChange={(e) => setPaymentForm({...paymentForm, expiry: e.target.value})} placeholder="09/28" />
+                <input
+                  type="text"
+                  value={paymentForm.expiry}
+                  onChange={(e) =>
+                    setPaymentForm({
+                      ...paymentForm,
+                      expiry: e.target.value,
+                    })
+                  }
+                  placeholder="09/28"
+                />
               </label>
               <div className="billing-modal-actions">
-                <button type="button" className="btn-outline" onClick={() => setModal("")}>Cancel</button>
-                <button type="submit" className="btn-solid">Save Card</button>
+                <button
+                  type="button"
+                  className="btn-outline"
+                  onClick={() => setModal("")}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn-solid">
+                  Save Card
+                </button>
               </div>
             </form>
           </div>
@@ -694,12 +1069,24 @@ const SettingsPage = () => {
       {modal === "cancel" && (
         <div className="billing-modal-backdrop">
           <div className="billing-modal">
-            <button className="billing-close" onClick={() => setModal("")}><X size={16} /></button>
+            <button className="billing-close" onClick={() => setModal("")}>
+              <X size={16} />
+            </button>
             <h3>Cancel Subscription?</h3>
-            <p className="billing-modal-description">Are you sure you want to cancel your {currentPlan} plan? You will lose access at the end of the billing cycle.</p>
+            <p className="billing-modal-description">
+              Are you sure you want to cancel your {currentPlan} plan? You
+              will lose access at the end of the billing cycle.
+            </p>
             <div className="billing-modal-actions">
-              <button className="btn-outline" onClick={() => setModal("")}>Keep Plan</button>
-              <button className="billing-danger-btn" onClick={confirmCancelPlan}><Trash2 size={15} /> Cancel Subscription</button>
+              <button className="btn-outline" onClick={() => setModal("")}>
+                Keep Plan
+              </button>
+              <button
+                className="billing-danger-btn"
+                onClick={confirmCancelPlan}
+              >
+                <Trash2 size={15} /> Cancel Subscription
+              </button>
             </div>
           </div>
         </div>
@@ -709,13 +1096,26 @@ const SettingsPage = () => {
       {modal === "appearance-confirm" && (
         <div className="billing-modal-backdrop">
           <div className="billing-modal appearance-confirm-modal">
-            <div className="appearance-confirm-icon"><AlertCircle size={28} /></div>
+            <div className="appearance-confirm-icon">
+              <AlertCircle size={28} />
+            </div>
             <h3>Unsaved Changes</h3>
-            <p className="billing-modal-description">You have unsaved appearance changes. What would you like to do?</p>
+            <p className="billing-modal-description">
+              You have unsaved appearance changes. What would you like to do?
+            </p>
             <div className="appearance-confirm-actions">
-              <button className="btn-outline" onClick={cancelTabChange}>Stay Here</button>
-              <button className="appearance-discard-btn" onClick={discardAndOpenTab}>Discard</button>
-              <button className="btn-solid" onClick={saveAndOpenTab}>Save & Continue</button>
+              <button className="btn-outline" onClick={cancelTabChange}>
+                Stay Here
+              </button>
+              <button
+                className="appearance-discard-btn"
+                onClick={discardAndOpenTab}
+              >
+                Discard
+              </button>
+              <button className="btn-solid" onClick={saveAndOpenTab}>
+                Save & Continue
+              </button>
             </div>
           </div>
         </div>
