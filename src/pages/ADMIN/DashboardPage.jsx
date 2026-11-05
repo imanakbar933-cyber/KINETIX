@@ -10,7 +10,7 @@ import BatchSchedulepage from "../../pages/ADMIN/BatchSchedulepage"; // ✅ Naya
 import "./DashboardPage.css";
 
 import MembersList from "../../components/ADMIN/MembersList";
-import BatchSchedulepage from "./BatchSchedulepage";
+
 
 const DEFAULT_APPEARANCE = {
   theme: "dark",
@@ -196,8 +196,6 @@ const DashboardPage = ({ page }) => {
         return <Placeholder title="Workouts" />;
       case "diet":
         return <Placeholder title="Diet" />;
-      case "schedule":
-        return <Placeholder title="Schedule" />;
       case "billing":
         return <Placeholder title="Billing" />;
       case "reports":

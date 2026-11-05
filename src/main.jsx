@@ -54,7 +54,7 @@ function AppLayout() {
   location.pathname.startsWith("/members") ||
   location.pathname.startsWith("/workouts") ||
   location.pathname.startsWith("/diet") ||
-  location.pathname.startsWith("/schedule") ||
+ 
   location.pathname.startsWith("/batch-schedule") ||
   location.pathname.startsWith("/billing") ||
   location.pathname.startsWith("/reports") ||
