@@ -10,7 +10,6 @@ import BatchSchedule from "../../components/ADMIN/BatchSchedule"; // ✅ IMPORT 
 
 import "./DashboardPage.css";
 
-import MembersList from "../../components/ADMIN/MembersList";
 
 
 import WorkoutPlans from "../../components/Admin/WorkoutPlans"; 
@@ -182,7 +181,7 @@ const DashboardPage = ({ page }) => {
         return <WorkoutPlans />;  // ✅ Ab yeh aapka page render karega
 
       case "diet":
-        return <Placeholder title="Diet" />;
+        return <DietPlans />;
       default:
         return <Placeholder title="Page Not Found" />;
     }
