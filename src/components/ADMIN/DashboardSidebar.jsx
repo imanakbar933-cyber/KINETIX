@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutGrid, Users, Dumbbell, Utensils, Calendar,
-  UserCircle, FileText, BarChart2, Settings, LogOut
+  UserCircle, FileText, BarChart2, Settings
 } from "lucide-react";
 import "./DashboardSidebar.css";
 
@@ -40,7 +40,10 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
         <Link to="/members" className={isActive("/members")}><Users size={20} /> Member</Link>
         <Link to="/workouts" className={isActive("/workouts")}><Dumbbell size={20} /> Workout Routine</Link>
         <Link to="/diet" className={isActive("/diet")}><Utensils size={20} /> Diet Chart</Link>
-        <Link to="/BatchSchedul" className={isActive("/BatchSchedule")}><Calendar size={20} /> Batch Schedule</Link>
+        
+        {/* ✅ YAHAN FIX KIYA HAI: /batch-schedule */}
+        <Link to="/batch-schedule" className={isActive("/batch-schedule")}><Calendar size={20} /> Batch Schedule</Link>
+        
         <Link to="/trainers" className={isActive("/trainers")}><UserCircle size={20} /> Trainer List</Link>
         <Link to="/billing" className={isActive("/billing")}><FileText size={20} /> Billing List</Link>
         <Link to="/reports" className={isActive("/reports")}><BarChart2 size={20} /> Report</Link>
@@ -55,7 +58,7 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
         </div>
       </div>
 
-      {/* ✅ RIGHT EDGE — Invisible Width drag handle (No lines) */}
+      {/* ✅ RIGHT EDGE — Invisible Width drag handle */}
       {isOpen && (
         <div
           className="dash-sidebar-resize-handle"
@@ -64,7 +67,7 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
         ></div>
       )}
 
-      {/* ✅ BOTTOM EDGE — Invisible Height drag handle (No lines) */}
+      {/* ✅ BOTTOM EDGE — Invisible Height drag handle */}
       {isOpen && (
         <div
           className="dash-sidebar-height-handle"

@@ -33,14 +33,16 @@ import Login from "./pages/Login.jsx";
 import ServiceDetail from "./components/ServiceDetail.jsx";
 
 // Admin Dashboard
-import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
+import DashboardPage from "./pages/Admin/DashboardPage.jsx";
 
 function AppLayout() {
   const location = useLocation();
 
+  // 1. AUTH PAGES (No Navbar, No Footer)
   const isAuthPage =
     location.pathname === "/login" || location.pathname === "/signup";
 
+  // 2. DASHBOARD PAGES (No Navbar, No Footer)
   const isDashboard =
     location.pathname.startsWith("/dashboard") ||
     location.pathname.startsWith("/members") ||
@@ -71,6 +73,9 @@ function AppLayout() {
         <Route path="/billing" element={<DashboardPage page="billing" />} />
         <Route path="/reports" element={<DashboardPage page="reports" />} />
         <Route path="/settings" element={<DashboardPage page="settings" />} />
+        
+        {/* ✅ TRAINERS ROUTE ADD KIYA HAI */}
+        <Route path="/trainers" element={<DashboardPage page="trainers" />} />
       </Routes>
     );
   }

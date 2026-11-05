@@ -4,11 +4,17 @@ import DashboardSidebar from "../../components/ADMIN/DashboardSidebar";
 
 // Pages
 import SettingsPage from "../../components/ADMIN/Settings/SettingsPage";
-
+import ReportsPage from "../../components/ADMIN/ReportsPage";
+import MembersList from "../../components/ADMIN/MembersList";
+import BatchSchedule from "../../components/ADMIN/BatchSchedule"; // ✅ IMPORT ADD KIYA
 
 import "./DashboardPage.css";
 
-import MembersList from "../../components/ADMIN/MembersList";
+
+
+
+import WorkoutPlans from "../../components/Admin/WorkoutPlans"; 
+import DietPlans from "../../components/Admin/DietPlans";
 
 
 const DEFAULT_APPEARANCE = {
@@ -23,7 +29,6 @@ const MAX_WIDTH = 380;
 const DEFAULT_WIDTH = 280;
 
 const MIN_HEIGHT = 500;
-const DEFAULT_HEIGHT = 100;
 
 const DashboardPage = ({ page }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -75,7 +80,6 @@ const DashboardPage = ({ page }) => {
         const newWidth = Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, e.clientX));
         setSidebarWidth(newWidth);
       }
-
       if (isResizingHeight.current) {
         const newHeight = Math.min(
           window.innerHeight,
@@ -90,12 +94,10 @@ const DashboardPage = ({ page }) => {
         isResizingWidth.current = false;
         localStorage.setItem("kinetix_sidebar_width", String(sidebarWidth));
       }
-
       if (isResizingHeight.current) {
         isResizingHeight.current = false;
         localStorage.setItem("kinetix_sidebar_height", String(sidebarHeight));
       }
-
       document.body.style.cursor = "";
       document.body.style.userSelect = "";
     };
@@ -163,23 +165,20 @@ const DashboardPage = ({ page }) => {
       case "members":
         return <MembersList />;
       case "batch-schedule":
-        return <BatchSchedulepage />;
+        return <BatchSchedule />;   // ✅ Yahan BatchSchedule call kiya
+      case "schedule":
+        return <BatchSchedule />;   // ✅ Schedule pe bhi BatchSchedule khulega
       case "reports":
-        return <ReportsPage />;  // ✅ REPORTS PAGE CALL KIYA
+        return <ReportsPage />;     // ✅ Reports Page
       case "settings":
         return <SettingsPage />;
        case "trainers":
         return <TrainerManagement />; 
       case "workouts":
-        return <Placeholder title="Workouts" />;
+        return <WorkoutPlans />;  // ✅ Ab yeh aapka page render karega
+
       case "diet":
         return <Placeholder title="Diet" />;
-      case "schedule":
-        return <Placeholder title="Schedule" />;
-        case "reports":
-        return <ReportsPage />; // ✅ Reports route ke liye
-      case "billing":
-        return <ReportsPage />; // 👈 // ✅ Placeholder ki jagah apna component
       default:
         return <Placeholder title="Page Not Found" />;
     }

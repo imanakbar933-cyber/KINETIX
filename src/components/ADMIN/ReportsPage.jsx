@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import {
   Download, FileText, Calendar, Search, Filter, ChevronDown,
   TrendingUp, TrendingDown, DollarSign, Wallet, Percent,
-  Eye, X, Printer, FileSpreadsheet, ShoppingCart, Users, Settings, Check
+  Eye, X, Printer, FileSpreadsheet, ShoppingCart, Users, Settings, Check, Clock
 } from "lucide-react";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend
+  PieChart, Pie, Cell
 } from "recharts";
 import "./ReportsPage.css";
 
@@ -44,15 +44,24 @@ const initialReports = [
 ];
 
 const tabs = ["All Reports", "Financial", "Sales", "Members", "Operations"];
+const dateOptions = ["This Month", "This Year", "This Quarter", "Last Month", "Last Year"];
 
 export default function ReportsPage() {
   const [activeTab, setActiveTab] = useState("All Reports");
   const [searchQuery, setSearchQuery] = useState("");
+  
+  // Modals state
   const [isGenerateModalOpen, setIsGenerateModalOpen] = useState(false);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
+  const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+  
   const [selectedReport, setSelectedReport] = useState(null);
+  
+  // Dropdown State
+  const [showDateDropdown, setShowDateDropdown] = useState(false);
+  const [selectedDate, setSelectedDate] = useState("This Month");
 
-  // Filter Logic
   const filteredReports = initialReports.filter(r => {
     const matchesTab = activeTab === "All Reports" || r.category.toLowerCase() === activeTab.toLowerCase();
     const matchesSearch = r.title.toLowerCase().includes(searchQuery.toLowerCase()) || r.desc.toLowerCase().includes(searchQuery.toLowerCase());
@@ -73,13 +82,31 @@ export default function ReportsPage() {
           <p>Financial & operational reports · Austin HQ</p>
         </div>
         <div className="reports-header-actions">
-          <button className="rp-btn-outline">
-            This Month <ChevronDown size={16} />
-          </button>
-          <button className="rp-btn-outline">
+          
+          {/* ✅ Date Dropdown */}
+          <div className="rp-dropdown-wrapper">
+            <button className="rp-btn-outline" onClick={() => setShowDateDropdown(!showDateDropdown)}>
+              {selectedDate} <ChevronDown size={16} />
+            </button>
+            {showDateDropdown && (
+              <div className="rp-dropdown-menu">
+                {dateOptions.map(opt => (
+                  <div 
+                    key={opt} 
+                    className={`rp-dropdown-item ${selectedDate === opt ? 'active' : ''}`}
+                    onClick={() => { setSelectedDate(opt); setShowDateDropdown(false); }}
+                  >
+                    {opt} {selectedDate === opt && <Check size={14} />}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <button className="rp-btn-outline" onClick={() => setIsExportModalOpen(true)}>
             <Download size={16} /> Export
           </button>
-          <button className="rp-btn-outline">
+          <button className="rp-btn-outline" onClick={() => setIsScheduleModalOpen(true)}>
             <Calendar size={16} /> Schedule
           </button>
           <button className="rp-btn-solid" onClick={() => setIsGenerateModalOpen(true)}>
@@ -110,7 +137,6 @@ export default function ReportsPage() {
 
       {/* ================= CHARTS ================= */}
       <div className="reports-charts-grid">
-        {/* Bar Chart */}
         <div className="chart-card bar-chart-card">
           <div className="chart-header">
             <h3>Revenue vs Expenses</h3>
@@ -122,10 +148,10 @@ export default function ReportsPage() {
           <div style={{ width: '100%', height: 300 }}>
             <ResponsiveContainer>
               <BarChart data={barData} margin={{ top: 20, right: 0, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#6b7280', fontSize: 12 }} dy={10} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#6b7280', fontSize: 12 }} />
-                <RechartsTooltip cursor={{ fill: 'transparent' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#333" />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#888', fontSize: 12 }} dy={10} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#888', fontSize: 12 }} />
+                <RechartsTooltip cursor={{ fill: 'rgba(255,255,255,0.05)' }} contentStyle={{ borderRadius: '8px', border: '1px solid #03ea04', background: '#111' }} />
                 <Bar dataKey="revenue" fill="#22c55e" radius={[4, 4, 0, 0]} barSize={40} />
                 <Bar dataKey="expenses" fill="#ef4444" radius={[4, 4, 0, 0]} barSize={40} />
               </BarChart>
@@ -133,7 +159,6 @@ export default function ReportsPage() {
           </div>
         </div>
 
-        {/* Pie Chart */}
         <div className="chart-card pie-chart-card">
           <div className="chart-header">
             <h3>Revenue Sources</h3>
@@ -146,7 +171,7 @@ export default function ReportsPage() {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <RechartsTooltip />
+                <RechartsTooltip contentStyle={{ background: '#111', border: '1px solid #03ea04' }} />
               </PieChart>
             </ResponsiveContainer>
             <div className="custom-pie-legend">
@@ -287,7 +312,7 @@ export default function ReportsPage() {
             
             <div className="preview-top-card">
               <div className="ptc-icon" style={{ background: `${selectedReport.color}15`, color: selectedReport.color }}>
-                <selectedReport.icon size={28} />
+                <selectedReport.icon size={24} />
               </div>
               <div>
                 <h3>{selectedReport.title}</h3>
@@ -353,6 +378,74 @@ export default function ReportsPage() {
           </div>
         </div>
       )}
+
+      {/* ================= SCHEDULE REPORT MODAL ================= */}
+      {isScheduleModalOpen && (
+        <div className="rp-modal-backdrop">
+          <div className="rp-modal">
+            <div className="rp-modal-header">
+              <h2>Schedule Report</h2>
+              <button className="rp-close-btn" onClick={() => setIsScheduleModalOpen(false)}><X size={20} /></button>
+            </div>
+            
+            <div className="rp-form-group" style={{ marginBottom: '16px' }}>
+              <input type="text" className="rp-input" placeholder="Custom scheduled report" defaultValue="Custom scheduled report" />
+            </div>
+
+            <div className="generate-form-grid">
+              <div className="rp-form-group">
+                <label>FREQUENCY</label>
+                <select><option>Monthly</option><option>Weekly</option><option>Daily</option></select>
+              </div>
+              <div className="rp-form-group">
+                <label>FORMAT</label>
+                <select><option>PDF</option><option>XLSX</option></select>
+              </div>
+            </div>
+
+            <div className="rp-form-group" style={{ marginBottom: '24px' }}>
+              <label>EMAIL RECIPIENTS</label>
+              <input type="text" className="rp-input" placeholder="finance@example.com, owner@example.com" />
+            </div>
+
+            <div className="rp-modal-actions">
+              <button className="rp-btn-outline flex-1" onClick={() => setIsScheduleModalOpen(false)}>Cancel</button>
+              <button className="rp-btn-solid flex-1" onClick={() => setIsScheduleModalOpen(false)}>
+                <Clock size={16} /> Schedule
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ================= EXPORT MODAL ================= */}
+      {isExportModalOpen && (
+        <div className="rp-modal-backdrop">
+          <div className="rp-modal">
+            <div className="rp-modal-header">
+              <h2>Export</h2>
+              <button className="rp-close-btn" onClick={() => setIsExportModalOpen(false)}><X size={20} /></button>
+            </div>
+            
+            <div className="rp-form-group" style={{ marginBottom: '16px' }}>
+              <input type="text" className="rp-input" placeholder="All reports in the current view" defaultValue="All reports in the current view" />
+            </div>
+
+            <div className="rp-form-group" style={{ marginBottom: '24px' }}>
+              <label>FORMAT</label>
+              <select><option>PDF</option><option>XLSX</option><option>CSV</option></select>
+            </div>
+
+            <div className="rp-modal-actions">
+              <button className="rp-btn-outline flex-1" onClick={() => setIsExportModalOpen(false)}>Cancel</button>
+              <button className="rp-btn-solid flex-1" onClick={() => setIsExportModalOpen(false)}>
+                <Download size={16} /> Export
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
