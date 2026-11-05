@@ -4,12 +4,11 @@ import DashboardSidebar from "../../components/ADMIN/DashboardSidebar";
 
 // Pages
 import SettingsPage from "../../components/ADMIN/Settings/SettingsPage";
-import ReportsPage from "../../components/ADMIN/ReportsPage"; // ✅ IMPORT KIYA
+import ReportsPage from "../../components/ADMIN/ReportsPage";
+import MembersList from "../../components/ADMIN/MembersList";
+import BatchSchedule from "../../components/ADMIN/BatchSchedule"; // ✅ IMPORT ADD KIYA
 
 import "./DashboardPage.css";
-
-import MembersList from "../../components/ADMIN/MembersList";
-
 
 const DEFAULT_APPEARANCE = {
   theme: "dark",
@@ -23,7 +22,6 @@ const MAX_WIDTH = 380;
 const DEFAULT_WIDTH = 280;
 
 const MIN_HEIGHT = 500;
-const DEFAULT_HEIGHT = 100;
 
 const DashboardPage = ({ page }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -163,23 +161,21 @@ const DashboardPage = ({ page }) => {
       case "members":
         return <MembersList />;
       case "batch-schedule":
-        return <BatchSchedulepage />;
+        return <BatchSchedule />;   // ✅ Yahan BatchSchedule call kiya
+      case "schedule":
+        return <BatchSchedule />;   // ✅ Schedule pe bhi BatchSchedule khulega
       case "reports":
-        return <ReportsPage />;  // ✅ REPORTS PAGE CALL KIYA
+        return <ReportsPage />;     // ✅ Reports Page
       case "settings":
         return <SettingsPage />;
+      case "billing":
+        return <Placeholder title="Billing" />; // Abhi placeholder hai
       case "trainers":
         return <Placeholder title="Trainers" />;
       case "workouts":
         return <Placeholder title="Workouts" />;
       case "diet":
         return <Placeholder title="Diet" />;
-      case "schedule":
-        return <Placeholder title="Schedule" />;
-        case "reports":
-        return <ReportsPage />; // ✅ Reports route ke liye
-      case "billing":
-        return <ReportsPage />; // 👈 // ✅ Placeholder ki jagah apna component
       default:
         return <Placeholder title="Page Not Found" />;
     }

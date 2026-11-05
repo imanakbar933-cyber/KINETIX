@@ -38,9 +38,11 @@ import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
 function AppLayout() {
   const location = useLocation();
 
+  // 1. AUTH PAGES (No Navbar, No Footer)
   const isAuthPage =
     location.pathname === "/login" || location.pathname === "/signup";
 
+  // 2. DASHBOARD PAGES (No Navbar, No Footer)
   const isDashboard =
     location.pathname.startsWith("/dashboard") ||
     location.pathname.startsWith("/members") ||
@@ -70,6 +72,9 @@ function AppLayout() {
         <Route path="/billing" element={<DashboardPage page="billing" />} />
         <Route path="/reports" element={<DashboardPage page="reports" />} />
         <Route path="/settings" element={<DashboardPage page="settings" />} />
+        
+        {/* ✅ TRAINERS ROUTE ADD KIYA HAI */}
+        <Route path="/trainers" element={<DashboardPage page="trainers" />} />
       </Routes>
     );
   }
