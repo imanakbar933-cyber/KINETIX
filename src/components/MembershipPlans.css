@@ -283,3 +283,136 @@
     font-size: 12px;
   }
 }
+
+
+
+/* =========================================
+   MEMBERSHIP HEADER - PREMIUM ANIMATION
+========================================= */
+
+.membership-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 55px;
+  text-align: center;
+  overflow: visible;
+}
+
+/* Eyebrow */
+
+.membership-eyebrow {
+  display: block;
+  color: #03ea04 !important;
+  -webkit-text-fill-color: #03ea04 !important;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin: 0 0 18px;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Main Heading */
+
+.membership-title {
+  display: block;
+  width: 100%;
+  position: relative;
+
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+
+  font-size: clamp(36px, 5.5vw, 66px);
+  font-weight: 900;
+  line-height: 1.15;
+  text-transform: uppercase;
+
+  margin: 0 0 20px;
+  padding: 0;
+
+  opacity: 0;
+  visibility: visible;
+  transform: translateY(45px);
+  filter: none !important;
+
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+
+.membership-title span {
+  display: inline;
+  color: #03ea04 !important;
+  -webkit-text-fill-color: #03ea04 !important;
+  filter: none !important;
+}
+
+/* Subtitle */
+
+.membership-subtitle {
+  display: block;
+  color: #a5a5a5 !important;
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 700px;
+
+  opacity: 0;
+  transform: translateY(25px);
+
+  transition:
+    opacity 0.8s ease 0.35s,
+    transform 0.8s ease 0.35s;
+}
+
+/* Active Animation */
+
+.membership-wrapper.in-view .membership-eyebrow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.membership-wrapper.in-view .membership-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.membership-wrapper.in-view .membership-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .membership-header {
+    margin-bottom: 40px;
+  }
+
+  .membership-title {
+    font-size: clamp(32px, 7vw, 46px);
+  }
+
+  .membership-subtitle {
+    font-size: 15px;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .membership-eyebrow,
+  .membership-title,
+  .membership-subtitle {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
