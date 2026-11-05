@@ -13,7 +13,6 @@ import "./DashboardPage.css";
 
 
 
-
 import WorkoutPlans from "../../components/Admin/WorkoutPlans"; 
 import DietPlans from "../../components/Admin/DietPlans";
 
@@ -158,16 +157,13 @@ const DashboardPage = ({ page }) => {
         
       case "settings":
         return <SettingsPage />;
-        
-      case "trainers":
-        return <Placeholder title="Trainers" />;
-
+       case "trainers":
+        return <TrainerManagement />; 
       case "workouts":
         return <WorkoutPlans />;
 
       case "diet":
-        return <DietPlans />; // Agar aapne DietPlans import kiya hai toh
-        
+        return <DietPlans />;
       default:
         return <Placeholder title="Page Not Found" />;
     }
