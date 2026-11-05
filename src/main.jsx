@@ -67,6 +67,7 @@ function AppLayout() {
         <Route path="/workouts" element={<DashboardPage page="workouts" />} />
         <Route path="/diet" element={<DashboardPage page="diet" />} />
         <Route path="/schedule" element={<DashboardPage page="schedule" />} />
+        <Route path="/trainers" element={<DashboardPage page="trainers" />} />
         <Route path="/billing" element={<DashboardPage page="billing" />} />
         <Route path="/reports" element={<DashboardPage page="reports" />} />
         <Route path="/settings" element={<DashboardPage page="settings" />} />

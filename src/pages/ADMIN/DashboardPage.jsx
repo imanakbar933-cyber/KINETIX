@@ -4,7 +4,7 @@ import DashboardSidebar from "../../components/ADMIN/DashboardSidebar";
 
 // Pages
 import SettingsPage from "../../components/ADMIN/Settings/SettingsPage";
-import ReportsPage from "../../components/ADMIN/ReportsPage"; // ✅ IMPORT KIYA
+
 
 import "./DashboardPage.css";
 
@@ -168,8 +168,8 @@ const DashboardPage = ({ page }) => {
         return <ReportsPage />;  // ✅ REPORTS PAGE CALL KIYA
       case "settings":
         return <SettingsPage />;
-      case "trainers":
-        return <Placeholder title="Trainers" />;
+       case "trainers":
+        return <TrainerManagement />; 
       case "workouts":
         return <Placeholder title="Workouts" />;
       case "diet":
