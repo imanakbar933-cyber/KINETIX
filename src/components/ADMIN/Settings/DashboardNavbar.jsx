@@ -11,7 +11,6 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   
-  // 👇 1. Navbar mein Profile LocalStorage se load hoga
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem("userProfile");
     return saved ? JSON.parse(saved) : {
@@ -24,7 +23,6 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
-  // 👇 2. Jab Settings page se Save ho, toh Navbar update ho jaye
   useEffect(() => {
     const loadProfile = () => {
       const saved = localStorage.getItem("userProfile");
@@ -57,14 +55,11 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
     }
   };
 
-  // 👇 3. Image change karne par direct user state update karo
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setUser({ ...user, photo: imageUrl });
-      // Note: Yeh change direct navbar par apply hoga, 
-      // agar isay permanent save karna hai toh Settings page se Save karein.
     }
   };
 
@@ -81,20 +76,16 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
             <Menu size={24} />
           </button>
 
-          <Link to="/" className="dash-icon-btn home-btn" title="Back to Home">
-            <Home size={22} />
-          </Link>
-
+          {/* ✅ Breadcrumb with Animated Text */}
           <div className="dash-breadcrumb">
-            <Link to="/" className="home-text">Home</Link>
-            <span className="separator">&gt;</span>
-            <span className="current-text">Dashboard</span>
+            <span className="current-text animated-gradient-text">
+              Dashboard
+            </span>
           </div>
         </div>
 
         <div className="dash-nav-right">
           <div className="dash-search">
-            {/* <Search size={20} className="search-icon" /> */}
             <input 
               type="text" 
               placeholder="Search pages, members..." 
@@ -122,7 +113,6 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
           <div className="dash-profile">
             <div className="profile-trigger" onClick={() => setProfileOpen(!profileOpen)}>
               <div className="profile-image-wrapper">
-                {/* 👇 Dynamic Image */}
                 <img src={user.photo} alt="User" className="profile-pic" />
                 <div className="image-upload-overlay" onClick={triggerFileInput}>
                   <Camera size={16} />
@@ -131,7 +121,6 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
               </div>
 
               <div className="profile-info">
-                {/* 👇 Dynamic Name */}
                 <h4>{user.name}</h4>
                 <p>Super Admin</p>
               </div>
@@ -141,7 +130,6 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
             {profileOpen && (
               <div className="profile-dropdown">
                 <div className="dropdown-header">
-                  {/* 👇 Dynamic Name & Email */}
                   <h4>{user.name}</h4>
                   <p>{user.email}</p>
                 </div>
