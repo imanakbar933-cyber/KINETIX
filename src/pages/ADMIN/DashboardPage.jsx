@@ -199,12 +199,7 @@ const DashboardPage = ({ page }) => {
         "--dash-accent": appearance.accent,
         "--dash-sidebar-width": `${sidebarWidth}px`,
         "--dash-sidebar-height": `${sidebarHeight}px`,
-<<<<<<< HEAD
-        "--dash-card-bg":
-          appearance.theme === "light" ? "#ffffff" : "#1a1a1a",
-=======
         "--dash-card-bg": appearance.theme === "light" ? "#ffffff" : "#1a1a1a",
->>>>>>> 5d7b0c2cf71b9cbebd697f8c86bdedeb8417cb3c
         "--dash-muted": appearance.theme === "light" ? "#6b7280" : "#888",
         "--dash-border": appearance.theme === "light" ? "#e5e7eb" : "transparent",
       }}
