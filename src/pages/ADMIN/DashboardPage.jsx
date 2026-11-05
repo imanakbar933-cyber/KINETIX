@@ -4,7 +4,8 @@ import DashboardSidebar from "../../components/ADMIN/DashboardSidebar";
 import SettingsPage from "../../components/ADMIN/Settings/SettingsPage";
 import "./DashboardPage.css";
 
-// 👇 Yahan apna MembersList import karein (Path check kar lein)
+// 👇 Apne naye component ko import karein (Path apne folder structure ke hisaab se adjust karein)
+import WorkoutRoutine from "../../components/ADMIN/WorkoutRoutine"; 
 import MembersList from "../../components/ADMIN/MembersList"; 
 
 const DashboardPage = ({ page }) => {
@@ -14,19 +15,21 @@ const DashboardPage = ({ page }) => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  // 👇 Yeh function decide karega ke screen par kya dikhana hai
   const renderContent = () => {
-    // 1. Settings Page
     if (page === "settings") {
       return <SettingsPage />;
     }
     
-    // 2. Members Page
     if (page === "members") {
       return <MembersList />;
     }
 
-    // 3. Default Dashboard
+    // 👇 Yahan Workout Plans ko call karein
+    if (page === "workouts") {
+      return <WorkoutRoutine />;
+    }
+
+    // Default Dashboard
     return (
       <div style={{ padding: "40px" }}>
         <h1 style={{ fontSize: "32px", marginBottom: "10px" }}>
