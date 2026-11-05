@@ -9,7 +9,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 
-// Pages
+// Main Website Pages
 import Home from "./pages/App.jsx";
 import About from "./pages/About.jsx";
 import GymHome from "./pages/GymHome.jsx";
@@ -20,69 +20,63 @@ import Team from "./pages/Team.jsx";
 import GalleryPage from "./pages/GalleryPage.jsx";
 import ClassDetail from "./pages/ClassDetail.jsx";
 import Contact from "./pages/Contact.jsx";
-// 👇 TrainersPage ka import hata diya hai kyunke home ka trainer page nahi chahiye
-// import TrainersPage from "./pages/TrainersPage.jsx"; 
 import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx"; 
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
 import ServiceDetail from "./components/ServiceDetail.jsx";
 
-// 👇 Dashboard Page
+// 👇 Dashboard Page (Yeh andar se decide karega ke Dashboard dikhana hai ya Settings)
 import DashboardPage from "./pages/ADMIN/DashboardPage.jsx"; 
 
 function AppLayout() {
   const location = useLocation();
   
-  // 👇 Yahan "/trainers" wapas add kar diya hai taake ye Dashboard ke andar hi khule
-  const isDashboard = location.pathname.startsWith("/dashboard") || 
-                      location.pathname.startsWith("/members") ||
-                      location.pathname.startsWith("/workouts") ||
-                      location.pathname.startsWith("/diet") ||
-                      location.pathname.startsWith("/schedule") ||
-                      location.pathname.startsWith("/trainers") || // 👈 YEH WAPAS ADD KIYA
-                      location.pathname.startsWith("/billing") ||
-                      location.pathname.startsWith("/reports") ||
-                      location.pathname.startsWith("/settings"); 
+  // 👇 Dashboard ke saare links yahan hain
+  const isDashboardRoute = location.pathname.startsWith("/dashboard") || 
+                           location.pathname.startsWith("/members") ||
+                           location.pathname.startsWith("/workouts") ||
+                           location.pathname.startsWith("/diet") ||
+                           location.pathname.startsWith("/schedule") ||
+                           location.pathname.startsWith("/trainers") || 
+                           location.pathname.startsWith("/billing") ||
+                           location.pathname.startsWith("/reports") ||
+                           location.pathname.startsWith("/settings"); 
 
   const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
   const isPlansPage = location.pathname === "/plans";
 
   // =========================================================
-  // AGAR DASHBOARD YA SETTINGS HAI TOH SIRF DASHBOARD PAGE DIKHAO
+  // AGAR DASHBOARD KA KOI BHI ROUTE HAI (INCLUDING /settings)
+  // TOH SIRF DASHBOARD PAGE DIKHAO
   // =========================================================
-  if (isDashboard) {
-    return (
-      <Routes>
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/members" element={<DashboardPage />} />
-        <Route path="/workouts" element={<DashboardPage />} />
-        <Route path="/diet" element={<DashboardPage />} />
-        <Route path="/schedule" element={<DashboardPage />} />
-        
-        {/* 👇 Ab /trainers par Dashboard wala page khulega */}
-        <Route path="/trainers" element={<DashboardPage />} /> 
-        
-        <Route path="/billing" element={<DashboardPage />} />
-        <Route path="/reports" element={<DashboardPage />} />
-        <Route path="/settings" element={<DashboardPage />} /> 
-      </Routes>
-    );
-  }
-
+ if (isDashboardRoute) {
+  return (
+    <Routes>
+      <Route path="/dashboard" element={<DashboardPage page="dashboard" />} />
+      <Route path="/members" element={<DashboardPage page="members" />} />
+      <Route path="/workouts" element={<DashboardPage page="workouts" />} />
+      <Route path="/diet" element={<DashboardPage page="diet" />} />
+      <Route path="/schedule" element={<DashboardPage page="schedule" />} />
+      <Route path="/trainers" element={<DashboardPage page="trainers" />} /> 
+      <Route path="/billing" element={<DashboardPage page="billing" />} />
+      <Route path="/reports" element={<DashboardPage page="reports" />} />
+      <Route path="/settings" element={<DashboardPage page="settings" />} /> 
+    </Routes>
+  );
+}
   // =========================================================
   // BAQI SAARE PAGES (Main Website)
   // =========================================================
   return (
     <>
       <ScrollToTop />
-
       {!isAuthPage && <Navbar />}
 
       <div 
         className="main-content-layout" 
         style={{ 
-          paddingTop: isAuthPage || isPlansPage ? "0" : "0px",
+          paddingTop: isAuthPage || isPlansPage ? "0" : "0px", // 👈 Padding 0 kar di taake black space khatam ho
           transition: "padding-top 0.3s ease"
         }}
       >
@@ -97,16 +91,10 @@ function AppLayout() {
           <Route path="/GalleryPage" element={<GalleryPage />} />
           <Route path="/class-detail/:classId" element={<ClassDetail />} />
           <Route path="/contact" element={<Contact />} />
-          
-          {/* 👇 Yahan se TrainersPage ka route hata diya hai. 
-              Ab main website par /trainers nahi khulega, sirf Dashboard khulega. */}
-          {/* <Route path="/trainers" element={<TrainersPage />} />  👈 YEH HATA DIYA */}
-          
           <Route path="/schedules" element={<SchedulePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
 
-          {/* Membership (Plans) ka Route */}
           <Route path="/plans" element={
             <div className="plans-page-wrapper">
               <div className="plans-hero-section">
