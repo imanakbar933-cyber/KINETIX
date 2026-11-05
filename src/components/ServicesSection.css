@@ -1,210 +1,100 @@
-/* =========================================
-   SERVICES SECTION
-========================================= */
 
-.services-wrapper {
-  position: relative;
-  width: 100%;
-  /* 👇 Top padding kam ki hai */
-  padding: 70px 5% 100px; 
-  background: #050505;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
+.services-section {
+  padding: 100px 7%;
+  background: #080b08;
+  color: #fff;
 }
 
-/* =========================================
-   WATERMARK (Background Text)
-========================================= */
-.services-watermark {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  width: 100%;
+.services-heading {
   text-align: center;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-}
-
-.services-watermark span {
-  display: inline-block;
-  white-space: nowrap;
-  font-family: 'Arial Black', sans-serif;
-  font-size: clamp(4rem, 13vw, 12rem);
-  font-weight: 900;
-  line-height: 1;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
-}
-
-/* =========================================
-   CONTAINER & HEADER
-========================================= */
-.services-container {
-  position: relative;
-  z-index: 1;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.services-header {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 60px;
+  margin-bottom: 55px;
 }
 
 .services-eyebrow {
   color: #03ea04;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
+  letter-spacing: 4px;
+  font-size: 13px;
+  font-weight: 700;
 }
 
-/* =========================================
-   NEON TITLE ("SERVICES WE OFFER")
-========================================= */
-.services-title {
-  font-family: "Arial Black", "Helvetica", sans-serif;
-  font-size: clamp(42px, 6vw, 75px);
+.services-heading h2 {
+  font-size: clamp(32px, 5vw, 52px);
+  margin: 15px 0;
   font-weight: 900;
-  line-height: 1.1;
-  text-transform: uppercase;
-  
-  /* Center align */
-  margin: 0 auto 18px;
-  display: block;
-  text-align: center;
-
-  /* 👇 LETTER KE ANDAR BHI GREEN */
-  color: #03ea04; 
-  
-  /* Bahar Glow */
-  text-shadow: 
-    0 0 10px rgba(3, 234, 4, 0.8),
-    0 0 25px rgba(3, 234, 4, 0.6),
-    0 0 45px rgba(3, 234, 4, 0.4);
-          
-  animation: servicesNeonPulse 3s ease-in-out infinite;
 }
 
-/* 👇 Neon Pulse Animation */
-@keyframes servicesNeonPulse {
-  0%, 100% {
-    color: rgba(3, 234, 4, 0.85); /* Halka dim */
-    text-shadow: 
-      0 0 8px rgba(3, 234, 4, 0.5),
-      0 0 15px rgba(3, 234, 4, 0.3);
-  }
-  50% {
-    color: #03ea04; /* Full bright */
-    text-shadow: 
-      0 0 15px rgba(3, 234, 4, 1),
-      0 0 35px rgba(3, 234, 4, 0.8),
-      0 0 60px rgba(3, 234, 4, 0.5);
-  }
+.services-heading h2 span {
+  color: #03ea04;
+  text-shadow: 0 0 15px #03ea0460;
 }
 
-.services-subtitle {
-  color: #999999;
-  font-size: 16px;
-  line-height: 1.6;
+.services-heading p {
+  color: #aaa;
+  font-size: 15px;
 }
 
-/* =========================================
-   GRID & CARD
-========================================= */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.service-card-link {
-  display: block;
-  text-decoration: none;
+  gap: 25px;
 }
 
 .service-card {
-  position: relative;
-  background: #111111;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #111611;
+  border: 1px solid #252d25;
+  border-radius: 10px;
   overflow: hidden;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  
-  /* Initial State for Animation */
+  text-decoration: none;
+  color: #fff;
+  transition: 0.4s ease;
+
   opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: var(--delay, 0s);
+  transform: translateY(35px);
 }
 
-.services-wrapper.show .service-card {
-  opacity: 1;
-  transform: translateY(0);
+.services-section.show .service-card {
+  animation: serviceReveal 0.7s ease forwards;
+  animation-delay: var(--delay);
 }
 
-/* Hover Effects */
+@keyframes serviceReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .service-card:hover {
-  border-color: rgba(3, 234, 4, 0.4);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border-color: #03ea04;
+  box-shadow: 0 0 20px #03ea0430;
+  transform: translateY(-8px);
 }
 
-.service-card::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: #03ea04;
-  transition: width 0.4s ease;
-}
-
-.service-card:hover::after {
-  width: 100%;
-}
-
-/* Image */
 .service-image {
   width: 100%;
-  height: 240px;
+  height: 250px;
   overflow: hidden;
 }
 
-.service-image img {
+.service-card img {
   width: 100%;
-  height: 100%;
+  height: 250px;
   object-fit: cover;
-  transition: transform 0.6s ease, filter 0.6s ease;
-  filter: grayscale(30%);
+  display: block;
+  transition: transform 0.5s ease;
 }
 
-.service-card:hover .service-image img {
+.service-card:hover img {
   transform: scale(1.08);
-  filter: grayscale(0%);
 }
 
-/* Content */
 .service-content {
-  padding: 30px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+  padding: 22px;
 }
 
-.service-card h3 {
-  color: #ffffff;
-  font-size: 22px;
-  font-weight: 800;
+.service-content h3 {
+  font-size: 21px;
   margin: 0 0 12px;
-  text-transform: uppercase;
   transition: color 0.3s ease;
 }
 
@@ -212,51 +102,37 @@
   color: #03ea04;
 }
 
-.service-card p {
-  color: #888888;
+.service-content p {
+  color: #aaa;
   font-size: 14px;
-  line-height: 1.6;
-  margin: 0 0 20px;
-  flex-grow: 1;
+  line-height: 1.7;
+  margin-bottom: 20px;
 }
 
-.service-view-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+.service-arrow {
   color: #03ea04;
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  transition: gap 0.3s ease;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
 
-.service-card:hover .service-view-link {
-  gap: 15px;
-}
-
-/* =========================================
-   RESPONSIVE
-========================================= */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 768px) {
-  .services-wrapper {
-    padding: 50px 20px 80px; /* Mobile pe padding kam */
+@media (max-width: 600px) {
+  .services-section {
+    padding: 70px 5%;
   }
-  
+
   .services-grid {
     grid-template-columns: 1fr;
   }
-  
-  .services-title {
-    font-size: 38px; /* Mobile pe chhota */
-    text-shadow: 
-      0 0 10px rgba(3, 234, 4, 0.8),
-      0 0 20px rgba(3, 234, 4, 0.5);
+
+  .service-image,
+  .service-card img {
+    height: 230px;
   }
 }

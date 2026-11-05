@@ -8,7 +8,6 @@ function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-  const [showTransition, setShowTransition] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -23,44 +22,13 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Page Load Transition
-  useEffect(() => {
-    const initialTimer = setTimeout(() => {
-      setShowTransition(true);
-      setTimeout(() => setShowTransition(false), 2000);
-    }, 500);
-    return () => clearTimeout(initialTimer);
-  }, []);
-
+  // 👇 Sirf yeh line add hui hai (purani showTransition hata di)
   const handleHomeClick = () => {
-    setShowTransition(true);
-    setTimeout(() => setShowTransition(false), 2000);
+    window.dispatchEvent(new Event("triggerHomeAnimation"));
   };
 
   return (
     <>
-      {/* 3D WRAP TRANSITION ANIMATION */}
-      {showTransition && (
-        <div 
-          style={{
-            position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-            zIndex: 9999999, 
-            backgroundColor: '#050706',
-            display: 'flex', justifyContent: 'center', alignItems: 'center', 
-            overflow: 'hidden', perspective: '1000px'
-          }}
-        >
-          <img 
-            src="/images/kinetix2.png" 
-            alt="Kinetix Transition" 
-            style={{
-              width: '80vw', height: 'auto', objectFit: 'contain', display: 'block',
-              animation: 'wrapReveal 2s cubic-bezier(0.22, 1, 0.36, 1) forwards'
-            }} 
-          />
-        </div>
-      )}
-
       {/* NAVBAR */}
       <header className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
         <div className="navbar-container">

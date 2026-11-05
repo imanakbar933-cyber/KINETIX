@@ -2054,3 +2054,40 @@ a {
   position: relative;
   z-index: 1;
 }
+
+
+
+/* =================================
+   SERVICE DETAIL - FULL WIDTH FIX
+================================= */
+
+.sd-extra {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.sd-extra .nt-section {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Full viewport marquee */
+.sd-extra .nt-marquee {
+  position: relative;
+  left: auto;
+  right: auto;
+
+  width: 100vw;
+  max-width: none;
+
+  margin-left: calc(50% - 50vw);
+  margin-right: 0;
+
+  padding: 20px 0;
+  box-sizing: border-box;
+}

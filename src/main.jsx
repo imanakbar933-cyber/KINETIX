@@ -1,4 +1,3 @@
-
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -9,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import "./index.css";
+import "./components/global.css";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -26,12 +26,12 @@ import Team from "./pages/Team.jsx";
 import GalleryPage from "./pages/GalleryPage.jsx";
 import ClassDetail from "./pages/ClassDetail.jsx";
 import Contact from "./pages/Contact.jsx";
-import TrainersPage from "./pages/TrainersPage.jsx";
 import TeamMember1 from "./pages/TeamMember1.jsx";
 import SchedulePage from "./pages/SchedulePage.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
 import ServiceDetail from "./components/ServiceDetail.jsx";
+
 // Admin Dashboard
 import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
 import MembersPage from "./pages/ADMIN/MembersPage.jsx";
@@ -39,42 +39,34 @@ import BatchSchedulepage from "./pages/ADMIN/BatchSchedulepage.jsx";
 
 function AppLayout() {
   const location = useLocation();
+  
+  // ==========================================
+  // ✅ 1. AUTH PAGES (No Navbar, No Footer)
+  // ==========================================
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
 
   // ==========================================
-  // AUTH PAGES (No Navbar and Footer)
+  // ✅ 2. DASHBOARD PAGES (No Navbar, No Footer)
   // ==========================================
-
-  const isAuthPage =
-    location.pathname === "/login" ||
-    location.pathname === "/signup";
-
-
-  // ==========================================
-  // DASHBOARD ROUTES (No Navbar and Footer)
-  // ==========================================
-
-  const isDashboard =
-    location.pathname.startsWith("/dashboard") ||
+  const isDashboard = 
+    location.pathname.startsWith("/dashboard") || 
     location.pathname.startsWith("/members") ||
     location.pathname.startsWith("/workouts") ||
     location.pathname.startsWith("/diet") ||
     location.pathname.startsWith("/schedule") ||
+    location.pathname.startsWith("/batch-schedule") ||
     location.pathname.startsWith("/billing") ||
     location.pathname.startsWith("/reports") ||
     location.pathname.startsWith("/settings");
 
-
   // ==========================================
-  // MEMBERSHIP PLANS PAGE
+  // ✅ 3. PLANS PAGE
   // ==========================================
-
   const isPlansPage = location.pathname === "/plans";
 
-
   // ==========================================
-  // DASHBOARD LAYOUT
+  // ✅ DASHBOARD LAYOUT
   // ==========================================
-
   if (isDashboard) {
     return (
       <Routes>
@@ -82,142 +74,69 @@ function AppLayout() {
         <Route path="/members" element={<MembersPage />} />
         <Route path="/workouts" element={<DashboardPage />} />
         <Route path="/diet" element={<DashboardPage />} />
-        <Route path="/BatchSchedulepage" element={<BatchSchedulepage />} />
+        <Route path="/schedule" element={<DashboardPage />} />
+        {/* ✅ Batch Schedule Route */}
+        <Route path="/batch-schedule" element={<DashboardPage />} />
+        
         <Route path="/billing" element={<DashboardPage />} />
         <Route path="/reports" element={<DashboardPage />} />
         <Route path="/settings" element={<DashboardPage />} />
-
-        {/* Dashboard ke separate trainer route ke liye */}
-        <Route
-          path="/dashboard/trainers"
-          element={<DashboardPage />}
-        />
       </Routes>
     );
   }
 
-
   // ==========================================
-  // MAIN WEBSITE LAYOUT
+  // ✅ MAIN WEBSITE LAYOUT
   // ==========================================
-
   return (
     <>
       <ScrollToTop />
 
-      {/* Navbar Login/Signup par show nahi hoga */}
       {!isAuthPage && <Navbar />}
 
-      <div
-        className="main-content-layout"
-        style={{
-          paddingTop:
-            isAuthPage || isPlansPage ? "0" : "80px",
+      <div 
+        className="main-content-layout" 
+        style={{ 
+          paddingTop: isAuthPage || isPlansPage ? "0" : "0px",
           transition: "padding-top 0.3s ease"
         }}
       >
-
         <Routes>
-
-          {/* Home */}
           <Route path="/" element={<Home />} />
-
-          {/* About */}
           <Route path="/about" element={<About />} />
-
-          {/* Gym Home */}
           <Route path="/gym-home" element={<GymHome />} />
-
-          {/* Team */}
           <Route path="/team" element={<Team />} />
-          <Route
-            path="/team/:memberId"
-            element={<TeamMember1 />}
-          />
-
-          {/* FAQ */}
+          <Route path="/team/:memberId" element={<TeamMember1 />} />
           <Route path="/faqpage" element={<FaqPage />} />
-
-          {/* Classroom */}
-          <Route
-            path="/ClassroomPage"
-            element={<ClassroomPage />}
-          />
-
-          {/* Gallery */}
-          <Route
-            path="/GalleryPage"
-            element={<GalleryPage />}
-          />
-
-          {/* Class Details */}
-          <Route
-            path="/class-detail/:classId"
-            element={<ClassDetail />}
-          />
-
-          {/* Contact */}
+          <Route path="/ClassroomPage" element={<ClassroomPage />} />
+          <Route path="/GalleryPage" element={<GalleryPage />} />
+          <Route path="/class-detail/:classId" element={<ClassDetail />} />
           <Route path="/contact" element={<Contact />} />
-
-          {/* Main Website Trainers Page */}
-          <Route
-            path="/trainers"
-            element={<TrainersPage />}
-          />
-
-          {/* Schedule */}
-          <Route
-            path="/schedules"
-            element={<SchedulePage />}
-          />
-
-          {/* Login */}
+          <Route path="/schedules" element={<SchedulePage />} />
           <Route path="/login" element={<Login />} />
-
-          {/* Signup */}
           <Route path="/signup" element={<SignUp />} />
 
-          {/* Membership Plans */}
-          <Route
-            path="/plans"
-            element={
-              <div className="plans-page-wrapper">
-
-                <div className="plans-hero-section">
-                  <div className="plans-hero-content">
-                    <h1>MEMBERSHIP</h1>
-                  </div>
+          <Route path="/plans" element={
+            <div className="plans-page-wrapper">
+              <div className="plans-hero-section">
+                <div className="plans-hero-content">
+                  <h1>MEMBERSHIP</h1>
                 </div>
-
-                <div className="plans-content-container">
-                  <MembershipPlans />
-                </div>
-
               </div>
-            }
-          />
+              <div className="plans-content-container">
+                <MembershipPlans />
+              </div>
+            </div>
+          } />
 
-          {/* Service Details */}
-          <Route
-            path="/services/:slug"
-            element={<ServiceDetail />}
-          />
-
+          <Route path="/services/:slug" element={<ServiceDetail />} />
         </Routes>
-
       </div>
 
-      {/* Footer Login/Signup par show nahi hoga */}
       {!isAuthPage && <Footer />}
-
     </>
   );
 }
-
-
-// ==========================================
-// ROOT RENDER
-// ==========================================
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
