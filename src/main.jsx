@@ -33,42 +33,30 @@ import Login from "./pages/Login.jsx";
 import ServiceDetail from "./components/ServiceDetail.jsx";
 
 // Admin Dashboard
-import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
-import MembersPage from "./pages/ADMIN/MembersPage.jsx";
-import BatchSchedulepage from "./pages/ADMIN/BatchSchedulepage.jsx";
+import DashboardPage from "./pages/Admin/DashboardPage.jsx";
 
 function AppLayout() {
   const location = useLocation();
 
-  // ==========================================
-  // ✅ 1. AUTH PAGES (No Navbar, No Footer)
-  // ==========================================
   const isAuthPage =
     location.pathname === "/login" || location.pathname === "/signup";
 
-  // ==========================================
-  // ✅ 2. DASHBOARD PAGES (No Navbar, No Footer)
-  // ==========================================
- const isDashboard =
-  location.pathname.startsWith("/dashboard") ||
-  location.pathname.startsWith("/members") ||
-  location.pathname.startsWith("/workouts") ||
-  location.pathname.startsWith("/diet") ||
-  location.pathname.startsWith("/schedule") ||
-  location.pathname.startsWith("/batch-schedule") ||
-  location.pathname.startsWith("/billing") ||
-  location.pathname.startsWith("/reports") ||
-  location.pathname.startsWith("/settings") ||
-  location.pathname.startsWith("/trainers");   // ✅ ADD THIS
+  const isDashboard =
+    location.pathname.startsWith("/dashboard") ||
+    location.pathname.startsWith("/members") ||
+    location.pathname.startsWith("/workouts") ||
+    location.pathname.startsWith("/diet") ||
+    location.pathname.startsWith("/schedule") ||
+    location.pathname.startsWith("/batch-schedule") ||
+    location.pathname.startsWith("/billing") ||
+    location.pathname.startsWith("/reports") ||
+    location.pathname.startsWith("/settings") ||
+    location.pathname.startsWith("/trainers");
 
-  // ==========================================
-  // ✅ 3. PLANS PAGE
-  // ==========================================
   const isPlansPage = location.pathname === "/plans";
 
   // ==========================================
   // ✅ DASHBOARD LAYOUT
-  // 👇 Har route pe `page` prop pass karo
   // ==========================================
   if (isDashboard) {
     return (

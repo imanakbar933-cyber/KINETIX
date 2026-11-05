@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import DashboardNavbar from "../../components/ADMIN/Settings/DashboardNavbar";
 import DashboardSidebar from "../../components/ADMIN/DashboardSidebar";
 import SettingsPage from "../../components/ADMIN/Settings/SettingsPage";
+import ReportsPage from "../../components/ADMIN/ReportsPage"; // ✅ IMPORT KIYA
+
 import "./DashboardPage.css";
 
 import MembersList from "../../components/ADMIN/MembersList";
@@ -54,8 +56,7 @@ const DashboardPage = ({ page }) => {
       setAppearance(saved ? JSON.parse(saved) : { ...DEFAULT_APPEARANCE });
     };
     window.addEventListener("appearanceUpdated", loadAppearance);
-    return () =>
-      window.removeEventListener("appearanceUpdated", loadAppearance);
+    return () => window.removeEventListener("appearanceUpdated", loadAppearance);
   }, []);
 
   const handleWidthMouseDown = useCallback(() => {
@@ -162,6 +163,10 @@ const DashboardPage = ({ page }) => {
         return <MembersList />;
       case "batch-schedule":
         return <BatchSchedulepage />;
+      case "reports":
+        return <ReportsPage />;  // ✅ REPORTS PAGE CALL KIYA
+      case "settings":
+        return <SettingsPage />;
       case "trainers":
         return <Placeholder title="Trainers" />;
 
@@ -173,12 +178,10 @@ const DashboardPage = ({ page }) => {
         return <Placeholder title="Diet" />;
       case "schedule":
         return <Placeholder title="Schedule" />;
+        case "reports":
+        return <ReportsPage />; // ✅ Reports route ke liye
       case "billing":
-        return <Placeholder title="Billing" />;
-      case "reports":
-        return <Placeholder title="Reports" />;
-      case "settings":
-        return <SettingsPage />;
+        return <ReportsPage />; // 👈 // ✅ Placeholder ki jagah apna component
       default:
         return <Placeholder title="Page Not Found" />;
     }
@@ -196,11 +199,14 @@ const DashboardPage = ({ page }) => {
         "--dash-accent": appearance.accent,
         "--dash-sidebar-width": `${sidebarWidth}px`,
         "--dash-sidebar-height": `${sidebarHeight}px`,
+<<<<<<< HEAD
         "--dash-card-bg":
           appearance.theme === "light" ? "#ffffff" : "#1a1a1a",
+=======
+        "--dash-card-bg": appearance.theme === "light" ? "#ffffff" : "#1a1a1a",
+>>>>>>> 5d7b0c2cf71b9cbebd697f8c86bdedeb8417cb3c
         "--dash-muted": appearance.theme === "light" ? "#6b7280" : "#888",
-        "--dash-border":
-          appearance.theme === "light" ? "#e5e7eb" : "transparent",
+        "--dash-border": appearance.theme === "light" ? "#e5e7eb" : "transparent",
       }}
     >
       <DashboardSidebar
