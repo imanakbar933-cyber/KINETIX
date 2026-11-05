@@ -171,12 +171,8 @@ const DashboardPage = ({ page }) => {
         return <ReportsPage />;     // ✅ Reports Page
       case "settings":
         return <SettingsPage />;
-      case "billing":
-        return <Placeholder title="Billing" />; // Abhi placeholder hai
-      case "trainers":
-        return <Placeholder title="Trainers" />;
-
-      // 👇 2. YAHAN PLACEHOLDER KI JAGAH APNA COMPONENT CALL KAREIN
+       case "trainers":
+        return <TrainerManagement />; 
       case "workouts":
         return <WorkoutPlans />;  // ✅ Ab yeh aapka page render karega
 
