@@ -44,7 +44,9 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
         {/* ✅ YAHAN FIX KIYA HAI: /batch-schedule */}
         <Link to="/batch-schedule" className={isActive("/batch-schedule")}><Calendar size={20} /> Batch Schedule</Link>
         
-        <Link to="/trainers" className={isActive("/trainers")}><UserCircle size={20} /> Trainer List</Link>
+       <Link to="/trainers" className={isActive("/trainers")}>
+  <UserCircle size={20} /> Trainer List
+</Link>
         <Link to="/billing" className={isActive("/billing")}><FileText size={20} /> Billing List</Link>
         <Link to="/reports" className={isActive("/reports")}><BarChart2 size={20} /> Report</Link>
         <Link to="/settings" className={isActive("/settings")}><Settings size={20} /> Settings</Link>

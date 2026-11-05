@@ -7,7 +7,7 @@ import SettingsPage from "../../components/ADMIN/Settings/SettingsPage";
 import ReportsPage from "../../components/ADMIN/ReportsPage";
 import MembersList from "../../components/ADMIN/MembersList";
 import BatchSchedule from "../../components/ADMIN/BatchSchedule"; // ✅ IMPORT ADD KIYA
-
+import TrainerManagement from "../../components/ADMIN/TrainerManagement";
 import "./DashboardPage.css";
 
 
