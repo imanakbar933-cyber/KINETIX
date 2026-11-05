@@ -10,6 +10,12 @@ import BatchSchedule from "../../components/ADMIN/BatchSchedule"; // ✅ IMPORT 
 
 import "./DashboardPage.css";
 
+import MembersList from "../../components/ADMIN/MembersList";
+
+
+import WorkoutPlans from "../../components/Admin/WorkoutPlans"; // ✅ IMPORT KIYA
+
+
 const DEFAULT_APPEARANCE = {
   theme: "dark",
   accent: "#03ea04",
@@ -73,7 +79,6 @@ const DashboardPage = ({ page }) => {
         const newWidth = Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, e.clientX));
         setSidebarWidth(newWidth);
       }
-
       if (isResizingHeight.current) {
         const newHeight = Math.min(
           window.innerHeight,
@@ -88,12 +93,10 @@ const DashboardPage = ({ page }) => {
         isResizingWidth.current = false;
         localStorage.setItem("kinetix_sidebar_width", String(sidebarWidth));
       }
-
       if (isResizingHeight.current) {
         isResizingHeight.current = false;
         localStorage.setItem("kinetix_sidebar_height", String(sidebarHeight));
       }
-
       document.body.style.cursor = "";
       document.body.style.userSelect = "";
     };
@@ -172,8 +175,11 @@ const DashboardPage = ({ page }) => {
         return <Placeholder title="Billing" />; // Abhi placeholder hai
       case "trainers":
         return <Placeholder title="Trainers" />;
+
+      // 👇 2. YAHAN PLACEHOLDER KI JAGAH APNA COMPONENT CALL KAREIN
       case "workouts":
-        return <Placeholder title="Workouts" />;
+        return <WorkoutPlans />;  // ✅ Ab yeh aapka page render karega
+
       case "diet":
         return <Placeholder title="Diet" />;
       default:

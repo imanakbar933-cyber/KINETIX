@@ -33,7 +33,7 @@ import Login from "./pages/Login.jsx";
 import ServiceDetail from "./components/ServiceDetail.jsx";
 
 // Admin Dashboard
-import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
+import DashboardPage from "./pages/Admin/DashboardPage.jsx";
 
 function AppLayout() {
   const location = useLocation();
