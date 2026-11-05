@@ -61,7 +61,7 @@ function Navbar() {
             <Link to="/trainers" className="nav-link">Trainers</Link>
             
             {/* 👇 NAYA DASHBOARD LINK */}
-            <Link to="/settings" className="nav-link dashboard-link">
+            <Link to="/dashboard" className="nav-link dashboard-link">
               Dashboard
             </Link>
 

@@ -1,12 +1,12 @@
 .member-list-container {
-  background-color: #0a0f0c; /* Kinetix Dark Greenish Black */
+  background-color: #0a0f0c;
   padding: 25px;
   border-radius: 12px;
   color: #9ca3af;
   font-family: 'Inter', sans-serif;
   width: 100%;
-  height: 100%;
   border: 1px solid #1f2e24;
+  box-sizing: border-box;
 }
 
 /* Top Action Bar */
@@ -15,40 +15,50 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .search-box {
+  display: flex;
+  align-items: center;
+  background-color: #0f1712;
+  border: 1px solid #1f2e24;
+  border-radius: 8px;
+  width: 400px;
+  padding: 5px;
   position: relative;
-  width: 350px;
 }
 
 .search-box input {
   width: 100%;
-  background-color: #0f1712;
-  border: 1px solid #1f2e24;
-  border-radius: 8px;
-  padding: 12px 15px 12px 45px;
+  background-color: transparent;
+  border: none;
+  padding: 10px 15px 10px 35px;
   color: #fff;
   font-size: 14px;
   outline: none;
-  transition: all 0.3s ease;
-}
-
-/* ✅ Kinetix Neon Green Focus */
-.search-box input:focus {
-  border-color: #4ade80;
-  box-shadow: 0 0 10px rgba(74, 222, 128, 0.1);
 }
 
 .search-icon {
   position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 12px;
   color: #6b7280;
 }
 
-/* ✅ Neon Green Add Button */
+.search-btn {
+  background-color: #1f2e24;
+  color: #4ade80;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.search-btn:hover { background-color: #4ade80; color: #000; }
+
 .add-member-btn {
   display: flex;
   align-items: center;
@@ -61,16 +71,12 @@
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
+.add-member-btn:hover { background-color: #22c55e; box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3); }
 
-.add-member-btn:hover {
-  background-color: #22c55e;
-  box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
-}
-
-/* Table Styles */
+/* ================= TABLE FIX ================= */
 .table-wrapper {
+  width: 100%;
   overflow-x: auto;
   border-radius: 8px;
   border: 1px solid #1f2e24;
@@ -78,184 +84,73 @@
 
 .member-table {
   width: 100%;
-  border-collapse: collapse;
+  min-width: 1100px; 
+  border-collapse: collapse !important; 
   text-align: left;
+  table-layout: fixed;
 }
 
+.member-table tr { display: table-row !important; border-bottom: 1px solid #1f2e24; }
+.member-table tr:hover { background-color: #0f1712; }
+
 .member-table th {
-  background-color: #080d0a; /* Darker header */
+  background-color: #080d0a;
   padding: 15px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   color: #9ca3af;
   border-bottom: 1px solid #1f2e24;
+  white-space: nowrap;
+  display: table-cell !important;
+  vertical-align: middle;
 }
 
 .member-table td {
-  padding: 15px;
-  border-bottom: 1px solid #1f2e24;
-  font-size: 14px;
+  padding: 12px 15px;
+  font-size: 13px;
   vertical-align: middle;
   color: #d1d5db;
+  white-space: nowrap;
+  display: table-cell !important;
 }
 
-.table-row {
-  transition: background-color 0.2s ease;
-}
+/* Column Widths */
+.member-table th:nth-child(1), .member-table td:nth-child(1) { width: 70px; }
+.member-table th:nth-child(2), .member-table td:nth-child(2) { width: 150px; }
+.member-table th:nth-child(3), .member-table td:nth-child(3) { width: 100px; }
+.member-table th:nth-child(4), .member-table td:nth-child(4) { width: 160px; }
+.member-table th:nth-child(5), .member-table td:nth-child(5) { width: 120px; }
+.member-table th:nth-child(6), .member-table td:nth-child(6) { width: 120px; }
+.member-table th:nth-child(7), .member-table td:nth-child(7) { width: 80px; }
+.member-table th:nth-child(8), .member-table td:nth-child(8) { width: 80px; }
+.member-table th:nth-child(9), .member-table td:nth-child(9) { width: 100px; }
+.member-table th:nth-child(10), .member-table td:nth-child(10) { width: 120px; }
 
-.table-row:hover {
-  background-color: #0f1712; /* Halka greenish hover */
-}
+/* Avatar & Text */
+.member-avatar { width: 36px; height: 36px; border-radius: 6px; object-fit: cover; border: 1px solid #1f2e24; }
+.member-name { color: #ffffff; font-weight: 600; cursor: pointer; white-space: normal !important; }
 
-/* Avatar & Name */
-.member-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  object-fit: cover;
-  border: 1px solid #1f2e24;
-}
-
-.member-name {
-  color: #ffffff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.member-name:hover {
-  color: #4ade80; /* Green on hover */
-}
-
-.member-id {
-  color: #9ca3af;
-}
-
-/* Status Badge *
-.status-badge {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.status-badge.paid {
-  background-color: rgba(74, 222, 128, 0.1);
-  color: #4ade80;
-  border: 1px solid rgba(74, 222, 128, 0.2);
-}
-
-.status-badge.not-paid {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
+/* Status Badge */
+.status-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.status-badge.paid { background-color: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.2); }
+.status-badge.not-paid { background-color: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
 
 /* Action Buttons */
-.action-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.action-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background-color: transparent;
-}
-
-/* View Button (Green) */
-.action-btn.view {
-  color: #4ade80;
-  border: 1px solid rgba(74, 222, 128, 0.3);
-}
-.action-btn.view:hover {
-  background-color: rgba(74, 222, 128, 0.1);
-}
-
-/* Edit Button (Yellow) */
-.action-btn.edit {
-  color: #facc15;
-  border: 1px solid rgba(250, 204, 21, 0.3);
-}
-.action-btn.edit:hover {
-  background-color: rgba(250, 204, 21, 0.1);
-}
-
-/* Delete Button (Red) */
-.action-btn.delete {
-  color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-}
-.action-btn.delete:hover {
-  background-color: rgba(239, 68, 68, 0.1);
-}
+.action-buttons { display: flex; gap: 8px; }
+.action-btn { width: 28px; height: 28px; border-radius: 6px; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: transparent; }
+.action-btn.view { color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
+.action-btn.view:hover { background-color: rgba(74, 222, 128, 0.1); }
+.action-btn.edit { color: #facc15; border: 1px solid rgba(250, 204, 21, 0.3); }
+.action-btn.edit:hover { background-color: rgba(250, 204, 21, 0.1); }
+.action-btn.delete { color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+.action-btn.delete:hover { background-color: rgba(239, 68, 68, 0.1); }
 
 /* Pagination */
-.pagination-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 25px;
-}
-
-.showing-text {
-  font-size: 14px;
-  color: #9ca3af;
-}
-
-.pagination-controls {
-  display: flex;
-  gap: 8px;
-}
-
-.page-btn {
-  width: 35px;
-  height: 35px;
-  border-radius: 8px;
-  border: 1px solid #1f2e24;
-  background-color: transparent;
-  color: #9ca3af;
-  cursor: pointer;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.page-btn:hover {
-  background-color: #0f1712;
-  color: #fff;
-}
-
-/* ✅ Active Page (Neon Green) */
-.page-btn.active {
-  background-color: #4ade80;
-  color: #000;
-  border-color: #4ade80;
-  box-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .member-top-bar {
-    flex-direction: column;
-    gap: 15px;
-  }
-  .search-box {
-    width: 100%;
-  }
-  .pagination-bar {
-    flex-direction: column;
-    gap: 15px;
-  }
-}
+.pagination-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; flex-wrap: wrap; gap: 15px; }
+.showing-text { font-size: 13px; color: #9ca3af; }
+.pagination-controls { display: flex; gap: 8px; }
+.page-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid #1f2e24; background-color: transparent; color: #9ca3af; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.page-btn:hover:not(:disabled) { background-color: #0f1712; color: #fff; }
+.page-btn.active { background-color: #4ade80; color: #000; border-color: #4ade80; }
+.page-btn:disabled { opacity: 0.5; cursor: not-allowed; }

@@ -95,7 +95,7 @@ export default function Login() {
             <LoginForm />
              {/* <p className="login-switch" style={{ textAlign: "center", marginTop: "20px", fontSize: "14px", color: "#a3a3a3" }}>
               Don't have an account?{" "}
-              <Link to="/SignUp" style={{ color: "#4ade80", fontWeight: "600", textDecoration: "none" }}>
+              <Link to="/signup" style={{ color: "#00ff00", fontWeight: "600", textDecoration: "none" }}>
                 SignUp
               </Link>
             </p> */}

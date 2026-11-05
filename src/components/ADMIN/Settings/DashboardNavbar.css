@@ -83,34 +83,67 @@
 .dash-nav-right { 
   display: flex; 
   align-items: center; 
-  gap: 15px; 
-  flex: 1; /* 👈 Bachi hui jagah lega */
-  justify-content: flex-end; /* 👈 Sab kuch right mein push karega */
+  justify-content: flex-end; /* 👈 Wapas flex-end kar diya taake sab right mein aaye */
+  gap: 20px; 
+  flex: 1; 
 }
 
-/* Search Bar (Responsive Width) */
+/* =========================================================
+   SEARCH BAR (FIXED ICON + NEON BORDER)
+========================================================= */
+/* Search Bar */
 .dash-search {
   display: flex;
   align-items: center;
   background: #050706;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 10px 15px;
+  border: 1px solid rgba(3, 234, 4, 0.4); /* 👈 Wapas Green Neon Border */
+  padding: 10px 16px;
   border-radius: 12px;
   width: 100%;
-  max-width: 300px; /* 👈 Max width fix ki taake zyada jagah na le */
+  max-width: 400px;
+  margin-right: 20px; /* 👈 Icons se thoda gap */
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 0 15px rgba(3, 234, 4, 0.1); /* 👈 Halki si Green Glow */
 }
 
 .dash-search:focus-within {
   border-color: #03ea04;
-  box-shadow: 0 0 20px rgba(3, 234, 4, 0.25);
+  box-shadow: 0 0 20px rgba(3, 234, 4, 0.3);
 }
 
-.search-icon { color: #777; margin-right: 10px; }
-.dash-search input { background: transparent; border: none; outline: none; color: #fff; font-size: 14px; width: 100%; }
-.dash-search input::placeholder { color: #666; }
-.search-shortcut { font-size: 11px; color: #666; background: rgba(255, 255, 255, 0.05); padding: 3px 6px; border-radius: 6px; margin-left: 8px; border: 1px solid rgba(255, 255, 255, 0.1); }
+/* Search Icon */
+.search-icon { 
+  color: #03ea04; /* 👈 Icon ka color Green */
+  flex-shrink: 0; 
+  margin-right: 10px; /* 👈 Icon aur text ke darmiyan gap */
+}
 
+/* Input Field */
+.dash-search input { 
+  background: transparent; 
+  border: none; 
+  outline: none; 
+  color: #fff; 
+  font-size: 14px; 
+  width: 100%; 
+  padding: 0; 
+}
+
+.dash-search input::placeholder { 
+  color: #666; 
+}
+
+/* Shortcut Badge (⌘K) */
+.search-shortcut { 
+  font-size: 11px; 
+  color: #666; 
+  background: rgba(255, 255, 255, 0.05); 
+  padding: 4px 6px; 
+  border-radius: 6px; 
+  margin-left: 8px; 
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  flex-shrink: 0;
+}
 .dash-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 
 .notification-dot {
