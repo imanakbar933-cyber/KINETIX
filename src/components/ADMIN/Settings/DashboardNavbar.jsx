@@ -94,7 +94,7 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
 
         <div className="dash-nav-right">
           <div className="dash-search">
-            <Search size={20} className="search-icon" />
+            {/* <Search size={20} className="search-icon" /> */}
             <input 
               type="text" 
               placeholder="Search pages, members..." 

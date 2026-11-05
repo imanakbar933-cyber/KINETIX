@@ -3,33 +3,106 @@
 ========================================================= */
 
 .dash-sidebar {
-  width: 280px;
-  height: 100vh; /* 👈 Poori screen */
-  background: #0a0d0b; 
+  width: var(--dash-sidebar-width, 280px);
+  height: var(--dash-sidebar-height, 100vh);   /* ✅ variable height */
+  background: #0a0d0b;
   border-right: 1px solid rgba(3, 234, 4, 0.2);
+  border-bottom: 1px solid rgba(3, 234, 4, 0.15);   /* ✅ height ke saath border */
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 0; 
-  left: -300px; 
-  z-index: 1000; 
-  transition: left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  top: 0;
+  left: -400px;
+  z-index: 1000;
+  transition: left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease, border-color 0.3s ease, width 0.15s ease,
+    height 0.15s ease;
+  overflow: hidden;   /* ✅ taake footer na nikle */
 }
 
-.dash-sidebar.open { 
-  left: 0; 
+.dash-sidebar.open {
+  left: 0;
+}
+
+/* ✅ RIGHT EDGE — WIDTH RESIZE HANDLE */
+.dash-sidebar-resize-handle {
+  position: absolute;
+  top: 0;
+  right: -6px;
+  width: 12px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+.dash-sidebar-resize-handle:hover {
+  background: rgba(3, 234, 4, 0.08);
+}
+.dash-sidebar-resize-handle span {
+  display: block;
+  width: 3px;
+  height: 24px;
+  border-radius: 3px;
+  background: rgba(3, 234, 4, 0.35);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.dash-sidebar-resize-handle:hover span {
+  background: var(--dash-accent, #03ea04);
+  transform: scaleY(1.15);
+  box-shadow: 0 0 10px rgba(3, 234, 4, 0.6);
+}
+
+/* ✅ BOTTOM EDGE — HEIGHT RESIZE HANDLE */
+.dash-sidebar-height-handle {
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  right: 0;
+  height: 12px;
+  cursor: row-resize;
+  z-index: 1001;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+.dash-sidebar-height-handle:hover {
+  background: rgba(3, 234, 4, 0.08);
+}
+.dash-sidebar-height-handle span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(3, 234, 4, 0.35);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.dash-sidebar-height-handle:hover span {
+  background: var(--dash-accent, #03ea04);
+  transform: scaleX(1.15);
+  box-shadow: 0 0 10px rgba(3, 234, 4, 0.6);
 }
 
 /* Sidebar Header */
 .dash-sidebar-header {
-  padding: 30px 20px; /* Logo ke liye thodi jagah */
+  padding: 30px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
-  justify-content: center; 
+  justify-content: center;
+  flex-shrink: 0;   /* ✅ header na squeeze ho */
 }
 
-.sidebar-logo img { 
-  height: 45px; /* Logo ki height */
+.sidebar-logo img {
+  height: 45px;
   object-fit: contain;
 }
 
@@ -40,12 +113,12 @@
   padding: 20px 15px;
 }
 
-.dash-sidebar-menu::-webkit-scrollbar { 
-  width: 4px; 
+.dash-sidebar-menu::-webkit-scrollbar {
+  width: 4px;
 }
-.dash-sidebar-menu::-webkit-scrollbar-thumb { 
-  background: rgba(3, 234, 4, 0.3); 
-  border-radius: 10px; 
+.dash-sidebar-menu::-webkit-scrollbar-thumb {
+  background: rgba(3, 234, 4, 0.3);
+  border-radius: 10px;
 }
 
 .dash-menu-item {
@@ -60,6 +133,7 @@
   border-radius: 10px;
   margin-bottom: 5px;
   transition: all 0.3s ease;
+  border-left: 3px solid transparent;
 }
 
 .dash-menu-item:hover {
@@ -70,51 +144,119 @@
 
 .dash-menu-item.active {
   background: rgba(3, 234, 4, 0.1);
-  color: #03ea04;
-  border-left: 3px solid #03ea04;
+  color: var(--dash-accent, #03ea04);
+  border-left: 3px solid var(--dash-accent, #03ea04);
+  box-shadow: 0 0 15px rgba(3, 234, 4, 0.1);
 }
 
-.dash-menu-item svg { 
-  transition: color 0.3s ease; 
+.dash-menu-item svg {
+  transition: color 0.3s ease;
 }
-.dash-menu-item:hover svg { 
-  color: #03ea04; 
+.dash-menu-item:hover svg {
+  color: var(--dash-accent, #03ea04);
+}
+.dash-menu-item.active svg {
+  color: var(--dash-accent, #03ea04);
 }
 
 /* =========================================================
    SIDEBAR FOOTER (User Profile)
 ========================================================= */
-
 .dash-sidebar-footer {
   padding: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
-  gap: 15px; /* Image aur text ke beech gap */
+  gap: 15px;
+  flex-shrink: 0;   /* ✅ footer na squeeze ho */
 }
 
-/* 👇 Profile Image Circle */
 .dash-sidebar-footer img {
   width: 45px;
   height: 45px;
-  border-radius: 50%;          /* Circle banayega */
-  object-fit: cover;           /* Stretch hone se bachayega */
-  border: 2px solid #03ea04;   /* Neon Green Border */
-  box-shadow: 0 0 12px rgba(3, 234, 4, 0.4); /* Halka sa Neon Glow */
-  flex-shrink: 0;              /* Size chota hone se bachayega */
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--dash-accent, #03ea04);
+  box-shadow: 0 0 12px rgba(3, 234, 4, 0.4);
+  flex-shrink: 0;
 }
 
-/* ===== User Text ===== */
-.user-info h4 { 
-  margin: 0 0 3px 0; 
-  font-size: 15px; 
-  color: #fff; 
+.user-info h4 {
+  margin: 0 0 3px 0;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 600;
+}
+.user-info p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--dash-accent, #03ea04);
   font-weight: 600;
 }
 
-.user-info p { 
-  margin: 0; 
-  font-size: 12px; 
-  color: #03ea04; 
-  font-weight: 600;
+/* =========================================================
+   ✅ LIGHT MODE
+========================================================= */
+.dashboard-layout.dashboard-light .dash-sidebar {
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+.dashboard-layout.dashboard-light .dash-sidebar-header {
+  border-bottom: 1px solid #e5e7eb;
+}
+.dashboard-layout.dashboard-light .dash-menu-item {
+  color: #4b5563;
+}
+.dashboard-layout.dashboard-light .dash-menu-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: #111827;
+}
+.dashboard-layout.dashboard-light .dash-menu-item.active {
+  background: rgba(3, 234, 4, 0.12);
+  color: var(--dash-accent, #03ea04);
+  border-left: 3px solid var(--dash-accent, #03ea04);
+}
+.dashboard-layout.dashboard-light .dash-menu-item.active svg {
+  color: var(--dash-accent, #03ea04);
+}
+.dashboard-layout.dashboard-light .dash-sidebar-footer {
+  border-top: 1px solid #e5e7eb;
+}
+.dashboard-layout.dashboard-light .user-info h4 {
+  color: #111827;
+}
+.dashboard-layout.dashboard-light .user-info p {
+  color: var(--dash-accent, #03ea04);
+}
+
+/* =========================================================
+   ✅ COMPACT MODE
+========================================================= */
+.dashboard-layout.dashboard-compact .dash-sidebar {
+  width: var(--dash-sidebar-width, 240px);
+}
+.dashboard-layout.dashboard-compact .dash-menu-item {
+  padding: 10px 16px;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+.dashboard-layout.dashboard-compact .dash-sidebar-header {
+  padding: 20px 16px;
+}
+.dashboard-layout.dashboard-compact .sidebar-logo img {
+  height: 36px;
+}
+.dashboard-layout.dashboard-compact .dash-sidebar-footer {
+  padding: 14px 16px;
+}
+.dashboard-layout.dashboard-compact .dash-sidebar-footer img {
+  width: 36px;
+  height: 36px;
+}
+.dashboard-layout.dashboard-compact .user-info h4 {
+  font-size: 13px;
+}
+.dashboard-layout.dashboard-compact .user-info p {
+  font-size: 11px;
 }

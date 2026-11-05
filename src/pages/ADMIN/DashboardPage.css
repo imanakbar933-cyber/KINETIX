@@ -1,13 +1,25 @@
 /* =========================================================
-   DASHBOARD LAYOUT
+   DASHBOARD LAYOUT — THEME + ACCENT + COMPACT + ANIMATIONS
 ========================================================= */
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
-  background: #050706; 
+  background: #050706;
   color: #fff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
+  transition: background 0.3s ease, color 0.3s ease;
+
+  /* Default (dark) theme tokens */
+  --dash-accent: #03ea04;
+  --dash-card-bg: #1a1a1a;
+  --dash-muted: #888;
+  --dash-border: transparent;
+  --dash-bg: #050706;
+  --dash-sidebar-bg: #050706;
+  --dash-navbar-bg: #050706;
+  --dash-text: #ffffff;
+  --dash-text-muted: rgba(255, 255, 255, 0.6);
 }
 
 /* =========================================================
@@ -15,17 +27,207 @@
 ========================================================= */
 .dashboard-content {
   flex: 1;
-  margin-top: 90px; /* Navbar ki height */
+  margin-top: 90px;
   margin-left: 0;
   padding: 30px;
-  background: #050706;
+  background: var(--dash-bg);
+  color: var(--dash-text);
   min-height: calc(100vh - 90px);
-  transition: margin-left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: margin-left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease, color 0.3s ease;
   width: 100%;
   overflow-x: hidden;
 }
 
-/* 👇 Jab sidebar open ho, toh content right shift ho */
 .dashboard-content.shifted {
   margin-left: 280px;
+}
+
+/* =========================================================
+   ✅ LIGHT MODE
+========================================================= */
+.dashboard-layout.dashboard-light {
+  background: #f4f6f8;
+  color: #1a1a1a;
+  --dash-accent: var(--dash-accent, #03ea04);
+  --dash-card-bg: #ffffff;
+  --dash-muted: #6b7280;
+  --dash-border: #e5e7eb;
+  --dash-bg: #f4f6f8;
+  --dash-sidebar-bg: #ffffff;
+  --dash-navbar-bg: #ffffff;
+  --dash-text: #111827;
+  --dash-text-muted: #6b7280;
+}
+
+.dashboard-layout.dashboard-light .dashboard-content {
+  background: var(--dash-bg);
+  color: var(--dash-text);
+}
+
+/* Sidebar light */
+.dashboard-layout.dashboard-light .dash-sidebar {
+  background: var(--dash-sidebar-bg);
+  border-right: 1px solid var(--dash-border);
+}
+
+.dashboard-layout.dashboard-light .dash-sidebar .dash-menu-item {
+  color: #4b5563;
+}
+
+.dashboard-layout.dashboard-light .dash-sidebar .dash-menu-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #111827;
+}
+
+.dashboard-layout.dashboard-light .dash-sidebar .dash-menu-item.active {
+  background: var(--dash-accent);
+  color: #050505;
+}
+
+.dashboard-layout.dashboard-light .dash-sidebar .dash-sidebar-footer {
+  border-top: 1px solid var(--dash-border);
+}
+
+.dashboard-layout.dashboard-light .dash-sidebar .user-info h4 {
+  color: #111827;
+}
+
+.dashboard-layout.dashboard-light .dash-sidebar .user-info p {
+  color: #6b7280;
+}
+
+/* Navbar light */
+.dashboard-layout.dashboard-light .dash-navbar {
+  background: var(--dash-navbar-bg);
+  border-bottom: 1px solid var(--dash-border);
+  color: #1a1a1a;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .home-text {
+  color: #6b7280;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .current-text {
+  color: #111827;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .dash-icon-btn {
+  color: #4b5563;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .dash-icon-btn:hover {
+  color: var(--dash-accent);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .dash-search input {
+  background: #f3f4f6;
+  color: #111827;
+  border-color: #e5e7eb;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .profile-info h4 {
+  color: #111827;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .profile-info p {
+  color: #6b7280;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .profile-dropdown {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #111827;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .profile-dropdown .dropdown-header h4 {
+  color: #111827;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .profile-dropdown .dropdown-header p {
+  color: #6b7280;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .dropdown-link {
+  color: #374151;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .dropdown-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #111827;
+}
+
+/* =========================================================
+   ✅ COMPACT MODE
+========================================================= */
+.dashboard-layout.dashboard-compact .dashboard-content {
+  padding: 18px 22px;
+  margin-top: 70px;
+  min-height: calc(100vh - 70px);
+}
+
+.dashboard-layout.dashboard-compact .dash-sidebar .dash-menu-item {
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+.dashboard-layout.dashboard-compact .dash-sidebar {
+  width: 240px;
+}
+
+.dashboard-layout.dashboard-compact .dash-navbar {
+  height: 70px;
+}
+
+.dashboard-layout.dashboard-compact
+  .dashboard-content.shifted {
+  margin-left: 240px;
+}
+
+/* =========================================================
+   ✅ NO ANIMATIONS
+========================================================= */
+.dashboard-layout.dashboard-no-animations *,
+.dashboard-layout.dashboard-no-animations *::before,
+.dashboard-layout.dashboard-no-animations *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* =========================================================
+   ✅ ACCENT COLOR USAGE
+========================================================= */
+.dashboard-layout .dash-sidebar .dash-menu-item.active {
+  background: var(--dash-accent);
+  color: #050505;
+}
+
+.dashboard-layout .dash-sidebar .dash-menu-item.active svg {
+  color: #050505;
+}
+
+.dashboard-layout .dash-navbar .dash-icon-btn:hover {
+  color: var(--dash-accent);
+}
+
+.dashboard-layout .dash-sidebar .sidebar-logo img {
+  filter: drop-shadow(0 0 8px var(--dash-accent));
+}
+
+/* =========================================================
+   ✅ RESPONSIVE
+========================================================= */
+@media (max-width: 768px) {
+  .dashboard-content {
+    margin-top: 80px;
+    padding: 20px;
+  }
+  .dashboard-content.shifted {
+    margin-left: 0;
+  }
+  .dashboard-layout.dashboard-compact .dashboard-content {
+    margin-top: 70px;
+    padding: 14px;
+  }
 }
