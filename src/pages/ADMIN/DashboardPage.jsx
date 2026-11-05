@@ -11,7 +11,8 @@ import "./DashboardPage.css";
 import MembersList from "../../components/ADMIN/MembersList";
 
 
-import WorkoutPlans from "../../components/Admin/WorkoutPlans"; // ✅ IMPORT KIYA
+import WorkoutPlans from "../../components/Admin/WorkoutPlans"; 
+import DietPlans from "../../components/Admin/DietPlans";
 
 
 const DEFAULT_APPEARANCE = {
@@ -176,7 +177,7 @@ const DashboardPage = ({ page }) => {
         return <WorkoutPlans />;  // ✅ Ab yeh aapka page render karega
 
       case "diet":
-        return <Placeholder title="Diet" />;
+        return <DietPlans />;
       case "schedule":
         return <Placeholder title="Schedule" />;
         case "reports":
