@@ -34,7 +34,7 @@ const DashboardSidebar = ({ isOpen }) => {
         <Link to="/members" className="dash-menu-item"><Users size={20} /> Member</Link>
         <Link to="/workouts" className="dash-menu-item"><Dumbbell size={20} /> Workout Routine</Link>
         <Link to="/diet" className="dash-menu-item"><Utensils size={20} /> Diet Chart</Link>
-        <Link to="/schedule" className="dash-menu-item"><Calendar size={20} /> Batch Schedule</Link>
+        <Link to="/batch-schedule" className="dash-menu-item"><Calendar size={18} /> Batch Schedule</Link>
         <Link to="/trainers" className="dash-menu-item"><UserCircle size={20} /> Trainer List</Link>
         <Link to="/billing" className="dash-menu-item"><FileText size={20} /> Billing List</Link>
         <Link to="/reports" className="dash-menu-item"><BarChart2 size={20} /> Report</Link>

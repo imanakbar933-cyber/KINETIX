@@ -35,6 +35,7 @@ import ServiceDetail from "./components/ServiceDetail.jsx";
 // Admin Dashboard
 import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
 import MembersPage from "./pages/ADMIN/MembersPage.jsx";
+import BatchSchedulepage from "./pages/ADMIN/BatchSchedulepage.jsx";
 
 function AppLayout() {
   const location = useLocation();
@@ -81,7 +82,7 @@ function AppLayout() {
         <Route path="/members" element={<MembersPage />} />
         <Route path="/workouts" element={<DashboardPage />} />
         <Route path="/diet" element={<DashboardPage />} />
-        <Route path="/schedule" element={<DashboardPage />} />
+        <Route path="/BatchSchedulepage" element={<BatchSchedulepage />} />
         <Route path="/billing" element={<DashboardPage />} />
         <Route path="/reports" element={<DashboardPage />} />
         <Route path="/settings" element={<DashboardPage />} />
