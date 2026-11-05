@@ -11,8 +11,7 @@ import "./DashboardPage.css";
 import MembersList from "../../components/ADMIN/MembersList";
 
 
-// 👇 1. APNA WORKOUT PAGE YAHAN IMPORT KAREIN
-import WorkoutRoutine from "./WorkoutRoutine";
+import WorkoutPlans from "../../components/Admin/WorkoutPlans"; // ✅ IMPORT KIYA
 
 
 const DEFAULT_APPEARANCE = {
@@ -174,7 +173,7 @@ const DashboardPage = ({ page }) => {
 
       // 👇 2. YAHAN PLACEHOLDER KI JAGAH APNA COMPONENT CALL KAREIN
       case "workouts":
-        return <WorkoutRoutine />;  // ✅ Ab yeh aapka page render karega
+        return <WorkoutPlans />;  // ✅ Ab yeh aapka page render karega
 
       case "diet":
         return <Placeholder title="Diet" />;
