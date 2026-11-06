@@ -84,11 +84,11 @@
 }
 
 .view-toggle button:hover {
-  color: #43df83;
+  color: #03ea04;
 }
 
 .view-toggle button.active {
-  color: #43df83;
+  color:#03ea04;
   background: #10271a;
 }
 
@@ -104,7 +104,7 @@
   padding: 15px 24px;
   border: none;
   border-radius: 11px;
-  background: #42d982;
+  background:#03ea04;
   color: #06150b;
   font-size: 16px;
   font-weight: 700;
@@ -113,7 +113,7 @@
 }
 
 .btn-primary:hover {
-  background: #30f080;
+  background: #03ea04;
   transform: translateY(-2px);
 }
 
@@ -141,7 +141,7 @@
 }
 
 .t-stat-card:hover {
-  border-color: #42d982;
+  border-color: #03ea04;
   transform: translateY(-3px);
 }
 
@@ -152,7 +152,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #42df83;
+  color: #03ea04;
   background: #10291a;
   border: 1px solid #205b37;
   border-radius: 13px;
@@ -211,7 +211,7 @@
 
 .t-search input:focus,
 .t-select:focus {
-  border-color: #42d982;
+  border-color: #03ea04
 }
 
 .t-search input::placeholder {
@@ -254,7 +254,7 @@
   opacity: 1;
 }
 .trainer-card:hover {
-  border-color: #42d982;
+  border-color: #03ea04;
   transform: translateY(-4px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
@@ -294,7 +294,7 @@
 }
 
 .tc-status-dot.online {
-  background: #42df83;
+  background: #03ea04;
 }
 
 .tc-status-dot.offline {
@@ -310,7 +310,7 @@
 
 .tc-badge {
   padding: 6px 11px;
-  color: #42df83;
+  color:#03ea04;
   background: #10291a;
   border: 1px solid #205b37;
   border-radius: 20px;
@@ -351,7 +351,7 @@
 
 .bg-green {
   background: #123823;
-  color: #61e69a;
+  color: #03ea04
 }
 
 .bg-cyan {
@@ -432,7 +432,7 @@
 }
 
 .tc-comm-header strong {
-  color: #42df83;
+  color: #03ea04;
   font-size: 17px;
 }
 
@@ -452,7 +452,7 @@
 .tc-progress-fill.bg-purple { background: #c69aff; }
 .tc-progress-fill.bg-orange { background: #ff9d57; }
 .tc-progress-fill.bg-pink { background: #ff91bd; }
-.tc-progress-fill.bg-green { background: #42df83; }
+.tc-progress-fill.bg-green { background:#03ea04; }
 .tc-progress-fill.bg-cyan { background: #60d9ed; }
 .tc-progress-fill.bg-yellow { background: #f6df59; }
 .tc-progress-fill.bg-blue { background: #7eb1ff; }
@@ -483,8 +483,8 @@
 }
 
 .tc-btn:hover {
-  color: #42df83;
-  border-color: #42df83;
+  color: #03ea04;
+  border-color:#03ea04;
   background: #14291b;
 }
 
@@ -534,7 +534,7 @@
 }
 
 .trainer-dropdown button:hover {
-  color: #42df83;
+  color:#03ea04;
   background: #1b3022;
 }
 
@@ -668,8 +668,8 @@
 }
 
 .modal-close:hover {
-  color: #42df83;
-  border-color: #42df83;
+  color:#03ea04;
+  border-color:#03ea04;
 }
 
 /* FORM */
@@ -698,7 +698,7 @@
 .trainer-modal form input:focus,
 .trainer-modal form select:focus,
 .trainer-modal form textarea:focus {
-  border-color: #42df83;
+  border-color: #03ea04;
 }
 
 .trainer-modal form input::placeholder,
@@ -731,7 +731,7 @@
   margin-top: 23px;
   padding: 12px;
   color: #06150b;
-  background: #42d982;
+  background:#03ea04;
   border: none;
   border-radius: 9px;
   font-weight: 700;
@@ -740,7 +740,7 @@
 }
 
 .modal-submit:hover {
-  background: #30f080;
+  background:#03ea04;
 }
 
 /* =====================================
@@ -756,7 +756,7 @@
   margin: 15px auto;
   color: #42df83;
   background: #143a26;
-  border: 2px solid #42df83;
+  border: 2px solid#03ea04;
   border-radius: 50%;
   font-size: 28px;
   font-weight: 750;
@@ -803,7 +803,7 @@
 }
 
 .trainer-detail-info strong {
-  color: #42df83;
+  color:#03ea04;
 }
 
 /* =====================================
@@ -832,7 +832,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  color: #42df83;
+  color:#03ea04;
   text-align: right;
 }
 

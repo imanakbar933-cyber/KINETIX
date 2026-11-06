@@ -208,11 +208,51 @@
 .form-row { display: flex; gap: 15px; }
 .form-group { flex: 1; display: flex; flex-direction: column; gap: 8px; }
 .form-group label { font-size: 13px; color: #d1d5db; font-weight: 600; }
-.form-group input, .form-group select { background: #0f1712; border: 1px solid #1f2e24; border-radius: 8px; padding: 12px 14px; color: #fff; font-size: 14px; outline: none; }
-.form-group input:focus, .form-group select:focus { border-color: #03ea04; }
+
+/* ✅ FIXED: Input & Select styling */
+.form-group input, 
+.form-group select { 
+  background: #0f1712; 
+  border: 1px solid #1f2e24; 
+  border-radius: 8px; 
+  padding: 12px 14px; 
+  color: #fff; 
+  font-size: 14px; 
+  outline: none; 
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Padding adjust ho */
+  font-family: 'Inter', sans-serif;
+  /* Remove any text overflow issues */
+  text-overflow: clip; 
+  white-space: nowrap;
+}
+
+.form-group input:focus, 
+.form-group select:focus { 
+  border-color: #03ea04; 
+  box-shadow: 0 0 0 2px rgba(3, 234, 4, 0.1);
+}
+
+/* ✅ Custom Dropdown Arrow styling */
+.form-group select {
+  appearance: none; /* Default arrow hatao */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px; /* Arrow ke liye jagah */
+  cursor: pointer;
+}
+
+/* Dropdown options ka color fix (Windows/Mac) */
+.form-group select option {
+  background-color: #0f1712;
+  color: #fff;
+}
 
 .modal-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 15px; }
-
 /* View Modal */
 .view-modal-content {
   background: #0a0f0c;
