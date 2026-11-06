@@ -40,13 +40,13 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
         <Link to="/members" className={isActive("/members")}><Users size={20} /> Member</Link>
         <Link to="/workouts" className={isActive("/workouts")}><Dumbbell size={20} /> Workout Routine</Link>
         <Link to="/diet" className={isActive("/diet")}><Utensils size={20} /> Diet Chart</Link>
-        
-        {/* ✅ YAHAN FIX KIYA HAI: /batch-schedule */}
         <Link to="/batch-schedule" className={isActive("/batch-schedule")}><Calendar size={20} /> Batch Schedule</Link>
-        
-       <Link to="/trainers" className={isActive("/trainers")}>
-  <UserCircle size={20} /> Trainer List
-</Link>
+
+        {/* ✅ FIX: Dashboard trainers ka alag route */}
+        <Link to="/dashboard/trainers" className={isActive("/dashboard/trainers")}>
+          <UserCircle size={20} /> Trainer List
+        </Link>
+
         <Link to="/billing" className={isActive("/billing")}><FileText size={20} /> Billing List</Link>
         <Link to="/reports" className={isActive("/reports")}><BarChart2 size={20} /> Report</Link>
         <Link to="/settings" className={isActive("/settings")}><Settings size={20} /> Settings</Link>
