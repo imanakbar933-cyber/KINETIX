@@ -5,6 +5,10 @@
   padding: 30px;
   background: #050706;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #ffffff;
 }
@@ -84,6 +88,9 @@
 }
 
 .rp-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: transparent;
   border: none;
   padding: 10px 16px;
@@ -95,14 +102,41 @@
   transition: all 0.2s;
 }
 
-.rp-tab:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+.rp-tab:hover { 
+  background: rgba(255, 255, 255, 0.05); 
+  color: #fff; 
+}
+
 .rp-tab.active {
   background: rgba(3, 234, 4, 0.1);
   color: #03ea04;
   border: 1px solid rgba(3, 234, 4, 0.3);
 }
 
-.billing-search-actions { display: flex; gap: 12px; }
+/* Tab Counts */
+.tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #a0a0a0;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.rp-tab.active .tab-count {
+  background: rgba(3, 234, 4, 0.2);
+  color: #03ea04;
+}
+
+.billing-search-actions { 
+  display: flex; 
+  gap: 12px; 
+}
 
 .rp-search {
   display: flex;
@@ -124,17 +158,40 @@
   color: #fff;
 }
 
-/* ================= TABLE ================= */
-.billing-table-container {
+/* ================= TABLE WRAPPER & SCROLL ================= */
+.billing-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   background: #0a0d0b;
   border-radius: 12px;
   border: 1px solid #1f2937;
   overflow: hidden;
 }
 
+.billing-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Custom scrollbar for table */
+.billing-table-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+.billing-table-scroll::-webkit-scrollbar-track {
+  background: #111;
+}
+.billing-table-scroll::-webkit-scrollbar-thumb {
+  background: #03ea04;
+  border-radius: 4px;
+}
+
 .billing-table {
   width: 100%;
+  min-width: 900px;
   border-collapse: collapse;
+  white-space: nowrap;
 }
 
 .billing-table th {
@@ -165,9 +222,16 @@
 .invoice-date { color: #888; }
 .invoice-amount { font-weight: 700; }
 
-.member-info-cell { display: flex; flex-direction: column; gap: 4px; }
+.invoice-phone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #a0a0a0;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
 .m-name { font-weight: 600; color: #fff; }
-.m-email { font-size: 12px; color: #888; }
 
 /* Status Badges */
 .status-badge {
@@ -184,7 +248,11 @@
 .status-overdue { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
 
 /* Action Buttons */
-.table-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.table-actions { 
+  display: flex; 
+  gap: 10px; 
+  justify-content: flex-end; 
+}
 
 .action-btn {
   background: transparent;
@@ -201,10 +269,54 @@
 }
 
 .action-btn:hover.view { color: #03ea04; border-color: #03ea04; background: rgba(3, 234, 4, 0.05); }
+.action-btn:hover.edit { color: #03ea04; border-color: #03ea04; background: rgba(3, 234, 4, 0.05); }
 .action-btn:hover.download { color: #3b82f6; border-color: #3b82f6; background: rgba(59, 130, 246, 0.05); }
 .action-btn:hover.delete { color: #ef4444; border-color: #ef4444; background: rgba(239, 68, 68, 0.05); }
 
-.empty-state { text-align: center; color: #666; padding: 40px !important; }
+.empty-state { 
+  text-align: center; 
+  color: #666; 
+  padding: 40px !important; 
+}
+
+/* ================= STICKY FOOTER ================= */
+.billing-sticky-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #0f1410;
+  border-top: 2px solid #03ea04;
+  color: #a0a0a0;
+  font-size: 13px;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.billing-sticky-footer strong {
+  color: #fff;
+}
+
+.footer-label {
+  font-weight: 700;
+  color: #a0a0a0;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  margin-right: 8px;
+}
+
+.footer-total-right {
+  display: flex;
+  align-items: center;
+}
+
+.footer-amount {
+  font-size: 18px;
+  font-weight: 800;
+  color: #03ea04;
+}
 
 /* ================= MODALS & FORMS ================= */
 .rp-btn-solid {
@@ -270,7 +382,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 30px 20px;
+  overflow-y: auto; /* Modal scroll fix */
 }
 
 .rp-modal {
@@ -282,6 +395,21 @@
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
   border: 1px solid #1f2937;
   animation: modalIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  max-height: calc(100vh - 60px);
+  overflow-y: auto; /* Modal scroll fix */
+}
+
+/* Custom scrollbar for modal */
+.rp-modal::-webkit-scrollbar {
+  width: 6px;
+}
+.rp-modal::-webkit-scrollbar-track {
+  background: #111;
+  border-radius: 3px;
+}
+.rp-modal::-webkit-scrollbar-thumb {
+  background: #03ea04;
+  border-radius: 3px;
 }
 
 @keyframes modalIn {
@@ -344,9 +472,14 @@
 }
 
 .rp-modal-actions { display: flex; gap: 12px; margin-top: 10px; }
+.rp-modal-actions.wrap { flex-wrap: wrap; }
 
 /* ================= PREVIEW MODAL ================= */
-.preview-modal { max-width: 520px; }
+.preview-modal { 
+  max-width: 520px; 
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+}
 
 .preview-top-card {
   display: flex;
@@ -390,6 +523,47 @@
 .ps-card span { display: block; font-size: 10px; font-weight: 800; color: #666; margin-bottom: 4px; letter-spacing: 0.5px; }
 .ps-card h4 { margin: 0; font-size: 13px; font-weight: 700; color: #fff; }
 
+/* Status Switcher */
+.status-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.status-switcher > span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-chip {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.status-chip.status-paid { color: #03ea04; border-color: rgba(3, 234, 4, 0.3); }
+.status-chip.status-pending { color: #d4af37; border-color: rgba(212, 175, 55, 0.3); }
+.status-chip.status-overdue { color: #ef4444; border-color: rgba(239, 68, 68, 0.3); }
+
+.status-chip.active {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 10px rgba(3, 234, 4, 0.15);
+}
+
+.status-chip:hover {
+  transform: translateY(-1px);
+}
+
 .preview-table-wrapper {
   margin-bottom: 20px;
   border: 1px solid #333;
@@ -413,18 +587,7 @@
 
 .row-total td { font-weight: 800; color: #fff; background: #111; }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .billing-header { flex-direction: column; gap: 16px; }
-  .billing-filters { flex-direction: column; align-items: stretch; }
-  .billing-search-actions { flex-direction: column; }
-  .rp-search { width: 100%; }
-  .generate-form-grid { grid-template-columns: 1fr; }
-  .invoice-details-grid { grid-template-columns: 1fr; }
-  .billing-table-container { overflow-x: auto; }
-}
 /* ================= DATE INPUT FIX ================= */
-/* Dark theme mein calendar icon ko white color dene ke liye */
 .date-input::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;
@@ -433,4 +596,15 @@
 
 .date-input::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .billing-header { flex-direction: column; gap: 16px; }
+  .billing-filters { flex-direction: column; align-items: stretch; }
+  .billing-search-actions { flex-direction: column; }
+  .rp-search { width: 100%; }
+  .generate-form-grid { grid-template-columns: 1fr; }
+  .invoice-details-grid { grid-template-columns: 1fr; }
+  .billing-sticky-footer { flex-direction: column; gap: 10px; align-items: flex-start; }
 }
