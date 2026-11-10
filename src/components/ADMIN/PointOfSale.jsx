@@ -618,16 +618,16 @@ export default function PointOfSale() {
       <header className="pos-topbar">
         <div className="pos-title-block">
           <div className="pos-brand-line">
-            <span className="pos-brand-mark">
+            {/* <span className="pos-brand-mark">
               <Icon name="dumbbell" size={17} />
             </span>
-            KINETIX <i>FITNESS CLUB</i>
+            KINETIX <i>FITNESS CLUB</i> */}
           </div>
 
           <div className="pos-title-row">
             <div>
-              <span className="pos-kicker">ADMINISTRATION / SALES CENTER</span>
-              <h1>Point of <em>Sale.</em></h1>
+              {/* <span className="pos-kicker">ADMINISTRATION / SALES CENTER</span> */}
+              <h1>Point of <em>Sale</em></h1>
               <p>Everything your gym sells, beautifully managed.</p>
             </div>
           </div>
@@ -752,7 +752,7 @@ export default function PointOfSale() {
 
               <button
                 className="pos-secondary-btn"
-                onClick={addCustomProduct}
+            onClick={() => setShowCustom(true)}
               >
                 <Icon name="plus" />
                 Custom item
@@ -1116,7 +1116,7 @@ export default function PointOfSale() {
 
             <button
               className="pos-secondary-btn"
-              onClick={addCustomProduct}
+           onClick={() => setShowCustom(true)}
             >
               <Icon name="plus" />
               Add custom item

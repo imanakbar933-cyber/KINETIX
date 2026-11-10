@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutGrid, Users, Dumbbell, Utensils, Calendar,
-  UserCircle, FileText, BarChart2, Settings, Briefcase, Headset
+  UserCircle, FileText, BarChart2, Settings, Briefcase,
+  BriefcaseBusiness
 } from "lucide-react";
 import "./DashboardSidebar.css";
 
@@ -46,8 +47,9 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
           <UserCircle size={20} /> Trainer List
         </Link>
 <Link to="/dashboard/services" className={isActive("/dashboard/services")}>
-          <Headset size={20} /> Services
-        </Link>
+  <BriefcaseBusiness size={20} />
+  Services
+</Link>
          <Link to="/dashboard/staff" className={isActive("/dashboard/staff")}>
           <Briefcase size={20} /> Staff
         </Link>

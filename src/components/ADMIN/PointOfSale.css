@@ -1,7 +1,7 @@
 /* src/components/ADMIN/PointOfSale.css */
 
 .pos-page {
-  --green: #39f56a;
+  --green:#03ea04;
   --green-dark: #13b947;
   --bg: #090d0b;
   --panel: #111814;
@@ -1399,3 +1399,577 @@
   }
 }
 
+/* =====================================================
+   KINETIX POS - CLICKABLE CARDS & DETAIL MODALS
+===================================================== */
+
+/* Clickable metric cards */
+
+.pos-clickable-card {
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.pos-clickable-card:hover {
+  transform: translateY(-5px);
+  border-color:#03ea04 !important;
+  box-shadow: 0 12px 30px rgba(57, 245, 106, 0.10);
+}
+
+.pos-clickable-card:focus-visible,
+.pos-register-pill:focus-visible {
+  outline: 2px solid#03ea04;
+  outline-offset: 3px;
+}
+
+.pos-card-hint {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 13px;
+  color:#03ea04;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, gap 0.2s ease;
+}
+
+.pos-clickable-card:hover .pos-card-hint {
+  opacity: 1;
+  gap: 11px;
+}
+
+/* Register button */
+
+.pos-register-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(57, 245, 106, 0.25);
+  border-radius: 13px;
+  padding: 12px 15px;
+  background: rgba(57, 245, 106, 0.07);
+  color: #f5fff7;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: 0.25s ease;
+}
+
+.pos-register-pill:hover {
+  background: rgba(57, 245, 106, 0.13);
+  border-color:#03ea04;
+}
+
+.pos-register-pill > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pos-register-pill b {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.pos-register-pill small {
+  color: #929b94;
+  font-size: 10px;
+}
+
+.pos-register-pill > svg {
+  color:#03ea04;
+  margin-left: 4px;
+}
+
+.pos-register-pill.register-closed {
+  background: rgba(255, 75, 75, 0.08);
+  border-color: rgba(255, 75, 75, 0.35);
+}
+
+.pos-register-pill.register-closed > svg {
+  color: #ff6969;
+}
+
+.pos-register-pill.register-closed .pos-live-dot,
+.pos-nav-date .pos-live-dot.offline {
+  background: #ff6969;
+  box-shadow: 0 0 9px rgba(255, 75, 75, 0.5);
+}
+
+/* Detail modal */
+
+.pos-detail-modal {
+  width: min(620px, 94vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 26px;
+  border: 1px solid rgba(57, 245, 106, 0.2);
+  border-radius: 20px;
+  background: #101612;
+  color: #f5fff7;
+  box-shadow: 0 25px 90px rgba(0, 0, 0, 0.65);
+  animation: posModalEnter 0.25s ease;
+}
+
+@keyframes posModalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pos-detail-modal .pos-modal-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.pos-detail-modal .pos-modal-heading h3 {
+  margin: 7px 0 0;
+  color: #fff;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.pos-detail-highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 21px;
+  border: 1px solid rgba(57, 245, 106, 0.22);
+  border-radius: 15px;
+  background: linear-gradient(
+    120deg,
+    rgba(57, 245, 106, 0.12),
+    rgba(57, 245, 106, 0.025)
+  );
+}
+
+.pos-detail-highlight small {
+  color: #a5b1a8;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.pos-detail-highlight strong {
+  color:#03ea04;
+  font-size: clamp(25px, 5vw, 36px);
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.pos-detail-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 24px 0 12px;
+}
+
+.pos-detail-list-heading strong {
+  color: #f4fff6;
+  font-size: 14px;
+}
+
+.pos-detail-list-heading span {
+  color:#03ea04;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.pos-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 3px;
+}
+
+.pos-detail-list-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #27332b;
+  border-radius: 12px;
+  background: #151e18;
+  color: #fff;
+  text-align: left;
+  font-family: inherit;
+  transition: 0.2s ease;
+}
+
+button.pos-detail-list-row {
+  cursor: pointer;
+}
+
+.pos-detail-list-row:hover {
+  border-color: rgba(57, 245, 106, 0.55);
+  background: #19251c;
+}
+
+.pos-detail-list-row > div {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pos-detail-list-row strong {
+  color: #f5fff7;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.pos-detail-list-row small {
+  color: #98a49b;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.pos-detail-list-row b {
+  color:#03ea04;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.pos-detail-list-row > svg {
+  flex-shrink: 0;
+  color:#03ea04;
+}
+
+/* Register details */
+
+.pos-register-status {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 17px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(57, 245, 106, 0.25);
+  border-radius: 13px;
+  background: rgba(57, 245, 106, 0.07);
+}
+
+.pos-register-status.closed {
+  border-color: rgba(255, 95, 95, 0.3);
+  background: rgba(255, 95, 95, 0.07);
+}
+
+.pos-register-status > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pos-register-status strong {
+  color: #fff;
+  font-size: 14px;
+}
+
+.pos-register-status small {
+  color: #9ba69e;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.pos-register-status.closed .pos-live-dot {
+  background: #ff6969;
+  box-shadow: 0 0 10px rgba(255, 75, 75, 0.5);
+}
+
+.pos-detail-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.pos-detail-stat-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #29342c;
+  border-radius: 12px;
+  background: #151e18;
+}
+
+.pos-detail-stat-grid small {
+  color: #a1ada4;
+  font-size: 11px;
+}
+
+.pos-detail-stat-grid strong {
+  color:#03ea04;
+  font-size: clamp(16px, 3vw, 21px);
+  overflow-wrap: anywhere;
+}
+
+.pos-register-open-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 21px;
+}
+
+.pos-register-open-form label {
+  color: #dce9df;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pos-register-open-form input {
+  width: 100%;
+  min-height: 45px;
+  padding: 0 13px;
+  border: 1px solid #344238;
+  border-radius: 9px;
+  outline: none;
+  background: #080d09;
+  color: #fff;
+  font: inherit;
+}
+
+.pos-register-open-form input:focus {
+  border-color:#03ea04;
+}
+
+.pos-register-close-info {
+  margin-top: 20px;
+}
+
+.pos-register-close-info p {
+  margin: 0 0 14px;
+  color: #a8b3aa;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.pos-danger-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid rgba(255, 89, 89, 0.4);
+  border-radius: 10px;
+  background: rgba(255, 75, 75, 0.12);
+  color: #ff7777;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.pos-danger-button:hover {
+  background: rgba(255, 75, 75, 0.2);
+  border-color: #ff6969;
+}
+
+.pos-register-warning {
+  margin: 10px 0 0;
+  color: #ff8585;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* Overview cards */
+
+.pos-overview-cards > button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #27332b;
+  border-radius: 14px;
+  background: #111914;
+  color: #fff;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.pos-overview-cards > button:hover {
+  transform: translateY(-4px);
+  border-color:#03ea04;
+  box-shadow: 0 10px 25px rgba(57, 245, 106, 0.08);
+}
+
+.pos-overview-cards > button > svg {
+  width: 23px;
+  height: 23px;
+  color:#03ea04;
+}
+
+.pos-overview-cards > button small {
+  color: #a0aca3;
+  font-size: 12px;
+}
+
+.pos-overview-cards > button strong {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.pos-overview-cards > button > span {
+  color:#03ea04;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.pos-overview-extra,
+.pos-inventory-summary,
+.pos-history-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+  margin: 20px 0;
+}
+
+.pos-overview-extra > div,
+.pos-inventory-summary > div,
+.pos-history-summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid #27332b;
+  border-radius: 12px;
+  background: #111914;
+}
+
+.pos-overview-extra span,
+.pos-inventory-summary span,
+.pos-history-summary span {
+  color: #a0aca3;
+  font-size: 11px;
+}
+
+.pos-overview-extra strong,
+.pos-inventory-summary strong,
+.pos-history-summary strong {
+  color:#03ea04;
+  font-size: 20px;
+  overflow-wrap: anywhere;
+}
+
+.pos-inventory-summary > div > svg {
+  color:#03ea04;
+}
+
+/* Recent transaction clickable rows */
+
+.pos-history-clickable {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #27332b;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.pos-history-clickable:hover {
+  background: rgba(57, 245, 106, 0.045);
+}
+
+.pos-history-clickable > span {
+  color:#03ea04;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+  .pos-detail-modal {
+    width: 95vw;
+    max-height: 90vh;
+    padding: 18px;
+    border-radius: 15px;
+  }
+
+  .pos-detail-modal .pos-modal-heading h3 {
+    font-size: 19px;
+  }
+
+  .pos-detail-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pos-overview-extra,
+  .pos-inventory-summary,
+  .pos-history-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .pos-detail-list-row {
+    padding: 11px;
+  }
+
+  .pos-detail-list-row b {
+    font-size: 11px;
+  }
+
+  .pos-register-pill {
+    padding: 9px;
+    gap: 8px;
+  }
+
+  .pos-register-pill small {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 420px) {
+  .pos-detail-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pos-detail-highlight {
+    padding: 16px;
+  }
+}
+
+/* Keep modal content readable */
+
+.pos-detail-modal,
+.pos-detail-modal button,
+.pos-detail-modal input {
+  box-sizing: border-box;
+}
+
+.pos-detail-modal button:focus-visible,
+.pos-detail-modal input:focus-visible {
+  outline: 2px solid#03ea04;
+  outline-offset: 2px;
+}
