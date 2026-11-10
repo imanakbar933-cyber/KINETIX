@@ -83,24 +83,26 @@ function MembershipPlans() {
   };
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+  const section = sectionRef.current;
+  if (!section) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          section.classList.add("in-view");
-        } else {
-          section.classList.remove("in-view"); // Har baar animate hone ke liye
-        }
-      },
-      { threshold: 0.15 }
-    );
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        section.classList.add("in-view");
+      } else {
+        section.classList.remove("in-view");
+      }
+    },
+    {
+      threshold: 0.1,
+    }
+  );
 
-    observer.observe(section);
+  observer.observe(section);
 
-    return () => observer.disconnect();
-  }, []);
+  return () => observer.disconnect();
+}, []);
 
   return (
     <section className="membership-wrapper" id="plans" ref={sectionRef}>
