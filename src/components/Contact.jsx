@@ -2,9 +2,12 @@
 
 import React from "react";
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom"; // 👈 1. Navigation ke liye import kiya
 import "./Contact.css";
 
 const Contact = () => {
+  const navigate = useNavigate(); // 👈 2. Hook initialize kiya
+
   return (
     <section className="contact">
 
@@ -54,6 +57,7 @@ const Contact = () => {
               show: { opacity: 1, y: 0 },
             }}
             whileHover={{ y: -4, scale: 1.04 }}
+            onClick={() => navigate('/register')} // 👈 Yahan aap apna route daal sakti hain
           >
             GET STARTED TODAY <span className="arrow">›</span>
           </motion.button>
@@ -65,6 +69,7 @@ const Contact = () => {
               show: { opacity: 1, y: 0 },
             }}
             whileHover={{ y: -4, scale: 1.04 }}
+            onClick={() => navigate('/contact')} // 👈 3. Contact Us par click se page open hoga
           >
             CONTACT US <span className="arrow">›</span>
           </motion.button>
@@ -74,8 +79,8 @@ const Contact = () => {
       {/* ---------- RIGHT SIDE: Arch-shaped Image ---------- */}
       <div className="contact-right">
 
-        {/* Rotating gradient glow ring */}
-        <motion.div
+        {/* ✅ Green Glow HATA DIYA GAYA HAI (Comment out kar diya hai) */}
+        {/* <motion.div
           className="contact-glow"
           animate={{ rotate: 360 }}
           transition={{
@@ -83,7 +88,7 @@ const Contact = () => {
             repeat: Infinity,
             ease: "linear",
           }}
-        />
+        /> */}
 
         {/* Image container — Arch shape */}
         <motion.div
@@ -119,4 +124,3 @@ const Contact = () => {
   );
 };
 export default Contact;
-

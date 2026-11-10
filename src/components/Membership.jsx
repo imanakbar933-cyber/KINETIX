@@ -201,23 +201,16 @@ function Membership() {
 
         <div className="membership-top">
 
-          <div className="membership-intro">
-
-            <h1>
-              DISCOVER YOUR
-              <br />
-              FITNESS MEMBERSHIP
-            </h1>
-
-            <p>
-              Choose from a variety of membership options designed to fit
-              your lifestyle, whether you prefer a month-to-month plan or
-              a yearly commitment. We offer flexible packages for
-              individuals, couples, and families.
-            </p>
-
-          </div>
-
+ <div className="membership-header">
+  <p className="membership-eyebrow">MEMBERSHIP</p>
+  
+  {/* Yahan aapne "MEMBERSHIP DISCOVER NOW" likh diya hai */}
+  <h2 className="membership-title">DISCOVER NOW</h2>
+  
+  <p className="membership-subtitle">
+    Choose from flexible membership options designed to fit your lifestyle.
+  </p>
+</div>
 
           {/* =====================================
               CONTROLS

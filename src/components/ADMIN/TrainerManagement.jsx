@@ -334,33 +334,33 @@ const TrainerManagement = () => {
 
         <div className="t-stat-card">
           <div className="t-stat-icon"><Users size={24} /></div>
-          <div>
-            <h2>{trainers.length}</h2>
+          <div className="t-stat-content">
             <p>ACTIVE TRAINERS</p>
+            <h2>{trainers.length}</h2>
           </div>
         </div>
 
         <div className="t-stat-card">
           <div className="t-stat-icon"><Calendar size={24} /></div>
-          <div>
-            <h2>{totalSessions}</h2>
+          <div className="t-stat-content">
             <p>SESSIONS THIS MONTH</p>
+            <h2>{totalSessions}</h2>
           </div>
         </div>
 
         <div className="t-stat-card">
           <div className="t-stat-icon"><DollarSign size={24} /></div>
-          <div>
-            <h2>${(totalCommission / 1000).toFixed(1)}K</h2>
+          <div className="t-stat-content">
             <p>TOTAL COMMISSIONS</p>
+            <h2>${(totalCommission / 1000).toFixed(1)}K</h2>
           </div>
         </div>
 
         <div className="t-stat-card">
           <div className="t-stat-icon"><Star size={24} /></div>
-          <div>
-            <h2>{averageRating}</h2>
+          <div className="t-stat-content">
             <p>AVG RATING</p>
+            <h2>{averageRating}</h2>
           </div>
         </div>
 
