@@ -1,442 +1,1127 @@
-import React, { useState, useMemo, useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import "./WorkoutPlans.css";
 
-// --- MOCK DATA ---
-const initialWorkoutPlans = [
-  { 
-    id: 1, title: "Hypertrophy Builder", level: "Intermediate", goal: "Muscle Gain", 
-    days: 5, duration: "8 weeks", activeDays: [0, 1, 2, 3, 4], 
-    exercises: ["Bench Press 4x8", "Incline Dumbbell 3x10", "Cable Fly 3x12", "Tricep Pushdown 4x15"] 
-  },
-  { 
-    id: 2, title: "Shred & Burn", level: "Beginner", goal: "Fat Loss", 
-    days: 4, duration: "6 weeks", activeDays: [0, 2, 4, 6], 
-    exercises: ["HIIT Treadmill 20m", "Kettlebell Swings 4x15", "Burpees 3x20", "Mountain Climbers 3x30s"] 
-  },
-  { 
-    id: 3, title: "Powerlifting 5x5", level: "Advanced", goal: "Strength", 
-    days: 3, duration: "12 weeks", activeDays: [1, 3, 5], 
-    exercises: ["Squats 5x5", "Deadlifts 5x5", "Overhead Press 5x5", "Barbell Rows 5x5"] 
-  },
+const weekDays = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
 ];
 
-const mockMembers = [
-  { id: 101, name: "Ali Khan", email: "ali@example.com", avatar: "AK" },
-  { id: 102, name: "Sara Ahmed", email: "sara@example.com", avatar: "SA" },
-  { id: 103, name: "John Doe", email: "john@example.com", avatar: "JD" },
-  { id: 104, name: "Zainab Tariq", email: "zainab@example.com", avatar: "ZT" },
-  { id: 105, name: "Usman Raza", email: "usman@example.com", avatar: "UR" },
-];
+const initialWorkouts = {
+  Monday: [
+    {
+      id: "monday-default",
+      focus: "Chest & Triceps",
+      category: "STRENGTH",
+      exercises: [
+        { name: "Bench Press", sets: 4, reps: "12", rest: "90 sec" },
+        { name: "Incline Dumbbell Press", sets: 3, reps: "12", rest: "60 sec" },
+        { name: "Cable Fly", sets: 3, reps: "15", rest: "45 sec" },
+        { name: "Tricep Pushdown", sets: 3, reps: "12", rest: "45 sec" },
+        { name: "Overhead Tricep Extension", sets: 3, reps: "12", rest: "45 sec" },
+      ],
+    },
+  ],
 
-const goals = ["All Goals", "Muscle Gain", "Fat Loss", "Strength", "Endurance", "Mobility"];
-const levels = ["All Levels", "Beginner", "Intermediate", "Advanced"];
+  Tuesday: [
+    {
+      id: "tuesday-default",
+      focus: "Back & Biceps",
+      category: "STRENGTH",
+      exercises: [
+        { name: "Lat Pulldown", sets: 4, reps: "12", rest: "60 sec" },
+        { name: "Seated Cable Row", sets: 3, reps: "12", rest: "60 sec" },
+        { name: "Barbell Row", sets: 3, reps: "10", rest: "90 sec" },
+        { name: "Dumbbell Curl", sets: 3, reps: "12", rest: "45 sec" },
+        { name: "Hammer Curl", sets: 3, reps: "12", rest: "45 sec" },
+      ],
+    },
+  ],
 
-const Icons = {
-  search: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>,
-  plus: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>,
-  eye: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>,
-  assign: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>,
-  dumbbell: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6.5 6.5h11"></path><path d="M6.5 17.5h11"></path><path d="M3 10.5h18"></path><path d="M3 13.5h18"></path><path d="M6 6.5v11"></path><path d="M18 6.5v11"></path></svg>,
-  fire: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>,
-  bolt: <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>,
-  star: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>,
-  document: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>,
-  users: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>,
-  close: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>,
-  check: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="20 6 9 17 4 12"></polyline></svg>,
-  clock: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>,
-  calendar: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>,
+  Wednesday: [
+    {
+      id: "wednesday-default",
+      focus: "Legs & Glutes",
+      category: "STRENGTH",
+      exercises: [
+        { name: "Barbell Squats", sets: 4, reps: "12", rest: "90 sec" },
+        { name: "Leg Press", sets: 3, reps: "12", rest: "60 sec" },
+        { name: "Leg Extension", sets: 3, reps: "15", rest: "45 sec" },
+        { name: "Leg Curl", sets: 3, reps: "12", rest: "45 sec" },
+        { name: "Calf Raises", sets: 4, reps: "15", rest: "45 sec" },
+      ],
+    },
+  ],
+
+  Thursday: [
+    {
+      id: "thursday-default",
+      focus: "Shoulders & Abs",
+      category: "STRENGTH",
+      exercises: [
+        { name: "Shoulder Press", sets: 4, reps: "12", rest: "60 sec" },
+        { name: "Lateral Raises", sets: 3, reps: "15", rest: "45 sec" },
+        { name: "Front Raises", sets: 3, reps: "12", rest: "45 sec" },
+        { name: "Plank", sets: 3, reps: "45 sec", rest: "30 sec" },
+        { name: "Crunches", sets: 3, reps: "20", rest: "30 sec" },
+      ],
+    },
+  ],
+
+  Friday: [
+    {
+      id: "friday-default",
+      focus: "Full Body",
+      category: "STRENGTH",
+      exercises: [
+        { name: "Deadlift", sets: 3, reps: "10", rest: "90 sec" },
+        { name: "Push Ups", sets: 3, reps: "15", rest: "45 sec" },
+        { name: "Goblet Squats", sets: 3, reps: "12", rest: "60 sec" },
+        { name: "Dumbbell Rows", sets: 3, reps: "12", rest: "45 sec" },
+        { name: "Mountain Climbers", sets: 3, reps: "30 sec", rest: "30 sec" },
+      ],
+    },
+  ],
+
+  Saturday: [
+    {
+      id: "saturday-default",
+      focus: "Cardio & Conditioning",
+      category: "CARDIO",
+      exercises: [
+        { name: "Treadmill Running", sets: 1, reps: "15 min", rest: "2 min" },
+        { name: "Cycling", sets: 1, reps: "10 min", rest: "2 min" },
+        { name: "Jump Rope", sets: 3, reps: "2 min", rest: "45 sec" },
+        { name: "Burpees", sets: 3, reps: "12", rest: "45 sec" },
+        { name: "Stretching", sets: 1, reps: "10 min", rest: "—" },
+      ],
+    },
+  ],
+
+  Sunday: [
+    {
+      id: "sunday-default",
+      focus: "Recovery & Rest",
+      category: "RECOVERY",
+      exercises: [],
+    },
+  ],
 };
 
-const WorkoutCard = ({ plan, assignedCount, onView, onAssign }) => {
-  const weekDays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-  
-  const getIcon = (title) => {
-    if (title.includes("Shred") || title.includes("Burn")) return Icons.fire;
-    if (title.includes("Power")) return Icons.bolt;
-    return Icons.dumbbell;
-  };
+const initialMembers = [
+  { id: 1, name: "Ahmed Khan", plan: "Beginner" },
+  { id: 2, name: "Ali Hassan", plan: "Intermediate" },
+  { id: 3, name: "Usman Malik", plan: "Advanced" },
+  { id: 4, name: "Hamza Ahmed", plan: "Beginner" },
+  { id: 5, name: "Bilal Shah", plan: "Intermediate" },
+];
 
-  return (
-    <div className="wp-card">
-      <div className="wp-card-header">
-        <div className="wp-card-icon">{getIcon(plan.title)}</div>
-      </div>
+const loadFromStorage = (key, fallback) => {
+  try {
+    const saved = localStorage.getItem(key);
+    return saved ? JSON.parse(saved) : fallback;
+  } catch {
+    return fallback;
+  }
+};
 
-      <div className="wp-card-body">
-        <div className="wp-card-badges">
-          <span className="wp-badge level">{plan.level}</span>
-          <span className="wp-badge goal">{plan.goal}</span>
-        </div>
-        
-        <h3 className="wp-card-title">{plan.title}</h3>
+const createEmptyExercise = () => ({
+  name: "",
+  sets: 3,
+  reps: "12",
+  rest: "60 sec",
+});
 
-        <div className="wp-card-details">
-          <span>{Icons.calendar} {plan.days} days/wk</span>
-          <span>{Icons.clock} {plan.duration}</span>
-          <span>{Icons.users} {assignedCount}</span>
-        </div>
+function WorkoutPlan() {
+  const [activeDay, setActiveDay] = useState("Monday");
 
-        <div className="wp-week-days">
-          {weekDays.map((day, idx) => {
-            const isActive = plan.activeDays.includes(idx);
-            return (
-              <div className={`wp-day-circle ${isActive ? 'active' : ''}`} key={idx}>
-                {day}
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="wp-card-actions">
-          <button className="wp-btn wp-btn-view" onClick={() => onView(plan)}>
-            {Icons.eye} View
-          </button>
-          <button className="wp-btn wp-btn-assign" onClick={() => onAssign(plan)}>
-            {Icons.assign} Assign
-          </button>
-        </div>
-      </div>
-    </div>
+  const [workouts, setWorkouts] = useState(() =>
+    loadFromStorage("kinetix-workout-plans-v2", initialWorkouts)
   );
-};
 
-const WorkoutPlans = () => {
-  // LocalStorage keys updated to v2 to avoid old cache issues
-  const [plansData, setPlansData] = useState(() => {
-    const saved = localStorage.getItem("wp_plansData_v2");
-    return saved ? JSON.parse(saved) : initialWorkoutPlans;
+  const [assignments, setAssignments] = useState(() =>
+    loadFromStorage("kinetix-workout-assignments-v2", [])
+  );
+
+  const [members] = useState(initialMembers);
+
+  const [selectedPlanId, setSelectedPlanId] = useState("monday-default");
+
+  const [selectedMember, setSelectedMember] = useState("");
+  const [assignDay, setAssignDay] = useState("Monday");
+  const [assignPlanId, setAssignPlanId] = useState("monday-default");
+
+  const [search, setSearch] = useState("");
+  const [showAssign, setShowAssign] = useState(false);
+  const [showAddPlan, setShowAddPlan] = useState(false);
+
+  const [newPlan, setNewPlan] = useState({
+    day: "Monday",
+    focus: "",
+    category: "STRENGTH",
+    exercises: [createEmptyExercise()],
   });
 
-  const [assignedMembers, setAssignedMembers] = useState(() => {
-    const saved = localStorage.getItem("wp_assignedMembers_v2");
-    return saved ? JSON.parse(saved) : {};
-  });
-
-  const [activeGoal, setActiveGoal] = useState("All Goals");
-  const [activeLevel, setActiveLevel] = useState("All Levels");
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const [selectedPlan, setSelectedPlan] = useState(null);
-  const [modalType, setModalType] = useState(null);
-
-  const [newPlanData, setNewPlanData] = useState({
-    title: "", level: "Beginner", goal: "Muscle Gain", duration: "4 weeks", days: 3, activeDays: [0, 2, 4]
-  });
+  // SAVE PLANS AND ASSIGNMENTS
+  useEffect(() => {
+    localStorage.setItem(
+      "kinetix-workout-plans-v2",
+      JSON.stringify(workouts)
+    );
+  }, [workouts]);
 
   useEffect(() => {
-    localStorage.setItem("wp_plansData_v2", JSON.stringify(plansData));
-  }, [plansData]);
+    localStorage.setItem(
+      "kinetix-workout-assignments-v2",
+      JSON.stringify(assignments)
+    );
+  }, [assignments]);
 
-  useEffect(() => {
-    localStorage.setItem("wp_assignedMembers_v2", JSON.stringify(assignedMembers));
-  }, [assignedMembers]);
+  const currentDayPlans = workouts[activeDay] || [];
 
-  const filteredPlans = useMemo(() => {
-    return plansData.filter((plan) => {
-      const matchGoal = activeGoal === "All Goals" || plan.goal === activeGoal;
-      const matchLevel = activeLevel === "All Levels" || plan.level === activeLevel;
-      const matchSearch = plan.title.toLowerCase().includes(searchTerm.toLowerCase());
-      return matchGoal && matchLevel && matchSearch;
-    });
-  }, [plansData, activeGoal, activeLevel, searchTerm]);
+  const currentWorkout =
+    currentDayPlans.find((plan) => plan.id === selectedPlanId) ||
+    currentDayPlans[0];
 
-  // 👇 Calculate TOTAL ASSIGNMENTS (Sum of all members across all plans)
-  const totalAssignments = useMemo(() => {
-    return Object.values(assignedMembers).reduce((sum, arr) => sum + arr.length, 0);
-  }, [assignedMembers]);
+  const dayAssignments = assignments.filter(
+    (item) => item.day === activeDay
+  );
 
-  const handleCloseModal = () => {
-    setModalType(null);
-    setSelectedPlan(null);
+  const filteredMembers = members.filter((member) =>
+    member.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const trainingDays = weekDays.filter((day) =>
+    (workouts[day] || []).some((plan) => plan.exercises.length > 0)
+  ).length;
+
+  const totalPlans = weekDays.reduce(
+    (total, day) => total + (workouts[day] || []).length,
+    0
+  );
+
+  // CHANGE DAY
+  const handleDayChange = (day) => {
+    setActiveDay(day);
+    setSelectedPlanId(workouts[day]?.[0]?.id || "");
   };
 
-  const handleAssignMember = (memberId) => {
-    if (!selectedPlan) return;
-    
-    // Explicitly capture the plan ID to avoid any closure issues
-    const currentPlanId = selectedPlan.id;
-
-    setAssignedMembers(prev => {
-      const currentAssigned = prev[currentPlanId] || [];
-      if (currentAssigned.includes(memberId)) return prev; // Prevent duplicates
-
-      return {
-        ...prev,
-        [currentPlanId]: [...currentAssigned, memberId]
-      };
-    });
+  // ASSIGNMENT MODAL
+  const openAssignModal = () => {
+    setAssignDay(activeDay);
+    setAssignPlanId(currentWorkout?.id || "");
+    setSelectedMember("");
+    setSearch("");
+    setShowAssign(true);
   };
 
-  const handleAddNewPlan = (e) => {
+  const closeAssignModal = () => {
+    setShowAssign(false);
+    setSelectedMember("");
+    setSearch("");
+  };
+
+  const handleAssignDayChange = (day) => {
+    setAssignDay(day);
+    setAssignPlanId(workouts[day]?.[0]?.id || "");
+    setSelectedMember("");
+  };
+
+  const handleAssign = () => {
+    if (!selectedMember) {
+      alert("Please select a member first.");
+      return;
+    }
+
+    const member = members.find(
+      (item) => item.id === Number(selectedMember)
+    );
+
+    const workout = (workouts[assignDay] || []).find(
+      (plan) => plan.id === assignPlanId
+    );
+
+    if (!member || !workout) {
+      alert("Please select a valid member and workout plan.");
+      return;
+    }
+
+    const alreadyAssigned = assignments.some(
+      (item) =>
+        item.memberId === member.id &&
+        item.day === assignDay
+    );
+
+    if (alreadyAssigned) {
+      alert("This member already has a workout assigned for this day.");
+      return;
+    }
+
+    setAssignments((prev) => [
+      ...prev,
+      {
+        id: `${member.id}-${assignDay}-${Date.now()}`,
+        memberId: member.id,
+        memberName: member.name,
+        day: assignDay,
+        planId: workout.id,
+        workout: workout.focus,
+      },
+    ]);
+
+    closeAssignModal();
+  };
+
+  const removeAssignment = (memberId, day) => {
+    setAssignments((prev) =>
+      prev.filter(
+        (item) => !(item.memberId === memberId && item.day === day)
+      )
+    );
+  };
+
+  // ADD NEW WORKOUT PLAN
+  const openAddPlanModal = () => {
+    setNewPlan({
+      day: activeDay,
+      focus: "",
+      category: "STRENGTH",
+      exercises: [createEmptyExercise()],
+    });
+
+    setShowAddPlan(true);
+  };
+
+  const closeAddPlanModal = () => {
+    setShowAddPlan(false);
+  };
+
+  const updateExercise = (index, field, value) => {
+    setNewPlan((prev) => ({
+      ...prev,
+      exercises: prev.exercises.map((exercise, i) =>
+        i === index
+          ? { ...exercise, [field]: value }
+          : exercise
+      ),
+    }));
+  };
+
+  const addExerciseRow = () => {
+    setNewPlan((prev) => ({
+      ...prev,
+      exercises: [...prev.exercises, createEmptyExercise()],
+    }));
+  };
+
+  const removeExerciseRow = (index) => {
+    setNewPlan((prev) => ({
+      ...prev,
+      exercises: prev.exercises.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleCreatePlan = (e) => {
     e.preventDefault();
-    const newPlan = {
-      id: Date.now(), 
-      title: newPlanData.title,
-      level: newPlanData.level,
-      goal: newPlanData.goal,
-      duration: newPlanData.duration,
-      days: newPlanData.days,
-      activeDays: newPlanData.activeDays.sort((a,b) => a-b),
-      exercises: ["Custom Exercise 1", "Custom Exercise 2"] 
+
+    const focus = newPlan.focus.trim();
+
+    if (!focus) {
+      alert("Please enter a workout plan name.");
+      return;
+    }
+
+    const validExercises = newPlan.exercises
+      .filter((exercise) => exercise.name.trim())
+      .map((exercise) => ({
+        ...exercise,
+        name: exercise.name.trim(),
+        sets: Number(exercise.sets) || 1,
+        reps: String(exercise.reps).trim(),
+        rest: String(exercise.rest).trim(),
+      }));
+
+    if (
+      newPlan.category !== "RECOVERY" &&
+      validExercises.length === 0
+    ) {
+      alert("Please add at least one exercise.");
+      return;
+    }
+
+    const createdPlan = {
+      id: `custom-${Date.now()}`,
+      focus,
+      category: newPlan.category,
+      exercises: validExercises,
     };
-    
-    setPlansData([newPlan, ...plansData]);
-    setModalType(null);
-    setNewPlanData({ title: "", level: "Beginner", goal: "Muscle Gain", duration: "4 weeks", days: 3, activeDays: [0, 2, 4] });
+
+    setWorkouts((prev) => ({
+      ...prev,
+      [newPlan.day]: [
+        ...(prev[newPlan.day] || []),
+        createdPlan,
+      ],
+    }));
+
+    setActiveDay(newPlan.day);
+    setSelectedPlanId(createdPlan.id);
+    setShowAddPlan(false);
   };
 
-  const getAssignedMembersForSelectedPlan = () => {
-    if (!selectedPlan) return [];
-    const ids = assignedMembers[selectedPlan.id] || [];
-    return mockMembers.filter(m => ids.includes(m.id));
-  };
-
-  const dynamicStats = [
-    { label: "TOTAL PLANS", value: plansData.length.toString(), icon: "document", color: "cyan" },
-    { label: "TOTAL ASSIGNMENTS", value: totalAssignments.toString(), icon: "users", color: "purple" }, // 👈 Now shows total assignments
-    { label: "EXERCISES LIBRARY", value: "244", icon: "dumbbell", color: "accent" },
-    { label: "MOST POPULAR", value: "Beginner", icon: "star", color: "cyan" },
-  ];
+  const isMemberAssigned = (memberId) =>
+    assignments.some(
+      (item) =>
+        item.memberId === memberId &&
+        item.day === assignDay
+    );
 
   return (
-    <div className="wp-container">
-      <header className="wp-header">
+    <div className="workout-page">
+      {/* HEADER */}
+      <div className="workout-header">
         <div>
-          <h1 className="wp-title">Workout Plans</h1>
-          <p className="wp-subtitle">Build & assign training programs to members • <span>Austin HQ</span></p>
+          <span className="workout-eyebrow">
+            KINETIX FITNESS CLUB / MANAGEMENT
+          </span>
+
+          <h1>
+            WORKOUT <span>PLANS</span>
+          </h1>
+
+          <p>
+            Create weekly training schedules and manage member workouts.
+          </p>
         </div>
-        
-        <div className="wp-header-actions">
-          <button className="wp-btn wp-btn-primary" onClick={() => setModalType('add')}>
-            {Icons.plus} New Plan
+
+        <div className="workout-header-actions">
+          <button
+            className="add-plan-main-btn"
+            onClick={openAddPlanModal}
+          >
+            + Create New Plan
+          </button>
+
+          <button
+            className="assign-main-btn"
+            onClick={openAssignModal}
+          >
+            + Assign Workout
           </button>
         </div>
-      </header>
-
-      <div className="wp-stats-grid">
-        {dynamicStats.map((stat, i) => (
-          <div className="wp-stat-card" key={i}>
-            <div className={`wp-stat-icon ${stat.color}`}>{Icons[stat.icon]}</div>
-            <div>
-              <p className="wp-stat-value">{stat.value}</p>
-              <p className="wp-stat-label">{stat.label}</p>
-            </div>
-          </div>
-        ))}
       </div>
 
-      <div className="wp-filter-bar">
-        <div className="wp-goal-tabs">
-          {goals.map((goal) => (
-            <button key={goal} className={`wp-goal-tab ${activeGoal === goal ? "active" : ""}`} onClick={() => setActiveGoal(goal)}>
-              {goal}
+      {/* STATISTICS */}
+      <div className="workout-stats">
+        <div className="workout-stat-card">
+          <div className="stat-icon">▣</div>
+          <div>
+            <span>WEEKLY SCHEDULE</span>
+            <h2>07 <small>Days</small></h2>
+          </div>
+        </div>
+
+        <div className="workout-stat-card">
+          <div className="stat-icon">♟</div>
+          <div>
+            <span>TOTAL MEMBERS</span>
+            <h2>{members.length.toString().padStart(2, "0")}</h2>
+          </div>
+        </div>
+
+        <div className="workout-stat-card">
+          <div className="stat-icon">✓</div>
+          <div>
+            <span>ASSIGNMENTS</span>
+            <h2>{assignments.length.toString().padStart(2, "0")}</h2>
+          </div>
+        </div>
+
+        <div className="workout-stat-card">
+          <div className="stat-icon">⚡</div>
+          <div>
+            <span>TRAINING DAYS</span>
+            <h2>{String(trainingDays).padStart(2, "0")}</h2>
+          </div>
+        </div>
+      </div>
+
+      {/* WEEKLY SCHEDULE */}
+      <div className="days-section">
+        <div className="workout-section-heading">
+          <div>
+            <span>YOUR TRAINING SCHEDULE</span>
+            <h2>
+              Weekly <span>Workout Split</span>
+            </h2>
+          </div>
+
+          <span className="week-label">
+            {totalPlans} WORKOUT PLANS
+          </span>
+        </div>
+
+        <div className="days-navigation">
+          {weekDays.map((day, index) => (
+            <button
+              key={day}
+              className={`day-tab ${
+                activeDay === day ? "active" : ""
+              }`}
+              onClick={() => handleDayChange(day)}
+            >
+              <span className="day-number">
+                DAY 0{index + 1}
+              </span>
+
+              <strong>{day.slice(0, 3).toUpperCase()}</strong>
+
+              <span className="day-dot"></span>
+
+              {(workouts[day] || []).length > 1 && (
+                <span className="day-plan-count">
+                  {(workouts[day] || []).length} PLANS
+                </span>
+              )}
             </button>
           ))}
         </div>
+      </div>
 
-        <div className="wp-search-controls">
-          <select className="wp-select" value={activeLevel} onChange={(e) => setActiveLevel(e.target.value)}>
-            {levels.map((level) => <option key={level} value={level}>{level}</option>)}
-          </select>
-          <div className="wp-search-wrapper">
-            <span className="wp-search-icon">{Icons.search}</span>
-            <input type="text" className="wp-input" placeholder="Search plan..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+      {/* WORKOUT DETAILS */}
+      <div className="workout-content">
+        <div className="workout-content-header">
+          <div>
+            <span className="content-eyebrow">
+              DAY {String(weekDays.indexOf(activeDay) + 1).padStart(2, "0")}
+              {" / WEEKLY TRAINING"}
+            </span>
+
+            <h2>{currentWorkout?.focus || "No Workout Plan"}</h2>
+
+            <p>
+              Your scheduled training exercises for {activeDay}.
+            </p>
           </div>
+
+          {currentWorkout && (
+            <span
+              className={`category-badge ${currentWorkout.category.toLowerCase()}`}
+            >
+              {currentWorkout.category}
+            </span>
+          )}
         </div>
-      </div>
 
-      <div className="wp-grid">
-        {filteredPlans.length > 0 ? (
-          filteredPlans.map((plan) => (
-            <WorkoutCard 
-              key={plan.id} 
-              plan={plan} 
-              assignedCount={(assignedMembers[plan.id] || []).length} // 👈 Accurate per-plan count
-              onView={(p) => { setSelectedPlan(p); setModalType('view'); }}
-              onAssign={(p) => { setSelectedPlan(p); setModalType('assign'); }}
-            />
-          ))
-        ) : (
-          <div className="wp-no-data"><h3>No plans found</h3><p>Try adjusting your filters.</p></div>
-        )}
-      </div>
+        {/* MULTIPLE PLANS SELECTOR */}
+        {currentDayPlans.length > 1 && (
+          <div className="day-plan-selector">
+            <span className="plan-selector-label">
+              SELECT WORKOUT PLAN
+            </span>
 
-      {/* VIEW MODAL */}
-      {modalType === 'view' && selectedPlan && (
-        <div className="wp-modal-overlay" onClick={handleCloseModal}>
-          <div className="wp-modal-content" onClick={e => e.stopPropagation()}>
-            <div className="wp-modal-header">
-              <h2>{selectedPlan.title} - Details</h2>
-              <button className="wp-modal-close" onClick={handleCloseModal}>{Icons.close}</button>
+            <div className="day-plan-buttons">
+              {currentDayPlans.map((plan) => (
+                <button
+                  key={plan.id}
+                  className={`day-plan-button ${
+                    currentWorkout?.id === plan.id ? "active" : ""
+                  }`}
+                  onClick={() => setSelectedPlanId(plan.id)}
+                >
+                  {plan.focus}
+                </button>
+              ))}
             </div>
-            <div className="wp-modal-body">
-              <div className="wp-modal-stats">
-                <div className="wp-modal-stat-box">
-                  <span>Level</span>
-                  <strong>{selectedPlan.level}</strong>
+          </div>
+        )}
+
+        {currentWorkout ? (
+          currentWorkout.exercises.length > 0 ? (
+            <>
+              <div className="exercise-table">
+                <div className="exercise-table-header">
+                  <span>EXERCISE NAME</span>
+                  <span>SETS</span>
+                  <span>REPS / DURATION</span>
+                  <span>REST TIME</span>
                 </div>
-                <div className="wp-modal-stat-box">
-                  <span>Goal</span>
-                  <strong>{selectedPlan.goal}</strong>
-                </div>
-                <div className="wp-modal-stat-box">
-                  <span>Duration</span>
-                  <strong>{selectedPlan.duration}</strong>
-                </div>
-              </div>
-              
-              <h3 className="wp-modal-subtitle">Exercises Breakdown</h3>
-              <div className="wp-exercise-list">
-                {selectedPlan.exercises.map((ex, i) => (
-                  <div key={i} className="wp-exercise-item">
-                    <span className="wp-exercise-dot"></span>
-                    {ex}
+
+                {currentWorkout.exercises.map((exercise, index) => (
+                  <div className="exercise-row" key={`${exercise.name}-${index}`}>
+                    <div className="exercise-name">
+                      <span className="exercise-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      <strong>{exercise.name}</strong>
+                    </div>
+
+                    <span className="exercise-value">
+                      {exercise.sets}
+                    </span>
+
+                    <span className="exercise-value">
+                      {exercise.reps}
+                    </span>
+
+                    <span className="exercise-rest">
+                      {exercise.rest}
+                    </span>
                   </div>
                 ))}
               </div>
 
-              <h3 className="wp-modal-subtitle" style={{ marginTop: "20px" }}>
-                Assigned Members ({(assignedMembers[selectedPlan.id] || []).length})
+              <div className="workout-footer">
+                <div>
+                  <span>TOTAL EXERCISES</span>
+                  <strong>{currentWorkout.exercises.length}</strong>
+                </div>
+
+                <div>
+                  <span>TRAINING FOCUS</span>
+                  <strong>{currentWorkout.focus}</strong>
+                </div>
+
+                <button
+                  className="footer-assign-btn"
+                  onClick={openAssignModal}
+                >
+                  + Assign to Member
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="rest-day-card">
+              <div className="rest-icon">✦</div>
+
+              <h2>REST & RECOVERY</h2>
+
+              <p>
+                Recovery is part of your progress. Give your muscles
+                time to repair, hydrate and prepare for the next week.
+              </p>
+
+              <span>RECOVER • REBUILD • REPEAT</span>
+
+              <button
+                className="rest-assign-btn"
+                onClick={openAssignModal}
+              >
+                + Assign Recovery Plan
+              </button>
+            </div>
+          )
+        ) : (
+          <div className="no-day-plan">
+            <h3>No workout plan for this day</h3>
+            <p>Create a new plan to add training for {activeDay}.</p>
+            <button onClick={openAddPlanModal}>
+              + Create Workout Plan
+            </button>
+          </div>
+        )}
+
+        {/* MEMBERS ASSIGNED TO THIS DAY */}
+        <div className="day-members-section">
+          <div className="day-members-heading">
+            <div>
+              <span>DAILY MEMBER OVERVIEW</span>
+              <h3>
+                Members Assigned <span>Today</span>
               </h3>
-              <div className="wp-assigned-list">
-                {getAssignedMembersForSelectedPlan().length > 0 ? (
-                  getAssignedMembersForSelectedPlan().map(member => (
-                    <div key={member.id} className="wp-assigned-member-item">
-                      <div className="wp-avatar-sm">{member.avatar}</div>
-                      <span>{member.name}</span>
-                    </div>
-                  ))
-                ) : (
-                  <p className="wp-empty-text">No members assigned to this workout yet.</p>
+            </div>
+
+            <span className="day-members-count">
+              {dayAssignments.length} ASSIGNED
+            </span>
+          </div>
+
+          {dayAssignments.length > 0 ? (
+            <div className="day-members-list">
+              {dayAssignments.map((assignment) => (
+                <div
+                  className="day-member-card"
+                  key={assignment.id || `${assignment.memberId}-${assignment.day}`}
+                >
+                  <div className="member-avatar">
+                    {assignment.memberName.charAt(0)}
+                  </div>
+
+                  <div className="assignment-member">
+                    <strong>{assignment.memberName}</strong>
+                    <span>{assignment.workout}</span>
+                  </div>
+
+                  <span className="assigned-status">
+                    ✓ ASSIGNED
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="day-members-empty">
+              No members assigned to {activeDay} yet.
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* ALL ASSIGNMENTS */}
+      <div className="assignments-section">
+        <div className="workout-section-heading">
+          <div>
+            <span>MEMBER MANAGEMENT</span>
+            <h2>
+              Assigned <span>Workouts</span>
+            </h2>
+          </div>
+
+          <span className="week-label">
+            {assignments.length} ASSIGNMENTS
+          </span>
+        </div>
+
+        {assignments.length > 0 ? (
+          <div className="assignment-list">
+            {assignments.map((assignment) => (
+              <div
+                className="assignment-row"
+                key={assignment.id || `${assignment.memberId}-${assignment.day}`}
+              >
+                <div className="member-avatar">
+                  {assignment.memberName.charAt(0)}
+                </div>
+
+                <div className="assignment-member">
+                  <strong>{assignment.memberName}</strong>
+                  <span>{assignment.workout}</span>
+                </div>
+
+                <span className="assignment-day">
+                  {assignment.day}
+                </span>
+
+                <span className="assigned-status">
+                  ASSIGNED
+                </span>
+
+                <button
+                  className="remove-assignment"
+                  onClick={() =>
+                    removeAssignment(
+                      assignment.memberId,
+                      assignment.day
+                    )
+                  }
+                  title="Remove assignment"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="empty-assignments">
+            <span>◎</span>
+            <h3>No Workout Assignments Yet</h3>
+            <p>
+              Assign a weekly workout to your gym members to get started.
+            </p>
+            <button onClick={openAssignModal}>
+              + Assign First Workout
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* ASSIGN MEMBER MODAL */}
+      {showAssign && (
+        <div
+          className="workout-modal-overlay"
+          onClick={closeAssignModal}
+        >
+          <div
+            className="workout-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modal-top-line"></div>
+
+            <div className="modal-heading">
+              <div>
+                <span>KINETIX / MEMBER MANAGEMENT</span>
+                <h2>
+                  Assign <span>Workout</span>
+                </h2>
+                <p>
+                  Assign a personalized workout to your gym member.
+                </p>
+              </div>
+
+              <button
+                className="modal-close"
+                onClick={closeAssignModal}
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="modal-form">
+              <div className="modal-field">
+                <label>SELECT GYM MEMBER</label>
+
+                <input
+                  type="text"
+                  placeholder="Search member by name..."
+                  value={search}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                    setSelectedMember("");
+                  }}
+                />
+
+                <div className="member-options">
+                  {filteredMembers.map((member) => {
+                    const assigned = isMemberAssigned(member.id);
+
+                    return (
+                      <button
+                        type="button"
+                        key={member.id}
+                        disabled={assigned}
+                        className={`member-option ${
+                          selectedMember === String(member.id)
+                            ? "selected"
+                            : ""
+                        } ${assigned ? "assigned" : ""}`}
+                        onClick={() =>
+                          setSelectedMember(String(member.id))
+                        }
+                      >
+                        <div className="member-option-avatar">
+                          {member.name.charAt(0)}
+                        </div>
+
+                        <div className="member-option-info">
+                          <strong>{member.name}</strong>
+                          <span>{member.plan} Member</span>
+                        </div>
+
+                        {assigned ? (
+                          <span className="member-assigned-label">
+                            ASSIGNED
+                          </span>
+                        ) : (
+                          <span className="member-check">
+                            {selectedMember === String(member.id) ? "✓" : "+"}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+
+                  {filteredMembers.length === 0 && (
+                    <p className="no-members">
+                      No members found.
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="modal-field">
+                <label>SELECT WORKOUT DAY</label>
+
+                <select
+                  value={assignDay}
+                  onChange={(e) => handleAssignDayChange(e.target.value)}
+                >
+                  {weekDays.map((day) => (
+                    <option key={day} value={day}>
+                      {day}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="modal-field">
+                <label>SELECT WORKOUT PLAN</label>
+
+                <select
+                  value={assignPlanId}
+                  onChange={(e) => setAssignPlanId(e.target.value)}
+                >
+                  {(workouts[assignDay] || []).map((plan) => (
+                    <option key={plan.id} value={plan.id}>
+                      {plan.focus}
+                    </option>
+                  ))}
+                </select>
+
+                {(workouts[assignDay] || []).length === 0 && (
+                  <p className="no-members">
+                    No workout plan available for this day.
+                  </p>
                 )}
               </div>
 
-            </div>
-            <div className="wp-modal-footer">
-              <button className="wp-btn wp-btn-outline" onClick={handleCloseModal}>Close</button>
-              <button className="wp-btn wp-btn-primary" onClick={() => setModalType('assign')}>Assign Member</button>
+              {assignPlanId && (
+                <div className="modal-workout-preview">
+                  <span>SELECTED WORKOUT PLAN</span>
+
+                  <h3>
+                    {(workouts[assignDay] || []).find(
+                      (plan) => plan.id === assignPlanId
+                    )?.focus}
+                  </h3>
+
+                  <div className="modal-preview-bottom">
+                    <span>
+                      {(workouts[assignDay] || []).find(
+                        (plan) => plan.id === assignPlanId
+                      )?.exercises.length || 0} Exercises
+                    </span>
+
+                    <span>
+                      {(workouts[assignDay] || []).find(
+                        (plan) => plan.id === assignPlanId
+                      )?.category}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              <div className="modal-actions">
+                <button
+                  className="modal-cancel"
+                  onClick={closeAssignModal}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  className="modal-confirm"
+                  onClick={handleAssign}
+                  disabled={
+                    !selectedMember ||
+                    !assignPlanId ||
+                    isMemberAssigned(Number(selectedMember))
+                  }
+                >
+                  ✓ Assign Workout
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* ASSIGN MODAL */}
-      {modalType === 'assign' && selectedPlan && (
-        <div className="wp-modal-overlay" onClick={handleCloseModal}>
-          <div className="wp-modal-content" onClick={e => e.stopPropagation()}>
-            <div className="wp-modal-header">
-              <h2>Assign: {selectedPlan.title}</h2>
-              <button className="wp-modal-close" onClick={handleCloseModal}>{Icons.close}</button>
-            </div>
-            <div className="wp-modal-body">
-              <div className="wp-member-search">
-                <span className="wp-search-icon">{Icons.search}</span>
-                <input type="text" placeholder="Search members..." />
+      {/* CREATE NEW WORKOUT PLAN MODAL */}
+      {showAddPlan && (
+        <div
+          className="workout-modal-overlay"
+          onClick={closeAddPlanModal}
+        >
+          <div
+            className="workout-modal create-plan-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modal-top-line"></div>
+
+            <div className="modal-heading">
+              <div>
+                <span>KINETIX / WORKOUT MANAGEMENT</span>
+                <h2>
+                  Create <span>New Plan</span>
+                </h2>
+                <p>
+                  Build a workout plan and add exercises to your weekly schedule.
+                </p>
               </div>
-              
-              <div className="wp-members-list">
-                {mockMembers.map(member => {
-                  // 👇 Check exact plan ID
-                  const isAssigned = (assignedMembers[selectedPlan.id] || []).includes(member.id);
-                  return (
-                    <div key={member.id} className="wp-member-item">
-                      <div className="wp-member-info">
-                        <div className="wp-avatar">{member.avatar}</div>
-                        <div>
-                          <h4>{member.name}</h4>
-                          <p>{member.email}</p>
+
+              <button
+                className="modal-close"
+                onClick={closeAddPlanModal}
+              >
+                ✕
+              </button>
+            </div>
+
+            <form className="modal-form" onSubmit={handleCreatePlan}>
+              <div className="create-plan-grid">
+                <div className="modal-field">
+                  <label>WORKOUT DAY</label>
+                  <select
+                    value={newPlan.day}
+                    onChange={(e) =>
+                      setNewPlan((prev) => ({
+                        ...prev,
+                        day: e.target.value,
+                      }))
+                    }
+                  >
+                    {weekDays.map((day) => (
+                      <option key={day} value={day}>
+                        {day}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="modal-field">
+                  <label>WORKOUT CATEGORY</label>
+                  <select
+                    value={newPlan.category}
+                    onChange={(e) =>
+                      setNewPlan((prev) => ({
+                        ...prev,
+                        category: e.target.value,
+                      }))
+                    }
+                  >
+                    <option value="STRENGTH">Strength</option>
+                    <option value="CARDIO">Cardio</option>
+                    <option value="RECOVERY">Recovery</option>
+                    <option value="FLEXIBILITY">Flexibility</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="modal-field">
+                <label>WORKOUT PLAN NAME / FOCUS</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Upper Body Strength"
+                  value={newPlan.focus}
+                  onChange={(e) =>
+                    setNewPlan((prev) => ({
+                      ...prev,
+                      focus: e.target.value,
+                    }))
+                  }
+                  required
+                />
+              </div>
+
+              <div className="exercise-builder-heading">
+                <div>
+                  <span>PLAN CONTENT</span>
+                  <h3>Workout Exercises</h3>
+                </div>
+
+                <button
+                  type="button"
+                  className="add-exercise-btn"
+                  onClick={addExerciseRow}
+                  disabled={newPlan.category === "RECOVERY"}
+                >
+                  + Add Exercise
+                </button>
+              </div>
+
+              {newPlan.category === "RECOVERY" ? (
+                <div className="recovery-note">
+                  <span>✦</span>
+                  Recovery plans can be created without exercises.
+                </div>
+              ) : (
+                <div className="exercise-builder-list">
+                  {newPlan.exercises.map((exercise, index) => (
+                    <div className="exercise-builder-row" key={index}>
+                      <div className="builder-exercise-title">
+                        <span>EXERCISE 0{index + 1}</span>
+
+                        {newPlan.exercises.length > 1 && (
+                          <button
+                            type="button"
+                            className="remove-exercise-btn"
+                            onClick={() => removeExerciseRow(index)}
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+
+                      <div className="modal-field">
+                        <label>EXERCISE NAME</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Bench Press"
+                          value={exercise.name}
+                          onChange={(e) =>
+                            updateExercise(index, "name", e.target.value)
+                          }
+                        />
+                      </div>
+
+                      <div className="exercise-builder-grid">
+                        <div className="modal-field">
+                          <label>SETS</label>
+                          <input
+                            type="number"
+                            min="1"
+                            value={exercise.sets}
+                            onChange={(e) =>
+                              updateExercise(index, "sets", e.target.value)
+                            }
+                          />
+                        </div>
+
+                        <div className="modal-field">
+                          <label>REPS / TIME</label>
+                          <input
+                            type="text"
+                            placeholder="12"
+                            value={exercise.reps}
+                            onChange={(e) =>
+                              updateExercise(index, "reps", e.target.value)
+                            }
+                          />
+                        </div>
+
+                        <div className="modal-field">
+                          <label>REST</label>
+                          <input
+                            type="text"
+                            placeholder="60 sec"
+                            value={exercise.rest}
+                            onChange={(e) =>
+                              updateExercise(index, "rest", e.target.value)
+                            }
+                          />
                         </div>
                       </div>
-                      <button 
-                        className={`wp-btn-assign-small ${isAssigned ? 'assigned' : ''}`}
-                        onClick={() => handleAssignMember(member.id)}
-                        disabled={isAssigned}
-                      >
-                        {isAssigned ? <>{Icons.check} Assigned</> : <>{Icons.assign} Assign</>}
-                      </button>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+                  ))}
+                </div>
+              )}
 
-      {/* ADD NEW PLAN MODAL */}
-      {modalType === 'add' && (
-        <div className="wp-modal-overlay" onClick={handleCloseModal}>
-          <div className="wp-modal-content" onClick={e => e.stopPropagation()}>
-            <div className="wp-modal-header">
-              <h2>Create New Workout Plan</h2>
-              <button className="wp-modal-close" onClick={handleCloseModal}>{Icons.close}</button>
-            </div>
-            <form onSubmit={handleAddNewPlan}>
-              <div className="wp-modal-body">
-                <div className="wp-form-group">
-                  <label>Plan Title</label>
-                  <input type="text" required placeholder="e.g. Full Body Blast" value={newPlanData.title} onChange={e => setNewPlanData({...newPlanData, title: e.target.value})} />
-                </div>
-                
-                <div className="wp-form-row">
-                  <div className="wp-form-group">
-                    <label>Level</label>
-                    <select value={newPlanData.level} onChange={e => setNewPlanData({...newPlanData, level: e.target.value})}>
-                      {levels.slice(1).map(l => <option key={l} value={l}>{l}</option>)}
-                    </select>
-                  </div>
-                  <div className="wp-form-group">
-                    <label>Goal</label>
-                    <select value={newPlanData.goal} onChange={e => setNewPlanData({...newPlanData, goal: e.target.value})}>
-                      {goals.slice(1).map(g => <option key={g} value={g}>{g}</option>)}
-                    </select>
-                  </div>
-                </div>
+              <div className="modal-actions">
+                <button
+                  type="button"
+                  className="modal-cancel"
+                  onClick={closeAddPlanModal}
+                >
+                  Cancel
+                </button>
 
-                <div className="wp-form-row">
-                  <div className="wp-form-group">
-                    <label>Duration</label>
-                    <input type="text" required placeholder="e.g. 6 weeks" value={newPlanData.duration} onChange={e => setNewPlanData({...newPlanData, duration: e.target.value})} />
-                  </div>
-                  <div className="wp-form-group">
-                    <label>Total Days / Wk</label>
-                    <input type="number" required min="1" max="7" value={newPlanData.days} onChange={e => setNewPlanData({...newPlanData, days: parseInt(e.target.value)})} />
-                  </div>
-                </div>
-
-                <div className="wp-form-group">
-                  <label>Active Days</label>
-                  <div className="wp-day-checkboxes">
-                    {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, idx) => (
-                      <label key={idx} className={`wp-day-checkbox ${newPlanData.activeDays.includes(idx) ? 'checked' : ''}`}>
-                        <input
-                          type="checkbox"
-                          checked={newPlanData.activeDays.includes(idx)}
-                          onChange={(e) => {
-                            const updatedDays = e.target.checked
-                              ? [...newPlanData.activeDays, idx]
-                              : newPlanData.activeDays.filter(d => d !== idx);
-                            setNewPlanData({...newPlanData, activeDays: updatedDays});
-                          }}
-                        />
-                        {day}
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="wp-modal-footer">
-                <button type="button" className="wp-btn wp-btn-outline" onClick={handleCloseModal}>Cancel</button>
-                <button type="submit" className="wp-btn wp-btn-primary">Save Plan</button>
+                <button
+                  type="submit"
+                  className="modal-confirm"
+                >
+                  + Create Workout Plan
+                </button>
               </div>
             </form>
           </div>
         </div>
       )}
-
     </div>
   );
-};
+}
 
-export default WorkoutPlans;
+export default WorkoutPlan;
