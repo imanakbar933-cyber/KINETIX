@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutGrid, Users, Dumbbell, Utensils, Calendar,
-  UserCircle, FileText, BarChart2, Settings
+  UserCircle, FileText, BarChart2, Settings, Briefcase,
+  BriefcaseBusiness
 } from "lucide-react";
 import "./DashboardSidebar.css";
 
@@ -42,13 +43,22 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
         <Link to="/diet" className={isActive("/diet")}><Utensils size={20} /> Diet Chart</Link>
         <Link to="/batch-schedule" className={isActive("/batch-schedule")}><Calendar size={20} /> Batch Schedule</Link>
 
-        {/* ✅ FIX: Dashboard trainers ka alag route */}
         <Link to="/dashboard/trainers" className={isActive("/dashboard/trainers")}>
           <UserCircle size={20} /> Trainer List
         </Link>
-
-        <Link to="/billing" className={isActive("/billing")}><FileText size={20} /> Billing List</Link>
+<Link to="/dashboard/services" className={isActive("/dashboard/services")}>
+  <BriefcaseBusiness size={20} />
+  Services
+</Link>
+         <Link to="/dashboard/staff" className={isActive("/dashboard/staff")}>
+          <Briefcase size={20} /> Staff
+        </Link>
+        <Link to="/billing" className={isActive("/billing")}><FileText size={20} /> Point of Sale</Link>
         <Link to="/reports" className={isActive("/reports")}><BarChart2 size={20} /> Report</Link>
+        
+        {/* ✅ NAYE PAGES ADD KIYE HAIN (Settings ke upar) */}
+        
+
         <Link to="/settings" className={isActive("/settings")}><Settings size={20} /> Settings</Link>
       </div>
 
