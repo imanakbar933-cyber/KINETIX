@@ -10,14 +10,14 @@ import {
 } from "recharts";
 import "./ReportsPage.css";
 
-// ================= DUMMY DATA =================
+// ================= DUMMY DATA (PAKISTAN) =================
 const barData = [
-  { name: "Feb", revenue: 40000, expenses: 24000 },
-  { name: "Mar", revenue: 50000, expenses: 30000 },
-  { name: "Apr", revenue: 60000, expenses: 35000 },
-  { name: "May", revenue: 55000, expenses: 32000 },
-  { name: "Jun", revenue: 70000, expenses: 40000 },
-  { name: "Jul", revenue: 84000, expenses: 49000 },
+  { name: "Feb", revenue: 400000, expenses: 240000 },
+  { name: "Mar", revenue: 500000, expenses: 300000 },
+  { name: "Apr", revenue: 600000, expenses: 350000 },
+  { name: "May", revenue: 550000, expenses: 320000 },
+  { name: "Jun", revenue: 700000, expenses: 400000 },
+  { name: "Jul", revenue: 840000, expenses: 490000 },
 ];
 
 const pieData = [
@@ -79,7 +79,7 @@ export default function ReportsPage() {
       <div className="reports-header">
         <div>
           <h1>Reports</h1>
-          <p>Financial & operational reports · Austin HQ</p>
+          <p>Financial & operational reports · Gujranwala HQ</p>
         </div>
         <div className="reports-header-actions">
           
@@ -119,15 +119,15 @@ export default function ReportsPage() {
       <div className="reports-summary-grid">
         <div className="summary-card">
           <div className="summary-title"><TrendingUp size={16} className="text-green" /> Total Revenue</div>
-          <h2>$84K</h2>
+          <h2>Rs 8.4 Lakh</h2>
         </div>
         <div className="summary-card">
           <div className="summary-title"><TrendingDown size={16} className="text-red" /> Total Expenses</div>
-          <h2>$49K</h2>
+          <h2>Rs 4.9 Lakh</h2>
         </div>
         <div className="summary-card">
           <div className="summary-title"><Wallet size={16} className="text-yellow" /> Net Profit</div>
-          <h2 className="text-yellow">$35K</h2>
+          <h2 className="text-yellow">Rs 3.5 Lakh</h2>
         </div>
         <div className="summary-card">
           <div className="summary-title"><Percent size={16} className="text-blue" /> Profit Margin</div>
@@ -147,11 +147,11 @@ export default function ReportsPage() {
           </div>
           <div style={{ width: '100%', height: 300 }}>
             <ResponsiveContainer>
-              <BarChart data={barData} margin={{ top: 20, right: 0, left: -20, bottom: 0 }}>
+              <BarChart data={barData} margin={{ top: 20, right: 0, left: 10, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#333" />
                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#888', fontSize: 12 }} dy={10} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#888', fontSize: 12 }} />
-                <RechartsTooltip cursor={{ fill: 'rgba(255,255,255,0.05)' }} contentStyle={{ borderRadius: '8px', border: '1px solid #03ea04', background: '#111' }} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#888', fontSize: 12 }} tickFormatter={(value) => `${value / 1000}K`} />
+                <RechartsTooltip cursor={{ fill: 'rgba(255,255,255,0.05)' }} contentStyle={{ borderRadius: '8px', border: '1px solid #03ea04', background: '#111' }} formatter={(value) => `Rs ${value.toLocaleString()}`} />
                 <Bar dataKey="revenue" fill="#22c55e" radius={[4, 4, 0, 0]} barSize={40} />
                 <Bar dataKey="expenses" fill="#ef4444" radius={[4, 4, 0, 0]} barSize={40} />
               </BarChart>
@@ -348,23 +348,23 @@ export default function ReportsPage() {
                 <tbody>
                   <tr>
                     <td>Revenue</td>
-                    <td>$84,000</td>
-                    <td>$80,000</td>
+                    <td>Rs 840,000</td>
+                    <td>Rs 800,000</td>
                   </tr>
                   <tr>
                     <td>Cost of goods</td>
-                    <td>$21,000</td>
-                    <td>$19,500</td>
+                    <td>Rs 210,000</td>
+                    <td>Rs 195,000</td>
                   </tr>
                   <tr>
                     <td>Operating expenses</td>
-                    <td>$28,000</td>
-                    <td>$26,500</td>
+                    <td>Rs 280,000</td>
+                    <td>Rs 265,000</td>
                   </tr>
                   <tr className="row-total">
                     <td>Net profit</td>
-                    <td>$35,000</td>
-                    <td>$34,000</td>
+                    <td>Rs 350,000</td>
+                    <td>Rs 340,000</td>
                   </tr>
                 </tbody>
               </table>
@@ -405,7 +405,7 @@ export default function ReportsPage() {
 
             <div className="rp-form-group" style={{ marginBottom: '24px' }}>
               <label>EMAIL RECIPIENTS</label>
-              <input type="text" className="rp-input" placeholder="finance@example.com, owner@example.com" />
+              <input type="text" className="rp-input" placeholder="finance@example.pk, owner@example.pk" />
             </div>
 
             <div className="rp-modal-actions">

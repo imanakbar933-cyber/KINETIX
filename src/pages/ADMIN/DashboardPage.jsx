@@ -7,15 +7,18 @@ import SettingsPage from "../../components/ADMIN/Settings/SettingsPage";
 import DashboardHome from "../../components/ADMIN/DashboardHome";
 import ReportsPage from "../../components/ADMIN/ReportsPage";
 import MembersList from "../../components/ADMIN/MembersList";
-import BatchSchedule from "../../components/ADMIN/BatchSchedule"; // ✅ IMPORT ADD KIYA
-import BillingList from "../../components/ADMIN/BillingList";
-import TrainerManagement from "../../components/ADMIN/TrainerManagement"; // ✅ IMPORT ADD KIYA
-import "./DashboardPage.css";
+import BatchSchedule from "../../components/ADMIN/BatchSchedule"; 
+import PointOfSale from "../../components/ADMIN/PointOfSale";
+import TrainerManagement from "../../components/ADMIN/TrainerManagement"; 
 
-
+// ✅ NAYE PAGES IMPORT KIYE HAIN
+import DashboardServices from "../../components/ADMIN/DashboardServices"; 
+// import StaffManagement from "../../components/ADMIN/StaffManagement"; // Agar Staff ka component bana liya hai toh isko uncomment karein
 
 import WorkoutPlans from "../../components/Admin/WorkoutPlans"; 
 import DietPlans from "../../components/Admin/DietPlans";
+
+import "./DashboardPage.css";
 
 
 const DEFAULT_APPEARANCE = {
@@ -139,7 +142,7 @@ const DashboardPage = ({ page }) => {
   const renderContent = () => {
     switch (page) {
       case "dashboard":
-        return <DashboardHome />; // ✅ Sahi jagah pe call kiya
+        return <DashboardHome />;
         
       case "members":
         return <MembersList />;
@@ -154,17 +157,28 @@ const DashboardPage = ({ page }) => {
         return <ReportsPage />;
         
       case "billing":
-        return <BillingList />;
+        return <PointOfSale />;
         
       case "settings":
         return <SettingsPage />;
-       case "trainers":
+        
+      case "trainers":
         return <TrainerManagement />; 
+
       case "workouts":
         return <WorkoutPlans />;
 
       case "diet":
         return <DietPlans />;
+
+      // ✅ NAYE PAGES ADD KIYE HAIN
+      case "services":
+        return <DashboardServices />;
+
+      case "staff":
+        // Jab StaffManagement component bana lena, tab isko use karna
+        return <Placeholder title="Staff Management" />;
+        
       default:
         return <Placeholder title="Page Not Found" />;
     }
