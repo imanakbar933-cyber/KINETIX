@@ -1973,3 +1973,33 @@ button.pos-detail-list-row {
   outline: 2px solid#03ea04;
   outline-offset: 2px;
 }
+/* CLEAR SALES HISTORY BUTTON */
+
+.pos-danger-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 19px;
+  border: 1px solid rgba(255, 75, 75, 0.35);
+  border-radius: 10px;
+  background: rgba(255, 65, 65, 0.09);
+  color: #ff6666;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.pos-danger-button:hover:not(:disabled) {
+  background: #e53939;
+  color: #fff;
+  border-color: #e53939;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(229, 57, 57, 0.2);
+}
+
+.pos-danger-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

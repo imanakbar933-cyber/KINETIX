@@ -601,6 +601,28 @@ export default function PointOfSale() {
     notify("Register closed successfully.");
   };
 
+  /* ========================= CLEAR SALES HISTORY ========================= */
+
+  const clearSalesHistory = () => {
+    if (sales.length === 0) {
+      notify("Sales history is already empty.");
+      return;
+    }
+
+    const confirmed = window.confirm(
+      "Are you sure you want to clear all sales history? This action cannot be undone."
+    );
+
+    if (!confirmed) return;
+
+    setSales([]);
+    setReceipt(null);
+    setSelectedMetric(null);
+    setHistoryQuery("");
+
+    notify("Sales history cleared successfully.");
+  };
+
   /* ========================= RENDER ========================= */
 
   return (
@@ -626,7 +648,6 @@ export default function PointOfSale() {
 
           <div className="pos-title-row">
             <div>
-              {/* <span className="pos-kicker">ADMINISTRATION / SALES CENTER</span> */}
               <h1>Point of <em>Sale</em></h1>
               <p>Everything your gym sells, beautifully managed.</p>
             </div>
@@ -752,7 +773,7 @@ export default function PointOfSale() {
 
               <button
                 className="pos-secondary-btn"
-            onClick={() => setShowCustom(true)}
+                onClick={() => setShowCustom(true)}
               >
                 <Icon name="plus" />
                 Custom item
@@ -1116,7 +1137,7 @@ export default function PointOfSale() {
 
             <button
               className="pos-secondary-btn"
-           onClick={() => setShowCustom(true)}
+              onClick={() => setShowCustom(true)}
             >
               <Icon name="plus" />
               Add custom item
@@ -1207,6 +1228,15 @@ export default function PointOfSale() {
               <h2>Sales <em>History</em></h2>
               <p>Review your completed sales and print receipts.</p>
             </div>
+
+            <button
+              className="pos-danger-button"
+              onClick={clearSalesHistory}
+              disabled={sales.length === 0}
+            >
+              <Icon name="trash" size={17} />
+              Clear History
+            </button>
           </div>
 
           <div className="pos-history-summary">
@@ -1630,4 +1660,3 @@ export default function PointOfSale() {
     </main>
   );
 }
-
