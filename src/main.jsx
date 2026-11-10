@@ -33,7 +33,7 @@ import Login from "./pages/Login.jsx";
 import ServiceDetail from "./components/ServiceDetail.jsx";
 
 // Admin Dashboard
-import DashboardPage from "./pages/Admin/DashboardPage.jsx";
+import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
 
 function AppLayout() {
   const location = useLocation();
@@ -43,6 +43,8 @@ function AppLayout() {
     location.pathname === "/login" || location.pathname === "/signup";
 
   // 2. DASHBOARD PAGES (No Navbar, No Footer)
+  // ❌ "/trainers" yahan se hata diya — ab public route hai
+  // ✅ Dashboard trainers ke liye "/dashboard/trainers" use karenge
   const isDashboard =
     location.pathname.startsWith("/dashboard") ||
     location.pathname.startsWith("/members") ||
@@ -52,8 +54,7 @@ function AppLayout() {
     location.pathname.startsWith("/batch-schedule") ||
     location.pathname.startsWith("/billing") ||
     location.pathname.startsWith("/reports") ||
-    location.pathname.startsWith("/settings") ||
-    location.pathname.startsWith("/trainers");
+    location.pathname.startsWith("/settings");
 
   const isPlansPage = location.pathname === "/plans";
 
@@ -69,13 +70,11 @@ function AppLayout() {
         <Route path="/workouts" element={<DashboardPage page="workouts" />} />
         <Route path="/diet" element={<DashboardPage page="diet" />} />
         <Route path="/schedule" element={<DashboardPage page="schedule" />} />
-        <Route path="/trainers" element={<DashboardPage page="trainers" />} />
+        {/* ✅ Dashboard trainers ka alag route */}
+        <Route path="/dashboard/trainers" element={<DashboardPage page="trainers" />} />
         <Route path="/billing" element={<DashboardPage page="billing" />} />
         <Route path="/reports" element={<DashboardPage page="reports" />} />
         <Route path="/settings" element={<DashboardPage page="settings" />} />
-        
-        {/* ✅ TRAINERS ROUTE ADD KIYA HAI */}
-        <Route path="/trainers" element={<DashboardPage page="trainers" />} />
       </Routes>
     );
   }
@@ -109,6 +108,9 @@ function AppLayout() {
           <Route path="/schedules" element={<SchedulePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+
+          {/* ✅ PUBLIC TRAINERS PAGE — ab /trainers public route hai */}
+          <Route path="/trainers" element={<Team />} />
 
           <Route
             path="/plans"

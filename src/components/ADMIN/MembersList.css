@@ -8,7 +8,6 @@
   width: 100%;
   box-sizing: border-box;
   border: 1px solid #1f2e24;
-  /* ✅ overflow: hidden hata diya taaki table ko jagah mile */
 }
 
 /* Top Action Bar */
@@ -78,20 +77,18 @@
 }
 .add-member-btn:hover { background-color: #22c55e; box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3); }
 
-/* ================= TABLE FIX (SCROLLBAR REMOVED) ================= */
+/* ================= TABLE FIX ================= */
 .table-wrapper {
   width: 100%;
   border-radius: 8px;
   border: 1px solid #1f2e24;
-  /* ✅ Overflow-x: auto hata diya taaki scrollbar na aaye */
 }
 
 .member-table {
   width: 100%; 
-  /* ✅ min-width hata diya taaki table screen mein fit ho jaye */
   border-collapse: collapse !important; 
   text-align: left;
-  table-layout: fixed; /* Table columns ko barabar baantega */
+  table-layout: fixed; 
 }
 
 .member-table tr { display: table-row !important; border-bottom: 1px solid #1f2e24; }
@@ -117,21 +114,21 @@
   color: #d1d5db;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Agar text bada ho toh '...' aayega */
+  text-overflow: ellipsis;
   display: table-cell !important;
 }
 
-/* ✅ Column Widths Percentages mein (Screen par fit hoga) */
-.member-table th:nth-child(1), .member-table td:nth-child(1) { width: 6%; } /* Photo */
-.member-table th:nth-child(2), .member-table td:nth-child(2) { width: 14%; } /* Name */
-.member-table th:nth-child(3), .member-table td:nth-child(3) { width: 10%; } /* Member ID */
-.member-table th:nth-child(4), .member-table td:nth-child(4) { width: 15%; } /* Package */
-.member-table th:nth-child(5), .member-table td:nth-child(5) { width: 10%; } /* Join Date */
-.member-table th:nth-child(6), .member-table td:nth-child(6) { width: 10%; } /* Expire Date */
-.member-table th:nth-child(7), .member-table td:nth-child(7) { width: 7%; }  /* Paid */
-.member-table th:nth-child(8), .member-table td:nth-child(8) { width: 7%; }  /* Due */
-.member-table th:nth-child(9), .member-table td:nth-child(9) { width: 10%; } /* Status */
-.member-table th:nth-child(10), .member-table td:nth-child(10) { width: 11%; }/* Action */
+/* Column Widths */
+.member-table th:nth-child(1), .member-table td:nth-child(1) { width: 6%; }
+.member-table th:nth-child(2), .member-table td:nth-child(2) { width: 14%; }
+.member-table th:nth-child(3), .member-table td:nth-child(3) { width: 10%; }
+.member-table th:nth-child(4), .member-table td:nth-child(4) { width: 15%; }
+.member-table th:nth-child(5), .member-table td:nth-child(5) { width: 10%; }
+.member-table th:nth-child(6), .member-table td:nth-child(6) { width: 10%; }
+.member-table th:nth-child(7), .member-table td:nth-child(7) { width: 7%; }
+.member-table th:nth-child(8), .member-table td:nth-child(8) { width: 7%; }
+.member-table th:nth-child(9), .member-table td:nth-child(9) { width: 10%; }
+.member-table th:nth-child(10), .member-table td:nth-child(10) { width: 11%; }
 
 /* Avatar & Text */
 .member-avatar { 
@@ -208,8 +205,50 @@
 .form-row { display: flex; gap: 15px; }
 .form-group { flex: 1; display: flex; flex-direction: column; gap: 8px; }
 .form-group label { font-size: 13px; color: #d1d5db; font-weight: 600; }
-.form-group input, .form-group select { background: #0f1712; border: 1px solid #1f2e24; border-radius: 8px; padding: 12px 14px; color: #fff; font-size: 14px; outline: none; }
-.form-group input:focus, .form-group select:focus { border-color: #03ea04; }
+
+/* ✅ FIXED: Input & Select Fields */
+.form-group input, 
+.form-group select { 
+  width: 100%;
+  height: 48px; /* Text cut nahi hoga */
+  background-color: #0f1712; 
+  border: 1px solid #1f2e24; 
+  border-radius: 8px; 
+  padding: 0 14px; /* Center alignment */
+  color: #ffffff; 
+  font-size: 14px; 
+  font-family: 'Inter', sans-serif;
+  outline: none; 
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus { 
+  border-color: #03ea04; 
+  box-shadow: 0 0 0 2px rgba(3, 234, 4, 0.1);
+}
+
+/* ✅ FIXED: Select Dropdown */
+.form-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 40px; /* Arrow ke liye jagah */
+  cursor: pointer;
+  /* Custom Arrow */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+}
+
+/* Dropdown Options */
+.form-group select option {
+  background-color: #0f1712;
+  color: #fff;
+  padding: 10px;
+}
 
 .modal-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 15px; }
 

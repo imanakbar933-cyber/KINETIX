@@ -4,10 +4,12 @@ import DashboardSidebar from "../../components/ADMIN/DashboardSidebar";
 
 // Pages
 import SettingsPage from "../../components/ADMIN/Settings/SettingsPage";
+import DashboardHome from "../../components/ADMIN/DashboardHome";
 import ReportsPage from "../../components/ADMIN/ReportsPage";
 import MembersList from "../../components/ADMIN/MembersList";
 import BatchSchedule from "../../components/ADMIN/BatchSchedule"; // ✅ IMPORT ADD KIYA
-
+import BillingList from "../../components/ADMIN/BillingList";
+import TrainerManagement from "../../components/ADMIN/TrainerManagement"; // ✅ IMPORT ADD KIYA
 import "./DashboardPage.css";
 
 
@@ -137,44 +139,29 @@ const DashboardPage = ({ page }) => {
   const renderContent = () => {
     switch (page) {
       case "dashboard":
-        return (
-          <div style={{ padding: "40px" }}>
-            <h1 style={{ fontSize: "32px", marginBottom: "10px" }}>
-              Dashboard Overview
-            </h1>
-            <p style={{ color: "var(--dash-muted, #888)", marginBottom: "30px" }}>
-              Welcome to your dashboard.
-            </p>
-            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-              <div style={{ background: "var(--dash-card-bg, #1a1a1a)", padding: "20px", borderRadius: "10px", flex: 1, minWidth: "200px", border: "1px solid var(--dash-border, transparent)" }}>
-                <h3 style={{ color: "var(--dash-accent, #03ea04)" }}>Total Members</h3>
-                <p style={{ fontSize: "24px", fontWeight: "bold" }}>1,248</p>
-              </div>
-              <div style={{ background: "var(--dash-card-bg, #1a1a1a)", padding: "20px", borderRadius: "10px", flex: 1, minWidth: "200px", border: "1px solid var(--dash-border, transparent)" }}>
-                <h3 style={{ color: "var(--dash-accent, #03ea04)" }}>Active Trainers</h3>
-                <p style={{ fontSize: "24px", fontWeight: "bold" }}>24</p>
-              </div>
-              <div style={{ background: "var(--dash-card-bg, #1a1a1a)", padding: "20px", borderRadius: "10px", flex: 1, minWidth: "200px", border: "1px solid var(--dash-border, transparent)" }}>
-                <h3 style={{ color: "var(--dash-accent, #03ea04)" }}>Active Plans</h3>
-                <p style={{ fontSize: "24px", fontWeight: "bold" }}>320</p>
-              </div>
-            </div>
-          </div>
-        );
+        return <DashboardHome />; // ✅ Sahi jagah pe call kiya
+        
       case "members":
         return <MembersList />;
+        
       case "batch-schedule":
-        return <BatchSchedule />;   // ✅ Yahan BatchSchedule call kiya
+        return <BatchSchedule />;
+        
       case "schedule":
-        return <BatchSchedule />;   // ✅ Schedule pe bhi BatchSchedule khulega
+        return <BatchSchedule />;
+        
       case "reports":
-        return <ReportsPage />;     // ✅ Reports Page
+        return <ReportsPage />;
+        
+      case "billing":
+        return <BillingList />;
+        
       case "settings":
         return <SettingsPage />;
        case "trainers":
         return <TrainerManagement />; 
       case "workouts":
-        return <WorkoutPlans />;  // ✅ Ab yeh aapka page render karega
+        return <WorkoutPlans />;
 
       case "diet":
         return <DietPlans />;

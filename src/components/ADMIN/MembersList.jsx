@@ -183,80 +183,86 @@ const MembersList = () => {
       </div>
 
       {/* ================= ✅ ADD / EDIT FORM MODAL ================= */}
-      {isFormModalOpen && (
-        <div className="modal-overlay" onClick={() => setIsFormModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>{modalMode === "add" ? "Add New Member" : "Edit Member"}</h2>
-              <button onClick={() => setIsFormModalOpen(false)}><X size={20} /></button>
-            </div>
-            
-            <form onSubmit={handleSaveForm} className="member-form">
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Full Name</label>
-                  <input required type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="e.g. John Doe" />
-                </div>
-                <div className="form-group">
-                  <label>Member ID</label>
-                  <input required type="text" value={formData.memberId} onChange={(e) => setFormData({...formData, memberId: e.target.value})} />
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Package</label>
-                  <select value={formData.package} onChange={(e) => setFormData({...formData, package: e.target.value})}>
-                    <option>Gold Membership</option>
-                    <option>Silver Membership</option>
-                    <option>Platinum Membership</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>Status</label>
-                  <select value={formData.status} onChange={(e) => setFormData({...formData, status: e.target.value})}>
-                    <option>Paid</option>
-                    <option>Not paid</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Joining Date</label>
-                  <input required type="text" value={formData.joinDate} onChange={(e) => setFormData({...formData, joinDate: e.target.value})} placeholder="MM/DD/YY" />
-                </div>
-                <div className="form-group">
-                  <label>Expire Date</label>
-                  <input required type="text" value={formData.expireDate} onChange={(e) => setFormData({...formData, expireDate: e.target.value})} placeholder="MM/DD/YY" />
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Paid Amount</label>
-                  <input required type="text" value={formData.paid} onChange={(e) => setFormData({...formData, paid: e.target.value})} />
-                </div>
-                <div className="form-group">
-                  <label>Due Amount</label>
-                  <input required type="text" value={formData.due} onChange={(e) => setFormData({...formData, due: e.target.value})} />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label>Photo URL</label>
-                <input required type="text" value={formData.image} onChange={(e) => setFormData({...formData, image: e.target.value})} />
-              </div>
-
-              <div className="modal-actions">
-                <button type="button" className="btn-outline" onClick={() => setIsFormModalOpen(false)}>Cancel</button>
-                <button type="submit" className="btn-primary">Save Member</button>
-              </div>
-            </form>
+{isFormModalOpen && (
+  <div className="modal-overlay" onClick={() => setIsFormModalOpen(false)}>
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-header">
+        <h2>{modalMode === "add" ? "Add New Member" : "Edit Member"}</h2>
+        <button onClick={() => setIsFormModalOpen(false)}><X size={20} /></button>
+      </div>
+      
+      <form onSubmit={handleSaveForm} className="member-form">
+        <div className="form-row">
+          <div className="form-group">
+            <label>Full Name</label>
+            <input required type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="e.g. John Doe" />
+          </div>
+          <div className="form-group">
+            <label>Member ID</label>
+            <input required type="text" value={formData.memberId} onChange={(e) => setFormData({...formData, memberId: e.target.value})} />
           </div>
         </div>
-      )}
 
+        {/* ✅ Yahan Package aur Status Hain */}
+        <div className="form-row">
+          <div className="form-group">
+            <label>Package</label>
+            <select 
+              value={formData.package} 
+              onChange={(e) => setFormData({...formData, package: e.target.value})}
+            >
+              <option value="Gold Membership">Gold Membership</option>
+              <option value="Silver Membership">Silver Membership</option>
+              <option value="Platinum Membership">Platinum Membership</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Status</label>
+            <select 
+              value={formData.status} 
+              onChange={(e) => setFormData({...formData, status: e.target.value})}
+            >
+              <option value="Paid">Paid</option>
+              <option value="Not paid">Not paid</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label>Joining Date</label>
+            <input required type="text" value={formData.joinDate} onChange={(e) => setFormData({...formData, joinDate: e.target.value})} placeholder="MM/DD/YY" />
+          </div>
+          <div className="form-group">
+            <label>Expire Date</label>
+            <input required type="text" value={formData.expireDate} onChange={(e) => setFormData({...formData, expireDate: e.target.value})} placeholder="MM/DD/YY" />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label>Paid Amount</label>
+            <input required type="text" value={formData.paid} onChange={(e) => setFormData({...formData, paid: e.target.value})} />
+          </div>
+          <div className="form-group">
+            <label>Due Amount</label>
+            <input required type="text" value={formData.due} onChange={(e) => setFormData({...formData, due: e.target.value})} />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label>Photo URL</label>
+          <input required type="text" value={formData.image} onChange={(e) => setFormData({...formData, image: e.target.value})} />
+        </div>
+
+        <div className="modal-actions">
+          <button type="button" className="btn-outline" onClick={() => setIsFormModalOpen(false)}>Cancel</button>
+          <button type="submit" className="btn-primary">Save Member</button>
+        </div>
+      </form>
+    </div>
+  </div>
+)}
       {/* ================= ✅ VIEW MEMBER MODAL ================= */}
       {isViewModalOpen && selectedMember && (
         <div className="modal-overlay" onClick={() => setIsViewModalOpen(false)}>
