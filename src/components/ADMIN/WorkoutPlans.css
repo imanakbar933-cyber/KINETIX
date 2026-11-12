@@ -1,268 +1,1547 @@
-/* --- WORKOUT PLANS CSS (NEON THEME) --- */
-:root {
-  --wp-bg-page: #0a0a0a;
-  --wp-bg-card: #141414;
-  --wp-text-main: #f3f4f6;
-  --wp-text-muted: #9ca3af;
-  --wp-border: #2d2d2d;
-  
-  /* Using Dashboard's global accent color (Green) */
-  --wp-accent: var(--dash-accent, #03ea04);
-  --wp-accent-glow: rgba(3, 234, 4, 0.3);
-  
-  --wp-neon-cyan: #00f0ff;
-  --wp-neon-purple: #b026ff;
-}
 
-.wp-container {
-  padding: 20px;
-  background-color: var(--wp-bg-page);
+/* =========================================
+   KINETIX WORKOUT PLAN
+========================================= */
+
+.workout-page {
+  width: 100%;
   min-height: 100vh;
-  font-family: 'Inter', sans-serif;
-  color: var(--wp-text-main);
+  padding: 32px;
+  background: #0b0d0b;
+  color: #f5f5f5;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-/* Header */
-.wp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 15px; }
-.wp-title { font-size: 28px; font-weight: 700; margin: 0 0 4px 0; color: #fff; }
-.wp-subtitle { color: var(--wp-text-muted); font-size: 14px; margin: 0; }
-.wp-subtitle span { color: var(--wp-accent); text-shadow: 0 0 5px var(--wp-accent-glow); }
+.workout-page * {
+  box-sizing: border-box;
+}
 
-/* Buttons */
-.wp-btn { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid var(--wp-border); background: var(--wp-bg-card); color: var(--wp-text-main); transition: all 0.2s ease; }
-.wp-btn:hover { background: #1f1f1f; }
-.wp-btn-primary { background: var(--wp-accent); color: #000; border: none; box-shadow: 0 0 10px var(--wp-accent-glow); }
-.wp-btn-primary:hover { filter: brightness(1.2); box-shadow: 0 0 20px var(--wp-accent-glow); }
-.wp-btn-outline { background: transparent; border: 1px solid var(--wp-border); }
+/* HEADER */
 
-/* Stats Grid */
-.wp-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
-.wp-stat-card { background: var(--wp-bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--wp-border); display: flex; align-items: center; gap: 15px; }
-.wp-stat-icon { padding: 12px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
-.wp-stat-icon.accent { background: rgba(3, 234, 4, 0.1); color: var(--wp-accent); box-shadow: 0 0 10px var(--wp-accent-glow); }
-.wp-stat-icon.cyan { background: rgba(0, 240, 255, 0.1); color: var(--wp-neon-cyan); box-shadow: 0 0 10px rgba(0, 240, 255, 0.3); }
-.wp-stat-icon.purple { background: rgba(176, 38, 255, 0.1); color: var(--wp-neon-purple); box-shadow: 0 0 10px rgba(176, 38, 255, 0.3); }
-.wp-stat-value { font-size: 24px; font-weight: 700; margin: 0; color: #fff; }
-.wp-stat-label { font-size: 12px; color: var(--wp-text-muted); text-transform: uppercase; margin: 0; }
-
-/* Filter Bar */
-.wp-filter-bar { background: var(--wp-bg-card); padding: 15px; border-radius: 12px; border: 1px solid var(--wp-border); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 30px; }
-.wp-goal-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
-.wp-goal-tab { padding: 8px 16px; border-radius: 8px; cursor: pointer; background: transparent; color: var(--wp-text-muted); border: 1px solid transparent; font-weight: 500; transition: all 0.2s; }
-.wp-goal-tab:hover, .wp-goal-tab.active { background: rgba(3, 234, 4, 0.1); color: var(--wp-accent); border-color: var(--wp-accent); box-shadow: 0 0 10px var(--wp-accent-glow); }
-
-/* Search Controls */
-.wp-search-controls { display: flex; gap: 12px; align-items: center; }
-.wp-select, .wp-input { background: #1f1f1f; border: 1px solid var(--wp-border); color: var(--wp-text-main); padding: 10px 15px; border-radius: 8px; outline: none; font-size: 14px; transition: all 0.2s; }
-.wp-select:focus, .wp-input:focus { border-color: var(--wp-accent); box-shadow: 0 0 5px var(--wp-accent-glow); }
-.wp-search-wrapper { position: relative; }
-.wp-search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--wp-text-muted); }
-.wp-input { padding-left: 38px; width: 220px; }
-
-/* Cards Grid */
-.wp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-.wp-card { background: var(--wp-bg-card); border-radius: 16px; border: 1px solid var(--wp-border); overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s; }
-.wp-card:hover { transform: translateY(-5px); border-color: #4b5563; box-shadow: 0 0 15px rgba(255,255,255,0.05); }
-
-/* Card Header with subtle gradient */
-.wp-card-header {
-  height: 100px;
+.workout-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 35px;
+}
+
+.workout-eyebrow {
+  color: #03ea04;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.workout-header h1 {
+  font-size: clamp(36px, 4vw, 50px);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  margin: 12px 0;
+}
+
+.workout-header h1 span,
+.workout-section-heading h2 span {
+  color: #03ea04;
+}
+
+.workout-header p {
+  color: #858985;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.assign-main-btn {
+  border: none;
+  background: #03ea04;
+  color: #050805;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 16px 24px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.assign-main-btn:hover {
+  background: #8aff8a;
+  box-shadow: 0 0 25px #03ea0460;
+  transform: translateY(-3px);
+}
+
+/* STATS */
+
+.workout-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 45px;
+}
+
+.workout-stat-card {
+  background: linear-gradient(135deg, #171b17, #101310);
+  border: 1px solid #252c25;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  border-radius: 9px;
+  transition: 0.3s;
+}
+
+.workout-stat-card:hover {
+  border-color: #03ea04;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px #03ea0410;
+}
+
+.stat-icon {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: #03ea04;
+  background: #03ea0412;
+  border: 1px solid #03ea0430;
+  font-size: 25px;
+  border-radius: 8px;
+}
+
+.workout-stat-card span {
+  color: #858985;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.workout-stat-card h2 {
+  margin: 8px 0 0;
+  font-size: 32px;
+  color: #fff;
+}
+
+.workout-stat-card h2 small {
+  font-size: 14px;
+  color: #929892;
+}
+
+/* SECTION HEADING */
+
+.workout-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 23px;
+}
+
+.workout-section-heading > div > span {
+  color: #03ea04;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.workout-section-heading h2 {
+  font-size: 30px;
+  margin: 9px 0 0;
+  font-weight: 800;
+}
+
+.week-label {
+  color: #03ea04;
+  border: 1px solid #03ea0450;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* HORIZONTAL DAYS */
+
+.days-section {
+  margin-bottom: 40px;
+}
+
+.days-navigation {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(90px, 1fr));
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+  scrollbar-width: thin;
+  scrollbar-color: #03ea04 #151815;
+}
+
+.day-tab {
+  position: relative;
+  min-height: 115px;
+  background: #151815;
+  border: 1px solid #282e28;
+  border-radius: 7px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  background: linear-gradient(180deg, rgba(3, 234, 4, 0.1) 0%, transparent 100%);
-  color: var(--wp-accent);
-  border-bottom: 1px solid var(--wp-border);
-}
-.wp-card-icon { filter: drop-shadow(0 0 10px var(--wp-accent-glow)); }
-
-.wp-card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
-.wp-card-badges { display: flex; justify-content: space-between; margin-bottom: 15px; }
-.wp-badge { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1px solid; }
-.wp-badge.level { background: rgba(255,255,255,0.05); color: #fff; border-color: var(--wp-border); }
-.wp-badge.goal { background: rgba(3, 234, 4, 0.1); color: var(--wp-accent); border-color: var(--wp-accent); }
-
-.wp-card-title { font-size: 20px; font-weight: 700; margin: 0 0 15px 0; color: #fff; }
-.wp-card-details { display: flex; gap: 15px; color: var(--wp-text-muted); font-size: 13px; margin-bottom: 20px; }
-.wp-card-details span { display: flex; align-items: center; gap: 5px; }
-
-/* Week Days Highlighting */
-.wp-week-days { display: flex; justify-content: space-between; margin-bottom: 20px; }
-.wp-day-circle {
-  width: 32px; height: 32px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--wp-border);
-  font-size: 12px; color: var(--wp-text-muted);
-  background: #1a1a1a; transition: all 0.2s;
-}
-.wp-day-circle.active {
-  background: rgba(3, 234, 4, 0.15);
-  color: var(--wp-accent);
-  border-color: var(--wp-accent);
-  box-shadow: 0 0 10px var(--wp-accent-glow);
-  font-weight: bold;
+  padding: 17px;
+  gap: 14px;
+  transition: 0.3s;
 }
 
-.wp-card-actions { margin-top: auto; display: flex; gap: 10px; border-top: 1px solid var(--wp-border); padding-top: 15px; }
-.wp-card-actions .wp-btn { flex: 1; justify-content: center; padding: 10px; font-size: 13px; }
-.wp-btn-view { background: #1f1f1f; border: 1px solid var(--wp-border); color: var(--wp-text-main); }
-.wp-btn-view:hover { background: #2d2d2d; border-color: var(--wp-text-muted); }
-.wp-btn-assign { background: rgba(3, 234, 4, 0.1); color: var(--wp-accent); border: 1px solid var(--wp-accent); }
-.wp-btn-assign:hover { background: var(--wp-accent); color: #000; box-shadow: 0 0 15px var(--wp-accent-glow); }
-
-/* ================= MODALS ================= */
-.wp-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; z-index: 1000; animation: fadeIn 0.2s ease-out; }
-.wp-modal-content { background: var(--wp-bg-card); border: 1px solid var(--wp-border); border-radius: 16px; width: 90%; max-width: 500px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); animation: slideUp 0.3s ease-out; display: flex; flex-direction: column; }
-.wp-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--wp-border); }
-.wp-modal-header h2 { font-size: 20px; margin: 0; color: #fff; }
-.wp-modal-close { background: none; border: none; color: var(--wp-text-muted); cursor: pointer; transition: 0.2s; }
-.wp-modal-close:hover { color: #ef4444; transform: rotate(90deg); }
-
-.wp-modal-body { padding: 20px; max-height: 70vh; overflow-y: auto; }
-.wp-modal-stats { display: flex; gap: 15px; margin-bottom: 20px; }
-.wp-modal-stat-box { background: #1f1f1f; padding: 15px; border-radius: 10px; flex: 1; display: flex; flex-direction: column; gap: 5px; border: 1px solid var(--wp-border); }
-.wp-modal-stat-box span { font-size: 12px; color: var(--wp-text-muted); text-transform: uppercase; }
-.wp-modal-stat-box strong { font-size: 18px; color: var(--wp-accent); }
-
-.wp-modal-subtitle { font-size: 16px; color: #fff; margin: 20px 0 15px 0; border-bottom: 1px solid var(--wp-border); padding-bottom: 10px; }
-.wp-exercise-list { display: flex; flex-direction: column; gap: 10px; }
-.wp-exercise-item { display: flex; align-items: center; gap: 10px; background: #1f1f1f; padding: 12px 15px; border-radius: 8px; border: 1px solid var(--wp-border); color: #ddd; font-size: 14px; }
-.wp-exercise-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--wp-accent); box-shadow: 0 0 5px var(--wp-accent-glow); }
-
-.wp-modal-footer { padding: 20px; border-top: 1px solid var(--wp-border); display: flex; justify-content: flex-end; gap: 10px; }
-
-/* Assign Modal Specific */
-.wp-member-search { position: relative; margin-bottom: 15px; }
-.wp-member-search input { width: 100%; background: #1f1f1f; border: 1px solid var(--wp-border); color: #fff; padding: 12px 12px 12px 40px; border-radius: 8px; outline: none; }
-.wp-member-search input:focus { border-color: var(--wp-accent); box-shadow: 0 0 5px var(--wp-accent-glow); }
-.wp-members-list { display: flex; flex-direction: column; gap: 10px; }
-.wp-member-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #1f1f1f; border-radius: 8px; border: 1px solid var(--wp-border); }
-.wp-member-info { display: flex; align-items: center; gap: 12px; }
-.wp-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(3, 234, 4, 0.2); color: var(--wp-accent); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; }
-.wp-member-info h4 { margin: 0 0 2px 0; font-size: 14px; color: #fff; }
-.wp-member-info p { margin: 0; font-size: 12px; color: var(--wp-text-muted); }
-
-/* Assign Button inside Modal */
-.wp-btn-assign-small {
-  background: rgba(3, 234, 4, 0.1); color: var(--wp-accent); border: 1px solid var(--wp-accent);
-  padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 5px; transition: all 0.2s;
+.day-tab:hover {
+  border-color: #03ea04;
+  background: #1c251c;
 }
-.wp-btn-assign-small:hover:not(:disabled) { background: var(--wp-accent); color: #000; box-shadow: 0 0 10px var(--wp-accent-glow); }
-.wp-btn-assign-small.assigned { background: #1f1f1f; color: var(--wp-text-muted); border-color: var(--wp-border); cursor: not-allowed; }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.day-tab.active {
+  background: linear-gradient(145deg, #123612, #142014);
+  border: 1px solid #03ea04;
+  box-shadow: 0 0 18px #03ea0420;
+}
 
+.day-number {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #888f88;
+  font-weight: 700;
+}
 
-/* Form Styles for Add New Plan Modal */
-.wp-form-group {
+.day-tab.active .day-number {
+  color: #03ea04;
+}
+
+.day-tab strong {
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.day-dot {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 7px;
+  height: 7px;
+  background: #03ea04;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #03ea04;
+}
+
+/* WORKOUT CONTENT */
+
+.workout-content {
+  background: #121512;
+  border: 1px solid #292e29;
+  border-radius: 9px;
+  padding: 30px;
+  margin-bottom: 45px;
+  animation: workoutFade 0.4s ease;
+}
+
+@keyframes workoutFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.workout-content-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.content-eyebrow {
+  color: #03ea04;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.workout-content-header h2 {
+  font-size: 32px;
+  margin: 11px 0;
+  font-weight: 800;
+}
+
+.workout-content-header p {
+  font-size: 16px;
+  color: #888f88;
+  margin: 0;
+}
+
+.category-badge {
+  padding: 11px 16px;
+  border: 1px solid #03ea0450;
+  color: #03ea04;
+  background: #03ea0410;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-radius: 4px;
+}
+
+.category-badge.cardio {
+  color: #03ea04;
+  border-color: #03ea0450;
+  background: #03ea0410;
+}
+
+.category-badge.recovery {
+  color: #d7bd70;
+  border-color: #d7bd7050;
+  background: #d7bd7010;
+}
+
+/* EXERCISE TABLE */
+
+.exercise-table {
+  width: 100%;
+}
+
+.exercise-table-header,
+.exercise-row {
+  display: grid;
+  grid-template-columns: 2fr 0.65fr 1.1fr 0.9fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.exercise-table-header {
+  padding: 18px;
+  background: #1b201b;
+  color: #858d85;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 800;
+  border-radius: 5px;
+}
+
+.exercise-row {
+  min-height: 78px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #262c26;
+  transition: 0.25s;
+}
+
+.exercise-row:hover {
+  background: #1a211a;
+}
+
+.exercise-name {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+}
+
+.exercise-number {
+  color: #03ea04;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.exercise-name strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.exercise-value,
+.exercise-rest {
+  color: #d2d6d2;
+  font-size: 15px;
+}
+
+.exercise-rest {
+  color: #03ea04;
+}
+
+/* WORKOUT FOOTER */
+
+.workout-footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 27px;
+}
+
+.workout-footer div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.workout-footer div span {
+  font-size: 11px;
+  color: #858d85;
+  letter-spacing: 1px;
+}
+
+.workout-footer div strong {
+  font-size: 16px;
+}
+
+.footer-assign-btn {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid #03ea04;
+  color: #03ea04;
+  padding: 13px 19px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.footer-assign-btn:hover {
+  background: #03ea04;
+  color: #080b08;
+}
+
+/* REST DAY */
+
+.rest-day-card {
+  padding: 50px 20px;
+  text-align: center;
+  background: radial-gradient(ellipse at center, #183018, #121512 70%);
+  border: 1px solid #283728;
+  border-radius: 7px;
+}
+
+.rest-icon {
+  font-size: 48px;
+  color: #03ea04;
+  text-shadow: 0 0 20px #03ea04;
+}
+
+.rest-day-card h2 {
+  color: #03ea04;
+  font-size: 29px;
+  letter-spacing: 2px;
+}
+
+.rest-day-card p {
+  max-width: 550px;
+  margin: 0 auto 22px;
+  color: #a0a8a0;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.rest-day-card > span {
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+/* ASSIGNMENTS */
+
+.assignments-section {
+  margin-bottom: 35px;
+}
+
+.assignment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.assignment-row {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 18px;
+  background: #151a15;
+  border: 1px solid #272e27;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.assignment-row:hover {
+  border-color: #03ea04;
+}
+
+.member-avatar {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #03ea04;
+  background: #03ea0415;
+  border: 1px solid #03ea0450;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.assignment-member {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-bottom: 15px;
+  min-width: 0;
 }
 
-.wp-form-group label {
+.assignment-member strong {
+  font-size: 16px;
+}
+
+.assignment-member span {
+  color: #929992;
   font-size: 13px;
-  color: var(--wp-text-muted);
-  font-weight: 500;
 }
 
-.wp-form-group input, 
-.wp-form-group select {
-  width: 100%;
-  padding: 10px 12px;
-  background: #1f1f1f;
-  border: 1px solid var(--wp-border);
-  border-radius: 8px;
-  color: #fff;
+.assignment-day {
+  color: #c8cec8;
   font-size: 14px;
+}
+
+.assigned-status {
+  color: #03ea04;
+  background: #03ea0415;
+  border: 1px solid #03ea0430;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 4px;
+}
+
+.remove-assignment {
+  color: #ff6666;
+  background: transparent;
+  border: 1px solid #ff666630;
+  border-radius: 4px;
+  padding: 9px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.remove-assignment:hover {
+  background: #ff333320;
+}
+
+.empty-assignments {
+  text-align: center;
+  padding: 45px 15px;
+  background: #141814;
+  border: 1px dashed #343d34;
+  border-radius: 7px;
+}
+
+.empty-assignments > span {
+  color: #03ea04;
+  font-size: 42px;
+}
+
+.empty-assignments h3 {
+  font-size: 21px;
+}
+
+.empty-assignments p {
+  color: #858d85;
+  font-size: 15px;
+  margin-bottom: 22px;
+}
+
+.empty-assignments button {
+  background: #03ea04;
+  color: #080b08;
+  border: none;
+  padding: 13px 20px;
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* =========================================
+   ASSIGN MEMBER MODAL
+========================================= */
+
+.workout-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.84);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: modalOverlay 0.25s ease;
+}
+
+@keyframes modalOverlay {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.workout-modal {
+  position: relative;
+  width: 100%;
+  max-width: 590px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #111611;
+  border: 1px solid #303b30;
+  border-radius: 12px;
+  padding: 35px;
+  box-shadow:
+    0 0 35px #03ea0415,
+    0 25px 90px #000;
+  animation: modalEnter 0.35s ease;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-top-line {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: #03ea04;
+  box-shadow: 0 0 15px #03ea04;
+}
+
+/* MODAL HEADING */
+
+.modal-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.modal-heading > div > span {
+  color: #03ea04;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.modal-heading h2 {
+  color: #fff;
+  font-size: 34px;
+  font-weight: 900;
+  margin: 12px 0;
+}
+
+.modal-heading h2 span {
+  color: #03ea04;
+}
+
+.modal-heading p {
+  color: #929992;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.modal-close {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  color: #fff;
+  background: #202720;
+  border: 1px solid #394339;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-close:hover {
+  color: #03ea04;
+  border-color: #03ea04;
+  transform: rotate(90deg);
+}
+
+/* MODAL FORM */
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-field label {
+  color: #03ea04;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.modal-field input,
+.modal-field select {
+  width: 100%;
+  min-height: 53px;
+  padding: 14px 16px;
+  background: #090d09;
+  border: 1px solid #343e34;
+  border-radius: 6px;
+  color: #fff;
   outline: none;
-  transition: border 0.2s;
+  font-size: 15px;
+  transition: 0.3s;
 }
 
-.wp-form-group input:focus, 
-.wp-form-group select:focus {
-  border-color: var(--wp-accent);
-  box-shadow: 0 0 5px var(--wp-accent-glow);
+.modal-field input:focus,
+.modal-field select:focus {
+  border-color: #03ea04;
+  box-shadow: 0 0 12px #03ea0418;
 }
 
-.wp-form-row {
+.modal-field select option {
+  background: #111611;
+  color: #fff;
+}
+
+/* MEMBER OPTIONS */
+
+.member-options {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  max-height: 215px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.member-option {
+  width: 100%;
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  background: #191f19;
+  border: 1px solid #303a30;
+  border-radius: 7px;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.member-option:hover {
+  border-color: #03ea04;
+  background: #1d281d;
+}
+
+.member-option.selected {
+  border-color: #03ea04;
+  background: #173017;
+  box-shadow: inset 0 0 15px #03ea0410;
+}
+
+.member-option-avatar {
+  flex-shrink: 0;
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  background: #03ea0418;
+  border: 1px solid #03ea0450;
+  border-radius: 50%;
+  color: #03ea04;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.member-option-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.member-option-info strong {
+  font-size: 15px;
+}
+
+.member-option-info span {
+  color: #929b92;
+  font-size: 13px;
+}
+
+.member-check {
+  color: #03ea04;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.no-members {
+  color: #aaa;
+  text-align: center;
+  font-size: 14px;
+  padding: 15px;
+}
+
+/* WORKOUT PREVIEW */
+
+.modal-workout-preview {
+  padding: 20px;
+  background: linear-gradient(135deg, #192519, #101610);
+  border: 1px solid #03ea0440;
+  border-radius: 7px;
+}
+
+.modal-workout-preview > span {
+  color: #03ea04;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.modal-workout-preview h3 {
+  color: #fff;
+  font-size: 23px;
+  margin: 12px 0 18px;
+}
+
+.modal-preview-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 13px;
+  border-top: 1px solid #344034;
+}
+
+.modal-preview-bottom span {
+  color: #b6bdb6;
+  font-size: 13px;
+}
+
+/* MODAL BUTTONS */
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 13px;
+  margin-top: 5px;
+}
+
+.modal-cancel,
+.modal-confirm {
+  min-height: 48px;
+  padding: 12px 22px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-cancel {
+  color: #ddd;
+  background: #242b24;
+  border: 1px solid #424b42;
+}
+
+.modal-cancel:hover {
+  border-color: #fff;
+  background: #303830;
+}
+
+.modal-confirm {
+  color: #050805;
+  background: #03ea04;
+  border: 1px solid #03ea04;
+}
+
+.modal-confirm:hover {
+  background: #8aff8a;
+  box-shadow: 0 0 20px #03ea0450;
+  transform: translateY(-2px);
+}
+
+/* SCROLLBARS */
+
+.workout-modal::-webkit-scrollbar,
+.member-options::-webkit-scrollbar {
+  width: 5px;
+}
+
+.workout-modal::-webkit-scrollbar-thumb,
+.member-options::-webkit-scrollbar-thumb {
+  background: #03ea04;
+  border-radius: 10px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+  .workout-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .workout-page {
+    padding: 20px 14px;
+  }
+
+  .workout-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .workout-header h1 {
+    font-size: 35px;
+  }
+
+  .workout-stats {
+    gap: 10px;
+  }
+
+  .workout-stat-card {
+    padding: 15px 11px;
+    gap: 10px;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 19px;
+  }
+
+  .workout-stat-card span {
+    font-size: 9px;
+  }
+
+  .workout-stat-card h2 {
+    font-size: 24px;
+  }
+
+  .workout-section-heading h2 {
+    font-size: 23px;
+  }
+
+  .days-navigation {
+    grid-template-columns: repeat(7, 100px);
+  }
+
+  .workout-content {
+    padding: 19px 13px;
+  }
+
+  .workout-content-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .exercise-table {
+    overflow-x: auto;
+  }
+
+  .exercise-table-header,
+  .exercise-row {
+    min-width: 590px;
+  }
+
+  .workout-footer {
+    gap: 20px;
+  }
+
+  .footer-assign-btn {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .assignment-row {
+    flex-wrap: wrap;
+    gap: 11px;
+  }
+
+  .assignment-member {
+    flex-basis: calc(100% - 65px);
+  }
+
+  .assignment-day {
+    margin-left: 55px;
+  }
+
+  .workout-section-heading {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .workout-modal {
+    padding: 25px 17px;
+    max-height: 92vh;
+  }
+
+  .modal-heading h2 {
+    font-size: 28px;
+  }
+
+  .modal-heading p {
+    font-size: 13px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+
+  .workout-header p,
+  .workout-content-header p {
+    font-size: 14px;
+  }
+
+  .exercise-name strong {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .workout-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .workout-stat-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .workout-section-heading {
+    flex-direction: column;
+  }
+}
+
+
+/* =========================================
+   HEADER ACTIONS
+========================================= */
+
+.workout-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.add-plan-main-btn {
+  border: 1px solid #03ea04;
+  background: transparent;
+  color: #03ea04;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 15px 22px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.add-plan-main-btn:hover {
+  background: #03ea04;
+  color: #050805;
+  box-shadow: 0 0 22px #03ea0450;
+  transform: translateY(-3px);
+}
+
+/* =========================================
+   DAY PLAN COUNT
+========================================= */
+
+.day-plan-count {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #03ea04;
+  background: #03ea0418;
+  border: 1px solid #03ea0440;
+  padding: 4px 6px;
+  font-size: 9px;
+  font-weight: 800;
+  border-radius: 3px;
+}
+
+/* =========================================
+   MULTIPLE WORKOUT PLANS
+========================================= */
+
+.day-plan-selector {
+  margin: 0 0 25px;
+  padding: 19px;
+  background: #0d120d;
+  border: 1px solid #283328;
+  border-radius: 7px;
+}
+
+.plan-selector-label {
+  display: block;
+  color: #03ea04;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 13px;
+}
+
+.day-plan-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.day-plan-button {
+  padding: 11px 16px;
+  background: #1a201a;
+  border: 1px solid #303a30;
+  color: #c5ccc5;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.day-plan-button:hover,
+.day-plan-button.active {
+  color: #03ea04;
+  background: #173017;
+  border-color: #03ea04;
+  box-shadow: 0 0 12px #03ea0415;
+}
+
+/* =========================================
+   DAILY MEMBER OVERVIEW
+========================================= */
+
+.day-members-section {
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 1px solid #2a332a;
+}
+
+.day-members-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.day-members-heading > div > span {
+  color: #03ea04;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.day-members-heading h3 {
+  margin: 8px 0 0;
+  font-size: 22px;
+  color: #fff;
+}
+
+.day-members-heading h3 span {
+  color: #03ea04;
+}
+
+.day-members-count {
+  color: #03ea04;
+  background: #03ea0412;
+  border: 1px solid #03ea0440;
+  border-radius: 4px;
+  padding: 9px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.day-members-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.day-member-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  padding: 15px;
+  background: #172217;
+  border: 1px solid #3b783b;
+  border-radius: 7px;
+  transition: 0.3s;
+}
+
+.day-member-card:hover {
+  background: #1d301d;
+  border-color: #03ea04;
+  box-shadow: 0 0 15px #03ea0412;
+}
+
+.day-member-card .assignment-member {
+  flex: 1;
+}
+
+.day-member-card .assignment-member strong {
+  color: #e4ffe4;
+}
+
+.day-member-card .assigned-status {
+  flex-shrink: 0;
+}
+
+.day-members-empty {
+  color: #929b92;
+  background: #101510;
+  border: 1px dashed #344034;
+  border-radius: 6px;
+  padding: 18px;
+  font-size: 14px;
+}
+
+/* =========================================
+   ASSIGNED MEMBER HIGHLIGHT IN MODAL
+========================================= */
+
+.member-option.assigned {
+  background: #1b351e;
+  border-color: #4a9b4d;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.member-option.assigned .member-option-avatar {
+  color: #a3ffa5;
+  background: #03ea0425;
+  border-color: #66c96b;
+}
+
+.member-option.assigned .member-option-info strong {
+  color: #caffca;
+}
+
+.member-option.assigned .member-option-info span {
+  color: #9acb9b;
+}
+
+.member-assigned-label {
+  flex-shrink: 0;
+  color: #a6ffa8;
+  background: #03ea0425;
+  border: 1px solid #5abf5e;
+  padding: 7px 9px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.member-option:disabled {
+  cursor: not-allowed;
+}
+
+.member-option:disabled:hover {
+  transform: none;
+}
+
+/* =========================================
+   CREATE NEW PLAN MODAL
+========================================= */
+
+.create-plan-modal {
+  max-width: 760px;
+}
+
+.create-plan-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
 }
 
-/* Day Checkboxes for Form */
-.wp-day-checkboxes {
+.exercise-builder-heading {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   margin-top: 5px;
 }
 
-.wp-day-checkbox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #1f1f1f;
-  border: 1px solid var(--wp-border);
-  cursor: pointer;
-  font-size: 13px;
-  color: var(--wp-text-muted);
-  transition: all 0.2s;
-  user-select: none;
+.exercise-builder-heading > div > span {
+  color: #03ea04;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
 }
 
-.wp-day-checkbox input {
-  display: none;
-}
-
-.wp-day-checkbox.checked {
-  background: rgba(3, 234, 4, 0.15);
-  color: var(--wp-accent);
-  border-color: var(--wp-accent);
-  box-shadow: 0 0 10px var(--wp-accent-glow);
-  font-weight: bold;
-}
-
-/* Assigned Members List in View Modal */
-.wp-assigned-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.wp-assigned-member-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #1f1f1f;
-  border: 1px solid var(--wp-border);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 13px;
+.exercise-builder-heading h3 {
   color: #fff;
+  font-size: 21px;
+  margin: 7px 0 0;
 }
 
-.wp-avatar-sm {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: rgba(3, 234, 4, 0.2);
-  color: var(--wp-accent);
+.add-exercise-btn {
+  padding: 10px 13px;
+  color: #03ea04;
+  background: #03ea0412;
+  border: 1px solid #03ea0450;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.add-exercise-btn:hover {
+  color: #080b08;
+  background: #03ea04;
+}
+
+.add-exercise-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.exercise-builder-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.exercise-builder-row {
+  padding: 17px;
+  background: #171e17;
+  border: 1px solid #303a30;
+  border-radius: 7px;
+}
+
+.builder-exercise-title {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: bold;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-.wp-empty-text {
+.builder-exercise-title > span {
+  color: #03ea04;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.remove-exercise-btn {
+  color: #ff7777;
+  background: transparent;
+  border: 1px solid #ff777750;
+  padding: 5px 9px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.remove-exercise-btn:hover {
+  background: #ff333320;
+  border-color: #ff7777;
+}
+
+.exercise-builder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 13px;
+}
+
+.exercise-builder-row .modal-field {
+  gap: 8px;
+}
+
+.exercise-builder-row .modal-field label {
+  font-size: 10px;
+}
+
+.exercise-builder-row .modal-field input {
+  min-height: 45px;
+  padding: 10px;
   font-size: 13px;
-  color: var(--wp-text-muted);
-  font-style: italic;
+}
+
+.recovery-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background: #1b251b;
+  border: 1px solid #03ea0440;
+  border-radius: 6px;
+  color: #b9c7b9;
+  font-size: 14px;
+}
+
+.recovery-note span {
+  color: #03ea04;
+  font-size: 25px;
+}
+
+.no-day-plan {
+  padding: 45px 20px;
+  text-align: center;
+  background: #141914;
+  border: 1px dashed #344034;
+  border-radius: 7px;
+}
+
+.no-day-plan h3 {
+  color: #fff;
+  font-size: 22px;
+}
+
+.no-day-plan p {
+  color: #929b92;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.no-day-plan button,
+.rest-assign-btn {
+  padding: 12px 18px;
+  color: #050805;
+  background: #03ea04;
+  border: 1px solid #03ea04;
+  border-radius: 5px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.no-day-plan button:hover,
+.rest-assign-btn:hover {
+  background: #8aff8a;
+  box-shadow: 0 0 18px #03ea0450;
+}
+
+.rest-assign-btn {
+  margin-top: 20px;
+}
+
+/* DISABLED CONFIRM BUTTON */
+
+.modal-confirm:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* =========================================
+   RESPONSIVE ADDITIONS
+========================================= */
+
+@media (max-width: 900px) {
+  .workout-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .workout-header-actions {
+    width: 100%;
+  }
+
+  .day-members-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .workout-header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .workout-header-actions button {
+    width: 100%;
+  }
+
+  .create-plan-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exercise-builder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exercise-builder-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .day-members-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .day-member-card {
+    flex-wrap: wrap;
+  }
+
+  .day-member-card .assigned-status {
+    margin-left: 60px;
+  }
+
+  .day-plan-buttons {
+    flex-direction: column;
+  }
+
+  .day-plan-button {
+    width: 100%;
+    text-align: left;
+  }
 }

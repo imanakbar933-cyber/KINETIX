@@ -1,10 +1,10 @@
 /* ================= MAIN CONTAINER ================= */
 .member-list-container {
   background-color: #0a0f0c;
-  padding: 25px;
+  padding: 30px; /* Thoda padding badhaya premium look ke liye */
   border-radius: 12px;
   color: #9ca3af;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   width: 100%;
   box-sizing: border-box;
   border: 1px solid #1f2e24;
@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 25px; /* ✅ Search box ko heading se neeche kiya */
   margin-bottom: 25px;
   flex-wrap: wrap;
   gap: 15px;
@@ -30,6 +31,12 @@
   max-width: 100%;
   padding: 5px;
   position: relative;
+  transition: all 0.2s;
+}
+
+.search-box:focus-within {
+  border-color: #03ea04;
+  box-shadow: 0 0 0 2px rgba(3, 234, 4, 0.1);
 }
 
 .search-box input {
@@ -58,8 +65,13 @@
   font-size: 14px;
   cursor: pointer;
   white-space: nowrap;
+  transition: all 0.2s;
 }
-.search-btn:hover { background-color: #03ea04; color: #000; }
+.search-btn:hover { 
+  background-color: #03ea04; 
+  color: #000; 
+  box-shadow: 0 0 15px rgba(3, 234, 4, 0.3);
+}
 
 .add-member-btn {
   display: flex;
@@ -74,8 +86,13 @@
   font-size: 14px;
   cursor: pointer;
   white-space: nowrap;
+  transition: all 0.3s;
 }
-.add-member-btn:hover { background-color: #22c55e; box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3); }
+.add-member-btn:hover { 
+  background-color: #22c55e; 
+  box-shadow: 0 4px 15px rgba(3, 234, 4, 0.4); 
+  transform: translateY(-1px);
+}
 
 /* ================= TABLE FIX ================= */
 .table-wrapper {
@@ -91,24 +108,29 @@
   table-layout: fixed; 
 }
 
-.member-table tr { display: table-row !important; border-bottom: 1px solid #1f2e24; }
+.member-table tr { 
+  display: table-row !important; 
+  border-bottom: 1px solid #1f2e24; 
+}
 .member-table tr:hover { background-color: #0f1712; }
 
+/* Headers */
 .member-table th {
   background-color: #080d0a;
-  padding: 15px 10px;
+  padding: 15px 12px;
   font-weight: 600;
   font-size: 12px;
   text-transform: uppercase;
   color: #9ca3af;
   border-bottom: 1px solid #1f2e24;
-  white-space: nowrap;
+  white-space: nowrap; /* ✅ Header text ek line me */
   display: table-cell !important;
   vertical-align: middle;
 }
 
+/* Cells */
 .member-table td {
-  padding: 12px 10px;
+  padding: 14px 12px;
   font-size: 13px;
   vertical-align: middle;
   color: #d1d5db;
@@ -141,8 +163,6 @@
 .member-name { 
   color: #ffffff; 
   font-weight: 600; 
-  cursor: pointer; 
-  white-space: normal !important; 
 }
 
 /* Status Badge */
@@ -152,7 +172,7 @@
 
 /* Action Buttons */
 .action-buttons { display: flex; gap: 6px; }
-.action-btn { width: 26px; height: 26px; border-radius: 6px; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: transparent; }
+.action-btn { width: 28px; height: 28px; border-radius: 6px; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: transparent; }
 .action-btn.view { color: #03ea04; border: 1px solid rgba(74, 222, 128, 0.3); }
 .action-btn.view:hover { background-color: rgba(74, 222, 128, 0.1); }
 .action-btn.edit { color: #facc15; border: 1px solid rgba(250, 204, 21, 0.3); }

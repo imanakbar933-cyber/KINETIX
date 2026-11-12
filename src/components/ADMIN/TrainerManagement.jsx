@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   Users,
@@ -50,20 +49,16 @@ const TrainerManagement = () => {
 
   // LOAD TRAINERS FROM LOCAL STORAGE
   const [trainers, setTrainers] = useState(() => {
-  try {
-    const saved = JSON.parse(
-      localStorage.getItem("kinetix_trainers")
-    );
-
-    if (Array.isArray(saved) && saved.length > 0) {
-      return saved;
+    try {
+      const saved = JSON.parse(localStorage.getItem("kinetix_trainers"));
+      if (Array.isArray(saved) && saved.length > 0) {
+        return saved;
+      }
+      return initialTrainers;
+    } catch {
+      return initialTrainers;
     }
-
-    return initialTrainers;
-  } catch {
-    return initialTrainers;
-  }
-});
+  });
 
   const [searchTerm, setSearchTerm] = useState("");
   const [viewMode, setViewMode] = useState("grid");
@@ -116,17 +111,14 @@ const TrainerManagement = () => {
   const filteredTrainers = trainers
     .filter((trainer) => {
       const search = searchTerm.toLowerCase();
-
       const matchesSearch =
         trainer.name.toLowerCase().includes(search) ||
         trainer.specialization.toLowerCase().includes(search);
-
       const matchesFilter =
         filterSpecialization === "All" ||
         trainer.specialization.toLowerCase().includes(
           filterSpecialization.toLowerCase()
         );
-
       return matchesSearch && matchesFilter;
     })
     .sort((a, b) => {
@@ -161,7 +153,6 @@ const TrainerManagement = () => {
       members: trainer.members,
       commission: trainer.commission
     });
-
     setEditingId(trainer.id);
     setSelectedTrainer(null);
     setOpenMenu(null);
@@ -171,7 +162,6 @@ const TrainerManagement = () => {
   // ADD / UPDATE TRAINER
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!form.name.trim() || !form.specialization.trim()) {
       alert("Please enter trainer name and specialization.");
       return;
@@ -199,7 +189,6 @@ const TrainerManagement = () => {
             : trainer
         )
       );
-
       alert("Trainer updated successfully!");
     } else {
       const newTrainer = {
@@ -221,11 +210,9 @@ const TrainerManagement = () => {
         color: colors[trainers.length % colors.length],
         online: true
       };
-
       setTrainers((previous) => [...previous, newTrainer]);
       alert("New trainer added successfully!");
     }
-
     closeModal();
     setForm(emptyForm);
   };
@@ -235,12 +222,10 @@ const TrainerManagement = () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this trainer?"
     );
-
     if (confirmDelete) {
       setTrainers((previous) =>
         previous.filter((trainer) => trainer.id !== id)
       );
-
       closeModal();
       alert("Trainer deleted successfully!");
     }
@@ -269,7 +254,6 @@ const TrainerManagement = () => {
   // SEND MESSAGE
   const sendMessage = (e) => {
     e.preventDefault();
-
     if (!messageText.trim()) return;
 
     const newMessage = {
@@ -281,7 +265,6 @@ const TrainerManagement = () => {
     };
 
     setMessages((previous) => [...previous, newMessage]);
-
     alert("Message saved successfully!");
     setMessageText("");
     closeModal();
@@ -294,7 +277,6 @@ const TrainerManagement = () => {
 
   return (
     <div className="trainer-management">
-
       {/* HEADER */}
       <div className="trainer-header">
         <div>
@@ -306,7 +288,6 @@ const TrainerManagement = () => {
         </div>
 
         <div className="trainer-header-actions">
-
           <div className="view-toggle">
             <button
               className={viewMode === "grid" ? "active" : ""}
@@ -331,7 +312,6 @@ const TrainerManagement = () => {
 
       {/* STATS */}
       <div className="trainer-stats">
-
         <div className="t-stat-card">
           <div className="t-stat-icon"><Users size={24} /></div>
           <div className="t-stat-content">
@@ -363,15 +343,12 @@ const TrainerManagement = () => {
             <h2>{averageRating}</h2>
           </div>
         </div>
-
       </div>
 
       {/* SEARCH + FILTER */}
       <div className="trainer-filters">
-
         <div className="t-search">
-          <Search size={19} className="t-search-icon" />
-
+          <Search size={18} className="t-search-icon" />
           <input
             type="text"
             placeholder="Search trainers by name or specialization..."
@@ -405,35 +382,27 @@ const TrainerManagement = () => {
           <option value="Commission">Sort: Commission</option>
           <option value="Rating">Sort: Rating</option>
         </select>
-
       </div>
 
       {/* TRAINER CARDS */}
       <div className={`trainer-grid ${viewMode}`}>
-
         {filteredTrainers.map((trainer) => (
-
           <div className={`trainer-card theme-${trainer.color}`} key={trainer.id}>
-
             <div className="tc-top">
-
               <div className="tc-avatar-wrapper">
                 <div className={`tc-avatar bg-${trainer.color}`}>
                   {trainer.initials}
                 </div>
-
                 <div className={`tc-status-dot ${trainer.online ? "online" : "offline"}`} />
               </div>
 
               <div className="tc-top-right">
                 <span className="tc-badge">{trainer.badge}</span>
-
                 <div className="tc-rating">
                   <Star size={12} fill="currentColor" />
                   {trainer.rating}
                 </div>
               </div>
-
             </div>
 
             <div className="tc-info">
@@ -446,12 +415,10 @@ const TrainerManagement = () => {
                 <span>Sessions</span>
                 <strong>{trainer.sessions}</strong>
               </div>
-
               <div>
                 <span>Members</span>
                 <strong>{trainer.members}</strong>
               </div>
-
               <div>
                 <span>Rating</span>
                 <strong>{trainer.rating}</strong>
@@ -463,7 +430,6 @@ const TrainerManagement = () => {
                 <span>Monthly Commission</span>
                 <strong>${Number(trainer.commission).toLocaleString()}</strong>
               </div>
-
               <div className="tc-progress-bar">
                 <div
                   className={`tc-progress-fill bg-${trainer.color}`}
@@ -474,9 +440,7 @@ const TrainerManagement = () => {
               </div>
             </div>
 
-            {/* ACTION BUTTONS */}
             <div className="tc-actions">
-
               <button
                 className="tc-btn schedule"
                 onClick={() => viewSchedule(trainer)}
@@ -493,7 +457,6 @@ const TrainerManagement = () => {
               </button>
 
               <div className="tc-menu-wrapper">
-
                 <button
                   className="tc-btn icon-only"
                   title="More Options"
@@ -506,31 +469,23 @@ const TrainerManagement = () => {
 
                 {openMenu === trainer.id && (
                   <div className="trainer-dropdown">
-
                     <button onClick={() => viewTrainer(trainer)}>
                       <Eye size={15} /> View Details
                     </button>
-
                     <button onClick={() => openEditModal(trainer)}>
                       <Edit size={15} /> Edit Trainer
                     </button>
-
                     <button
                       className="delete-option"
                       onClick={() => deleteTrainer(trainer.id)}
                     >
                       <Trash2 size={15} /> Delete Trainer
                     </button>
-
                   </div>
                 )}
-
               </div>
-
             </div>
-
           </div>
-
         ))}
 
         {filteredTrainers.length === 0 && (
@@ -540,29 +495,23 @@ const TrainerManagement = () => {
             <p>Try another search or add a new trainer.</p>
           </div>
         )}
-
       </div>
 
       {/* ADD / EDIT MODAL */}
       {(modal === "add" || modal === "edit") && (
-
         <div className="trainer-modal-overlay" onClick={closeModal}>
-
           <div className="trainer-modal" onClick={(e) => e.stopPropagation()}>
-
             <div className="modal-heading">
               <div>
                 <h2>{modal === "add" ? "Add New Trainer" : "Edit Trainer"}</h2>
                 <p>Enter trainer information below.</p>
               </div>
-
               <button className="modal-close" onClick={closeModal}>
                 <X size={22} />
               </button>
             </div>
 
             <form onSubmit={handleSubmit}>
-
               <label>Trainer Name</label>
               <input
                 type="text"
@@ -603,7 +552,6 @@ const TrainerManagement = () => {
                     onChange={(e) => setForm({ ...form, sessions: e.target.value })}
                   />
                 </div>
-
                 <div>
                   <label>Members</label>
                   <input
@@ -627,20 +575,15 @@ const TrainerManagement = () => {
                 {modal === "add" ? <Plus size={17} /> : <Edit size={17} />}
                 {modal === "add" ? "Add Trainer" : "Save Changes"}
               </button>
-
             </form>
-
           </div>
         </div>
       )}
 
       {/* VIEW DETAILS */}
       {modal === "view" && selectedTrainer && (
-
         <div className="trainer-modal-overlay" onClick={closeModal}>
-
           <div className="trainer-modal" onClick={(e) => e.stopPropagation()}>
-
             <div className="modal-heading">
               <h2>Trainer Details</h2>
               <button className="modal-close" onClick={closeModal}>
@@ -653,7 +596,6 @@ const TrainerManagement = () => {
             </div>
 
             <h2 className="detail-name">{selectedTrainer.name}</h2>
-
             <p className="detail-specialization">
               {selectedTrainer.specialization}
             </p>
@@ -673,31 +615,25 @@ const TrainerManagement = () => {
             >
               <Edit size={16} /> Edit Trainer
             </button>
-
           </div>
         </div>
       )}
 
       {/* SCHEDULE MODAL */}
       {modal === "schedule" && selectedTrainer && (
-
         <div className="trainer-modal-overlay" onClick={closeModal}>
-
           <div className="trainer-modal" onClick={(e) => e.stopPropagation()}>
-
             <div className="modal-heading">
               <div>
                 <h2>Trainer Schedule</h2>
                 <p>{selectedTrainer.name}</p>
               </div>
-
               <button className="modal-close" onClick={closeModal}>
                 <X />
               </button>
             </div>
 
             <div className="trainer-schedule-info">
-
               {[
                 ["Monday", "06:00 AM - 10:00 AM"],
                 ["Tuesday", "04:00 PM - 08:00 PM"],
@@ -707,60 +643,47 @@ const TrainerManagement = () => {
                 ["Saturday", "09:00 AM - 01:00 PM"],
                 ["Sunday", "Off Day"]
               ].map(([day, time]) => (
-
                 <div key={day}>
                   <strong>{day}</strong>
                   <span>
                     <Clock size={14} /> {time}
                   </span>
                 </div>
-
               ))}
-
             </div>
-
           </div>
         </div>
       )}
 
       {/* MESSAGE MODAL */}
       {modal === "message" && selectedTrainer && (
-
         <div className="trainer-modal-overlay" onClick={closeModal}>
-
           <div className="trainer-modal" onClick={(e) => e.stopPropagation()}>
-
             <div className="modal-heading">
               <div>
                 <h2>Message Trainer</h2>
                 <p>To: {selectedTrainer.name}</p>
               </div>
-
               <button className="modal-close" onClick={closeModal}>
                 <X />
               </button>
             </div>
 
             <form onSubmit={sendMessage}>
-
               <label>Write Message</label>
-
               <textarea
                 placeholder="Write your message here..."
                 value={messageText}
                 onChange={(e) => setMessageText(e.target.value)}
                 required
               />
-
               <button className="modal-submit" type="submit">
                 <Send size={16} /> Send Message
               </button>
-
             </form>
 
             <div className="message-history">
               <h3>Message History</h3>
-
               {trainerMessages.length === 0 ? (
                 <p>No messages sent yet.</p>
               ) : (
@@ -771,13 +694,10 @@ const TrainerManagement = () => {
                   </div>
                 ))
               )}
-
             </div>
-
           </div>
         </div>
       )}
-
     </div>
   );
 };

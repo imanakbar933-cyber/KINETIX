@@ -9,28 +9,28 @@ import {
 } from "recharts";
 import "./DashboardHome.css";
 
-// ================= DUMMY DATA =================
+// ================= DUMMY DATA (PAKISTAN) =================
 const revenueData = [
-  { name: "Jan", revenue: 15000 },
-  { name: "Feb", revenue: 22000 },
-  { name: "Mar", revenue: 18000 },
-  { name: "Apr", revenue: 28000 },
-  { name: "May", revenue: 25000 },
-  { name: "Jun", revenue: 35000 },
-  { name: "Jul", revenue: 42000 },
+  { name: "Jan", revenue: 150000 },
+  { name: "Feb", revenue: 220000 },
+  { name: "Mar", revenue: 180000 },
+  { name: "Apr", revenue: 280000 },
+  { name: "May", revenue: 250000 },
+  { name: "Jun", revenue: 350000 },
+  { name: "Jul", revenue: 420000 },
 ];
 
 const initialMembers = [
-  { id: 1, name: "Cody Fisher", plan: "Gold Membership", date: "Today", image: "https://i.pravatar.cc/150?img=1" },
-  { id: 2, name: "Annette Black", plan: "Platinum Membership", date: "Yesterday", image: "https://i.pravatar.cc/150?img=5" },
-  { id: 3, name: "Marvin McKinney", plan: "Silver Membership", date: "Oct 24, 2026", image: "https://i.pravatar.cc/150?img=11" },
-  { id: 4, name: "Dianne Russell", plan: "Gold Membership", date: "Oct 23, 2026", image: "https://i.pravatar.cc/150?img=9" },
+  { id: 1, name: "Ali Raza", plan: "Gold Membership", date: "Today", image: "https://i.pravatar.cc/150?img=11" },
+  { id: 2, name: "Ayesha Khan", plan: "Platinum Membership", date: "Yesterday", image: "https://i.pravatar.cc/150?img=5" },
+  { id: 3, name: "Muhammad Usman", plan: "Silver Membership", date: "Oct 24, 2026", image: "https://i.pravatar.cc/150?img=12" },
+  { id: 4, name: "Zainab Fatima", plan: "Gold Membership", date: "Oct 23, 2026", image: "https://i.pravatar.cc/150?img=9" },
 ];
 
 const recentTransactions = [
-  { id: "INV-2026-012", member: "Cody Fisher", amount: "$450.00", status: "Paid" },
-  { id: "INV-2026-011", member: "Marvin McKinney", amount: "$450.00", status: "Pending" },
-  { id: "INV-2026-010", member: "Annette Black", amount: "$450.00", status: "Paid" },
+  { id: "INV-2026-012", member: "Ali Raza", amount: "Rs 15,000.00", status: "Paid" },
+  { id: "INV-2026-011", member: "Muhammad Usman", amount: "Rs 12,000.00", status: "Pending" },
+  { id: "INV-2026-010", member: "Ayesha Khan", amount: "Rs 25,000.00", status: "Paid" },
 ];
 
 export default function DashboardHome() {
@@ -76,7 +76,7 @@ export default function DashboardHome() {
       <div className="dh-header">
         <div>
           <h1>Dashboard Overview</h1>
-          <p>Welcome back, Admin! Here is what's happening at KINETIX today.</p>
+          <p>Welcome back, Admin! Here is what's happening at KINETIX Gujranwala today.</p>
         </div>
         <div className="dh-header-actions">
           <button className="rp-btn-outline" onClick={handleExport}>
@@ -110,7 +110,7 @@ export default function DashboardHome() {
           <div className="stat-content">
             <span className="stat-title">Total Revenue</span>
             <div className="stat-value-row">
-              <h2>$84,500</h2>
+              <h2>Rs 8.4 Lakh</h2>
               <span className="stat-trend up"><ArrowUpRight size={14} /> 8.5%</span>
             </div>
           </div>
@@ -150,7 +150,7 @@ export default function DashboardHome() {
           <div className="dh-card-header">
             <div>
               <h3>Revenue Growth</h3>
-              <p>Monthly revenue performance</p>
+              <p>Monthly revenue performance (PKR)</p>
             </div>
             <select className="dh-chart-select">
               <option>Last 6 Months</option>
@@ -159,7 +159,7 @@ export default function DashboardHome() {
           </div>
           <div style={{ width: '100%', height: 300 }}>
             <ResponsiveContainer>
-              <AreaChart data={revenueData} margin={{ top: 20, right: 0, left: -20, bottom: 0 }}>
+              <AreaChart data={revenueData} margin={{ top: 20, right: 0, left: 10, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#03ea04" stopOpacity={0.4}/>
@@ -168,10 +168,11 @@ export default function DashboardHome() {
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#222" />
                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#888', fontSize: 12 }} dy={10} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#888', fontSize: 12 }} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#888', fontSize: 12 }} tickFormatter={(val) => `${val/1000}K`} />
                 <RechartsTooltip 
                   cursor={{ stroke: '#03ea04', strokeWidth: 1, strokeDasharray: '3 3' }} 
                   contentStyle={{ borderRadius: '8px', border: '1px solid #03ea04', background: '#111', color: '#fff' }} 
+                  formatter={(value) => [`Rs ${value.toLocaleString()}`, 'Revenue']}
                 />
                 <Area type="monotone" dataKey="revenue" stroke="#03ea04" strokeWidth={3} fillOpacity={1} fill="url(#colorRevenue)" />
               </AreaChart>
@@ -283,7 +284,7 @@ export default function DashboardHome() {
                 <input 
                   type="text" 
                   className="rp-input" 
-                  placeholder="e.g. John Doe" 
+                  placeholder="e.g. Muhammad Ali" 
                   required
                   value={newMember.name}
                   onChange={(e) => setNewMember({...newMember, name: e.target.value})}
@@ -320,10 +321,10 @@ export default function DashboardHome() {
             </div>
             <div className="dh-list" style={{ maxHeight: "300px", overflowY: "auto" }}>
               {[
-                { name: "Sarah Connor", specialty: "CrossFit", image: "https://i.pravatar.cc/150?img=33" },
-                { name: "John Matrix", specialty: "Weightlifting", image: "https://i.pravatar.cc/150?img=12" },
-                { name: "Ellen Ripley", specialty: "Cardio & HIIT", image: "https://i.pravatar.cc/150?img=44" },
-                { name: "Bruce Wayne", specialty: "Martial Arts", image: "https://i.pravatar.cc/150?img=59" },
+                { name: "Umar Farooq", specialty: "CrossFit", image: "https://i.pravatar.cc/150?img=33" },
+                { name: "Bilal Ahmed", specialty: "Weightlifting", image: "https://i.pravatar.cc/150?img=12" },
+                { name: "Hamza Tariq", specialty: "Cardio & HIIT", image: "https://i.pravatar.cc/150?img=44" },
+                { name: "Fahad Mustafa", specialty: "Martial Arts", image: "https://i.pravatar.cc/150?img=59" },
               ].map((t, i) => (
                 <div className="dh-list-item" key={i}>
                   <img src={t.image} alt={t.name} className="dh-avatar" />

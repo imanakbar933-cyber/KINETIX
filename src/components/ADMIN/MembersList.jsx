@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Plus, Eye, Pencil, Trash2, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { 
+  Search, Plus, Eye, Pencil, Trash2, ChevronLeft, ChevronRight, X, Users 
+} from "lucide-react";
 import "./MembersList.css";
 
-// Demo Data (20 members)
+// Demo Data (10 members - original)
 const initialMembers = [
   { id: 1, name: "Cody Fisher", memberId: "3536", package: "Gold Membership", joinDate: "8/21/15", expireDate: "12/4/17", paid: "$450", due: "$450", status: "Not paid", image: "https://i.pravatar.cc/150?img=1" },
   { id: 2, name: "Marvin McKinney", memberId: "4152", package: "Silver Membership", joinDate: "5/19/12", expireDate: "2/11/12", paid: "$450", due: "$450", status: "Not paid", image: "https://i.pravatar.cc/150?img=2" },
@@ -24,10 +26,10 @@ const MembersList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // ✅ Modal States
+  // Modal States
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
-  const [modalMode, setModalMode] = useState("add"); // "add" | "edit"
+  const [modalMode, setModalMode] = useState("add");
   const [selectedMember, setSelectedMember] = useState(null);
   
   // Form State
@@ -48,31 +50,37 @@ const MembersList = () => {
     setCurrentPage(1);
   };
 
-  // ✅ Open Add Modal
+  // Add Modal
   const handleAddClick = () => {
     setModalMode("add");
     setFormData({
-      name: "", memberId: Math.floor(1000 + Math.random() * 9000).toString(), // Auto generate ID
-      package: "Gold Membership", joinDate: new Date().toLocaleDateString(), expireDate: "", 
-      paid: "$0", due: "$0", status: "Paid", image: `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 50)}`
+      name: "", 
+      memberId: Math.floor(1000 + Math.random() * 9000).toString(),
+      package: "Gold Membership", 
+      joinDate: new Date().toLocaleDateString(), 
+      expireDate: "", 
+      paid: "$0", 
+      due: "$0", 
+      status: "Paid", 
+      image: `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 50)}`
     });
     setIsFormModalOpen(true);
   };
 
-  // ✅ Open Edit Modal
+  // Edit Modal
   const handleEditClick = (member) => {
     setModalMode("edit");
     setFormData(member);
     setIsFormModalOpen(true);
   };
 
-  // ✅ Open View Modal
+  // View Modal
   const handleViewClick = (member) => {
     setSelectedMember(member);
     setIsViewModalOpen(true);
   };
 
-  // ✅ Save Form (Add or Edit)
+  // Save Form
   const handleSaveForm = (e) => {
     e.preventDefault();
     if (modalMode === "add") {
@@ -85,10 +93,12 @@ const MembersList = () => {
   };
 
   // Filter & Pagination
-  const filteredMembers = members.filter((member) =>
-    member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    member.memberId.includes(searchQuery)
-  );
+  const filteredMembers = useMemo(() => {
+    return members.filter((member) =>
+      member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      member.memberId.includes(searchQuery)
+    );
+  }, [members, searchQuery]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -98,13 +108,23 @@ const MembersList = () => {
   return (
     <div className="member-list-container">
       
+      {/* ✅ HEADER SECTION */}
+      <div className="members-header">
+        <div>
+          <h1>Members List</h1>
+          <p>Manage all your gym members, their packages and statuses.</p>
+        </div>
+      </div>
+
       {/* Top Bar */}
       <div className="member-top-bar">
         <div className="search-box">
           <Search size={18} className="search-icon" />
           <input 
-            type="text" placeholder="Search here..." 
-            value={searchInput} onChange={(e) => setSearchInput(e.target.value)}
+            type="text" 
+            placeholder="Search by name or ID..." 
+            value={searchInput} 
+            onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           />
           <button className="search-btn" onClick={handleSearch}>Search</button>
@@ -129,17 +149,17 @@ const MembersList = () => {
               {currentItems.map((member, index) => (
                 <motion.tr 
                   key={member.id} className="table-row"
-                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.2, delay: index * 0.03 }}
                 >
                   <td><img src={member.image} alt={member.name} className="member-avatar" /></td>
                   <td className="member-name">{member.name}</td>
-                  <td className="member-id">{member.memberId}</td>
-                  <td>{member.package}</td>
+                  <td className="member-id">#{member.memberId}</td>
+                  <td><span className="package-tag">{member.package}</span></td>
                   <td>{member.joinDate}</td>
                   <td>{member.expireDate}</td>
-                  <td>{member.paid}</td>
-                  <td>{member.due}</td>
+                  <td className="amount-paid">{member.paid}</td>
+                  <td className="amount-due">{member.due}</td>
                   <td>
                     <span className={`status-badge ${member.status === "Paid" ? "paid" : "not-paid"}`}>
                       {member.status}
@@ -147,7 +167,6 @@ const MembersList = () => {
                   </td>
                   <td>
                     <div className="action-buttons">
-                      {/* ✅ Functional Buttons */}
                       <button className="action-btn view" title="View" onClick={() => handleViewClick(member)}><Eye size={16} /></button>
                       <button className="action-btn edit" title="Edit" onClick={() => handleEditClick(member)}><Pencil size={16} /></button>
                       <button className="action-btn delete" title="Delete" onClick={() => handleDelete(member.id)}><Trash2 size={16} /></button>
@@ -157,113 +176,119 @@ const MembersList = () => {
               ))}
             </AnimatePresence>
             {currentItems.length === 0 && (
-              <tr><td colSpan="10" style={{ textAlign: "center", padding: "30px", color: "#9ca3af" }}>No members found!</td></tr>
+              <tr>
+                <td colSpan="10" className="empty-state">
+                  <Users size={30} style={{ marginBottom: 10, opacity: 0.5 }} />
+                  <br />
+                  No members found matching your search.
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
       </div>
 
       {/* Pagination */}
-      <div className="pagination-bar">
-        <span className="showing-text">
-          Showing {filteredMembers.length > 0 ? indexOfFirstItem + 1 : 0}-{indexOfLastItem > filteredMembers.length ? filteredMembers.length : indexOfLastItem} from {filteredMembers.length}
-        </span>
-        
-        <div className="pagination-controls">
-          <button className="page-btn nav" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}><ChevronLeft size={16} /></button>
+      {filteredMembers.length > 0 && (
+        <div className="pagination-bar">
+          <span className="showing-text">
+            Showing <strong>{indexOfFirstItem + 1}</strong> to <strong>{Math.min(indexOfLastItem, filteredMembers.length)}</strong> of <strong>{filteredMembers.length}</strong> members
+          </span>
           
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-            <button key={number} className={`page-btn ${currentPage === number ? "active" : ""}`} onClick={() => setCurrentPage(number)}>
-              {number}
+          <div className="pagination-controls">
+            <button className="page-btn nav" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
+              <ChevronLeft size={16} />
             </button>
-          ))}
+            
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+              <button key={number} className={`page-btn ${currentPage === number ? "active" : ""}`} onClick={() => setCurrentPage(number)}>
+                {number}
+              </button>
+            ))}
 
-          <button className="page-btn nav" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages || totalPages === 0}><ChevronRight size={16} /></button>
-        </div>
-      </div>
-
-      {/* ================= ✅ ADD / EDIT FORM MODAL ================= */}
-{isFormModalOpen && (
-  <div className="modal-overlay" onClick={() => setIsFormModalOpen(false)}>
-    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-      <div className="modal-header">
-        <h2>{modalMode === "add" ? "Add New Member" : "Edit Member"}</h2>
-        <button onClick={() => setIsFormModalOpen(false)}><X size={20} /></button>
-      </div>
-      
-      <form onSubmit={handleSaveForm} className="member-form">
-        <div className="form-row">
-          <div className="form-group">
-            <label>Full Name</label>
-            <input required type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="e.g. John Doe" />
-          </div>
-          <div className="form-group">
-            <label>Member ID</label>
-            <input required type="text" value={formData.memberId} onChange={(e) => setFormData({...formData, memberId: e.target.value})} />
+            <button className="page-btn nav" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages || totalPages === 0}>
+              <ChevronRight size={16} />
+            </button>
           </div>
         </div>
+      )}
 
-        {/* ✅ Yahan Package aur Status Hain */}
-        <div className="form-row">
-          <div className="form-group">
-            <label>Package</label>
-            <select 
-              value={formData.package} 
-              onChange={(e) => setFormData({...formData, package: e.target.value})}
-            >
-              <option value="Gold Membership">Gold Membership</option>
-              <option value="Silver Membership">Silver Membership</option>
-              <option value="Platinum Membership">Platinum Membership</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Status</label>
-            <select 
-              value={formData.status} 
-              onChange={(e) => setFormData({...formData, status: e.target.value})}
-            >
-              <option value="Paid">Paid</option>
-              <option value="Not paid">Not paid</option>
-            </select>
+      {/* ================= ADD / EDIT FORM MODAL ================= */}
+      {isFormModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsFormModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>{modalMode === "add" ? "Add New Member" : "Edit Member"}</h2>
+              <button className="modal-close" onClick={() => setIsFormModalOpen(false)}><X size={20} /></button>
+            </div>
+            
+            <form onSubmit={handleSaveForm} className="member-form">
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Full Name</label>
+                  <input required type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="e.g. John Doe" />
+                </div>
+                <div className="form-group">
+                  <label>Member ID</label>
+                  <input required type="text" value={formData.memberId} onChange={(e) => setFormData({...formData, memberId: e.target.value})} />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Package</label>
+                  <select value={formData.package} onChange={(e) => setFormData({...formData, package: e.target.value})}>
+                    <option value="Gold Membership">Gold Membership</option>
+                    <option value="Silver Membership">Silver Membership</option>
+                    <option value="Platinum Membership">Platinum Membership</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label>Status</label>
+                  <select value={formData.status} onChange={(e) => setFormData({...formData, status: e.target.value})}>
+                    <option value="Paid">Paid</option>
+                    <option value="Not paid">Not paid</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Joining Date</label>
+                  <input required type="text" value={formData.joinDate} onChange={(e) => setFormData({...formData, joinDate: e.target.value})} placeholder="MM/DD/YY" />
+                </div>
+                <div className="form-group">
+                  <label>Expire Date</label>
+                  <input required type="text" value={formData.expireDate} onChange={(e) => setFormData({...formData, expireDate: e.target.value})} placeholder="MM/DD/YY" />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Paid Amount</label>
+                  <input required type="text" value={formData.paid} onChange={(e) => setFormData({...formData, paid: e.target.value})} />
+                </div>
+                <div className="form-group">
+                  <label>Due Amount</label>
+                  <input required type="text" value={formData.due} onChange={(e) => setFormData({...formData, due: e.target.value})} />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label>Photo URL</label>
+                <input required type="text" value={formData.image} onChange={(e) => setFormData({...formData, image: e.target.value})} />
+              </div>
+
+              <div className="modal-actions">
+                <button type="button" className="btn-outline" onClick={() => setIsFormModalOpen(false)}>Cancel</button>
+                <button type="submit" className="btn-primary">Save Member</button>
+              </div>
+            </form>
           </div>
         </div>
+      )}
 
-        <div className="form-row">
-          <div className="form-group">
-            <label>Joining Date</label>
-            <input required type="text" value={formData.joinDate} onChange={(e) => setFormData({...formData, joinDate: e.target.value})} placeholder="MM/DD/YY" />
-          </div>
-          <div className="form-group">
-            <label>Expire Date</label>
-            <input required type="text" value={formData.expireDate} onChange={(e) => setFormData({...formData, expireDate: e.target.value})} placeholder="MM/DD/YY" />
-          </div>
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label>Paid Amount</label>
-            <input required type="text" value={formData.paid} onChange={(e) => setFormData({...formData, paid: e.target.value})} />
-          </div>
-          <div className="form-group">
-            <label>Due Amount</label>
-            <input required type="text" value={formData.due} onChange={(e) => setFormData({...formData, due: e.target.value})} />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label>Photo URL</label>
-          <input required type="text" value={formData.image} onChange={(e) => setFormData({...formData, image: e.target.value})} />
-        </div>
-
-        <div className="modal-actions">
-          <button type="button" className="btn-outline" onClick={() => setIsFormModalOpen(false)}>Cancel</button>
-          <button type="submit" className="btn-primary">Save Member</button>
-        </div>
-      </form>
-    </div>
-  </div>
-)}
-      {/* ================= ✅ VIEW MEMBER MODAL ================= */}
+      {/* ================= VIEW MEMBER MODAL ================= */}
       {isViewModalOpen && selectedMember && (
         <div className="modal-overlay" onClick={() => setIsViewModalOpen(false)}>
           <div className="view-modal-content" onClick={(e) => e.stopPropagation()}>
@@ -271,7 +296,7 @@ const MembersList = () => {
               <img src={selectedMember.image} alt={selectedMember.name} />
               <div>
                 <h2>{selectedMember.name}</h2>
-                <p>ID: {selectedMember.memberId} • {selectedMember.package}</p>
+                <p>ID: #{selectedMember.memberId} • {selectedMember.package}</p>
               </div>
               <button className="close-view" onClick={() => setIsViewModalOpen(false)}><X size={20} /></button>
             </div>
@@ -279,9 +304,9 @@ const MembersList = () => {
             <div className="view-grid">
               <div className="view-item"><span>Joining Date</span><strong>{selectedMember.joinDate}</strong></div>
               <div className="view-item"><span>Expire Date</span><strong>{selectedMember.expireDate}</strong></div>
-              <div className="view-item"><span>Paid</span><strong>{selectedMember.paid}</strong></div>
-              <div className="view-item"><span>Due</span><strong>{selectedMember.due}</strong></div>
-              <div className="view-item">
+              <div className="view-item"><span>Paid</span><strong className="text-green">{selectedMember.paid}</strong></div>
+              <div className="view-item"><span>Due</span><strong className="text-red">{selectedMember.due}</strong></div>
+              <div className="view-item" style={{ gridColumn: "1 / -1" }}>
                 <span>Status</span>
                 <strong className={selectedMember.status === "Paid" ? "text-green" : "text-red"}>
                   {selectedMember.status}
