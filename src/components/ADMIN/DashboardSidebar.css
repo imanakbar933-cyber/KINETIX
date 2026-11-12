@@ -160,20 +160,37 @@
 }
 
 /* =========================================================
-   SIDEBAR FOOTER (User Profile)
+   SIDEBAR FOOTER (User Profile) — clickable + moved down
 ========================================================= */
-.dash-sidebar-footer {
-  padding: 20px;
+
+.dash-sidebar-footer-wrap {
+  flex-shrink: 0;
+  padding: 10px 12px 24px;          /* ✅ extra bottom gap → profile thora upar */
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #0a0d0b;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.dash-sidebar-footer {
   display: flex;
   align-items: center;
-  gap: 15px;
-  flex-shrink: 0;   /* ✅ footer na squeeze ho */
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+  outline: none;
+}
+
+.dash-sidebar-footer:hover,
+.dash-sidebar-footer:focus-visible {
+  background: rgba(3, 234, 4, 0.08);
+  box-shadow: 0 0 0 1px rgba(3, 234, 4, 0.28) inset;
 }
 
 .dash-sidebar-footer img {
-  width: 45px;
-  height: 45px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--dash-accent, #03ea04);
@@ -183,13 +200,13 @@
 
 .user-info h4 {
   margin: 0 0 3px 0;
-  font-size: 15px;
+  font-size: 14px;
   color: #fff;
   font-weight: 600;
 }
 .user-info p {
   margin: 0;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--dash-accent, #03ea04);
   font-weight: 600;
 }
@@ -220,8 +237,13 @@
 .dashboard-layout.dashboard-light .dash-menu-item.active svg {
   color: var(--dash-accent, #03ea04);
 }
-.dashboard-layout.dashboard-light .dash-sidebar-footer {
+
+.dashboard-layout.dashboard-light .dash-sidebar-footer-wrap {
+  background: #ffffff;
   border-top: 1px solid #e5e7eb;
+}
+.dashboard-layout.dashboard-light .dash-sidebar-footer:hover {
+  background: rgba(3, 234, 4, 0.08);
 }
 .dashboard-layout.dashboard-light .user-info h4 {
   color: #111827;
@@ -247,8 +269,11 @@
 .dashboard-layout.dashboard-compact .sidebar-logo img {
   height: 36px;
 }
+.dashboard-layout.dashboard-compact .dash-sidebar-footer-wrap {
+  padding: 8px 12px 18px;
+}
 .dashboard-layout.dashboard-compact .dash-sidebar-footer {
-  padding: 14px 16px;
+  padding: 8px 10px;
 }
 .dashboard-layout.dashboard-compact .dash-sidebar-footer img {
   width: 36px;
@@ -259,4 +284,80 @@
 }
 .dashboard-layout.dashboard-compact .user-info p {
   font-size: 11px;
+}
+/* =========================================================
+   WHATSAPP STYLE MODAL - BUTTONS FIX (For Sidebar)
+========================================================= */
+
+/* Actions container */
+.wa-image-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 25px;
+  width: 100%;
+}
+
+/* Button row - horizontal alignment */
+.wa-image-btn-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Base style for all modal buttons */
+.wa-upload-btn, 
+.wa-remove-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  outline: none;
+  text-decoration: none;
+}
+
+/* Change Photo & Edit Profile (Green Outline) */
+.wa-upload-btn {
+  background: transparent !important;
+  border: 1px solid #03ea04 !important;
+  color: #03ea04 !important;
+}
+
+.wa-upload-btn:hover {
+  background: rgba(3, 234, 4, 0.1) !important;
+  box-shadow: 0 0 15px rgba(3, 234, 4, 0.3);
+}
+
+/* Remove Photo (Red Outline) */
+.wa-remove-btn {
+  background: transparent !important;
+  border: 1px solid #ff4d4d !important;
+  color: #ff4d4d !important;
+}
+
+.wa-remove-btn:hover {
+  background: rgba(255, 77, 77, 0.1) !important;
+  box-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .wa-image-btn-row {
+    flex-direction: column;
+    width: 100%;
+  }
+  .wa-upload-btn, 
+  .wa-remove-btn {
+    width: 100%;
+  }
 }

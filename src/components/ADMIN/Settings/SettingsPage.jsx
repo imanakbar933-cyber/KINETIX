@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   User, Briefcase, Bell, Shield, CreditCard, Palette,
   Check, Download, RotateCcw, Crown, Pencil, X,
@@ -9,6 +10,8 @@ import {
 import "./SettingsPage.css";
 import NotificationPreferences from "../NotificationPreferences";
 import SecuritySettings from "../SecuritySettings";
+
+const DEFAULT_AVATAR = "/images/user.jpg";
 
 const initialInvoices = [
   { id: "INV-2026-010", date: "Oct 01, 2026", description: "Enterprise Plan", amount: 5999, status: "Paid" },
@@ -36,12 +39,31 @@ const accentColors = [
   { name: "Energy Yellow", value: "#e8c323" },
 ];
 
+const VALID_TABS = ["Profile", "Business", "Notifications", "Security", "Billing", "Appearance"];
+
 const SettingsPage = () => {
+  // ✅ Default tab is Profile
   const [activeTab, setActiveTab] = useState("Profile");
   const [saveStatus, setSaveStatus] = useState("idle");
+  const [searchParams] = useSearchParams();
+
+  // ✅ Profile modal (open by default when ?tab=profile)
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   const notificationRef = useRef(null);
   const fileInputRef = useRef(null);
+
+  // ================= READ ?tab= FROM URL =================
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab) {
+      const pretty = tab.charAt(0).toUpperCase() + tab.slice(1).toLowerCase();
+      if (VALID_TABS.includes(pretty)) {
+        setActiveTab(pretty);
+        if (pretty === "Profile") setIsProfileModalOpen(true);
+      }
+    }
+  }, [searchParams]);
 
   // ================= PROFILE =================
   const [profile, setProfile] = useState(() => {
@@ -50,8 +72,9 @@ const SettingsPage = () => {
       name: "Nathan Reeves",
       email: "nathan@example.com",
       phone: "(512) 555-0118",
+      role: "Super Admin",
       bio: "Gym owner & fitness enthusiast running Dreams GYM across 6 branches.",
-      photo: "/images/user.jpg"
+      photo: DEFAULT_AVATAR
     };
   });
 
@@ -100,13 +123,26 @@ const SettingsPage = () => {
   const hasUnsavedAppearance =
     JSON.stringify(appearance) !== JSON.stringify(savedAppearance);
 
-  // ================= IMAGE =================
+  // ================= IMAGE HANDLERS =================
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfile({ ...profile, photo: imageUrl });
-    }
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const updated = { ...profile, photo: reader.result };
+      setProfile(updated);
+      localStorage.setItem("userProfile", JSON.stringify(updated));
+      window.dispatchEvent(new Event("profileUpdated"));
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemovePhoto = () => {
+    const updated = { ...profile, photo: DEFAULT_AVATAR };
+    setProfile(updated);
+    localStorage.setItem("userProfile", JSON.stringify(updated));
+    window.dispatchEvent(new Event("profileUpdated"));
   };
 
   // ================= SAVE =================
@@ -137,8 +173,9 @@ const SettingsPage = () => {
       name: "Nathan Reeves",
       email: "nathan@example.com",
       phone: "(512) 555-0118",
+      role: "Super Admin",
       bio: "Gym owner & fitness enthusiast running Dreams GYM across 6 branches.",
-      photo: "/images/user.jpg",
+      photo: DEFAULT_AVATAR,
     });
     setBusiness({
       gymName: "Dreams GYM",
@@ -150,7 +187,6 @@ const SettingsPage = () => {
       timezone: "ET",
     });
 
-    // ✅ Appearance bhi reset + save + notify
     setAppearance({ ...defaultAppearance });
     setSavedAppearance({ ...defaultAppearance });
     localStorage.setItem("kinetix_appearance", JSON.stringify(defaultAppearance));
@@ -198,7 +234,6 @@ const SettingsPage = () => {
     changeAppearance("accent", event.target.value);
   };
 
-  // ✅ Save + notify Dashboard
   const saveAppearance = () => {
     setSavedAppearance({ ...appearance });
     setAppearanceMessage("Appearance saved successfully.");
@@ -206,7 +241,6 @@ const SettingsPage = () => {
     window.dispatchEvent(new Event("appearanceUpdated"));
   };
 
-  // ✅ Restore + save + notify
   const restoreAppearance = () => {
     setAppearance({ ...defaultAppearance });
     setAppearanceMessage("Default restored.");
@@ -215,6 +249,10 @@ const SettingsPage = () => {
   };
 
   const requestTabChange = (nextTab) => {
+    if (nextTab === "Profile") {
+      setActiveTab("Profile");
+      return;
+    }
     if (nextTab === activeTab) return;
     if (activeTab === "Appearance" && hasUnsavedAppearance) {
       setPendingTab(nextTab);
@@ -310,38 +348,44 @@ const SettingsPage = () => {
 
           {/* ================= RIGHT CONTENT ================= */}
           <section className="settings-content">
-            {/* ================= PROFILE ================= */}
+            {/* ================= PROFILE (inline panel) ================= */}
             {activeTab === "Profile" && (
-              <>
-                <h2 className="content-title">Profile Information</h2>
+              <div className="profile-panel">
                 <div className="profile-top">
                   <div
-                    className="avatar-circle"
-                    style={{ overflow: "hidden", padding: 0 }}
+                    className="avatar-large-wrapper"
+                    onClick={() => fileInputRef.current.click()}
+                    title="Change photo"
                   >
-                    <img
-                      src={profile.photo}
-                      alt="User"
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
+                    <img src={profile.photo} alt={profile.name} />
+                    <div className="avatar-edit-overlay">
+                      <Pencil size={22} />
+                      <span>Change</span>
+                    </div>
                   </div>
                   <div className="profile-info">
                     <h3>{profile.name}</h3>
-                    <p>Super Admin · {profile.email}</p>
-                    <button
-                      className="btn-outline"
-                      type="button"
-                      onClick={() => fileInputRef.current.click()}
-                    >
-                      ↑ Change Photo
-                    </button>
-                    <input
-                      type="file"
-                      ref={fileInputRef}
-                      onChange={handleImageChange}
-                      accept="image/*"
-                      style={{ display: "none" }}
-                    />
+                    <p>
+                      {profile.email} · {profile.role || "Super Admin"}
+                    </p>
+                    <div className="profile-inline-actions">
+                      <button
+                        className="btn-outline"
+                        onClick={() => setIsProfileModalOpen(true)}
+                      >
+                        <Pencil size={14} /> Edit Profile
+                      </button>
+                      <button
+                        className="billing-danger-btn"
+                        onClick={() => {
+                          if (window.confirm("Remove profile photo?")) {
+                            handleRemovePhoto();
+                          }
+                        }}
+                      >
+                        <Trash2 size={14} /> Remove Photo
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -387,10 +431,11 @@ const SettingsPage = () => {
                     </div>
                     <div className="form-group">
                       <label>Role</label>
-                      <input type="text" defaultValue="Super Admin" readOnly />
-                      <span className="helper-text">
-                        Roles are managed by your organisation owner.
-                      </span>
+                      <input
+                        type="text"
+                        value={profile.role || "Super Admin"}
+                        readOnly
+                      />
                     </div>
                   </div>
                   <div className="form-group">
@@ -410,7 +455,7 @@ const SettingsPage = () => {
                     Save Profile
                   </button>
                 </form>
-              </>
+              </div>
             )}
 
             {/* ================= BUSINESS ================= */}
@@ -531,12 +576,7 @@ const SettingsPage = () => {
             {/* ================= NOTIFICATIONS ================= */}
             {activeTab === "Notifications" && (
               <div className="notifications-tab-wrapper">
-                <h2
-                  className="content-title"
-                  style={{ marginBottom: "20px" }}
-                >
-                  Notifications
-                </h2>
+                <h2 className="content-title" style={{ marginBottom: "20px" }}>Notifications</h2>
                 <NotificationPreferences ref={notificationRef} />
               </div>
             )}
@@ -635,17 +675,13 @@ const SettingsPage = () => {
                     </div>
                     <div className="billing-cycle-switch">
                       <button
-                        className={
-                          billingCycle === "monthly" ? "active" : ""
-                        }
+                        className={billingCycle === "monthly" ? "active" : ""}
                         onClick={() => setBillingCycle("monthly")}
                       >
                         Monthly
                       </button>
                       <button
-                        className={
-                          billingCycle === "yearly" ? "active" : ""
-                        }
+                        className={billingCycle === "yearly" ? "active" : ""}
                         onClick={() => setBillingCycle("yearly")}
                       >
                         Yearly <span>-17%</span>
@@ -825,9 +861,7 @@ const SettingsPage = () => {
                   <div className="billing-section-heading">
                     <div>
                       <h3>Accent Color</h3>
-                      <p>
-                        Pick a highlight color for buttons and links.
-                      </p>
+                      <p>Pick a highlight color for buttons and links.</p>
                     </div>
                   </div>
                   <div className="appearance-colors">
@@ -944,6 +978,108 @@ const SettingsPage = () => {
       </main>
 
       {/* ================= MODALS ================= */}
+
+      {/* PROFILE MODAL */}
+      {isProfileModalOpen && (
+        <div className="billing-modal-backdrop" onClick={() => setIsProfileModalOpen(false)}>
+          <div className="billing-modal profile-modal-large" onClick={(e) => e.stopPropagation()}>
+            <button className="billing-close" onClick={() => setIsProfileModalOpen(false)}>
+              <X size={20} />
+            </button>
+
+            <div className="profile-modal-header">
+              <div className="avatar-large-wrapper" onClick={() => fileInputRef.current.click()}>
+                <img src={profile.photo} alt={profile.name} />
+                <div className="avatar-edit-overlay">
+                  <Pencil size={24} />
+                  <span>Change</span>
+                </div>
+              </div>
+              <div className="profile-modal-title">
+                <h2>{profile.name}</h2>
+                <p>{profile.role || "Super Admin"} · {profile.email}</p>
+              </div>
+            </div>
+
+            <form
+              className="settings-form profile-modal-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSave();
+                setIsProfileModalOpen(false);
+              }}
+            >
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Full Name</label>
+                  <input
+                    type="text"
+                    value={profile.name}
+                    onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Email</label>
+                  <input
+                    type="email"
+                    value={profile.email}
+                    onChange={(e) => setProfile({ ...profile, email: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Phone</label>
+                  <input
+                    type="text"
+                    value={profile.phone}
+                    onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Role</label>
+                  <input type="text" value={profile.role || "Super Admin"} readOnly />
+                </div>
+              </div>
+              <div className="form-group">
+                <label>Bio</label>
+                <textarea
+                  rows="3"
+                  value={profile.bio}
+                  onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+                />
+              </div>
+
+              <div className="billing-modal-actions profile-modal-actions">
+                <button
+                  type="button"
+                  className="billing-danger-btn"
+                  onClick={() => {
+                    if (window.confirm("Remove profile photo?")) {
+                      handleRemovePhoto();
+                    }
+                  }}
+                >
+                  <Trash2 size={15} /> Remove Photo
+                </button>
+                <button type="button" className="btn-outline" onClick={() => setIsProfileModalOpen(false)}>
+                  Cancel
+                </button>
+                <button type="submit" className="btn-solid">
+                  <Check size={16} /> Save Profile
+                </button>
+              </div>
+            </form>
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleImageChange}
+              accept="image/*"
+              style={{ display: "none" }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Plan Modal */}
       {modal === "plan" && (
