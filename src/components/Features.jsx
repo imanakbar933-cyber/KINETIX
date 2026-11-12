@@ -111,7 +111,7 @@ const Features = () => {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.9, delay: 0.25 }}
           >
-            KINETIX?
+          OUR GYM?
           </motion.h2>
 
           <motion.p
@@ -121,7 +121,7 @@ const Features = () => {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.9, delay: 0.4 }}
           >
-            At KINETIX, we don't just build bodies — we build confidence, community,
+             We don't just build bodies — we build confidence, community,
             and lasting habits. With world-class equipment, certified trainers, and
             an atmosphere that pushes you to be your best, every workout becomes a
             step toward a stronger you.

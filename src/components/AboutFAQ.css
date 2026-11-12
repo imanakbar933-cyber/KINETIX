@@ -5,7 +5,7 @@
    ============================================ */
 .aboutfaq-section {
   position: relative;
-  background: #050505;
+  background: #0a0a0a;
   color: #fff;
   padding: 40px 60px 100px;              /* ✅ Top 100px → 40px */
   overflow: hidden;
@@ -110,7 +110,7 @@
   align-items: center;
   gap: 10px;
   background:#00ff00;
-  color: #0a0a0a;
+  color: #0a0a0a;;
   border: none;
   padding: 16px 32px;
   font-size: 0.95rem;
