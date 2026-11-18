@@ -111,7 +111,7 @@ const featuresData = [
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.9, delay: 0.25 }}
           >
-            KINETIX?
+          OUR GYM?
           </motion.h2>
 
           <motion.p
@@ -121,13 +121,10 @@ const featuresData = [
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.9, delay: 0.4 }}
           >
-          
-At KINETIX, we believe fitness is about more than lifting weights.
-It is about building strength, improving everyday habits, and making
-consistent progress. With practical trainer guidance, dedicated
-training areas, and a supportive environment, we help members work
-towards their fitness goals one workout at a time.
-
+             We don't just build bodies — we build confidence, community,
+            and lasting habits. With world-class equipment, certified trainers, and
+            an atmosphere that pushes you to be your best, every workout becomes a
+            step toward a stronger you.
           </motion.p>
         </div>
 
