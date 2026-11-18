@@ -1,4 +1,3 @@
-// src/components/ScheduleHero.jsx
 
 import React from "react";
 import { motion } from "motion/react";
@@ -9,7 +8,7 @@ const ScheduleHero = () => {
   return (
     <section className="schedulehero-section">
 
-      {/* 🎥 Video Background */}
+      {/* Video Background */}
       <video
         className="schedulehero-video"
         autoPlay
@@ -22,7 +21,7 @@ const ScheduleHero = () => {
         Your browser does not support the video tag.
       </video>
 
-      {/* 🌑 Dark Overlay */}
+      {/* Dark Overlay */}
       <div className="schedulehero-overlay"></div>
 
       {/* Content */}
@@ -36,7 +35,7 @@ const ScheduleHero = () => {
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
         >
-          WORKING SCHEDULES
+          TRAINING SCHEDULE
         </motion.h1>
 
         {/* Breadcrumb */}
@@ -48,9 +47,15 @@ const ScheduleHero = () => {
           transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
           aria-label="breadcrumb"
         >
-          <Link to="/" className="schedulehero-breadcrumb-link">HOME</Link>
+          <Link to="/" className="schedulehero-breadcrumb-link">
+            HOME
+          </Link>
+
           <span className="schedulehero-breadcrumb-separator">/</span>
-          <span className="schedulehero-breadcrumb-current">WORKING SCHEDULES</span>
+
+          <span className="schedulehero-breadcrumb-current">
+            TRAINING SCHEDULE
+          </span>
         </motion.nav>
 
       </div>
