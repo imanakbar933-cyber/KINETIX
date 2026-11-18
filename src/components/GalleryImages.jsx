@@ -9,16 +9,58 @@ const GalleryImages = () => {
   const [currentIndex, setCurrentIndex] = useState(null);
 
   // ✅ Gallery Images
-  const images = [
-    { id: 1, src: "/gym-assets/picture1.png", title: "Modern Gym Floor", size: "tall" },
-    { id: 2, src: "/gym-assets/picture2.png", title: "Group Training",   size: "normal" },
-    { id: 3, src: "/gym-assets/picture3.png", title: "Cardio Zone",      size: "wide" },
-    { id: 4, src: "/gym-assets/picture4.png", title: "Strength Area",    size: "normal" },
-    { id: 5, src: "/gym-assets/picture5.png", title: "Free Weights",     size: "wide" },
-    { id: 6, src: "/gym-assets/picture6.png", title: "Personal Training", size: "normal" },
-    { id: 7, src: "/gym-assets/picture7.png", title: "Functional Zone",  size: "normal" },
-    { id: 8, src: "/gym-assets/picture8.png", title: "Locker Room",      size: "wide" },
-  ];
+  
+const images = [
+  {
+    id: 1,
+    src: "/gym-assets/picture1.png",
+    title: "KINETIX Main Training Floor",
+    size: "tall",
+  },
+  {
+    id: 2,
+    src: "/gym-assets/picture2.png",
+    title: "Group Fitness Sessions",
+    size: "normal",
+  },
+  {
+    id: 3,
+    src: "/gym-assets/picture3.png",
+    title: "Cardio Training Area",
+    size: "wide",
+  },
+  {
+    id: 4,
+    src: "/gym-assets/picture4.png",
+    title: "Strength Training Zone",
+    size: "normal",
+  },
+  {
+    id: 5,
+    src: "/gym-assets/picture5.png",
+    title: "Free Weights & Barbells",
+    size: "wide",
+  },
+  {
+    id: 6,
+    src: "/gym-assets/picture6.png",
+    title: "Personal Training",
+    size: "normal",
+  },
+  {
+    id: 7,
+    src: "/gym-assets/picture7.png",
+    title: "Functional Fitness Training",
+    size: "normal",
+  },
+  {
+    id: 8,
+    src: "/gym-assets/picture8.png",
+    title: "Members' Changing Area",
+    size: "wide",
+  },
+];
+
 
   const closeModal = () => setCurrentIndex(null);
 

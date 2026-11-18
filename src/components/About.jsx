@@ -60,13 +60,19 @@ function About() {
             OUR <span>KINETIX</span> <br /> STORY
           </h2>
 
-          <p className="about-para">
-            Founded in 2024, KINETIX started with a simple vision: to make
-            fitness convenient, enjoyable, and accessible to everyone. What began
-            as a small venture has now grown into a thriving fitness community,
-            serving members worldwide with world-class equipment and expert
-            trainers.
-          </p>
+         
+<p className="about-para">
+  Founded in 2024 in Gujranwala, Pakistan, KINETIX was built with
+  one simple vision: to create a fitness space where people feel
+  motivated, supported, and confident in their fitness journey.
+  What started as a passion for fitness has grown into a community
+  of dedicated members, experienced trainers, and people working
+  every day towards healthier lifestyles. From personalized
+  workout plans to professional fitness guidance, KINETIX is
+  committed to helping every member achieve real and lasting
+  results.
+</p>
+
 
           <a href="#join" className="about-btn">
             <span>JOIN US</span>

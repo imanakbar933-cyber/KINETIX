@@ -26,7 +26,9 @@ const ClassroomHero = () => {
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
         >
-          OUR CLASSROOM
+         
+FITNESS CLASSES
+
         </motion.h1>
 
         {/* Breadcrumb */}
@@ -40,7 +42,7 @@ const ClassroomHero = () => {
         >
           <Link to="/" className="classroomhero-breadcrumb-link">HOME</Link>
           <span className="classroomhero-breadcrumb-separator">/</span>
-          <span className="classroomhero-breadcrumb-current">OUR CLASSROOM</span>
+          <span className="classroomhero-breadcrumb-current"> FITNESS CLASSES</span>
         </motion.nav>
 
       </div>

@@ -1,8 +1,9 @@
+
 import "./Headlines.css";
 
 const HeadlinesItems = () => (
   <>
-    <span className="white-text">FITNESS ESSENTIALS</span>
+    <span className="white-text">WELCOME TO KINETIX</span>
 
     <img
       src="/images/dumbbell.jpg"
@@ -10,7 +11,7 @@ const HeadlinesItems = () => (
       className="dumbbell-icon"
     />
 
-    <span className="green-text">WORKOUT CENTRAL</span>
+    <span className="green-text">TRAIN WITH PURPOSE</span>
 
     <img
       src="/images/dumbbell.jpg"
@@ -18,7 +19,7 @@ const HeadlinesItems = () => (
       className="dumbbell-icon"
     />
 
-    <span className="white-text">FIT ZONE HIGHLIGHTS</span>
+    <span className="white-text">STRENGTH & CONDITIONING</span>
 
     <img
       src="/images/dumbbell.jpg"
@@ -26,7 +27,7 @@ const HeadlinesItems = () => (
       className="dumbbell-icon"
     />
 
-    <span className="green-text">TRAINING HUB</span>
+    <span className="green-text">YOUR FITNESS JOURNEY</span>
 
     <img
       src="/images/dumbbell.jpg"
@@ -34,7 +35,7 @@ const HeadlinesItems = () => (
       className="dumbbell-icon"
     />
 
-    <span className="white-text">FITNESS HEADQUARTERS</span>
+    <span className="white-text">MOVE BETTER, FEEL STRONGER</span>
 
     <img
       src="/images/dumbbell.jpg"
@@ -42,7 +43,7 @@ const HeadlinesItems = () => (
       className="dumbbell-icon"
     />
 
-    <span className="green-text">GEAR UP</span>
+    <span className="green-text">PROGRESS STARTS HERE</span>
 
     <img
       src="/images/dumbbell.jpg"

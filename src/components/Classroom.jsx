@@ -8,56 +8,57 @@ import "./Classroom.css";
 const Classroom= () => {
 
   // ✅ 6 Classes Data
-  const classes = [
-    {
-      id: 1,
-      title: "ONLINE CLASSES & RESOURCES",
-      description:
-        "Join our energetic group fitness classes led by experienced instructors.",
-      image: "/gym-assets/class1.jpg",
-     link: "/class-detail/online-classes", 
-    },
-    {
-      id: 2,
-      title: "NUTRITION COUNSELLING",
-      description:
-        "Join our energetic group fitness classes led by experienced instructors.",
-      image: "/gym-assets/class2.jpg",
-     link: "/class-detail/nutrition",
-    },
-    {
-      id: 3,
-      title: "PERSONAL TRAINING SESSIONS",
-      description:
-        "Join our energetic group fitness classes led by experienced instructors.",
-      image: "/gym-assets/class3.jpg",
-     link: "/class-detail/personal-training",
-    },
-    {
-      id: 4,
-      title: "FITNESS CHALLENGES",
-      description:
-        "Join our energetic group fitness classes led by experienced instructors.",
-      image: "/gym-assets/class4.jpg",
-      link: "/class-detail/fitness-challenges",
-    },
-    {
-      id: 5,
-      title: "WORKSHOPS & SEMINARS",
-      description:
-        "Join our energetic group fitness classes led by experienced instructors.",
-      image: "/gym-assets/class5.jpg",
-      link: "/class-detail/workshops", //
-    },
-    {
-      id: 6,
-      title: "GROUP FITNESS CLASSES",
-      description:
-        "Join our energetic group fitness classes led by experienced instructors.",
-      image: "/gym-assets/class6.jpg",
-      link: "/class-detail/group-fitness",
-    },
-  ];
+ 
+const classes = [
+  {
+    id: 1,
+    title: "STRENGTH & CONDITIONING",
+    description:
+      "Build strength, improve endurance, and develop proper lifting techniques with guided resistance training sessions.",
+    image: "/gym-assets/class1.jpg",
+    link: "/class-detail/online-classes",
+  },
+  {
+    id: 2,
+    title: "WEIGHT MANAGEMENT",
+    description:
+      "Follow structured workout sessions designed to support healthy weight management through consistent exercise.",
+    image: "/gym-assets/class2.jpg",
+    link: "/class-detail/nutrition",
+  },
+  {
+    id: 3,
+    title: "PERSONAL TRAINING",
+    description:
+      "Get individual attention from an experienced trainer with workouts planned around your personal fitness goals.",
+    image: "/gym-assets/class3.jpg",
+    link: "/class-detail/personal-training",
+  },
+  {
+    id: 4,
+    title: "HIIT & FAT BURN",
+    description:
+      "Challenge yourself with short, energetic workout intervals that combine cardio and strength exercises.",
+    image: "/gym-assets/class4.jpg",
+    link: "/class-detail/fitness-challenges",
+  },
+  {
+    id: 5,
+    title: "FUNCTIONAL FITNESS",
+    description:
+      "Improve balance, mobility, coordination, and everyday strength through practical full-body exercises.",
+    image: "/gym-assets/class5.jpg",
+    link: "/class-detail/workshops",
+  },
+  {
+    id: 6,
+    title: "CARDIO & ENDURANCE",
+    description:
+      "Improve cardiovascular fitness and stamina through guided cardio sessions suitable for different fitness levels.",
+    image: "/gym-assets/class6.jpg",
+    link: "/class-detail/group-fitness",
+  },
+];
 
   return (
     <section className="classroomcontent-section">

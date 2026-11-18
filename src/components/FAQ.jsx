@@ -7,44 +7,46 @@ import "./FAQ.css";
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(1);
 
-  const faqData = [
-    {
-      id: 1,
-      question: "How do I sign up for a membership?",
-      answer:
-        "Signing up is easy! You can register online through our website, visit our front desk in person, or call us at 0306-789-5432. All you need is a valid ID and a payment method. Your membership activates the same day!",
-    },
-    {
-      id: 2,
-      question: "Is there a joining or registration fee?",
-      answer:
-        "Yes, there's a one-time registration fee of $29 that covers your membership card, locker assignment, and a free orientation session with one of our trainers. No hidden charges — this is a one-time payment only.",
-    },
-    {
-      id: 3,
-      question: "What equipment do you have in the gym?",
-      answer:
-        "We have everything you need: premium cardio machines (treadmills, ellipticals, bikes), free weights up to 50kg, power racks, cable machines, functional training area, and a dedicated stretching zone. All equipment is sanitized daily.",
-    },
-    {
-      id: 4,
-      question: "Do you offer group fitness classes?",
-      answer:
-        "Absolutely! We offer 20+ group classes every week including Yoga, Zumba, CrossFit, HIIT, Spin, and Boxing. All classes are included in Pro and Premium memberships. Check our schedule page for timings and book your spot!",
-    },
-    {
-      id: 5,
-      question: "Can I cancel my membership anytime?",
-      answer:
-        "Yes, you can cancel anytime with no penalties. Just give us 30 days' notice in writing (email or at the front desk). Any prepaid fees for unused months will be refunded within 14 business days.",
-    },
-    {
-      id: 6,
-      question: "Do you have a nutritionist or diet plans?",
-      answer:
-        "Yes! We have certified nutritionists available for consultations. Premium members get one free diet plan consultation per month. Custom meal plans start at $19 for non-members. Book at the front desk.",
-    },
-  ];
+ 
+const faqData = [
+  {
+    id: 1,
+    question: "How can I become a KINETIX member?",
+    answer:
+      "You can get started by visiting KINETIX Fitness Club in Gujranwala or contacting our team for membership details. Our staff can explain the available plans, registration process, and help you choose an option that suits your fitness goals.",
+  },
+  {
+    id: 2,
+    question: "What are the membership fees and registration charges?",
+    answer:
+      "Membership charges depend on the selected plan and duration. Our team will share the current fee structure, any applicable registration charges, and payment details before you sign up.",
+  },
+  {
+    id: 3,
+    question: "What gym equipment is available at KINETIX?",
+    answer:
+      "Our training facilities include strength-training equipment, free weights, barbells, and cardio workout options. Members can choose exercises according to their fitness level and training goals.",
+  },
+  {
+    id: 4,
+    question: "Do you provide personal training and workout plans?",
+    answer:
+      "Yes, members can get trainer guidance for exercise techniques and workout routines. Training recommendations can be adjusted according to individual fitness goals, experience, and progress.",
+  },
+  {
+    id: 5,
+    question: "What are the gym opening and closing hours?",
+    answer:
+      "Our gym operates according to its scheduled training hours. Please contact the KINETIX team to confirm the latest opening and closing times before planning your visit.",
+  },
+  {
+    id: 6,
+    question: "Do you provide diet plans and nutrition guidance?",
+    answer:
+      "Members can explore nutrition guidance and diet-plan options according to their fitness goals. Recommendations may consider daily routine, food preferences, and training requirements.",
+  },
+];
+
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -64,7 +66,7 @@ const FAQ = () => {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.8 }}
           >
-            Got Questions? <br /> We've Got Answers
+           Questions About KINETIX? <br /> We're Here to Help
           </motion.h2>
 
           <motion.p
@@ -74,8 +76,8 @@ const FAQ = () => {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.15 }}
           >
-            Find answers to common questions about our gym, memberships,
-            facilities, and training programs.
+           Learn more about membership plans, gym facilities, training
+options, and everything you need before joining KINETIX.
           </motion.p>
 
           {/* ✅ Optional Button — Screenshot 2 jaisa */}

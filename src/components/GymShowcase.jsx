@@ -1,11 +1,9 @@
+
 import "./GymShowcase.css";
-
-
 
 function GymShowcase() {
   return (
     <div>
-
       <section className="gym-showcase">
 
         {/* ================= TOP SECTION ================= */}
@@ -17,7 +15,7 @@ function GymShowcase() {
           <div className="showcase-heading">
 
             <p className="showcase-small">
-              MORE THAN A GYM
+              WELCOME TO KINETIX FITNESS CLUB
             </p>
 
             <h2>
@@ -27,13 +25,12 @@ function GymShowcase() {
             </h2>
 
             <p className="showcase-description">
-              Everything you need to train harder,
-              track your progress and become the
-              strongest version of yourself.
+              Train with purpose, stay consistent, and work
+              towards your fitness goals with the right
+              environment and guidance at KINETIX.
             </p>
 
           </div>
-
 
           {/* RIGHT SIDE - IMAGES */}
 
@@ -43,21 +40,19 @@ function GymShowcase() {
 
               <div className="image-label">
                 <span>01</span>
-                TRAIN HARD
+                TRAIN WITH PURPOSE
               </div>
 
             </div>
-
 
             <div className="gym-image image-two">
 
               <div className="image-label">
                 <span>02</span>
-                STAY STRONG
+                PROGRESS EVERY DAY
               </div>
 
             </div>
-
 
             {/* MOVING CIRCLE */}
 
@@ -75,9 +70,7 @@ function GymShowcase() {
 
       </section>
 
-
       {/* ================= WORKOUT ANIMATION ================= */}
-
 
     </div>
   );

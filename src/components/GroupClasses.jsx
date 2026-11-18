@@ -2,46 +2,137 @@ import { useState } from "react";
 import { ServicePage, Block, Steps, TipList, Cta, Reveal } from "./ServiceKit";
 
 /* NOTE: timetable, spots aur stats SAMPLE hain. Apna asal schedule yahan edit karein. */
-const MARQUEE = ["Sweat Together", "Yoga", "Zumba", "HIIT", "All Levels Welcome", "Good Vibes Only"];
-
-const STATS = [
-  { value: 20, suffix: "+", label: "Classes every week" },
-  { value: 3, suffix: "", label: "Class styles" },
-  { value: 45, suffix: "–60 min", label: "Class length" },
-  { value: 100, suffix: "%", label: "Beginner friendly options" },
+const MARQUEE = [
+  "Train Together",
+  "Yoga Sessions",
+  "Zumba Fitness",
+  "HIIT Training",
+  "All Fitness Levels",
+  "Stronger Every Day"
 ];
 
+const STATS = [
+  { value: 20, suffix: "", label: "Scheduled classes per week" },
+  { value: 3, suffix: "", label: "Group class styles" },
+  { value: 45, suffix: "–60 min", label: "Average class duration" },
+  { value: 7, suffix: "", label: "Days with scheduled classes" },
+];
 const TYPES = ["All", "Yoga", "Zumba", "HIIT"];
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 const c = (id, time, name, type, level, mins, int, spots) => ({ id, time, name, type, level, mins, int, spots });
 const SCHEDULE = [
-  [c("m1", "7:00 AM", "Morning Flow", "Yoga", "All levels", 60, 1, 12), c("m2", "6:00 PM", "Zumba Party", "Zumba", "All levels", 60, 3, 9), c("m3", "7:30 PM", "HIIT Burn", "HIIT", "Intermediate", 45, 5, 6)],
-  [c("t1", "6:30 AM", "HIIT Express", "HIIT", "All levels", 45, 4, 10), c("t2", "5:30 PM", "Vinyasa Yoga", "Yoga", "Intermediate", 60, 2, 8), c("t3", "7:00 PM", "Zumba Toning", "Zumba", "All levels", 60, 3, 11)],
-  [c("w1", "7:00 AM", "Gentle Yoga", "Yoga", "Beginner", 60, 1, 14), c("w2", "6:00 PM", "HIIT Circuit", "HIIT", "All levels", 45, 4, 7), c("w3", "7:30 PM", "Zumba Dance", "Zumba", "All levels", 60, 3, 12)],
-  [c("h1", "6:30 AM", "Zumba Wake-Up", "Zumba", "All levels", 45, 3, 10), c("h2", "5:30 PM", "Power Yoga", "Yoga", "Intermediate", 60, 3, 8), c("h3", "7:00 PM", "HIIT Strength", "HIIT", "Intermediate", 45, 5, 5)],
-  [c("f1", "7:00 AM", "HIIT Burn", "HIIT", "All levels", 45, 4, 9), c("f2", "6:00 PM", "Zumba Fiesta", "Zumba", "All levels", 60, 4, 13), c("f3", "7:30 PM", "Yin Yoga", "Yoga", "Beginner", 60, 1, 15)],
-  [c("s1", "9:00 AM", "Yoga Flow", "Yoga", "All levels", 60, 2, 14), c("s2", "10:30 AM", "Zumba Cardio", "Zumba", "All levels", 60, 4, 12), c("s3", "12:00 PM", "HIIT Challenge", "HIIT", "Advanced", 45, 5, 8)],
-  [c("u1", "9:00 AM", "Restorative Yoga", "Yoga", "Beginner", 60, 1, 15), c("u2", "10:30 AM", "Beginner HIIT", "HIIT", "Beginner", 45, 3, 12)],
-];
+  // MONDAY
+  [
+    c("m1", "7:00 AM", "Morning Yoga Flow", "Yoga", "Beginner", 60, 1, 12),
+    c("m2", "5:30 PM", "Zumba Fitness", "Zumba", "All levels", 45, 3, 10),
+    c("m3", "7:00 PM", "HIIT Conditioning", "HIIT", "Intermediate", 45, 4, 8),
+  ],
 
+  // TUESDAY
+  [
+    c("t1", "7:00 AM", "HIIT Express", "HIIT", "Beginner", 45, 3, 12),
+    c("t2", "5:30 PM", "Evening Yoga", "Yoga", "All levels", 60, 2, 10),
+    c("t3", "7:00 PM", "Zumba Toning", "Zumba", "All levels", 45, 3, 11),
+  ],
+
+  // WEDNESDAY
+  [
+    c("w1", "7:00 AM", "Gentle Yoga", "Yoga", "Beginner", 45, 1, 14),
+    c("w2", "5:30 PM", "HIIT Circuit", "HIIT", "Intermediate", 45, 4, 8),
+    c("w3", "7:00 PM", "Zumba Dance Fitness", "Zumba", "All levels", 45, 3, 12),
+  ],
+
+  // THURSDAY
+  [
+    c("h1", "7:00 AM", "Morning HIIT", "HIIT", "All levels", 45, 3, 10),
+    c("h2", "5:30 PM", "Power Yoga", "Yoga", "Intermediate", 60, 3, 9),
+    c("h3", "7:00 PM", "Zumba Cardio", "Zumba", "All levels", 45, 3, 12),
+  ],
+
+  // FRIDAY
+  [
+    c("f1", "5:00 PM", "Evening HIIT", "HIIT", "Intermediate", 45, 4, 8),
+    c("f2", "6:15 PM", "Friday Zumba", "Zumba", "All levels", 45, 3, 12),
+    c("f3", "7:15 PM", "Relaxing Yoga", "Yoga", "Beginner", 60, 1, 14),
+  ],
+
+  // SATURDAY
+  [
+    c("s1", "8:00 AM", "Weekend Yoga Flow", "Yoga", "All levels", 60, 2, 14),
+    c("s2", "9:30 AM", "Zumba Weekend Session", "Zumba", "All levels", 45, 3, 12),
+    c("s3", "11:00 AM", "Weekend HIIT Challenge", "HIIT", "Advanced", 45, 5, 8),
+  ],
+
+  // SUNDAY
+  [
+    c("u1", "9:00 AM", "Beginner Yoga", "Yoga", "Beginner", 60, 1, 15),
+    c("u2", "10:30 AM", "Beginner HIIT", "HIIT", "Beginner", 45, 2, 12),
+  ],
+];
 const STYLES = [
-  { name: "Yoga", tag: "Flexibility and calm", text: "Build mobility, balance and core strength while lowering stress. Gentle or powerful, you choose.", burn: "About 180–300 kcal per hour", int: 2 },
-  { name: "Zumba", tag: "Dance cardio", text: "Latin-inspired dance workouts that feel like a party and quietly burn a lot of energy.", burn: "About 400–550 kcal per hour", int: 4 },
-  { name: "HIIT", tag: "Fast and intense", text: "Short, hard intervals with rests. Great for fitness and fat loss when time is tight.", burn: "About 450–700 kcal per hour", int: 5 },
+  {
+    name: "Yoga",
+    tag: "Flexibility & Balance",
+    text: "Improve flexibility, balance, breathing, and core strength through guided yoga movements. Suitable for members who prefer a controlled and focused workout.",
+    burn: "Low to moderate intensity",
+    int: 2,
+  },
+  {
+    name: "Zumba",
+    tag: "Dance-Based Cardio",
+    text: "Enjoy energetic dance-based workouts that combine music, movement, and cardio exercise. A fun way to stay active while improving stamina and coordination.",
+    burn: "Moderate to high intensity",
+    int: 4,
+  },
+  {
+    name: "HIIT",
+    tag: "High-Intensity Training",
+    text: "Combine short periods of challenging exercise with recovery breaks. HIIT sessions can improve cardiovascular fitness and overall conditioning.",
+    burn: "High intensity",
+    int: 5,
+  },
 ];
 
 const STEPS = [
-  { when: "10 min", title: "Warm-up", text: "Raise your heart rate and open up the joints you are about to use." },
-  { when: "30–40 min", title: "Main session", text: "The class itself, with options to make every move easier or harder." },
-  { when: "10 min", title: "Cool-down", text: "Stretch and slow your breathing so recovery starts straight away." },
-  { when: "After", title: "Refuel", text: "Water, a snack or a smoothie to finish the job." },
+  {
+    when: "10 min",
+    title: "Warm-Up",
+    text: "Start with light movements and mobility exercises to prepare your body for the session.",
+  },
+  {
+    when: "30–40 min",
+    title: "Main Workout",
+    text: "Follow the instructor through the planned exercises, with easier and more challenging variations where needed.",
+  },
+  {
+    when: "5–10 min",
+    title: "Cool-Down",
+    text: "Finish with gentle movements, stretching, and controlled breathing.",
+  },
+  {
+    when: "After Class",
+    title: "Recovery",
+    text: "Drink water, allow your body to recover, and follow your usual balanced nutrition routine.",
+  },
 ];
 const TIPS = [
-  { title: "Arrive 10 minutes early", text: "Time to find a spot, meet your coach and mention any injuries." },
-  { title: "Bring water and a towel", text: "Even a gentle class can leave you sweating." },
-  { title: "Scale the moves", text: "Coaches show easier and harder versions. Pick the one that feels right today." },
-  { title: "Try every style once", text: "You might love the class you expected to dislike." },
+  {
+    title: "Arrive 10 minutes early",
+    text: "Get familiar with the class area and speak with the instructor if you are new.",
+  },
+  {
+    title: "Bring a water bottle and towel",
+    text: "Stay hydrated and keep a towel with you during your workout.",
+  },
+  {
+    title: "Wear comfortable workout clothes",
+    text: "Choose suitable sportswear and footwear that allow you to move comfortably.",
+  },
+  {
+    title: "Start at your own fitness level",
+    text: "Do not rush into difficult movements. Follow the beginner variations and gradually improve.",
+  },
 ];
 
 const Meter = ({ n }) => (
@@ -62,10 +153,10 @@ export default function GroupClasses() {
     <ServicePage
       id="group-classes"
       marquee={MARQUEE}
-      kicker="Train Together"
-      title="Group Classes That Keep You"
-      accent="Showing Up"
-      lead="Yoga, Zumba and HIIT led by coaches who keep the energy high. Browse the week, filter by style and reserve your spot."
+      kicker="Group Fitness at KINETIX"
+title="Train Together and Keep"
+accent="Getting Stronger"
+lead="Join guided Yoga, Zumba, and HIIT sessions at KINETIX. Explore the weekly timetable, choose a workout style, and find a class that matches your fitness level."
       stats={STATS}
     >
       <Block title="Weekly Timetable">
@@ -138,11 +229,11 @@ export default function GroupClasses() {
         <TipList items={TIPS} />
       </Block>
 
-      <Cta
-        title="Your first class is waiting"
-        text="Pick a class, bring a friend and see why people keep coming back."
-        label="Join a class"
-      />
+     <Cta
+  title="Ready for your first group class?"
+  text="Choose a session, bring your workout essentials, and take the next step in your fitness journey."
+  label="Join a class"
+/>
     </ServicePage>
   );
 }
