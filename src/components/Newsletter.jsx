@@ -1,8 +1,7 @@
 
-
 import React from "react";
 import { motion } from "motion/react";
-import './Newsletter.css';  
+import "./Newsletter.css";
 
 const Newsletter = () => {
   return (
@@ -18,7 +17,7 @@ const Newsletter = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          STAY FIT AND <br /> INFORMED
+          STAY STRONG AND <br /> STAY INFORMED
         </motion.h1>
 
         {/* Paragraph with fade-up animation */}
@@ -28,9 +27,9 @@ const Newsletter = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          Get fit, stay motivated! Subscribe now to receive 
-          personalized workout plans, nutrition guides, and 
-           early access to our gym events and challenges.
+          Stay connected with KINETIX Fitness Club! Get fitness
+          tips, workout inspiration, healthy lifestyle guidance,
+          and updates about our latest gym activities and offers.
         </motion.p>
 
         {/* Email input + arrow with fade-up */}
@@ -42,17 +41,25 @@ const Newsletter = () => {
         >
           <input
             type="email"
-            placeholder="hello@yourdomain.com"
+            placeholder="Enter your email address"
             className="newsletter-input"
+            aria-label="Email address"
           />
-          <button className="newsletter-arrow">→</button>
+
+          <button
+            type="button"
+            className="newsletter-arrow"
+            aria-label="Subscribe to newsletter"
+          >
+            →
+          </button>
         </motion.div>
       </div>
 
       {/* ---------- RIGHT SIDE: Image in circular glow ---------- */}
       <div className="newsletter-right">
 
-        {/* Glowing pulsing circle behind image — AUTO animation */}
+        {/* Glowing pulsing circle behind image */}
         <motion.div
           className="newsletter-glow"
           animate={{
@@ -66,15 +73,15 @@ const Newsletter = () => {
           }}
         />
 
-        {/* The image inside the circle — AUTO floating animation */}
+        {/* Trainer image with floating animation */}
         <motion.img
           src="/gym-assets/Newsletter.jpg"
-          alt="Trainer helping client"
+          alt="Personal training session at KINETIX Fitness Club"
           className="newsletter-img"
           initial={{ opacity: 0, scale: 0.5, rotate: -15 }}
           whileInView={{
             opacity: 1,
-            scale: [0.98, 1.02, 0.98],   // breathing
+            scale: [0.98, 1.02, 0.98],
             rotate: 0,
           }}
           viewport={{ once: false, amount: 0.3 }}
@@ -88,10 +95,7 @@ const Newsletter = () => {
             },
           }}
         />
-      
 
-       
-        
       </div>
 
     </section>
@@ -99,5 +103,3 @@ const Newsletter = () => {
 };
 
 export default Newsletter;
-
-
