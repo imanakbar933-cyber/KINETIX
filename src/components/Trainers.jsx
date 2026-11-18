@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Trainers.css";
@@ -6,14 +7,14 @@ function Trainers() {
   const sectionRef = useRef(null);
   const [inView, setInView] = useState(false);
 
-  // ✅ Intersection Observer (Reliable & Har baar animate hoga)
+  // Intersection Observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
         } else {
-          setInView(false); // Scroll out hone par reset
+          setInView(false);
         }
       },
       { threshold: 0.15 }
@@ -26,7 +27,7 @@ function Trainers() {
     return () => observer.disconnect();
   }, []);
 
-  // ✅ EXACT SAME ARRAY AS TEAMFACES
+  // KINETIX TRAINERS DATA
   const trainersData = [
     {
       id: 1,
@@ -45,14 +46,14 @@ function Trainers() {
     {
       id: 3,
       name: "FATIMA ALI",
-      role: "Yoga Instructor",
+      role: "Group Fitness Instructor",
       image: "/gym-assets/Fatimah.jpg",
       link: "/team/fatima",
     },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCount = 3; // 3 cards ek waqt mein dikhenge
+  const visibleCount = 3;
 
   const handleNext = () => {
     setCurrentIndex((prev) =>
@@ -62,104 +63,131 @@ function Trainers() {
 
   const handlePrev = () => {
     setCurrentIndex((prev) =>
-      prev - 1 < 0 ? trainersData.length - visibleCount : prev - 1
+      prev - 1 < 0
+        ? trainersData.length - visibleCount
+        : prev - 1
     );
   };
 
   const headingWords = [
-    { text: "THE",     green: false, index: 0 },
-    { text: "FACES",   green: false, index: 1 },
-    { text: "BEHIND",  green: false, index: 2 },
-    { text: "KINETIX", green: true,  index: 3 },
+    { text: "THE", green: false, index: 0 },
+    { text: "FACES", green: false, index: 1 },
+    { text: "BEHIND", green: false, index: 2 },
+    { text: "KINETIX", green: true, index: 3 },
   ];
 
   return (
-    <section ref={sectionRef} className={`trainers ${inView ? "in-view" : ""}`}>
+    <section
+      ref={sectionRef}
+      className={`trainers ${inView ? "in-view" : ""}`}
+    >
       <div className="trainers-container">
-        
-        {/* ===== LEFT SIDE ===== */}
+
+        {/* LEFT SIDE */}
         <div className="trainers-left">
-          
+
           {/* Tag */}
           <span className="trainers-tag">
             OUR TEAM
           </span>
 
-          {/* Heading Words */}
+          {/* Heading */}
           <h2 className="trainers-heading">
             {headingWords.map((word) => (
               <span
                 key={word.index}
                 className={`word ${word.green ? "green" : ""}`}
-                style={{ "--i": word.index }} // 👈 Index pass kiya for CSS delay
+                style={{ "--i": word.index }}
               >
                 {word.text}
               </span>
             ))}
           </h2>
 
-          {/* Controls */}
+          {/* Slider Controls */}
           <div className="trainers-controls">
             <button
               className="trainer-arrow"
               onClick={handlePrev}
-              aria-label="Previous"
+              aria-label="Previous trainer"
             >
               ←
             </button>
-            <button className="trainer-arrow" onClick={handleNext} aria-label="Next">
+
+            <button
+              className="trainer-arrow"
+              onClick={handleNext}
+              aria-label="Next trainer"
+            >
               →
             </button>
           </div>
         </div>
 
-        {/* ===== RIGHT SIDE — SLIDER ===== */}
+        {/* RIGHT SIDE - TRAINER SLIDER */}
         <div className="trainers-slider">
           <div
             className="trainers-track"
             style={{
               transform: `translateX(calc(-${currentIndex} * (100% / ${visibleCount} + 20px)))`,
-              transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)"
+              transition:
+                "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           >
             {trainersData.map((trainer, idx) => (
               <div
                 key={trainer.id}
                 className="trainer-card"
-                style={{ "--i": idx }} // 👈 Index pass kiya for CSS delay
+                style={{ "--i": idx }}
               >
-                <Link to={trainer.link} className="trainer-card-link">
+                <Link
+                  to={trainer.link}
+                  className="trainer-card-link"
+                  aria-label={`View ${trainer.name} profile`}
+                >
                   <div className="trainer-card-image">
-                    <img src={trainer.image} alt={trainer.name} />
+
+                    <img
+                      src={trainer.image}
+                      alt={`${trainer.name} - ${trainer.role}`}
+                    />
 
                     <div className="trainer-sweep"></div>
                     <div className="trainer-scan"></div>
                     <div className="trainer-card-overlay"></div>
 
-                    {/* ✅ Naam 2 lines mein */}
+                    {/* Trainer Name */}
                     <div className="trainer-name-block">
                       <h3 className="trainer-card-name">
                         {trainer.name.split(" ")[0]}
                       </h3>
+
                       {trainer.name.split(" ")[1] && (
                         <h3 className="trainer-card-name">
-                          {trainer.name.split(" ").slice(1).join(" ")}
+                          {trainer.name
+                            .split(" ")
+                            .slice(1)
+                            .join(" ")}
                         </h3>
                       )}
                     </div>
 
-                    <span className="trainer-card-arrow">↗</span>
+                    <span className="trainer-card-arrow">
+                      ↗
+                    </span>
 
                     <span className="t-corner t-tl"></span>
                     <span className="t-corner t-tr"></span>
                     <span className="t-corner t-bl"></span>
                     <span className="t-corner t-br"></span>
+
                   </div>
                 </Link>
               </div>
             ))}
           </div>
         </div>
+
       </div>
     </section>
   );

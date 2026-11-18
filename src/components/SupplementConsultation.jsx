@@ -1,142 +1,303 @@
+
 import { useState } from "react";
 import { ServicePage, Block, Steps, Faq, Cta, Reveal, Bar, Check } from "./ServiceKit";
 
-/* NOTE: stats aur copy sample hain. Apne asal numbers / baatein yahan edit karein. */
-const MARQUEE = ["Evidence First", "No Hype", "Right Dose", "Right Timing", "Food Before Pills", "Made For You"];
+const MARQUEE = [
+  "Understand Supplements",
+  "Food Comes First",
+  "Read The Label",
+  "Avoid Fitness Hype",
+  "Know Your Options",
+  "Train Consistently",
+];
 
 const STATS = [
-  { value: 30, suffix: " min", label: "First consultation" },
-  { value: 4, suffix: "", label: "Simple steps" },
-  { value: 100, suffix: "%", label: "Personalised advice" },
-  { value: 0, suffix: "", label: "Pressure to buy" },
+  { value: 4, suffix: "", label: "Fitness goal categories" },
+  { value: 3, suffix: "", label: "Diet preferences" },
+  { value: 4, suffix: "", label: "Learning steps" },
+  { value: 0, suffix: "", label: "Pressure to purchase" },
 ];
 
 const GOALS = [
-  { id: "muscle", label: "Muscle Gain", note: "Build size and strength" },
-  { id: "fat", label: "Fat Loss", note: "Stay full and strong" },
-  { id: "endurance", label: "Endurance", note: "Run, ride, last longer" },
-  { id: "health", label: "General Health", note: "Cover the basics" },
+  { id: "muscle", label: "Muscle Gain", note: "Understand protein and strength support" },
+  { id: "fat", label: "Weight Management", note: "Focus on sustainable habits" },
+  { id: "endurance", label: "Endurance", note: "Learn about exercise fuel and hydration" },
+  { id: "health", label: "General Fitness", note: "Understand everyday nutrition" },
 ];
+
 const DIETS = [
-  { id: "meat", label: "Eats everything" },
+  { id: "meat", label: "Mixed Diet" },
   { id: "veg", label: "Vegetarian" },
   { id: "vegan", label: "Vegan" },
 ];
 
 const ITEMS = {
-  protein: { name: "Whey Protein", tag: "Muscle repair", text: "A convenient way to reach your daily protein target and recover after training.", dose: "20–30 g after training or with a meal" },
-  plant: { name: "Plant Protein Blend", tag: "Muscle repair", text: "Pea and rice protein together give a full amino acid profile without dairy.", dose: "25–35 g after training or with a meal" },
-  creatine: { name: "Creatine Monohydrate", tag: "Strength and power", text: "The most researched supplement for strength, power and lean mass. Works by daily use, not timing.", dose: "3–5 g every day" },
-  caffeine: { name: "Caffeine", tag: "Energy and focus", text: "Improves alertness and training output. Keep it earlier in the day so sleep stays good.", dose: "100–200 mg, 30–45 min before training" },
-  omega: { name: "Omega-3 (fish oil)", tag: "Joints and heart", text: "Supports heart health and helps manage inflammation, mainly if you rarely eat oily fish.", dose: "1–2 g EPA + DHA with a meal" },
-  algae: { name: "Algae Omega-3", tag: "Joints and heart", text: "Plant-based source of EPA and DHA, a good swap for fish oil.", dose: "1–2 g EPA + DHA with a meal" },
-  vitd: { name: "Vitamin D3", tag: "Bones and immunity", text: "Useful if you get little sun. A blood test tells you if you actually need it.", dose: "1000–2000 IU daily with a meal" },
-  mag: { name: "Magnesium", tag: "Sleep and recovery", text: "Can help muscle relaxation and sleep quality in people who eat little of it.", dose: "200–400 mg in the evening" },
-  electro: { name: "Electrolytes", tag: "Hydration", text: "Replaces sodium lost in sweat. Most helpful in long or hot sessions.", dose: "During sessions over 75 min" },
-  carbs: { name: "Carb Drink or Gel", tag: "Fuel", text: "Keeps energy steady during long efforts when food is hard to eat.", dose: "30–60 g carbs per hour of long exercise" },
-  iron: { name: "Iron (only if low)", tag: "Energy", text: "Common low spot for endurance athletes, but too much is harmful. Test first.", dose: "Only after a blood test" },
-  b12: { name: "Vitamin B12", tag: "Energy and nerves", text: "Hard to get without animal foods, so plant-based eaters often need it.", dose: "As per label or after a blood test" },
+  protein: {
+    name: "Whey Protein",
+    tag: "Protein Source",
+    text: "A convenient dairy-based protein option. It may help people who find it difficult to meet their daily protein needs through meals.",
+    dose: "Serving depends on product label and individual needs.",
+  },
+
+  plant: {
+    name: "Plant Protein",
+    tag: "Plant-Based Option",
+    text: "Protein powders made from sources such as pea, soy or rice can be an alternative for people who avoid dairy or animal-based products.",
+    dose: "Compare protein content and ingredients on the product label.",
+  },
+
+  creatine: {
+    name: "Creatine Monohydrate",
+    tag: "Strength & Performance",
+    text: "One of the most researched sports supplements. It is commonly studied for its role in repeated high-intensity exercise and strength training.",
+    dose: "Discuss suitability and use with a qualified professional.",
+  },
+
+  caffeine: {
+    name: "Caffeine",
+    tag: "Alertness & Energy",
+    text: "A commonly used stimulant that may improve alertness. Sensitivity varies, and excessive intake can affect sleep, heart rate and wellbeing.",
+    dose: "Consider total daily caffeine intake and individual sensitivity.",
+  },
+
+  omega: {
+    name: "Omega-3",
+    tag: "Essential Fatty Acids",
+    text: "Omega-3 fats are found in foods such as fish. Fish oil products are one possible source for people whose diets provide limited omega-3.",
+    dose: "Consider dietary intake and professional advice before supplementation.",
+  },
+
+  algae: {
+    name: "Algae-Based Omega-3",
+    tag: "Plant-Based Option",
+    text: "An alternative source of certain omega-3 fats for people following vegetarian or vegan eating patterns.",
+    dose: "Check the EPA and DHA content on the product label.",
+  },
+
+  vitd: {
+    name: "Vitamin D",
+    tag: "Bone Health",
+    text: "Vitamin D supports normal bone and muscle function. Whether supplementation is needed depends on individual circumstances and vitamin D status.",
+    dose: "Discuss testing and supplementation with a healthcare professional.",
+  },
+
+  mag: {
+    name: "Magnesium",
+    tag: "Essential Mineral",
+    text: "Magnesium is involved in normal muscle and nerve function. Foods such as nuts, seeds, legumes and leafy vegetables provide magnesium.",
+    dose: "Review dietary intake and professional advice before supplement use.",
+  },
+
+  electro: {
+    name: "Electrolytes",
+    tag: "Hydration Support",
+    text: "Electrolytes such as sodium and potassium help regulate fluid balance. Their replacement may matter during prolonged exercise or heavy sweating.",
+    dose: "Requirements vary with exercise duration, sweating and conditions.",
+  },
+
+  carbs: {
+    name: "Carbohydrate Drinks",
+    tag: "Exercise Fuel",
+    text: "Carbohydrate drinks or gels can provide convenient fuel during prolonged endurance activities when ordinary meals are not practical.",
+    dose: "Consider exercise duration and individual nutrition requirements.",
+  },
+
+  iron: {
+    name: "Iron",
+    tag: "Essential Mineral",
+    text: "Iron supports normal oxygen transport in the body. Supplementation should not be started without assessing whether it is actually needed.",
+    dose: "Use only with appropriate medical assessment and advice.",
+  },
+
+  b12: {
+    name: "Vitamin B12",
+    tag: "Nerve & Blood Health",
+    text: "Vitamin B12 is found naturally in animal-based foods and fortified products. People following fully plant-based diets may need a reliable source.",
+    dose: "Requirements depend on diet, health status and professional advice.",
+  },
 };
 
 const STACK = {
-  muscle: ["protein", "creatine", "vitd", "omega"],
-  fat: ["protein", "creatine", "caffeine", "omega"],
-  endurance: ["electro", "carbs", "caffeine", "iron"],
+  muscle: ["protein", "creatine"],
+  fat: ["protein", "caffeine"],
+  endurance: ["electro", "carbs"],
   health: ["vitd", "omega", "mag"],
 };
-const VEGAN_SWAP = { protein: "plant", omega: "algae" };
+
+const VEGAN_SWAP = {
+  protein: "plant",
+  omega: "algae",
+};
 
 const EVIDENCE = [
-  { label: "Creatine", value: 95 },
-  { label: "Protein powder", value: 90 },
-  { label: "Caffeine", value: 85 },
-  { label: "Vitamin D (if low)", value: 80 },
-  { label: "Omega-3", value: 65 },
-  { label: "BCAAs (if protein is enough)", value: 25 },
-  { label: "Fat burners", value: 15 },
+  { label: "Creatine for strength training", value: 95 },
+  { label: "Protein supplementation when needed", value: 90 },
+  { label: "Caffeine for exercise performance", value: 85 },
+  { label: "Vitamin D when deficient", value: 80 },
+  { label: "Omega-3 supplementation", value: 65 },
+  { label: "BCAAs when protein intake is adequate", value: 25 },
+  { label: "Commercial fat burners", value: 15 },
 ];
 
 const SKIP = [
-  { name: "Fat burners", text: "Mostly caffeine with big promises. Diet and training do the real work." },
-  { name: "Extra BCAAs", text: "Not needed if your daily protein is already on target." },
-  { name: "Detox teas", text: "Your liver and kidneys already do this job." },
-  { name: "Testosterone boosters", text: "Weak evidence and often poorly regulated." },
+  {
+    name: "Unverified Fat Burners",
+    text: "Products with exaggerated weight-loss promises should be approached carefully. Sustainable eating habits and physical activity matter more.",
+  },
+  {
+    name: "Unnecessary BCAA Products",
+    text: "Extra BCAA products may offer limited additional value when overall dietary protein intake is already adequate.",
+  },
+  {
+    name: "Detox Teas",
+    text: "Detox and quick-cleanse claims are often misleading. The body already has organs that process and eliminate waste.",
+  },
+  {
+    name: "Unverified Testosterone Boosters",
+    text: "Products making hormonal claims may have limited evidence and potential safety concerns. Avoid self-prescribing them.",
+  },
 ];
 
 const STEPS = [
-  { when: "Step 01", title: "Free chat", text: "Tell us your goal, training week and what you already take." },
-  { when: "Step 02", title: "Assessment", text: "We review your food, sleep, health notes and budget." },
-  { when: "Step 03", title: "Your short list", text: "A clear plan with the product type, dose and timing. Nothing extra." },
-  { when: "Step 04", title: "Review", text: "We check progress after a month and adjust or remove items." },
+  {
+    when: "Step 01",
+    title: "Discuss Your Fitness Goals",
+    text: "Share your training objectives, daily routine, food preferences and questions about supplements.",
+  },
+  {
+    when: "Step 02",
+    title: "Review Your Current Routine",
+    text: "Understand your everyday meals, training schedule, existing supplement use and relevant considerations.",
+  },
+  {
+    when: "Step 03",
+    title: "Understand Your Options",
+    text: "Explore common supplement categories, ingredients, product labels and potential considerations.",
+  },
+  {
+    when: "Step 04",
+    title: "Make Informed Decisions",
+    text: "Use the information to discuss suitable choices with a qualified professional when needed. There is no requirement to purchase products.",
+  },
 ];
 
 const FAQ = [
-  { q: "Do I need supplements to build muscle?", a: "No. Food, training and sleep come first. Supplements are small helpers that fill gaps or add convenience." },
-  { q: "Are supplements safe?", a: "Most are safe at normal doses from reputable brands. Always check with a doctor if you are pregnant, on medication or have a health condition." },
-  { q: "Will I be pushed to buy something?", a: "No. We explain what fits your goal and what to skip, and the decision is always yours." },
-  { q: "How soon will I notice a difference?", a: "Creatine needs a few weeks of daily use. Protein and electrolytes help right away with convenience and recovery." },
+  {
+    q: "Do I need supplements to build muscle?",
+    a: "No. Consistent training, balanced meals, adequate protein and proper recovery are the foundation. Supplements are optional and may offer convenience in some situations.",
+  },
+  {
+    q: "Are all supplements safe?",
+    a: "No supplement is suitable for everyone. Ingredients, quality, health conditions and medication interactions can all matter. Ask a qualified healthcare professional if you have concerns.",
+  },
+  {
+    q: "Will I be encouraged to buy supplements?",
+    a: "The purpose of this service is education. You can learn about common products and their uses without any obligation to purchase them.",
+  },
+  {
+    q: "Can I use supplements without changing my diet?",
+    a: "Supplements do not replace balanced meals. Everyday foods such as eggs, milk, yogurt, chicken, fish, daal, beans, fruits and vegetables remain important.",
+  },
+  {
+    q: "Should I take supplements recommended online?",
+    a: "Avoid following recommendations without considering your individual needs. Check product ingredients and consult a qualified professional before starting a supplement.",
+  },
 ];
 
 export default function SupplementConsultation() {
   const [goal, setGoal] = useState("muscle");
   const [diet, setDiet] = useState("meat");
 
-  let ids = STACK[goal].map((id) => (diet === "vegan" && VEGAN_SWAP[id]) || id);
-  if (diet !== "meat" && !ids.includes("b12")) ids = [...ids, "b12"];
+  let ids = STACK[goal].map(
+    (id) => (diet === "vegan" && VEGAN_SWAP[id]) || id
+  );
+
+  if (diet === "vegan" && !ids.includes("b12")) {
+    ids = [...ids, "b12"];
+  }
+
   const stack = ids.map((id) => ITEMS[id]);
 
   return (
     <ServicePage
       id="supplement-guide"
       marquee={MARQUEE}
-      kicker="Know What To Take"
-      title="Supplements That Actually"
-      accent="Fit You"
-      lead="Skip the hype and the crowded shelf. Tell us your goal and diet, and we help you pick only what is worth your money, with the right dose and timing."
+      kicker="Understand Before You Choose"
+      title="Supplements With"
+      accent="Knowledge"
+      lead="Explore common fitness supplements according to your training goals and dietary preferences. Learn what products are designed for, what to check and when professional advice matters."
       stats={STATS}
     >
-      <Block title="Find Your Starter Stack">
+      <Block title="Explore Your Supplement Guide">
         <div className="nt-calc">
           <Reveal className="nt-panel" variant="left" delay={100}>
             <div className="nt-field">
-              <label>Your goal</label>
+              <label>Your Fitness Goal</label>
+
               <div className="nt-opts sv-opts2">
                 {GOALS.map((g) => (
-                  <button key={g.id} type="button" className={goal === g.id ? "on" : ""} onClick={() => setGoal(g.id)}>
+                  <button
+                    key={g.id}
+                    type="button"
+                    className={goal === g.id ? "on" : ""}
+                    onClick={() => setGoal(g.id)}
+                  >
                     <b>{g.label}</b>
                     <small>{g.note}</small>
                   </button>
                 ))}
               </div>
             </div>
+
             <div className="nt-field">
-              <label>Your diet</label>
+              <label>Your Dietary Preference</label>
+
               <div className="nt-seg">
                 {DIETS.map((d) => (
-                  <button key={d.id} type="button" className={diet === d.id ? "on" : ""} onClick={() => setDiet(d.id)}>
+                  <button
+                    key={d.id}
+                    type="button"
+                    className={diet === d.id ? "on" : ""}
+                    onClick={() => setDiet(d.id)}
+                  >
                     {d.label}
                   </button>
                 ))}
               </div>
             </div>
+
             <p className="nt-note">
-              General guidance only, not medical advice. Check with a doctor if you are pregnant, take medication or have a health condition.
+              This interactive guide provides general educational information,
+              not a personalized supplement prescription. Consult a qualified
+              healthcare professional before starting supplements, especially
+              if you take medication or have a health condition.
             </p>
           </Reveal>
 
           <Reveal className="nt-panel nt-result" variant="right" delay={200}>
-            <h4 className="sv-sub">Your starter stack</h4>
+            <h4 className="sv-sub">Your Supplement Learning Guide</h4>
+
             <ul className="sv-stack" key={goal + diet}>
               {stack.map((it, i) => (
-                <li className="sv-item" key={it.name} style={{ "--i": i }}>
+                <li
+                  className="sv-item"
+                  key={it.name}
+                  style={{ "--i": i }}
+                >
                   <span className="sv-num">{i + 1}</span>
+
                   <div>
                     <div className="sv-item-top">
                       <h5>{it.name}</h5>
                       <span className="nt-chip">{it.tag}</span>
                     </div>
+
                     <p>{it.text}</p>
-                    <div className="sv-dose"><Check />{it.dose}</div>
+
+                    <div className="sv-dose">
+                      <Check />
+                      {it.dose}
+                    </div>
                   </div>
                 </li>
               ))}
@@ -145,22 +306,38 @@ export default function SupplementConsultation() {
         </div>
       </Block>
 
-      <Block title="What Is Worth Your Money">
+      <Block title="Understanding Supplement Research">
         <div className="nt-two">
           <Reveal className="nt-panel" variant="left">
-            <h3 className="nt-h3 sm">How Strong Is The Evidence?</h3>
+            <h3 className="nt-h3 sm">Evidence Overview</h3>
+
             {EVIDENCE.map((e, i) => (
-              <Bar key={e.label} label={e.label} value={e.value} shown={e.value + " / 100"} delay={i * 80} />
+              <Bar
+                key={e.label}
+                label={e.label}
+                value={e.value}
+                shown={e.value + " / 100"}
+                delay={i * 80}
+              />
             ))}
-            <p className="nt-note">Our own simple rating based on research, not a clinical score.</p>
+
+            <p className="nt-note">
+              Illustrative educational ratings, not official clinical scores
+              or a medical ranking. Evidence and suitability vary by outcome,
+              individual and product.
+            </p>
           </Reveal>
 
           <Reveal className="nt-panel" variant="right" delay={150}>
-            <h3 className="nt-h3 sm">Often Not Worth It</h3>
+            <h3 className="nt-h3 sm">Products To Approach Carefully</h3>
+
             <ul className="sv-skip">
               {SKIP.map((s) => (
                 <li key={s.name}>
-                  <span className="sv-x" aria-hidden="true">✕</span>
+                  <span className="sv-x" aria-hidden="true">
+                    ✕
+                  </span>
+
                   <div>
                     <h5>{s.name}</h5>
                     <p>{s.text}</p>
@@ -172,18 +349,18 @@ export default function SupplementConsultation() {
         </div>
       </Block>
 
-      <Block title="How A Consultation Works">
+      <Block title="How Supplement Consultation Works">
         <Steps items={STEPS} />
       </Block>
 
-      <Block title="Common Questions">
+      <Block title="Frequently Asked Questions">
         <Faq items={FAQ} />
       </Block>
 
       <Cta
-        title="Get a supplement plan built around you"
-        text="Book a 30-minute consultation and leave with a short, honest list."
-        label="Book a consultation"
+        title="Make Informed Fitness Choices"
+        text="Understand your options, focus on everyday nutrition and make supplement decisions responsibly."
+        label="Explore Your Options"
       />
     </ServicePage>
   );
