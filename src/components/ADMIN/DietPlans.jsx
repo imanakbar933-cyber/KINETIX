@@ -247,6 +247,7 @@ function DietPlan() {
   });
 
   const [result, setResult] = useState(null);
+  const [showResults, setShowResults] = useState(false);
   const [glasses, setGlasses] = useState(0);
 
   const handleChange = (e) => {
@@ -310,6 +311,9 @@ function DietPlan() {
       tdee: Math.round(tdee),
       water,
     });
+
+    // Open the generated diet chart as a separate full-screen view.
+    setShowResults(true);
   };
 
   const resetForm = () => {
@@ -323,6 +327,7 @@ function DietPlan() {
     });
 
     setResult(null);
+    setShowResults(false);
     setGlasses(0);
   };
 
@@ -534,8 +539,17 @@ function DietPlan() {
       </section>
 
       {/* RESULTS */}
-      {result && (
+      {result && showResults && (
         <section className="dp-results">
+          <button
+            type="button"
+            className="dp-back-calculator"
+            onClick={() => setShowResults(false)}
+          >
+            <RotateCcw size={17} />
+            BACK TO CALCULATOR
+          </button>
+
           <div className="dp-section-heading">
             <span>YOUR PERSONAL REPORT</span>
             <h2>

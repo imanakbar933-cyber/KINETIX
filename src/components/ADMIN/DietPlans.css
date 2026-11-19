@@ -1318,3 +1318,90 @@
   color: #080d08 !important;
   box-shadow: 0 0 15px rgba(3, 234, 4, 0.4);
 }
+
+
+/* =========================================================
+   GENERATED DIET CHART - SEPARATE FULL-SCREEN SCREEN
+   Original KINETIX theme above is intentionally preserved.
+========================================================= */
+
+.dp-results {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 38px clamp(16px, 4vw, 60px) 60px;
+  background: var(--dp-bg, #090d09);
+  color: #fff;
+  box-sizing: border-box;
+  isolation: isolate;
+  overscroll-behavior: contain;
+  animation: dpResultsScreenIn 0.45s ease both;
+}
+
+.dp-results *,
+.dp-results *::before,
+.dp-results *::after {
+  box-sizing: border-box;
+}
+
+.dp-back-calculator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  margin: 0 0 32px;
+  padding: 11px 18px;
+  border: 1px solid rgba(3, 234, 4, 0.45);
+  border-radius: 5px;
+  background: rgba(3, 234, 4, 0.07);
+  color: #03ea04;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease,
+    box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.dp-back-calculator:hover {
+  color: #080b08;
+  background: #03ea04;
+  box-shadow: 0 0 22px rgba(3, 234, 4, 0.28);
+  transform: translateY(-2px);
+}
+
+@keyframes dpResultsScreenIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .dp-results {
+    padding: 22px 14px 40px;
+  }
+
+  .dp-back-calculator {
+    margin-bottom: 24px;
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-results {
+    animation: none;
+  }
+}
