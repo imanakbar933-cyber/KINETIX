@@ -1,8 +1,9 @@
+
 /* ================= MAIN SECTION ================= */
 .schedule-section {
   width: 100%;
   min-height: 100vh;
-  background-color: #050706; /* Dark background */
+  background-color: #050706;
   padding: 80px 20px;
   display: flex;
   justify-content: center;
@@ -11,16 +12,16 @@
 
 .schedule-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Sab kuch center mein lane ke liye */
+  align-items: center;
   gap: 30px;
 }
 
-/* ================= HEADER (FIXED) ================= */
+/* ================= HEADER ================= */
 .schedule-header {
-  text-align: center; /* Text ko center align kiya */
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,7 +29,7 @@
 }
 
 .section-subtitle {
-  color: #03ea04; /* Green color */
+  color: #03ea04;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -38,7 +39,7 @@
 
 .section-title {
   color: #ffffff;
-  font-size: 42px; /* Bara heading */
+  font-size: 42px;
   font-weight: 800;
   line-height: 1.2;
   margin: 0;
@@ -72,12 +73,11 @@
   color: #03ea04;
 }
 
-/* Jab tab active ho */
 .tab-btn.active {
   background: rgba(3, 234, 4, 0.1);
   border-color: #03ea04;
   color: #03ea04;
-  box-shadow: 0 0 15px rgba(3, 234, 4, 0.2); /* Halka sa green glow */
+  box-shadow: 0 0 15px rgba(3, 234, 4, 0.2);
 }
 
 /* ================= SCHEDULE TABLE ================= */
@@ -90,27 +90,28 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Header Row */
+/* Header Row - 7 Columns */
 .table-header {
   display: grid;
-  grid-template-columns: 1.5fr repeat(5, 1fr); /* Pehla column (Time) thora bara */
+  grid-template-columns: 1.5fr repeat(6, minmax(0, 1fr));
   background: #111a14;
   border-bottom: 2px solid #03ea04;
 }
 
 .header-cell {
-  padding: 20px 15px;
+  padding: 20px 10px;
   color: #03ea04;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
+  white-space: nowrap;
 }
 
-/* Data Rows */
+/* Data Rows - 7 Columns */
 .table-row {
   display: grid;
-  grid-template-columns: 1.5fr repeat(5, 1fr);
+  grid-template-columns: 1.5fr repeat(6, minmax(0, 1fr));
   border-bottom: 1px solid #1f2e24;
   transition: background 0.3s ease;
 }
@@ -120,47 +121,115 @@
 }
 
 .table-row:hover {
-  background: #0f1712; /* Hover effect */
+  background: #0f1712;
 }
 
 .table-cell {
-  padding: 18px 15px;
+  padding: 18px 10px;
   color: #d1d5db;
-  font-size: 15px;
+  font-size: 13px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
 }
 
-/* Time Column Styling */
+/* Time Column */
 .time-cell {
   color: #03ea04;
   font-weight: 700;
-  font-size: 15px;
-  justify-content: flex-start; /* Time left align rahe */
-  padding-left: 25px;
+  font-size: 13px;
+  justify-content: flex-start;
+  padding-left: 18px;
+  white-space: nowrap;
 }
 
 /* ================= RESPONSIVE DESIGN ================= */
+
+@media (max-width: 1200px) {
+  .schedule-container {
+    max-width: 100%;
+  }
+
+  .header-cell,
+  .table-cell {
+    font-size: 12px;
+    padding: 16px 7px;
+  }
+
+  .time-cell {
+    padding-left: 12px;
+  }
+}
+
 @media (max-width: 992px) {
   .section-title {
     font-size: 32px;
   }
-  .header-cell, .table-cell {
+
+  .schedule-table {
+    overflow-x: auto;
+  }
+
+  .table-header,
+  .table-row {
+    min-width: 1050px;
+  }
+
+  .header-cell,
+  .table-cell {
     font-size: 13px;
     padding: 15px 10px;
-  }
-  .time-cell {
-    padding-left: 15px;
   }
 }
 
 @media (max-width: 768px) {
-  .schedule-table {
-    overflow-x: auto; /* Choti screen par table scroll ho */
+  .schedule-section {
+    padding: 60px 15px;
   }
-  .table-header, .table-row {
-    min-width: 800px; /* Table ko squeeze hone se bachaya */
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+  }
+
+  .filter-tabs {
+    gap: 10px;
+  }
+
+  .tab-btn {
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+
+  .schedule-table {
+    overflow-x: auto;
+    width: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: #03ea04 #111a14;
+  }
+
+  .table-header,
+  .table-row {
+    min-width: 1050px;
+  }
+}
+
+@media (max-width: 480px) {
+  .schedule-section {
+    padding: 50px 12px;
+  }
+
+  .section-title {
+    font-size: 25px;
+  }
+
+  .tab-btn {
+    padding: 9px 12px;
+    font-size: 11px;
   }
 }

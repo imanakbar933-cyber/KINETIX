@@ -1,16 +1,16 @@
-/* src/components/TeamFaces.css */
 
 /* ============================================
-   SECTION
+   TEAM FACES SECTION
    ============================================ */
+
 .teamfaces-section {
   position: relative;
-  background:#050505;
+  background: #050505;
   color: #fff;
   padding: 100px 60px;
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-               "Helvetica Neue", Arial, sans-serif;
+    "Helvetica Neue", Arial, sans-serif;
 }
 
 /* Background Glow */
@@ -42,6 +42,7 @@
 /* ============================================
    HEADER
    ============================================ */
+
 .teamfaces-header {
   text-align: center;
   margin-bottom: 80px;
@@ -57,19 +58,18 @@
   color: #ffffff;
 }
 
-/* Green Outline Highlight */
 .teamfaces-title-highlight {
   color: transparent;
-  -webkit-text-stroke: 2px  #00ff00;      /* ✅ Green outline */
-  text-stroke: 2px  #00ff00;
+  -webkit-text-stroke: 2px #00ff00;
   text-shadow: 0 0 40px rgba(74, 222, 128, 0.3);
   margin-top: 10px;
   display: inline-block;
 }
 
 /* ============================================
-   GRID — 3 CARDS
+   GRID
    ============================================ */
+
 .teamfaces-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -80,11 +80,11 @@
 /* ============================================
    TEAM CARD
    ============================================ */
+
 .teamface-card {
   cursor: pointer;
 }
 
-/* Image Wrapper */
 .teamface-image-wrapper {
   position: relative;
   width: 100%;
@@ -104,6 +104,7 @@
 }
 
 /* Image */
+
 .teamface-image {
   width: 100%;
   height: 100%;
@@ -114,10 +115,11 @@
 }
 
 .teamface-card:hover .teamface-image {
-  transform: scale(1.08);                /* ✅ Zoom on hover */
+  transform: scale(1.08);
 }
 
-/* Dark Gradient Overlay */
+/* Dark Overlay */
+
 .teamface-overlay {
   position: absolute;
   inset: 0;
@@ -133,6 +135,7 @@
 }
 
 /* Info Row */
+
 .teamface-info {
   position: absolute;
   bottom: 0;
@@ -146,7 +149,8 @@
   z-index: 3;
 }
 
-/* Name Block */
+/* Name */
+
 .teamface-name-block {
   display: flex;
   flex-direction: column;
@@ -164,7 +168,21 @@
   text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
 }
 
-/* Arrow Button */
+/* Trainer Role */
+
+.teamface-role {
+  color: #03ea04;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 5px 0 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   ARROW
+   ============================================ */
+
 .teamface-arrow {
   flex-shrink: 0;
   width: 50px;
@@ -185,12 +203,11 @@
   overflow: hidden;
 }
 
-/* Green fill circle on hover */
 .teamface-arrow::before {
   content: "";
   position: absolute;
   inset: 0;
-  background:  #00ff00;
+  background: #00ff00;
   border-radius: 50%;
   transform: scale(0);
   transition: transform 0.4s ease;
@@ -205,9 +222,8 @@
   transition: all 0.4s ease;
 }
 
-/* Hover pe arrow green */
 .teamface-arrow:hover {
-  border-color:  #00ff00;
+  border-color: #00ff00;
   color: #0a0a0a;
   transform: scale(1.1) rotate(45deg);
 }
@@ -225,6 +241,7 @@
    ============================================ */
 
 /* Tablet */
+
 @media (max-width: 1024px) {
   .teamfaces-section {
     padding: 80px 30px;
@@ -240,11 +257,12 @@
   }
 
   .teamfaces-title-highlight {
-    -webkit-text-stroke: 1.5px  #00ff00;
+    -webkit-text-stroke: 1.5px #00ff00;
   }
 }
 
 /* Mobile */
+
 @media (max-width: 700px) {
   .teamfaces-section {
     padding: 60px 20px;
@@ -261,7 +279,7 @@
   }
 
   .teamfaces-title-highlight {
-    -webkit-text-stroke: 1.2px  #00ff00;
+    -webkit-text-stroke: 1.2px #00ff00;
   }
 
   .teamfaces-header {
@@ -284,5 +302,9 @@
 
   .teamface-info {
     padding: 20px 18px;
+  }
+
+  .teamface-role {
+    font-size: 11px;
   }
 }

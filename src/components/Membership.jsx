@@ -1,11 +1,14 @@
+
 import { useState } from "react";
 import "./Membership.css";
 import WorkoutAnimation from "./WorkoutAnimation";
+
 function Membership() {
   const [billing, setBilling] = useState("monthly");
   const [currentIndex, setCurrentIndex] = useState(5);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
 
+  // SAMPLE PRICES - Confirm actual membership fees before publishing.
   const monthlyPlans = [
     {
       name: "BASIC MEMBERSHIP",
@@ -13,19 +16,19 @@ function Membership() {
     },
     {
       name: "PREMIUM MEMBERSHIP",
-      price: "PKR8000",
+      price: "PKR6000",
     },
     {
       name: "COUPLES MEMBERSHIP",
-      price: "PKR1000",
+      price: "PKR7000",
     },
     {
       name: "FAMILY MEMBERSHIP",
-      price: "PKR22000",
+      price: "PKR12000",
     },
     {
       name: "VIP MEMBERSHIP",
-      price: "PKR28000",
+      price: "PKR10000",
     },
   ];
 
@@ -36,19 +39,19 @@ function Membership() {
     },
     {
       name: "PREMIUM MEMBERSHIP",
-      price: "PKR80000",
+      price: "PKR60000",
     },
     {
       name: "COUPLES MEMBERSHIP",
-      price: "PKR110000",
+      price: "PKR70000",
     },
     {
       name: "FAMILY MEMBERSHIP",
-      price: "PKR25000",
+      price: "PKR120000",
     },
     {
       name: "VIP MEMBERSHIP",
-      price: "PKR28000",
+      price: "PKR100000",
     },
   ];
 
@@ -58,16 +61,16 @@ function Membership() {
       : yearlyPlans;
 
   const features = [
-    "FULL ACCESS TO CARDIO",
-    "ACCESS TO FITNESS CLASSES group",
-    "USE OF LOCKER ROOMS AND SHOWERS",
-    "COMPLIMENTARY TOWEL SERVICE",
-    "VIRTUAL WORKOUT ACCESS INCLUDED",
-    "NO SIGN-UP FEES",
+    "ACCESS TO AVAILABLE GYM FACILITIES",
+    "STRENGTH AND CARDIO TRAINING",
+    "WORKOUT ROUTINE GUIDANCE",
+    "MEMBERSHIP PROGRESS TRACKING",
+    "MEMBER SUPPORT AND ASSISTANCE",
+    "FLEXIBLE MEMBERSHIP OPTIONS",
   ];
 
   /*
-    We make 3 copies:
+    We make 3 copies for infinite carousel:
 
     COPY 1
     BASIC
@@ -122,20 +125,6 @@ function Membership() {
   ========================================= */
 
   const handleTransitionEnd = () => {
-    /*
-      Forward:
-
-      5 = BASIC
-      6 = PREMIUM
-      7 = COUPLES
-      8 = FAMILY
-      9 = VIP
-      10 = BASIC CLONE
-
-      When 10 is reached,
-      silently go back to 5.
-    */
-
     if (currentIndex >= 10) {
       setTransitionEnabled(false);
 
@@ -147,16 +136,6 @@ function Membership() {
         });
       });
     }
-
-    /*
-      Backward:
-
-      5 = BASIC
-      4 = VIP CLONE
-
-      When 4 is reached,
-      silently go to 9.
-    */
 
     if (currentIndex <= 4) {
       setTransitionEnabled(false);
@@ -190,191 +169,191 @@ function Membership() {
   };
 
   return (
-   <div>
-    <section className="membership-section">
+    <div>
+      <section className="membership-section">
 
-      <div className="membership-container">
-
-        {/* =====================================
-            TOP CONTENT
-        ===================================== */}
-
-        <div className="membership-top">
-
- <div className="membership-header">
-  <p className="membership-eyebrow">MEMBERSHIP</p>
-  
-  {/* Yahan aapne "MEMBERSHIP DISCOVER NOW" likh diya hai */}
-  <h2 className="membership-title">DISCOVER NOW</h2>
-  
-  <p className="membership-subtitle">
-    Choose from flexible membership options designed to fit your lifestyle.
-  </p>
-</div>
+        <div className="membership-container">
 
           {/* =====================================
-              CONTROLS
+              TOP CONTENT
           ===================================== */}
 
-          <div className="membership-controls">
+          <div className="membership-top">
 
-            <div className="billing-buttons">
+            <div className="membership-header">
+              <p className="membership-eyebrow">
+                KINETIX MEMBERSHIPS
+              </p>
 
-              <button
-                className={
-                  billing === "monthly"
-                    ? "active-billing"
-                    : ""
-                }
-                onClick={() => changeBilling("monthly")}
-              >
-                MONTHLY BILLING
-              </button>
+              <h2 className="membership-title">
+                CHOOSE YOUR PLAN
+              </h2>
 
-              <button
-                className={
-                  billing === "yearly"
-                    ? "active-billing"
-                    : ""
-                }
-                onClick={() => changeBilling("yearly")}
-              >
-                YEARLY BILLING
-              </button>
-
+              <p className="membership-subtitle">
+                Find a membership that matches your fitness
+                goals, training routine, and lifestyle.
+                Start building a stronger and healthier you
+                with KINETIX.
+              </p>
             </div>
-
 
             {/* =====================================
-                ARROWS
+                CONTROLS
             ===================================== */}
 
-            <div className="carousel-arrows">
+            <div className="membership-controls">
 
-              <button
-                onClick={previousSlide}
-                aria-label="Previous membership"
-              >
-                ←
-              </button>
+              <div className="billing-buttons">
 
-              <button
-                onClick={nextSlide}
-                aria-label="Next membership"
-              >
-                →
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        {/* =====================================
-            CAROUSEL VIEWPORT
-        ===================================== */}
-
-        <div className="membership-viewport">
-
-          <div
-            className={`membership-track ${
-              transitionEnabled
-                ? "carousel-transition"
-                : ""
-            }`}
-            style={{
-              transform: `translateX(calc(-${currentIndex} * (40vw - 8px)))`,
-            }}
-            onTransitionEnd={handleTransitionEnd}
-          >
-
-            {loopPlans.map((plan, index) => (
-
-              <div
-                className="membership-card"
-                key={`${plan.name}-${index}`}
-              >
-
-                {/* PLAN TITLE */}
-
-                <h3>
-                  {plan.name}
-                </h3>
-
-
-                {/* PRICE */}
-
-                <div className="membership-price">
-
-                  <strong>
-                    {plan.price}
-                  </strong>
-
-                  <span>
-                    / {billing === "monthly" ? "MONTH" : "YEAR"}
-                  </span>
-
-                </div>
-
-
-                {/* SUBSCRIBE */}
-
-                <button className="subscribe-button">
-
-                  <span>
-                    SUBSCRIBE
-                  </span>
-
-                  <b>
-                    →
-                  </b>
-
+                <button
+                  className={
+                    billing === "monthly"
+                      ? "active-billing"
+                      : ""
+                  }
+                  onClick={() => changeBilling("monthly")}
+                >
+                  MONTHLY BILLING
                 </button>
 
-
-                {/* FEATURES */}
-
-                <div className="membership-features">
-
-                  {features.map((feature, featureIndex) => (
-
-                    <div
-                      className="membership-feature"
-                      key={featureIndex}
-                    >
-
-                      <span className="feature-check">
-                        ✓
-                      </span>
-
-                      <span>
-                        {feature}
-                      </span>
-
-                    </div>
-
-                  ))}
-
-                </div>
+                <button
+                  className={
+                    billing === "yearly"
+                      ? "active-billing"
+                      : ""
+                  }
+                  onClick={() => changeBilling("yearly")}
+                >
+                  YEARLY BILLING
+                </button>
 
               </div>
 
-            ))}
+              {/* =====================================
+                  ARROWS
+              ===================================== */}
+
+              <div className="carousel-arrows">
+
+                <button
+                  onClick={previousSlide}
+                  aria-label="Previous membership"
+                >
+                  ←
+                </button>
+
+                <button
+                  onClick={nextSlide}
+                  aria-label="Next membership"
+                >
+                  →
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* =====================================
+              CAROUSEL VIEWPORT
+          ===================================== */}
+
+          <div className="membership-viewport">
+
+            <div
+              className={`membership-track ${
+                transitionEnabled
+                  ? "carousel-transition"
+                  : ""
+              }`}
+              style={{
+                transform: `translateX(calc(-${currentIndex} * (40vw - 8px)))`,
+              }}
+              onTransitionEnd={handleTransitionEnd}
+            >
+
+              {loopPlans.map((plan, index) => (
+
+                <div
+                  className="membership-card"
+                  key={`${plan.name}-${index}`}
+                >
+
+                  {/* PLAN TITLE */}
+
+                  <h3>
+                    {plan.name}
+                  </h3>
+
+                  {/* PRICE */}
+
+                  <div className="membership-price">
+
+                    <strong>
+                      {plan.price}
+                    </strong>
+
+                    <span>
+                      / {billing === "monthly" ? "MONTH" : "YEAR"}
+                    </span>
+
+                  </div>
+
+                  {/* SUBSCRIBE */}
+
+                  <button className="subscribe-button">
+
+                    <span>
+                      SUBSCRIBE
+                    </span>
+
+                    <b>
+                      →
+                    </b>
+
+                  </button>
+
+                  {/* FEATURES */}
+
+                  <div className="membership-features">
+
+                    {features.map((feature, featureIndex) => (
+
+                      <div
+                        className="membership-feature"
+                        key={featureIndex}
+                      >
+
+                        <span className="feature-check">
+                          ✓
+                        </span>
+
+                        <span>
+                          {feature}
+                        </span>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
 
           </div>
 
         </div>
 
-      </div>
-  
-    </section>
-    <WorkoutAnimation />
+      </section>
+
+      <WorkoutAnimation />
     </div>
   );
- 
 }
-
 
 export default Membership;

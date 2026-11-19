@@ -14,12 +14,13 @@ export default function LoginForm() {
     setMessage("");
 
     if (!email.trim() || !password) {
-      setMessage("Please enter your email and password.");
+      setMessage("Please enter your registered email and password.");
       return;
     }
 
-    // Connect your authentication API here.
-    setMessage("Connect your authentication API to enable login.");
+    setMessage(
+      "Login service is not connected yet. Please connect the KINETIX authentication API."
+    );
   }
 
   return (
@@ -34,7 +35,7 @@ export default function LoginForm() {
 
         <input
           type="email"
-          placeholder="Email Address"
+          placeholder="Registered Email Address"
           autoComplete="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}

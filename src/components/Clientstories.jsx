@@ -5,43 +5,54 @@ import { motion } from "motion/react";
 import "./ClientStories.css";
 
 const ClientStories = () => {
-  const clients = [
-    {
-      name: "Ayesha Khan",
-      result: "Lost 25 KG",
-      message: "KINETIX changed my life completely.",
-      before: "/assets/ayesha.png",
-      after: "/assets/ayeshaafter.png",
-    },
-    {
-      name: "Bilal Ahmed",
-      result: "Lost 35 KG",
-      message: "The trainers here are truly amazing.",
-      before: "/assets/billalahmed.png",
-      after: "/assets/billalahmedafter.png",
-    },
-    {
-      name: "Hamza",
-      result: "Lost 20 KG",
-      message: "Best gym in town. Highly recommended!",
-      before: "/assets/hamza.png",
-      after: "/assets/hamzaafter.png",
-    },
-    {
-      name: "Ali",
-      result: "Lost 30 KG",
-      message: "I feel stronger and healthier than ever.",
-      before: "/assets/ali.png",
-      after: "/assets/aliafter.png",
-    },
-    {
-      name: "Zani",
-      result: "Lost 15 KG",
-      message: "Amazing experience and great trainers!",
-      before: "/assets/zani.png",
-      after: "/assets/zaniafter.png",
-    },
-  ];
+  
+const clients = [
+  {
+    id: 1,
+    name: "Rameez Shafqat",
+    result: "Lost 12 KG",
+    message:
+      "I struggled to stay consistent before joining KINETIX. My trainer helped me build a routine that I could actually follow.",
+    before: "/assets/ayesha.png",
+    after: "/assets/ayeshaafter.png",
+  },
+  {
+    id: 2,
+    name: "Hanzala Tariq",
+    result: "Lost 16 KG",
+    message:
+      "The structured workouts and regular guidance helped me improve my fitness. I feel much more confident now.",
+    before: "/assets/billalahmed.png",
+    after: "/assets/billalahmedafter.png",
+  },
+  {
+    id: 3,
+    name: "Zaryab Khalid",
+    result: "Lost 9 KG",
+    message:
+      "I joined to improve my stamina, but ended up developing a much healthier lifestyle. The environment is motivating.",
+    before: "/assets/hamza.png",
+    after: "/assets/hamzaafter.png",
+  },
+  {
+    id: 4,
+    name: "Muneeb Arshad",
+    result: "Lost 14 KG",
+    message:
+      "The trainers pay attention to proper exercise techniques and keep me motivated. My strength and endurance have improved.",
+    before: "/assets/ali.png",
+    after: "/assets/aliafter.png",
+  },
+  {
+    id: 5,
+    name: "Salar Javed",
+    result: "Lost 7 KG",
+    message:
+      "What I like most about KINETIX is the supportive atmosphere. I no longer skip workouts and enjoy my fitness routine.",
+    before: "/assets/zani.png",
+    after: "/assets/zaniafter.png",
+  },
+];
 
   return (
     <section className="cs-section">

@@ -5,71 +5,71 @@ import { motion } from "motion/react";
 import "./Features.css";
 
 const Features = () => {
-  const featuresData = [
-    {
-      id: 1,
-      number: "01",
-      title: "EXPERT STAFF",
-      description:
-        "Our team of fitness professionals is here to guide and support you every step of the way.",
-      // ✅ Image position — 4 cards mein split
-      bgPosition: "0% 50%",            // Left — part 1
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 6a4 4 0 0 0-4 4v3a4 4 0 0 0 8 0v-3" />
-          <path d="M8 13v3a5 5 0 0 0 10 0" />
-          <path d="M4 10v5M2 12v1M20 10v5M22 12v1" />
-          <circle cx="12" cy="6" r="0.5" fill="currentColor" />
-        </svg>
-      ),
-    },
-    {
-      id: 2,
-      number: "02",
-      title: "COMMUNITY ATMOSPHERE",
-      description:
-        "Join a welcoming community of fitness enthusiasts who motivate and inspire each other.",
-      bgPosition: "33.33% 50%",        // Center-left — part 2
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
-          <line x1="8" y1="14" x2="16" y2="14" />
-          <line x1="8" y1="17" x2="13" y2="17" />
-        </svg>
-      ),
-    },
-    {
-      id: 3,
-      number: "03",
-      title: "CONVENIENT HOURS",
-      description:
-        "Our team of fitness professionals is here to guide and support you every step of the way.",
-      bgPosition: "66.66% 50%",        // Center-right — part 3
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 7v5l3 2" />
-        </svg>
-      ),
-    },
-    {
-      id: 4,
-      number: "04",
-      title: "CLEAN & SAFE ENVIRONMENT",
-      description:
-        "Your health and safety are our top priorities. We maintain a clean and sanitized facility at all times.",
-      bgPosition: "100% 50%",          // Right — part 4
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22v-8" />
-          <path d="M12 14a5 5 0 0 0-5-5H3a5 5 0 0 0 5 5h4z" />
-          <path d="M12 14a5 5 0 0 1 5-5h4a5 5 0 0 1-5 5h-4z" />
-          <path d="M12 10V6a3 3 0 1 1 3 3" />
-          <circle cx="19" cy="5" r="1.5" />
-        </svg>
-      ),
-    },
-  ];
+  
+const featuresData = [
+  {
+    id: 1,
+    number: "01",
+    title: "EXPERIENCED TRAINERS",
+    description:
+      "Get practical guidance on exercise techniques, workout routines, and training methods from fitness professionals who support your fitness journey.",
+    bgPosition: "0% 50%",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 6a4 4 0 0 0-4 4v3a4 4 0 0 0 8 0v-3" />
+        <path d="M8 13v3a5 5 0 0 0 10 0" />
+        <path d="M4 10v5M2 12v1M20 10v5M22 12v1" />
+        <circle cx="12" cy="6" r="0.5" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    id: 2,
+    number: "02",
+    title: "SUPPORTIVE COMMUNITY",
+    description:
+      "Train in a welcoming environment where members with different fitness goals can stay motivated, build healthy habits, and encourage one another.",
+    bgPosition: "33.33% 50%",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+        <line x1="8" y1="14" x2="16" y2="14" />
+        <line x1="8" y1="17" x2="13" y2="17" />
+      </svg>
+    ),
+  },
+  {
+    id: 3,
+    number: "03",
+    title: "FLEXIBLE TRAINING HOURS",
+    description:
+      "Make fitness part of your daily routine with convenient gym timings. Plan your workout sessions around your work, studies, and personal schedule.",
+    bgPosition: "66.66% 50%",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </svg>
+    ),
+  },
+  {
+    id: 4,
+    number: "04",
+    title: "CLEAN TRAINING ENVIRONMENT",
+    description:
+      "Enjoy a comfortable workout environment with attention to equipment cleanliness, organized training spaces, and everyday gym hygiene.",
+    bgPosition: "100% 50%",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22v-8" />
+        <path d="M12 14a5 5 0 0 0-5-5H3a5 5 0 0 0 5 5h4z" />
+        <path d="M12 14a5 5 0 0 1 5-5h4a5 5 0 0 1-5 5h-4z" />
+        <path d="M12 10V6a3 3 0 1 1 3 3" />
+        <circle cx="19" cy="5" r="1.5" />
+      </svg>
+    ),
+  },
+];
 
   return (
     <section className="features-section">

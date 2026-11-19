@@ -81,20 +81,21 @@ function Reveal({ children, delay = 0, variant = "up", as: Tag = "div", classNam
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
 /* ------------------------------------------------------------------ */
+
 const MARQUEE = [
-  "Fuel Your Gains",
-  "Eat Clean",
-  "Protein First",
-  "Hydrate Daily",
-  "Recover Faster",
-  "Track Your Macros",
+  "Eat Balanced",
+  "Train Consistently",
+  "Protein Rich Foods",
+  "Stay Hydrated",
+  "Recover Well",
+  "Healthy Daily Habits",
 ];
 
 const STATS = [
-  { value: 40, suffix: "+", label: "Meal plans" },
-  { value: 12, suffix: "", label: "Certified nutritionists" },
-  { value: 1250, suffix: "+", label: "Members coached" },
-  { value: 98, suffix: "%", label: "Hit their goal" },
+  { value: 3, suffix: "", label: "Fitness goals" },
+  { value: 4, suffix: "", label: "Sample daily meals" },
+  { value: 6, suffix: "", label: "Protein food options" },
+  { value: 8, suffix: "", label: "Hydration tracker glasses" },
 ];
 
 const ACTIVITY = [
@@ -111,53 +112,163 @@ const GOALS = [
 
 const MEALS = {
   lose: [
-    { time: "7:30 AM", name: "Egg-white veggie omelette + oats", kcal: 380, p: 32 },
-    { time: "12:30 PM", name: "Grilled chicken, quinoa & greens", kcal: 480, p: 45 },
-    { time: "4:00 PM", name: "Greek yogurt with berries", kcal: 220, p: 22 },
-    { time: "8:00 PM", name: "Baked salmon with steamed broccoli", kcal: 520, p: 40 },
+    {
+      time: "7:30 AM",
+      name: "2 boiled eggs, whole-wheat roti & tea",
+      kcal: 400,
+      p: 22,
+    },
+    {
+      time: "12:30 PM",
+      name: "Grilled chicken, small rice portion & salad",
+      kcal: 500,
+      p: 42,
+    },
+    {
+      time: "4:00 PM",
+      name: "Plain yogurt with seasonal fruit",
+      kcal: 220,
+      p: 10,
+    },
+    {
+      time: "8:00 PM",
+      name: "Daal, chapati & cucumber raita",
+      kcal: 480,
+      p: 22,
+    },
   ],
+
   maintain: [
-    { time: "7:30 AM", name: "Whole eggs, toast & avocado", kcal: 480, p: 24 },
-    { time: "12:30 PM", name: "Chicken wrap with brown rice", kcal: 650, p: 42 },
-    { time: "4:00 PM", name: "Protein shake & a banana", kcal: 300, p: 28 },
-    { time: "8:00 PM", name: "Lean beef, sweet potato & salad", kcal: 640, p: 45 },
+    {
+      time: "7:30 AM",
+      name: "2 eggs, whole-wheat paratha & milk",
+      kcal: 500,
+      p: 26,
+    },
+    {
+      time: "12:30 PM",
+      name: "Chicken pulao with raita and salad",
+      kcal: 650,
+      p: 38,
+    },
+    {
+      time: "4:00 PM",
+      name: "Banana, milk & roasted chana",
+      kcal: 300,
+      p: 14,
+    },
+    {
+      time: "8:00 PM",
+      name: "Grilled fish, chapati & cooked vegetables",
+      kcal: 600,
+      p: 35,
+    },
   ],
+
   gain: [
-    { time: "7:30 AM", name: "Peanut butter oats, whey & milk", kcal: 720, p: 45 },
-    { time: "12:30 PM", name: "Rice, chicken thigh & olive oil veg", kcal: 850, p: 55 },
-    { time: "4:00 PM", name: "Mass-gain smoothie", kcal: 600, p: 40 },
-    { time: "8:00 PM", name: "Pasta, lean mince & parmesan", kcal: 820, p: 52 },
+    {
+      time: "7:30 AM",
+      name: "3 eggs, whole-wheat paratha & milk",
+      kcal: 700,
+      p: 32,
+    },
+    {
+      time: "12:30 PM",
+      name: "Chicken rice bowl with vegetables",
+      kcal: 800,
+      p: 48,
+    },
+    {
+      time: "4:00 PM",
+      name: "Banana milk shake with peanut butter",
+      kcal: 450,
+      p: 18,
+    },
+    {
+      time: "8:00 PM",
+      name: "Chicken curry, chapati & daal",
+      kcal: 750,
+      p: 42,
+    },
   ],
 };
 
 const TIMING = [
-  { when: "90 min before", title: "Pre-workout", text: "Slow carbs + moderate protein, such as oats with a banana. Keeps energy steady through the session." },
-  { when: "During", title: "Intra-workout", text: "Sip water or electrolytes. Add fast carbs only if you train longer than 75 minutes." },
-  { when: "Within 60 min after", title: "Post-workout", text: "20–40 g protein with quick carbs. Starts muscle repair and refills glycogen." },
-  { when: "Before bed", title: "Night recovery", text: "Casein, cottage cheese or Greek yogurt feeds muscles slowly while you sleep." },
+  {
+    when: "1–2 hours before",
+    title: "Pre-workout",
+    text: "Choose an easy-to-digest meal such as a banana, oats or a small roti with eggs. Adjust the portion according to your training time.",
+  },
+  {
+    when: "During training",
+    title: "Stay Hydrated",
+    text: "Drink water regularly during your workout. For longer or particularly sweaty sessions, hydration needs may be different.",
+  },
+  {
+    when: "After training",
+    title: "Post-workout",
+    text: "Include protein and carbohydrates in your next meal, such as chicken with rice, eggs with roti or daal with chapati.",
+  },
+  {
+    when: "Before bed",
+    title: "Night Recovery",
+    text: "A balanced evening meal and a consistent sleep routine can support recovery. Milk or plain yogurt can also be convenient food options.",
+  },
 ];
 
 const SUPPLEMENTS = [
-  { name: "Whey Protein", tag: "Muscle repair", text: "Fast-digesting protein for hitting your daily target and recovering after training.", dose: "20–30 g after training" },
-  { name: "Creatine", tag: "Strength & power", text: "The most researched supplement for strength, power and lean mass.", dose: "3–5 g every day" },
-  { name: "Omega-3", tag: "Joints & heart", text: "Supports joint comfort, heart health and lowers inflammation.", dose: "1–2 g with a meal" },
-  { name: "Vitamin D3", tag: "Bones & immunity", text: "Helps bone strength and immune function, especially with little sun.", dose: "1000–2000 IU daily" },
+  {
+    name: "Whey Protein",
+    tag: "Protein support",
+    text: "A convenient protein source for people who find it difficult to meet their daily protein needs through regular meals.",
+    dose: "Follow product instructions and individual dietary needs",
+  },
+  {
+    name: "Creatine",
+    tag: "Strength & performance",
+    text: "Creatine monohydrate is commonly studied for its potential benefits in strength and high-intensity exercise.",
+    dose: "Discuss suitability and use with a qualified professional",
+  },
+  {
+    name: "Omega-3",
+    tag: "Dietary fats",
+    text: "Omega-3 fats are found in foods such as fish, and are part of a balanced diet.",
+    dose: "Consider dietary sources and individual needs",
+  },
+  {
+    name: "Vitamin D",
+    tag: "Bone health",
+    text: "Vitamin D supports normal bone health. Supplementation may be appropriate for some people depending on their needs.",
+    dose: "Seek medical advice before supplementing",
+  },
 ];
 
 const FOODS = [
   { name: "Chicken breast", per: 31 },
-  { name: "Salmon", per: 20 },
+  { name: "Fish", per: 20 },
   { name: "Eggs", per: 13 },
-  { name: "Greek yogurt", per: 10 },
-  { name: "Lentils", per: 9 },
-  { name: "Tofu", per: 8 },
+  { name: "Plain yogurt", per: 4 },
+  { name: "Cooked lentils (daal)", per: 9 },
+  { name: "Roasted chickpeas (chana)", per: 19 },
 ];
 
 const TIPS = [
-  { title: "Eat protein at every meal", text: "Spread 25–40 g across 3–4 meals for better muscle building than one huge serving." },
-  { title: "Do not fear carbs", text: "Carbs fuel hard training. Time most of them around your workout." },
-  { title: "Sleep is nutrition too", text: "Aim for 7–9 hours. Poor sleep raises hunger and slows recovery." },
-  { title: "Prep ahead", text: "Cooking two days of meals in one session removes most bad choices." },
+  {
+    title: "Include protein in your meals",
+    text: "Eggs, chicken, fish, milk, yogurt, daal and chana can help you include protein in your everyday diet.",
+  },
+  {
+    title: "Choose balanced portions",
+    text: "Combine roti or rice with protein-rich foods and vegetables instead of relying on one food group.",
+  },
+  {
+    title: "Drink water regularly",
+    text: "Keep water available throughout the day, especially during exercise and in hot weather.",
+  },
+  {
+    title: "Plan your meals ahead",
+    text: "Preparing simple foods such as boiled eggs, chicken, daal and vegetables can make daily meal planning easier.",
+  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -271,16 +382,22 @@ export default function Nutrient() {
       <div className="nt-wrap">
         {/* ---------------- Heading ---------------- */}
         <header className="nt-head">
-          <Reveal as="p" className="nt-kicker" variant="fade">
-            Eat Right, Train Better
-          </Reveal>
-          <Reveal as="h2" className="nt-title" delay={100}>
-            Nutrition That Powers Your <span>Workout</span>
-          </Reveal>
-          <Reveal as="p" className="nt-lead" delay={200}>
-            Training builds the stimulus. Food builds the result. Work out your daily targets, follow a plan made
-            by our nutritionists, and learn what to eat before and after every session.
-          </Reveal>
+          
+<Reveal as="p" className="nt-kicker" variant="fade">
+  KINETIX NUTRITION GUIDE
+</Reveal>
+
+<Reveal as="h2" className="nt-title" delay={100}>
+  Eat Better, Train <span>Stronger</span>
+</Reveal>
+
+<Reveal as="p" className="nt-lead" delay={200}>
+  Build healthier eating habits alongside your fitness routine.
+  Explore familiar food options, estimate your daily nutrition
+  targets, and learn how balanced meals can support your
+  training and recovery.
+</Reveal>
+
         </header>
 
         {/* ---------------- Stats ---------------- */}
@@ -293,7 +410,7 @@ export default function Nutrient() {
         {/* ---------------- Calculator ---------------- */}
         <div className="nt-block">
           <Reveal as="h3" className="nt-h3">
-            Your Daily Macro Calculator
+           Daily Nutrition Calculator
           </Reveal>
 
           <div className="nt-calc">
@@ -417,8 +534,7 @@ export default function Nutrient() {
                 </li>
               </ul>
               <p className="nt-note">
-                Estimate based on the Mifflin-St Jeor formula. Our nutritionists can fine-tune it for you.
-              </p>
+This is an estimated calculation for general information, not a medical or personalised diet prescription. Individual nutritional needs can vary.              </p>
             </Reveal>
           </div>
         </div>
@@ -483,7 +599,7 @@ export default function Nutrient() {
         {/* ---------------- Supplements ---------------- */}
         <div className="nt-block">
           <Reveal as="h3" className="nt-h3">
-            Supplements Worth Taking
+            Understanding Fitness Supplements
           </Reveal>
           <div className="nt-grid4">
             {SUPPLEMENTS.map((s, i) => (
@@ -505,17 +621,16 @@ export default function Nutrient() {
         {/* ---------------- Foods + Hydration ---------------- */}
         <div className="nt-block nt-two">
           <Reveal className="nt-panel" variant="left">
-            <h3 className="nt-h3 sm">Protein per 100 g</h3>
+            <h3 className="nt-h3 sm">Protein in Common Foods</h3>
             {FOODS.map((f, i) => (
               <FoodBar key={f.name} {...f} max={34} delay={i * 90} />
             ))}
           </Reveal>
 
           <Reveal className="nt-panel" variant="right" delay={150}>
-            <h3 className="nt-h3 sm">Hydration Tracker</h3>
+            <h3 className="nt-h3 sm">Daily Hydration Tracker</h3>
             <p className="nt-muted">
-              Tap a glass for every 250 ml you drink. Your goal today is 8 glasses.
-            </p>
+Tap a glass for every 250 ml of water you drink. This tracker uses 8 glasses (2 litres) as a simple example, not a fixed daily requirement.            </p>
             <div className="nt-glasses">
               {Array.from({ length: 8 }).map((_, i) => (
                 <button
@@ -566,12 +681,13 @@ export default function Nutrient() {
         {/* ---------------- CTA ---------------- */}
         <Reveal className="nt-cta" variant="zoom">
           <div>
-            <h3>Get a plan built around you</h3>
-            <p>Book a free 30-minute session with one of our certified nutritionists.</p>
+           <h3>Build Healthier Habits With KINETIX</h3>
+            <p>B  Make nutrition part of your fitness journey. Explore balanced
+  meal ideas and develop eating habits that support your goals..</p>
           </div>
-          <a href="/contact" className="nt-btn">
-            Book a consultation
-          </a>
+        <a href="/contact" className="nt-btn">
+  Contact KINETIX
+</a>
         </Reveal>
       </div>
     </section>
