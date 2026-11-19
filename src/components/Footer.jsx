@@ -1,23 +1,24 @@
 import "./Footer.css";
 
 function Footer() {
-
-  const quickLinks = [
-    "Home",
-    "About Us",
-    "Membership",
-    "Trainers",
-    "Contact Us"
-  ];
+const quickLinks = [
+  "Home",
+  "About KINETIX",
+  "Membership Plans",
+  "Our Trainers",
+  "Our Classes",
+  "Contact Us"
+];
 
   const services = [
-    "Personal Training",
-    "Group Classes",
-    "Workout Plans",
-    "Diet & Nutrition",
-    "Progress Tracking",
-    "Smart Attendance"
-  ];
+  "Strength Training",
+  "Cardio & Endurance",
+  "Personal Training",
+  "Workout Planning",
+  "Diet & Nutrition",
+  "Progress Tracking",
+  "Attendance Management"
+];
 
   return (
     <footer className="gym-footer">
@@ -29,19 +30,18 @@ function Footer() {
         <div className="newsletter-content">
 
           <p className="newsletter-tag">
-            STAY STRONG • STAY UPDATED
+         STAY FIT • STAY CONSISTENT
           </p>
 
           <h2>
-            Your Fitness Journey
-            <br />
-            Starts <span>Here.</span>
+          Your Stronger
+<br />
+Journey <span>Starts Here.</span>
           </h2>
 
           <p>
-            Get fitness tips, membership updates,
-            special offers and gym news directly
-            in your inbox.
+           Get fitness guidance, gym updates, training tips,
+and membership information from the KINETIX team.
           </p>
 
           <div className="newsletter-box">
@@ -52,7 +52,7 @@ function Footer() {
             />
 
             <button>
-              SUBSCRIBE →
+              GET UPDATES →
             </button>
 
           </div>
@@ -86,13 +86,11 @@ function Footer() {
             TRAIN • SWEAT • TRANSFORM
           </p>
 
-          <p className="footer-description">
-            KINETIX is more than a gym.
-            It is a place where consistency,
-            strength and dedication become
-            a lifestyle.
-          </p>
-
+         <p className="footer-description">
+  KINETIX Fitness Club is a place to build strength,
+  improve fitness, and develop healthier habits
+  through consistent training and proper guidance.
+</p>
 
           <div className="social-links">
 
@@ -156,8 +154,8 @@ function Footer() {
             <span className="contact-icon">⌖</span>
 
             <div>
-              <strong>Gujranwala, Pakistan</strong>
-              <small>KINETIX Main Branch</small>
+              <strong>Satellite Town, Gujranwala</strong>
+<small>Punjab, Pakistan</small>
             </div>
           </div>
 
@@ -166,8 +164,8 @@ function Footer() {
             <span className="contact-icon">☎</span>
 
             <div>
-              <strong>+92 300 123 4567</strong>
-              <small>Call us anytime</small>
+              <strong>+92 300 847 2619</strong>
+<small>Contact our fitness team</small>
             </div>
           </div>
 
@@ -176,8 +174,8 @@ function Footer() {
             <span className="contact-icon">✉</span>
 
             <div>
-              <strong>info@kinetix.com</strong>
-              <small>Send us an email</small>
+              <strong>hello@kinetixfitness.pk</strong>
+<small>Membership & general enquiries</small>
             </div>
           </div>
 
@@ -186,8 +184,8 @@ function Footer() {
             <span className="contact-icon">◷</span>
 
             <div>
-              <strong>6:00 AM — 11:00 PM</strong>
-              <small>Monday — Sunday</small>
+             <strong>6:00 AM — 10:00 PM</strong>
+<small>Monday — Saturday</small>
             </div>
           </div>
 
@@ -205,8 +203,8 @@ function Footer() {
         </div>
 
         <p>
-          © 2026 <span>KINETIX</span> Fitness Center.
-          All rights reserved.
+          © 2026 <span>KINETIX</span> Fitness Club.
+All rights reserved.
         </p>
 
         <div className="footer-motto">

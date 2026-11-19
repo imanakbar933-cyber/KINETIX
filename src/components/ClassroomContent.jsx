@@ -14,25 +14,26 @@ const ClassroomContent = () => {
             ============================================ */}
         <div className="classroomcontent-header">
 
-          <motion.h2
-            className="classroomcontent-title"
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-          >
-            EMPOWER YOUR FITNESS JOURNEY
-          </motion.h2>
+          
+<motion.h2
+  className="classroomcontent-title"
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: false, amount: 0.3 }}
+  transition={{ duration: 1, ease: "easeOut" }}
+>
+  TRAIN SMARTER, GET STRONGER
+</motion.h2>
 
-          <motion.h2
-            className="classroomcontent-title classroomcontent-title-second"
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-          >
-            IN OUR <span className="classroomcontent-highlight">INTERACTIVE</span> CLASSROOM
-          </motion.h2>
+<motion.h2
+  className="classroomcontent-title classroomcontent-title-second"
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: false, amount: 0.3 }}
+  transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+>
+  YOUR FITNESS, OUR <span className="classroomcontent-highlight">GUIDANCE</span>
+</motion.h2>
 
         </div>
 

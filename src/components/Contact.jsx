@@ -15,27 +15,33 @@ const Contact = () => {
       <div className="contact-left">
 
         {/* Heading — fade-up */}
-        <motion.h1
-          className="contact-title"
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          GET STARTED <br /> TODAY
-        </motion.h1>
+       
+<motion.h1
+  className="contact-title"
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: false, amount: 0.3 }}
+  transition={{ duration: 0.8, ease: "easeOut" }}
+>
+  YOUR FITNESS <br /> STARTS HERE
+</motion.h1>
+
 
         {/* Paragraph — fade-up with blur */}
-        <motion.p
-          className="contact-para"
-          initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
-          Ready to take the first step towards a healthier,
-          stronger you?
-        </motion.p>
+        
+<motion.p
+  className="contact-para"
+  initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+  viewport={{ once: false, amount: 0.3 }}
+  transition={{ duration: 1, delay: 0.2 }}
+>
+  <br />
+  Ready to build a stronger, healthier lifestyle? Join the
+  KINETIX fitness community in Gujranwala and take the first
+  step towards your fitness goals.
+</motion.p>
+
 
         {/* Buttons — staggered fade-up */}
         <motion.div

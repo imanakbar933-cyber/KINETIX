@@ -1,24 +1,21 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Search, Plus, Eye, Pencil, Trash2, ChevronLeft, ChevronRight, X, Users 
+import {
+  Search, Plus, Eye, Pencil, Trash2, ChevronLeft, ChevronRight, X, Users
 } from "lucide-react";
 import "./MembersList.css";
-
-// Demo Data (10 members - original)
 const initialMembers = [
-  { id: 1, name: "Cody Fisher", memberId: "3536", package: "Gold Membership", joinDate: "8/21/15", expireDate: "12/4/17", paid: "$450", due: "$450", status: "Not paid", image: "https://i.pravatar.cc/150?img=1" },
-  { id: 2, name: "Marvin McKinney", memberId: "4152", package: "Silver Membership", joinDate: "5/19/12", expireDate: "2/11/12", paid: "$450", due: "$450", status: "Not paid", image: "https://i.pravatar.cc/150?img=2" },
-  { id: 3, name: "Annette Black", memberId: "9261", package: "Platinum Membership", joinDate: "3/4/16", expireDate: "10/6/13", paid: "$450", due: "$450", status: "Not paid", image: "https://i.pravatar.cc/150?img=3" },
-  { id: 4, name: "Dianne Russell", memberId: "8811", package: "Gold Membership", joinDate: "5/27/15", expireDate: "7/11/19", paid: "$450", due: "$450", status: "Not paid", image: "https://i.pravatar.cc/150?img=4" },
-  { id: 5, name: "Eleanor Pena", memberId: "5028", package: "Silver Membership", joinDate: "9/18/16", expireDate: "8/2/19", paid: "$450", due: "$450", status: "Paid", image: "https://i.pravatar.cc/150?img=5" },
-  { id: 6, name: "Arlene McCoy", memberId: "5948", package: "Platinum Membership", joinDate: "8/15/17", expireDate: "7/27/13", paid: "$450", due: "$450", status: "Paid", image: "https://i.pravatar.cc/150?img=6" },
-  { id: 7, name: "Darrell Steward", memberId: "1148", package: "Gold Membership", joinDate: "12/4/17", expireDate: "7/18/17", paid: "$450", due: "$450", status: "Paid", image: "https://i.pravatar.cc/150?img=7" },
-  { id: 8, name: "Leslie Alexander", memberId: "6690", package: "Silver Membership", joinDate: "5/27/15", expireDate: "12/10/13", paid: "$450", due: "$450", status: "Paid", image: "https://i.pravatar.cc/150?img=8" },
-  { id: 9, name: "Floyd Miles", memberId: "1439", package: "Platinum Membership", joinDate: "10/6/13", expireDate: "4/4/18", paid: "$450", due: "$450", status: "Paid", image: "https://i.pravatar.cc/150?img=9" },
-  { id: 10, name: "Albert Flores", memberId: "4349", package: "Gold Membership", joinDate: "7/27/13", expireDate: "3/4/16", paid: "$450", due: "$450", status: "Paid", image: "https://i.pravatar.cc/150?img=10" },
+  { id: 1,  name: "Ali Hassan",       package: "Gold Membership",     joinDate: "8/21/15", expireDate: "12/4/17", paid: 450, due: 450, status: "Unpaid",  image: "https://i.pravatar.cc/150?img=11" },
+  { id: 2,  name: "Ahmed Raza",       package: "Silver Membership",   joinDate: "5/19/12", expireDate: "2/11/12", paid: 300, due: 150, status: "Partial", image: "https://i.pravatar.cc/150?img=12" },
+  { id: 3,  name: "Fatima Noor",      package: "Platinum Membership", joinDate: "3/4/16",  expireDate: "10/6/13", paid: 600, due: 0,   status: "Paid",    image: "https://i.pravatar.cc/150?img=45" },
+  { id: 4,  name: "Usman Tariq",      package: "Gold Membership",     joinDate: "5/27/15", expireDate: "7/11/19", paid: 0,   due: 450, status: "Unpaid",  image: "https://i.pravatar.cc/150?img=13" },
+  { id: 5,  name: "Ayesha Khan",      package: "Silver Membership",   joinDate: "9/18/16", expireDate: "8/2/19",  paid: 450, due: 0,   status: "Paid",    image: "https://i.pravatar.cc/150?img=47" },
+  { id: 6,  name: "Bilal Ahmed",      package: "Platinum Membership", joinDate: "8/15/17", expireDate: "7/27/13", paid: 450, due: 0,   status: "Paid",    image: "https://i.pravatar.cc/150?img=14" },
+  { id: 7,  name: "Zainab Malik",     package: "Gold Membership",     joinDate: "12/4/17", expireDate: "7/18/17", paid: 200, due: 250, status: "Partial", image: "https://i.pravatar.cc/150?img=48" },
+  { id: 8,  name: "Hassan Sheikh",    package: "Silver Membership",   joinDate: "5/27/15", expireDate: "12/10/13", paid: 450, due: 0,   status: "Paid",    image: "https://i.pravatar.cc/150?img=15" },
+  { id: 9,  name: "Maryam Iqbal",     package: "Platinum Membership", joinDate: "10/6/13", expireDate: "4/4/18",  paid: 0,   due: 450, status: "Unpaid",  image: "https://i.pravatar.cc/150?img=44" },
+  { id: 10, name: "Hamza Siddiqui",   package: "Gold Membership",     joinDate: "7/27/13", expireDate: "3/4/16",  paid: 450, due: 0,   status: "Paid",    image: "https://i.pravatar.cc/150?img=16" },
 ];
-
 const MembersList = () => {
   const [members, setMembers] = useState(initialMembers);
   const [searchInput, setSearchInput] = useState("");
@@ -26,77 +23,94 @@ const MembersList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // Modal States
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState("add");
   const [selectedMember, setSelectedMember] = useState(null);
-  
-  // Form State
+
   const [formData, setFormData] = useState({
-    name: "", memberId: "", package: "Gold Membership", joinDate: "", expireDate: "", paid: "$0", due: "$0", status: "Paid", image: ""
+    name: "", package: "Gold Membership", joinDate: "", expireDate: "",
+    paid: 0, due: 0, status: "Paid", image: ""
   });
 
-  // Delete
+  /* ---------- AUTO STATUS LOGIC ----------
+     paid > 0 aur due > 0  -> Partial
+     due === 0             -> Paid
+     paid === 0            -> Unpaid
+  ---------------------------------------- */
+  const autoStatus = (paid, due) => {
+    if (Number(paid) > 0 && Number(due) > 0) return "Partial";
+    if (Number(due) === 0 && Number(paid) > 0) return "Paid";
+    return "Unpaid";
+  };
+
+  /* ---------- DELETE ---------- */
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this member?")) {
-      setMembers(members.filter((member) => member.id !== id));
+      setMembers(members.filter((m) => m.id !== id));
     }
   };
 
-  // Search
+  /* ---------- SEARCH ---------- */
   const handleSearch = () => {
     setSearchQuery(searchInput);
     setCurrentPage(1);
   };
 
-  // Add Modal
+  /* ---------- ADD ---------- */
   const handleAddClick = () => {
     setModalMode("add");
     setFormData({
-      name: "", 
-      memberId: Math.floor(1000 + Math.random() * 9000).toString(),
-      package: "Gold Membership", 
-      joinDate: new Date().toLocaleDateString(), 
-      expireDate: "", 
-      paid: "$0", 
-      due: "$0", 
-      status: "Paid", 
-      image: `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 50)}`
+      name: "",
+      package: "Gold Membership",
+      joinDate: new Date().toLocaleDateString(),
+      expireDate: "",
+      paid: 0,
+      due: 0,
+      status: "Paid",
+      image: `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 50) + 1}`
     });
     setIsFormModalOpen(true);
   };
 
-  // Edit Modal
+  /* ---------- EDIT ---------- */
   const handleEditClick = (member) => {
     setModalMode("edit");
     setFormData(member);
     setIsFormModalOpen(true);
   };
 
-  // View Modal
+  /* ---------- VIEW ---------- */
   const handleViewClick = (member) => {
     setSelectedMember(member);
     setIsViewModalOpen(true);
   };
 
-  // Save Form
+  /* ---------- SAVE ---------- */
   const handleSaveForm = (e) => {
     e.preventDefault();
+
+    const finalStatus = autoStatus(formData.paid, formData.due);
+    const cleaned = {
+      ...formData,
+      paid: Number(formData.paid) || 0,
+      due: Number(formData.due) || 0,
+      status: finalStatus
+    };
+
     if (modalMode === "add") {
-      const newMember = { ...formData, id: Date.now() };
-      setMembers([newMember, ...members]);
+      setMembers([{ ...cleaned, id: Date.now() }, ...members]);
     } else {
-      setMembers(members.map(m => m.id === formData.id ? formData : m));
+      setMembers(members.map((m) => (m.id === cleaned.id ? cleaned : m)));
     }
     setIsFormModalOpen(false);
   };
 
-  // Filter & Pagination
+  /* ---------- FILTER + PAGINATION ---------- */
   const filteredMembers = useMemo(() => {
-    return members.filter((member) =>
-      member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      member.memberId.includes(searchQuery)
+    return members.filter((m) =>
+      m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      String(m.id).includes(searchQuery)
     );
   }, [members, searchQuery]);
 
@@ -105,27 +119,36 @@ const MembersList = () => {
   const currentItems = filteredMembers.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filteredMembers.length / itemsPerPage);
 
+  /* ---------- STATUS BADGE CLASS ---------- */
+  const getStatusClass = (status) => {
+    if (status === "Paid") return "paid";
+    if (status === "Partial") return "partial";
+    return "not-paid";
+  };
+
   return (
     <div className="member-list-container">
-      
-      {/* ✅ HEADER SECTION */}
+
+      {/* Header */}
       <div className="members-header">
-        <div>
-          <h1>Members List</h1>
-          <p>Manage all your gym members, their packages and statuses.</p>
-        </div>
+        <h1>Members List</h1>
+        <p>Manage all your gym members, their packages and statuses.</p>
       </div>
 
       {/* Top Bar */}
       <div className="member-top-bar">
         <div className="search-box">
           <Search size={18} className="search-icon" />
-          <input 
-            type="text" 
-            placeholder="Search by name or ID..." 
-            value={searchInput} 
-            onChange={(e) => setSearchInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+          <input
+            type="text"
+            placeholder="Search by name"
+            value={searchInput}
+            onChange={(e) => {
+    setSearchInput(e.target.value);
+    setSearchQuery(e.target.value);   // ✅ real-time search
+    setCurrentPage(1);
+  }}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           />
           <button className="search-btn" onClick={handleSearch}>Search</button>
         </div>
@@ -139,45 +162,64 @@ const MembersList = () => {
         <table className="member-table">
           <thead>
             <tr>
-              <th>Photo</th><th>Name</th><th>Member Id</th><th>Package</th>
-              <th>Joining Date</th><th>Expire Date</th><th>Paid</th><th>Due</th>
-              <th>Status</th><th>Action</th>
+              <th>Sr No</th>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Member ID</th>
+              <th>Package</th>
+              <th>Joining Date</th>
+              <th>Expiry Date</th>
+              <th>Paid</th>
+              <th>Due</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <AnimatePresence>
-              {currentItems.map((member, index) => (
-                <motion.tr 
-                  key={member.id} className="table-row"
-                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.2, delay: index * 0.03 }}
-                >
-                  <td><img src={member.image} alt={member.name} className="member-avatar" /></td>
-                  <td className="member-name">{member.name}</td>
-                  <td className="member-id">#{member.memberId}</td>
-                  <td><span className="package-tag">{member.package}</span></td>
-                  <td>{member.joinDate}</td>
-                  <td>{member.expireDate}</td>
-                  <td className="amount-paid">{member.paid}</td>
-                  <td className="amount-due">{member.due}</td>
-                  <td>
-                    <span className={`status-badge ${member.status === "Paid" ? "paid" : "not-paid"}`}>
-                      {member.status}
-                    </span>
-                  </td>
-                  <td>
-                    <div className="action-buttons">
-                      <button className="action-btn view" title="View" onClick={() => handleViewClick(member)}><Eye size={16} /></button>
-                      <button className="action-btn edit" title="Edit" onClick={() => handleEditClick(member)}><Pencil size={16} /></button>
-                      <button className="action-btn delete" title="Delete" onClick={() => handleDelete(member.id)}><Trash2 size={16} /></button>
-                    </div>
-                  </td>
-                </motion.tr>
-              ))}
+              {currentItems.map((member, index) => {
+                // ✅ Sequential Sr No & Member ID
+                const srNo = indexOfFirstItem + index + 1;
+                const sequenceId = `#${String(srNo).padStart(4, "0")}`;
+
+                return (
+                  <motion.tr
+                    key={member.id}
+                    className="table-row"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.2, delay: index * 0.03 }}
+                  >
+                    <td className="srno-cell">{srNo}</td>
+                    <td><img src={member.image} alt={member.name} className="member-avatar" /></td>
+                    <td className="member-name">{member.name}</td>
+                    <td className="member-id">{sequenceId}</td>
+                    <td>{member.package}</td>
+                    <td>{member.joinDate}</td>
+                    <td>{member.expireDate}</td>
+                    <td className="text-green">${member.paid}</td>
+                    <td className={member.due > 0 ? "text-red" : ""}>${member.due}</td>
+                    <td>
+                      <span className={`status-badge ${getStatusClass(member.status)}`}>
+                        {member.status}
+                      </span>
+                    </td>
+                    <td>
+                      <div className="action-buttons">
+                        <button className="action-btn view" title="View" onClick={() => handleViewClick(member)}><Eye size={16} /></button>
+                        <button className="action-btn edit" title="Edit" onClick={() => handleEditClick(member)}><Pencil size={16} /></button>
+                        <button className="action-btn delete" title="Delete" onClick={() => handleDelete(member.id)}><Trash2 size={16} /></button>
+                      </div>
+                    </td>
+                  </motion.tr>
+                );
+              })}
             </AnimatePresence>
+
             {currentItems.length === 0 && (
               <tr>
-                <td colSpan="10" className="empty-state">
+                <td colSpan="11" className="empty-state">
                   <Users size={30} style={{ marginBottom: 10, opacity: 0.5 }} />
                   <br />
                   No members found matching your search.
@@ -192,62 +234,48 @@ const MembersList = () => {
       {filteredMembers.length > 0 && (
         <div className="pagination-bar">
           <span className="showing-text">
-            Showing <strong>{indexOfFirstItem + 1}</strong> to <strong>{Math.min(indexOfLastItem, filteredMembers.length)}</strong> of <strong>{filteredMembers.length}</strong> members
+            Showing <strong>{indexOfFirstItem + 1}</strong> to{" "}
+            <strong>{Math.min(indexOfLastItem, filteredMembers.length)}</strong> of{" "}
+            <strong>{filteredMembers.length}</strong> members
           </span>
-          
+
           <div className="pagination-controls">
-            <button className="page-btn nav" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
+            <button className="page-btn nav" onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1}>
               <ChevronLeft size={16} />
             </button>
-            
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-              <button key={number} className={`page-btn ${currentPage === number ? "active" : ""}`} onClick={() => setCurrentPage(number)}>
-                {number}
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+              <button key={n} className={`page-btn ${currentPage === n ? "active" : ""}`} onClick={() => setCurrentPage(n)}>
+                {n}
               </button>
             ))}
-
-            <button className="page-btn nav" onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages || totalPages === 0}>
+            <button className="page-btn nav" onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages || totalPages === 0}>
               <ChevronRight size={16} />
             </button>
           </div>
         </div>
       )}
 
-      {/* ================= ADD / EDIT FORM MODAL ================= */}
+      {/* ================= ADD / EDIT MODAL ================= */}
       {isFormModalOpen && (
         <div className="modal-overlay" onClick={() => setIsFormModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>{modalMode === "add" ? "Add New Member" : "Edit Member"}</h2>
-              <button className="modal-close" onClick={() => setIsFormModalOpen(false)}><X size={20} /></button>
+              <button onClick={() => setIsFormModalOpen(false)}><X size={20} /></button>
             </div>
-            
+
             <form onSubmit={handleSaveForm} className="member-form">
               <div className="form-row">
                 <div className="form-group">
                   <label>Full Name</label>
-                  <input required type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="e.g. John Doe" />
+                  <input required type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="e.g. John Doe" />
                 </div>
-                <div className="form-group">
-                  <label>Member ID</label>
-                  <input required type="text" value={formData.memberId} onChange={(e) => setFormData({...formData, memberId: e.target.value})} />
-                </div>
-              </div>
-
-              <div className="form-row">
                 <div className="form-group">
                   <label>Package</label>
-                  <select value={formData.package} onChange={(e) => setFormData({...formData, package: e.target.value})}>
-                    <option value="Gold Membership">Gold Membership</option>
-                    <option value="Silver Membership">Silver Membership</option>
-                    <option value="Platinum Membership">Platinum Membership</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>Status</label>
-                  <select value={formData.status} onChange={(e) => setFormData({...formData, status: e.target.value})}>
-                    <option value="Paid">Paid</option>
-                    <option value="Not paid">Not paid</option>
+                  <select value={formData.package} onChange={(e) => setFormData({ ...formData, package: e.target.value })}>
+                    <option>Gold Membership</option>
+                    <option>Silver Membership</option>
+                    <option>Platinum Membership</option>
                   </select>
                 </div>
               </div>
@@ -255,28 +283,28 @@ const MembersList = () => {
               <div className="form-row">
                 <div className="form-group">
                   <label>Joining Date</label>
-                  <input required type="text" value={formData.joinDate} onChange={(e) => setFormData({...formData, joinDate: e.target.value})} placeholder="MM/DD/YY" />
+                  <input required type="text" value={formData.joinDate} onChange={(e) => setFormData({ ...formData, joinDate: e.target.value })} placeholder="MM/DD/YY" />
                 </div>
                 <div className="form-group">
-                  <label>Expire Date</label>
-                  <input required type="text" value={formData.expireDate} onChange={(e) => setFormData({...formData, expireDate: e.target.value})} placeholder="MM/DD/YY" />
+                  <label>Expiry Date</label>
+                  <input required type="text" value={formData.expireDate} onChange={(e) => setFormData({ ...formData, expireDate: e.target.value })} placeholder="MM/DD/YY" />
                 </div>
               </div>
 
               <div className="form-row">
                 <div className="form-group">
-                  <label>Paid Amount</label>
-                  <input required type="text" value={formData.paid} onChange={(e) => setFormData({...formData, paid: e.target.value})} />
+                  <label>Paid Amount ($)</label>
+                  <input required type="number" min="0" value={formData.paid} onChange={(e) => setFormData({ ...formData, paid: e.target.value })} />
                 </div>
                 <div className="form-group">
-                  <label>Due Amount</label>
-                  <input required type="text" value={formData.due} onChange={(e) => setFormData({...formData, due: e.target.value})} />
+                  <label>Due Amount ($)</label>
+                  <input required type="number" min="0" value={formData.due} onChange={(e) => setFormData({ ...formData, due: e.target.value })} />
                 </div>
               </div>
 
               <div className="form-group">
                 <label>Photo URL</label>
-                <input required type="text" value={formData.image} onChange={(e) => setFormData({...formData, image: e.target.value})} />
+                <input required type="text" value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} />
               </div>
 
               <div className="modal-actions">
@@ -288,7 +316,7 @@ const MembersList = () => {
         </div>
       )}
 
-      {/* ================= VIEW MEMBER MODAL ================= */}
+      {/* ================= VIEW MODAL ================= */}
       {isViewModalOpen && selectedMember && (
         <div className="modal-overlay" onClick={() => setIsViewModalOpen(false)}>
           <div className="view-modal-content" onClick={(e) => e.stopPropagation()}>
@@ -296,19 +324,19 @@ const MembersList = () => {
               <img src={selectedMember.image} alt={selectedMember.name} />
               <div>
                 <h2>{selectedMember.name}</h2>
-                <p>ID: #{selectedMember.memberId} • {selectedMember.package}</p>
+                <p>{selectedMember.package}</p>
               </div>
               <button className="close-view" onClick={() => setIsViewModalOpen(false)}><X size={20} /></button>
             </div>
-            
+
             <div className="view-grid">
               <div className="view-item"><span>Joining Date</span><strong>{selectedMember.joinDate}</strong></div>
-              <div className="view-item"><span>Expire Date</span><strong>{selectedMember.expireDate}</strong></div>
-              <div className="view-item"><span>Paid</span><strong className="text-green">{selectedMember.paid}</strong></div>
-              <div className="view-item"><span>Due</span><strong className="text-red">{selectedMember.due}</strong></div>
+              <div className="view-item"><span>Expiry Date</span><strong>{selectedMember.expireDate}</strong></div>
+              <div className="view-item"><span>Paid</span><strong className="text-green">${selectedMember.paid}</strong></div>
+              <div className="view-item"><span>Due</span><strong className={selectedMember.due > 0 ? "text-red" : ""}>${selectedMember.due}</strong></div>
               <div className="view-item" style={{ gridColumn: "1 / -1" }}>
                 <span>Status</span>
-                <strong className={selectedMember.status === "Paid" ? "text-green" : "text-red"}>
+                <strong className={selectedMember.status === "Paid" ? "text-green" : selectedMember.status === "Partial" ? "text-yellow" : "text-red"}>
                   {selectedMember.status}
                 </strong>
               </div>
@@ -316,7 +344,6 @@ const MembersList = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

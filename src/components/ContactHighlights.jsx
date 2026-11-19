@@ -9,40 +9,42 @@ function ContactHighlights() {
     once: false,   // 👈 HAR BAAR animate hoga
   });
 
-  const features = [
-    {
-      number: "01",
-      title: "Train With Purpose",
-      text: "Every session is designed to move you closer to your goal. No wasted reps, no random routines — just focused progress.",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 4v16M18 4v16M6 8h12M6 16h12M3 8v8M21 8v8" />
-        </svg>
-      ),
-    },
-    {
-      number: "02",
-      title: "Backed By Experts",
-      text: "Certified trainers, personalized plans, and constant guidance — you'll never train alone or guess what to do next.",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
-          <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2" />
-        </svg>
-      ),
-    },
-    {
-      number: "03",
-      title: "Built For Results",
-      text: "Track progress, hit milestones, and see real change. We focus on outcomes — not just workouts.",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M3 17l6-6 4 4 8-8" />
-          <path d="M14 7h7v7" />
-        </svg>
-      ),
-    },
-  ];
+  
+const features = [
+  {
+    number: "01",
+    title: "Training That Fits You",
+    text: "Whether your goal is building strength, losing weight, or improving stamina, your training routine is guided by your current fitness level and personal goals.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 4v16M18 4v16M6 8h12M6 16h12M3 8v8M21 8v8" />
+      </svg>
+    ),
+  },
+  {
+    number: "02",
+    title: "Guidance You Can Trust",
+    text: "Our fitness trainers help you understand exercises, maintain proper form, and follow suitable workout routines so you can train safely and confidently.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
+        <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2" />
+      </svg>
+    ),
+  },
+  {
+    number: "03",
+    title: "Progress You Can Track",
+    text: "Keep an eye on your workouts, attendance, fitness measurements, and personal milestones. Every improvement matters, and consistency makes the difference.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 17l6-6 4 4 8-8" />
+        <path d="M14 7h7v7" />
+      </svg>
+    ),
+  },
+];
+
 
   // ===== Animation Variants =====
   const containerVariants = {
@@ -134,21 +136,21 @@ function ContactHighlights() {
             className="contact-cta-badge"
             variants={badgeVariants}
           >
-            WHY CHOOSE US
+           WHY CHOOSE KINETIX
           </motion.span>
 
           <motion.h2
             className="contact-cta-title"
             variants={titleVariants}
           >
-            MORE THAN A <span className="green">GYM.</span>
+        MORE THAN A <span className="green">WORKOUT.</span>
           </motion.h2>
 
           <motion.p
             className="contact-cta-desc"
             variants={descVariants}
           >
-            We build people — not just bodies. Here's what makes us different.
+            Your fitness journey deserves the right environment, proper guidance, and a team that keeps you moving forward.
           </motion.p>
         </div>
 
@@ -232,7 +234,7 @@ function ContactHighlights() {
             whileTap={{ scale: 0.97 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
-            Start Your Journey
+          Start Your Fitness Journey
             <motion.span
               className="cta-arrow"
               whileHover={{ x: 3, y: -3 }}
@@ -241,7 +243,7 @@ function ContactHighlights() {
               ↗
             </motion.span>
           </motion.a>
-          <p className="cta-note">No pressure. Just progress.</p>
+          <p className="cta-note">Every step forward counts.</p>
         </motion.div>
       </div>
     </motion.section>

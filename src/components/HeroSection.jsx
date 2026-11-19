@@ -1,4 +1,4 @@
-// src/components/HeroSection.jsx
+
 import React from 'react';
 
 const HeroSection = () => {
@@ -7,7 +7,7 @@ const HeroSection = () => {
       {/* Background Image */}
       <img 
         src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1470&auto=format&fit=crop" 
-        alt="People working out" 
+        alt="People working out at the gym" 
         className="hero-bg-image"
       />
       
@@ -16,8 +16,8 @@ const HeroSection = () => {
       
       {/* Text Content */}
       <div className="hero-content">
-        <h1>SERVICES</h1>
-        <p>HOME / SERVICES</p>
+        <h1>OUR SERVICES</h1>
+        <p>HOME / KINETIX / SERVICES</p>
       </div>
     </section>
   );

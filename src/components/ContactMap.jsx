@@ -93,10 +93,10 @@ function ContactMap() {
             className="contact-map-desc"
             variants={descVariants}
           >
-            Undo image pen asset distribute auto library. Move list
-            underline frame opacity plugin outline project.
-            <br />
-            Style variant slice shadow export blur plugin pixel.
+            Visit KINETIX Fitness Club in Gujranwala and take the first
+step towards a stronger, healthier lifestyle.
+<br />
+Our team is ready to welcome you and help you get started.
           </motion.p>
         </div>
 
@@ -130,8 +130,8 @@ function ContactMap() {
 
           <iframe
             className="contact-map-frame"
-            title="Jalal Textile Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.317591906877!2d90.41884431498202!3d23.80602698456274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c700d3f05b59%3A0xb2c5e19d6a77d1a0!2sZeroGround!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd"
+            title="KINETIX Fitness Club Location"
+src="https://www.google.com/maps?q=Satellite+Town,+Gujranwala,+Pakistan&output=embed"
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"

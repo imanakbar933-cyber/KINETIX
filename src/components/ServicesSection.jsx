@@ -39,12 +39,13 @@ function ServicesSection() {
         </span>
 
         <h2>
-          SERVICES WE <span>OFFER</span>
+          TRAINING. <span>SUPPORT. RESULTS.</span>
         </h2>
 
         <p>
-          Professional services designed to make your fitness
-          journey easier and more effective.
+          From personal training and group workouts to nutrition
+          guidance and everyday fitness support, explore the
+          services that help you make more of your fitness journey.
         </p>
       </div>
 

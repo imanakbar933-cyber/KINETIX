@@ -7,50 +7,52 @@ import "./AboutFAQ.css";
 const AboutFAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
 
-  const faqData = [
-    {
-      id: 1,
-      number: "01",
-      question: "When was KINETIX founded?",
-      answer:
-        "KINETIX was founded in 2018 with a simple mission: to create a fitness community where everyone feels welcome. What started as a small gym with just 5 trainers has grown into one of the most trusted fitness clubs in Gujranwala.",
-    },
-    {
-      id: 2,
-      number: "02",
-      question: "What is your mission and vision?",
-      answer:
-        "Our mission is to make fitness accessible, enjoyable, and sustainable for everyone — regardless of age, gender, or fitness level. We envision a community where health is a lifestyle, not a chore.",
-    },
-    {
-      id: 3,
-      number: "03",
-      question: "Who are the trainers at KINETIX?",
-      answer:
-        "Our team consists of 25+ certified trainers, nutritionists, and fitness coaches. Each trainer specializes in different areas — strength training, yoga, CrossFit, cardio, and rehabilitation. All our trainers are internationally certified.",
-    },
-    {
-      id: 4,
-      number: "04",
-      question: "What makes KINETIX different from other gyms?",
-      answer:
-        "Three things: our community-first approach, premium equipment, and personalized attention. We don't just sell memberships — we build relationships. Our members stay with us for years because they feel like family.",
-    },
-    {
-      id: 5,
-      number: "05",
-      question: "What are your core values?",
-      answer:
-        "We live by five values: Respect (for every body type), Consistency (small steps every day), Community (we grow together), Excellence (in everything we do), and Fun (fitness should be enjoyable).",
-    },
-    {
-      id: 6,
-      number: "06",
-      question: "How many members do you have today?",
-      answer:
-        "We're proud to serve over 2,500 active members across all our programs. From beginners to professional athletes, our community continues to grow every single month.",
-    },
-  ];
+  
+const faqData = [
+  {
+    id: 1,
+    number: "01",
+    question: "When was KINETIX established?",
+    answer:
+      "KINETIX was established in 2024 in Gujranwala, Pakistan, with a vision to make quality fitness training accessible to the local community. Since then, we have focused on creating a welcoming environment where members can work towards their fitness goals with confidence.",
+  },
+  {
+    id: 2,
+    number: "02",
+    question: "What is the mission of KINETIX?",
+    answer:
+      "Our mission is to help people build healthier lifestyles through consistent training, proper guidance, and a supportive fitness environment. We believe fitness is not about quick results; it is about making small improvements every day.",
+  },
+  {
+    id: 3,
+    number: "03",
+    question: "Who will guide me during my workouts?",
+    answer:
+      "Our fitness team includes experienced trainers who guide members according to their fitness levels and individual goals. Whether you are new to the gym or have been training for years, our trainers help you understand exercises, maintain proper form, and follow a suitable workout routine.",
+  },
+  {
+    id: 4,
+    number: "04",
+    question: "What makes KINETIX different?",
+    answer:
+      "At KINETIX, we focus on more than just providing gym equipment. Members can manage their memberships, track attendance, follow workout and diet plans, and monitor their fitness progress. Our goal is to make every member's fitness journey organized, comfortable, and motivating.",
+  },
+  {
+    id: 5,
+    number: "05",
+    question: "What facilities are available at KINETIX?",
+    answer:
+      "Members can benefit from strength training equipment, cardio workouts, personalized exercise guidance, workout plans, and fitness progress tracking. We also provide membership options to suit different fitness goals and training preferences.",
+  },
+  {
+    id: 6,
+    number: "06",
+    question: "How can I become a KINETIX member?",
+    answer:
+      "Getting started is simple. Visit KINETIX in Gujranwala, explore the available membership plans, and choose the option that suits your fitness goals. Our team will guide you through registration and help you get started with your fitness journey.",
+  },
+];
+
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);

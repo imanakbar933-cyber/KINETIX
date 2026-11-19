@@ -6,36 +6,38 @@ import "./Exercise.css";
 
 const Exercises = () => {
   // ✅ 4 Exercises — Videos ke saath
-  const exercisesData = [
-    {
-      id: 1,
-      title: "AB CRUNCH MACHINE",
-      description:
-        "Sculpt your core with our premium ab crunch machine. Target your abs with controlled movements and adjustable resistance for maximum results.",
-      video: "/assets/Ab crunch.mp4",
-    },
-    {
-      id: 2,
-      title: "BARBELL",
-      description:
-        "Build raw strength with our full range of barbells and weight plates. Perfect for squats, deadlifts, bench press, and compound lifts.",
-      video: "/assets/Barbell.mp4",
-    },
-    {
-      id: 3,
-      title: "CARDIO",
-      description:
-        "Boost your heart health with our state-of-the-art cardio equipment — treadmills, ellipticals, bikes, and rowing machines.",
-      video: "/assets/Cardio.mp4",
-    },
-    {
-      id: 4,
-      title: "FLEXIBILITY & STRETCHING",
-      description:
-        "Improve mobility and prevent injuries with our dedicated stretching zone. Yoga mats, foam rollers, and resistance bands included.",
-      video: "/assets/Flexibility.mp4",
-    },
-  ];
+ 
+const exercisesData = [
+  {
+    id: 1,
+    title: "AB CRUNCH MACHINE",
+    description:
+      "Strengthen your abdominal muscles with controlled machine-based movements. Adjust the resistance according to your fitness level and focus on proper form for effective core training.",
+    video: "/assets/Ab crunch.mp4",
+  },
+  {
+    id: 2,
+    title: "BARBELL STRENGTH TRAINING",
+    description:
+      "Build overall strength with barbell exercises such as squats, bench presses, deadlifts, and shoulder presses. Suitable for beginners and experienced members with trainer guidance.",
+    video: "/assets/Barbell.mp4",
+  },
+  {
+    id: 3,
+    title: "CARDIO & ENDURANCE",
+    description:
+      "Improve stamina and cardiovascular fitness through treadmill sessions, cycling, and other cardio workouts. Choose an intensity that matches your fitness level and personal goals.",
+    video: "/assets/Cardio.mp4",
+  },
+  {
+    id: 4,
+    title: "FLEXIBILITY & MOBILITY",
+    description:
+      "Improve movement, flexibility, and recovery with guided stretching routines. Use resistance bands, foam rollers, and floor exercises to support better mobility.",
+    video: "/assets/Flexibility.mp4",
+  },
+];
+
 
   return (
     <section className="exercises-section">
@@ -82,9 +84,11 @@ const Exercises = () => {
     viewport={{ once: false, amount: 0.3 }}
     transition={{ duration: 0.9, delay: 0.4 }}
   >
-    From strength training to cardio and flexibility — discover a complete
-    range of workouts designed to push your limits and help you become the
-    strongest version of yourself.
+    
+Explore strength training, cardio, core workouts, and flexibility exercises
+at KINETIX. Follow routines suited to your fitness level and work towards
+your goals with proper training techniques.
+
   </motion.p>
 </div>
 

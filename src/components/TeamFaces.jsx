@@ -1,4 +1,3 @@
-// src/components/TeamFaces.jsx
 
 import React from "react";
 import { motion } from "motion/react";
@@ -24,7 +23,7 @@ const TeamFaces = () => {
     {
       id: 3,
       name: "FATIMA ALI",
-      role: "Yoga Instructor",
+      role: "Group Fitness Instructor",
       image: "/gym-assets/Fatimah.jpg",
       link: "/team/fatima",
     },
@@ -33,10 +32,6 @@ const TeamFaces = () => {
   return (
     <section className="teamfaces-section">
       <div className="teamfaces-container">
-
-        {/* ============================================
-            HEADER
-            ============================================ */}
         <div className="teamfaces-header">
           <motion.h2
             className="teamfaces-title"
@@ -45,7 +40,7 @@ const TeamFaces = () => {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
           >
-            THE FACES BEHIND
+            MEET THE PEOPLE
           </motion.h2>
 
           <motion.h2
@@ -53,29 +48,30 @@ const TeamFaces = () => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+            transition={{
+              duration: 0.9,
+              delay: 0.2,
+              ease: "easeOut",
+            }}
           >
-            KINETIX  Fitness Club
+            BEHIND KINETIX
           </motion.h2>
         </div>
 
-        {/* ============================================
-            TEAM GRID
-            ============================================ */}
         <div className="teamfaces-grid">
           {teamMembers.map((member, index) => (
-            <TeamCard key={member.id} member={member} index={index} />
+            <TeamCard
+              key={member.id}
+              member={member}
+              index={index}
+            />
           ))}
         </div>
-
       </div>
     </section>
   );
 };
 
-/* ============================================
-   Team Card Component
-   ============================================ */
 const TeamCard = ({ member, index }) => {
   return (
     <motion.div
@@ -90,35 +86,32 @@ const TeamCard = ({ member, index }) => {
       }}
       whileHover={{ y: -10 }}
     >
-      {/* ✨ Image Container */}
       <div className="teamface-image-wrapper">
-
-        {/* Image */}
         <img
           src={member.image}
-          alt={member.name}
+          alt={`${member.name} - ${member.role}`}
           className="teamface-image"
         />
 
-        {/* Dark Gradient Overlay */}
         <div className="teamface-overlay"></div>
 
-        {/* Bottom Info Row */}
         <div className="teamface-info">
-
-          {/* Name */}
           <div className="teamface-name-block">
             <h3 className="teamface-name">
               {member.name.split(" ")[0]}
             </h3>
+
             {member.name.split(" ")[1] && (
               <h3 className="teamface-name">
                 {member.name.split(" ").slice(1).join(" ")}
               </h3>
             )}
+
+            <p className="teamface-role">
+              {member.role}
+            </p>
           </div>
 
-          {/* Arrow Button */}
           <Link
             to={member.link}
             className="teamface-arrow"
@@ -136,9 +129,7 @@ const TeamCard = ({ member, index }) => {
               <polyline points="7 7 17 7 17 17" />
             </svg>
           </Link>
-
         </div>
-
       </div>
     </motion.div>
   );

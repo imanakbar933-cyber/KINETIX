@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from "react";
 import "./InfoCards.css";
 
@@ -11,11 +12,11 @@ function InfoCards() {
           if (entry.isIntersecting) {
             entry.target.classList.add("in-view");
           } else {
-            entry.target.classList.remove("in-view"); // Har baar animate hone ke liye
+            entry.target.classList.remove("in-view");
           }
         });
       },
-      { threshold: 0.1 } // Jab 15% section view mein aaye
+      { threshold: 0.1 }
     );
 
     const elements = sectionRef.current.querySelectorAll(".reveal");
@@ -27,15 +28,15 @@ function InfoCards() {
   const cardsData = [
     {
       number: "01",
-      title: "EMPOWERING\nHEALTHIER LIVES",
+      title: "YOUR FITNESS\nYOUR JOURNEY",
       image: "/images/card2.jpg",
-      desc: "At KINETIX, we are dedicated to empowering individuals to lead healthier lives. We provide the tools, support, and guidance needed to achieve fitness goals, improve overall well-being, and foster a sustainable commitment to health.",
+      desc: "Every fitness journey is different. At KINETIX, our focus is to help members build healthy habits, improve their strength, and work towards personal fitness goals through consistent training and proper guidance.",
     },
     {
       number: "02",
-      title: "BUILDING A SUPPORTIVE\nCOMMUNITY",
+      title: "STRONGER\nTOGETHER",
       image: "/images/card3.jpg",
-      desc: "At KINETIX, we are dedicated to building a supportive community where every member feels valued. We provide the tools, support, and guidance needed to achieve fitness goals, improve overall well-being, and foster a sustainable commitment to health.",
+      desc: "Fitness becomes more enjoyable when you are part of a supportive environment. KINETIX brings people together through shared motivation, training experiences, and a commitment to becoming stronger and healthier every day.",
     },
   ];
 
@@ -46,7 +47,7 @@ function InfoCards() {
           <div
             className="info-card reveal"
             key={i}
-            style={{ transitionDelay: `${i * 0.25}s` }} // Card 2 thoda late aaye
+            style={{ transitionDelay: `${i * 0.25}s` }}
           >
             <div className="info-card-image">
               <img src={card.image} alt={card.title} />

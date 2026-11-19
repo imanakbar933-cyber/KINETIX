@@ -89,15 +89,16 @@ function ContactInfo() {
             className="contact-help-title"
             variants={titleVariants}
           >
-            HOW CAN I HELP YOU?
+            HOW CAN WE HELP YOU?
           </motion.h2>
 
           <motion.p
             className="contact-help-desc"
             variants={descVariants}
           >
-            Distribute horizontal group background shadow italic. Figma pencil
-            edit rectangle figma link slice horizontal text follower.
+            Have questions about memberships, training sessions, or fitness programs?
+Our KINETIX team is here to guide you. Reach out and we’ll help you find
+the right way to get started.
           </motion.p>
 
           {/* Info Items */}
@@ -136,11 +137,11 @@ function ContactInfo() {
               </motion.div>
               <div className="contact-help-text">
                 <h4>OFFICE:</h4>
-                <p>
-                  930 Hilgard Ave, Los Angeles, CA 90024,
-                  <br />
-                  United States.
-                </p>
+               <p>
+  KINETIX Fitness Club, Satellite Town,
+  <br />
+  Gujranwala, Punjab, Pakistan.
+</p>
               </div>
             </motion.div>
 
@@ -174,7 +175,7 @@ function ContactInfo() {
               </motion.div>
               <div className="contact-help-text">
                 <h4>CONTACT</h4>
-                <p>+111 345 543 000</p>
+                <p><p>+92 300 847 2619</p></p>
               </div>
             </motion.div>
 
@@ -209,7 +210,7 @@ function ContactInfo() {
               </motion.div>
               <div className="contact-help-text">
                 <h4>EMAIL:</h4>
-                <p>hello@yourdomain.com</p>
+                <p><p>hello@kinetixfitness.pk</p></p>
               </div>
             </motion.div>
           </motion.div>
@@ -237,8 +238,9 @@ function ContactInfo() {
             className="contact-form-desc"
             variants={descVariants}
           >
-            List team variant line style shadow bullet prototype image
-            connection follower.
+           Tell us what you’re looking for. Whether it’s membership information,
+personal training, or general support, send us a message and our team
+will get back to you.
           </motion.p>
 
           <form className="contact-help-form">
@@ -251,15 +253,15 @@ function ContactInfo() {
                 className="contact-form-group"
                 variants={formFieldVariants}
               >
-                <label>First Name</label>
-                <input type="text" placeholder="First Name" />
+                <label>Your First Name</label>
+                <input type="text" placeholder="Your First Name" />
               </motion.div>
               <motion.div
                 className="contact-form-group"
                 variants={formFieldVariants}
               >
-                <label>Last Name</label>
-                <input type="text" placeholder="Last Name" />
+                <label>Your Last Name</label>
+                <input type="text" placeholder="Your Last Name" />
               </motion.div>
             </motion.div>
 
@@ -272,15 +274,15 @@ function ContactInfo() {
                 className="contact-form-group"
                 variants={formFieldVariants}
               >
-                <label>Email Address</label>
-                <input type="email" placeholder="email" />
+                <label>Your Email Address</label>
+                <input type="email" placeholder="Your Email Address" />
               </motion.div>
               <motion.div
                 className="contact-form-group"
                 variants={formFieldVariants}
               >
-                <label>Company Name</label>
-                <input type="text" placeholder="Company Name" />
+                <label>Phone Number</label>
+                <input type="text" placeholder="Your Phone Number" />
               </motion.div>
             </motion.div>
 
@@ -289,7 +291,7 @@ function ContactInfo() {
               className="contact-form-group"
               variants={formFieldVariants}
             >
-              <label>Message</label>
+              <label>	How Can We Help?</label>
               <textarea rows="6" placeholder="Message"></textarea>
             </motion.div>
 
@@ -306,7 +308,7 @@ function ContactInfo() {
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              Send Message
+             Submit Your Enquiry
             </motion.button>
           </form>
         </motion.div>
