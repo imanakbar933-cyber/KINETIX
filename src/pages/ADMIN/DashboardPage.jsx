@@ -1,27 +1,26 @@
+
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import DashboardNavbar from "../../components/ADMIN/Settings/DashboardNavbar";
-import DashboardSidebar from "../../components/ADMIN/DashboardSidebar";
+import DashboardSidebar from "../../components/Admin/DashboardSidebar";
 
 // Pages
 import SettingsPage from "../../components/ADMIN/Settings/SettingsPage";
 import DashboardHome from "../../components/ADMIN/DashboardHome";
 import ReportsPage from "../../components/ADMIN/ReportsPage";
 import MembersList from "../../components/ADMIN/MembersList";
-import BatchSchedule from "../../components/ADMIN/BatchSchedule"; 
+import BatchSchedule from "../../components/ADMIN/BatchSchedule";
 import PointOfSale from "../../components/ADMIN/PointOfSale";
-import TrainerManagement from "../../components/ADMIN/TrainerManagement"; 
+import TrainerManagement from "../../components/ADMIN/TrainerManagement";
+import DashboardServices from "../../components/Admin/DashboardServices";
+import Staff from "../../components/ADMIN/Staff";
 
-// ✅ NAYE PAGES IMPORT KIYE HAIN
-import DashboardServices from "../../components/ADMIN/DashboardServices"; 
-
-// ✅ STAFF IMPORT (Aap ki file ke naam ke mutabiq)
-import Staff from "../../components/ADMIN/Staff"; 
-
-import WorkoutPlans from "../../components/Admin/WorkoutPlans"; 
+import WorkoutPlans from "../../components/Admin/WorkoutPlans";
 import DietPlans from "../../components/Admin/DietPlans";
 
-import "./DashboardPage.css";
+// NEW: LOCKER MANAGEMENT
+import LockerManagement from "../../components/Admin/LockerManagement";
 
+import "./DashboardPage.css";
 
 const DEFAULT_APPEARANCE = {
   theme: "dark",
@@ -64,7 +63,9 @@ const DashboardPage = ({ page }) => {
       const saved = localStorage.getItem("kinetix_appearance");
       setAppearance(saved ? JSON.parse(saved) : { ...DEFAULT_APPEARANCE });
     };
+
     window.addEventListener("appearanceUpdated", loadAppearance);
+
     return () => window.removeEventListener("appearanceUpdated", loadAppearance);
   }, []);
 
@@ -86,6 +87,7 @@ const DashboardPage = ({ page }) => {
         const newWidth = Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, e.clientX));
         setSidebarWidth(newWidth);
       }
+
       if (isResizingHeight.current) {
         const newHeight = Math.min(
           window.innerHeight,
@@ -100,16 +102,19 @@ const DashboardPage = ({ page }) => {
         isResizingWidth.current = false;
         localStorage.setItem("kinetix_sidebar_width", String(sidebarWidth));
       }
+
       if (isResizingHeight.current) {
         isResizingHeight.current = false;
         localStorage.setItem("kinetix_sidebar_height", String(sidebarHeight));
       }
+
       document.body.style.cursor = "";
       document.body.style.userSelect = "";
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
@@ -120,6 +125,7 @@ const DashboardPage = ({ page }) => {
     const t = setTimeout(() => {
       localStorage.setItem("kinetix_sidebar_width", String(sidebarWidth));
     }, 300);
+
     return () => clearTimeout(t);
   }, [sidebarWidth]);
 
@@ -127,6 +133,7 @@ const DashboardPage = ({ page }) => {
     const t = setTimeout(() => {
       localStorage.setItem("kinetix_sidebar_height", String(sidebarHeight));
     }, 300);
+
     return () => clearTimeout(t);
   }, [sidebarHeight]);
 
@@ -134,7 +141,10 @@ const DashboardPage = ({ page }) => {
 
   const Placeholder = ({ title }) => (
     <div style={{ padding: "40px" }}>
-      <h1 style={{ fontSize: "32px", marginBottom: "10px" }}>{title} Page</h1>
+      <h1 style={{ fontSize: "32px", marginBottom: "10px" }}>
+        {title} Page
+      </h1>
+
       <p style={{ color: "var(--dash-muted, #888)", marginBottom: "30px" }}>
         This page is under construction. 🚧
       </p>
@@ -145,27 +155,27 @@ const DashboardPage = ({ page }) => {
     switch (page) {
       case "dashboard":
         return <DashboardHome />;
-        
+
       case "members":
         return <MembersList />;
-        
+
       case "batch-schedule":
         return <BatchSchedule />;
-        
+
       case "schedule":
         return <BatchSchedule />;
-        
+
       case "reports":
         return <ReportsPage />;
-        
+
       case "billing":
         return <PointOfSale />;
-        
+
       case "settings":
         return <SettingsPage />;
-        
+
       case "trainers":
-        return <TrainerManagement />; 
+        return <TrainerManagement />;
 
       case "workouts":
         return <WorkoutPlans />;
@@ -173,14 +183,16 @@ const DashboardPage = ({ page }) => {
       case "diet":
         return <DietPlans />;
 
-      // ✅ NAYE PAGES ADD KIYE HAIN
       case "services":
         return <DashboardServices />;
 
       case "staff":
-        // ✅ STAFF COMPONENT YAHAN LAGA DIYA HAI
         return <Staff />;
-        
+
+      // NEW: LOCKER MANAGEMENT
+      case "locker-management":
+        return <LockerManagement />;
+
       default:
         return <Placeholder title="Page Not Found" />;
     }
@@ -188,6 +200,7 @@ const DashboardPage = ({ page }) => {
 
   const themeClass =
     appearance.theme === "light" ? "dashboard-light" : "dashboard-dark";
+
   const compactClass = appearance.compact ? "dashboard-compact" : "";
   const animClass = appearance.animations ? "" : "dashboard-no-animations";
 
@@ -198,9 +211,12 @@ const DashboardPage = ({ page }) => {
         "--dash-accent": appearance.accent,
         "--dash-sidebar-width": `${sidebarWidth}px`,
         "--dash-sidebar-height": `${sidebarHeight}px`,
-        "--dash-card-bg": appearance.theme === "light" ? "#ffffff" : "#1a1a1a",
-        "--dash-muted": appearance.theme === "light" ? "#6b7280" : "#888",
-        "--dash-border": appearance.theme === "light" ? "#e5e7eb" : "transparent",
+        "--dash-card-bg":
+          appearance.theme === "light" ? "#ffffff" : "#1a1a1a",
+        "--dash-muted":
+          appearance.theme === "light" ? "#6b7280" : "#888",
+        "--dash-border":
+          appearance.theme === "light" ? "#e5e7eb" : "transparent",
       }}
     >
       <DashboardSidebar
@@ -208,10 +224,12 @@ const DashboardPage = ({ page }) => {
         onResizeStart={handleWidthMouseDown}
         onHeightResizeStart={handleHeightMouseDown}
       />
+
       <DashboardNavbar
         toggleSidebar={toggleSidebar}
         isSidebarOpen={isSidebarOpen}
       />
+
       <main className={`dashboard-content ${isSidebarOpen ? "shifted" : ""}`}>
         {renderContent()}
       </main>

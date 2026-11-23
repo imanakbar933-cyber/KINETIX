@@ -33,7 +33,7 @@ import Login from "./pages/Login.jsx";
 import ServiceDetail from "./components/ServiceDetail.jsx";
 
 // Admin Dashboard
-import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
+import DashboardPage from "./pages/Admin/DashboardPage.jsx";
 
 function AppLayout() {
   const location = useLocation();
@@ -43,17 +43,21 @@ function AppLayout() {
     location.pathname === "/login" || location.pathname === "/signup";
 
   // 2. DASHBOARD PAGES (No Navbar, No Footer)
-  const isDashboard =
-    location.pathname.startsWith("/dashboard") ||
-    location.pathname.startsWith("/members") ||
-    location.pathname.startsWith("/workouts") ||
-    location.pathname.startsWith("/diet") ||
-    location.pathname.startsWith("/batch-schedule") ||
-    location.pathname.startsWith("/billing") ||
-    location.pathname.startsWith("/reports") ||
-    location.pathname.startsWith("/settings") ||
-    location.pathname.startsWith("/dashboard/staff") ||   // ✅ FIXED
-    location.pathname.startsWith("/dashboard/services");  // ✅ FIXED
+
+
+const isDashboard =
+  location.pathname.startsWith("/dashboard") ||
+  location.pathname.startsWith("/members") ||
+  location.pathname.startsWith("/workouts") ||
+  location.pathname.startsWith("/diet") ||
+  location.pathname.startsWith("/batch-schedule") ||
+  location.pathname.startsWith("/billing") ||
+  location.pathname.startsWith("/reports") ||
+  location.pathname.startsWith("/settings") ||
+  location.pathname.startsWith("/locker-management") ||
+  location.pathname.startsWith("/dashboard/staff") ||
+  location.pathname.startsWith("/dashboard/services");
+
 
   const isPlansPage = location.pathname === "/plans";
 
@@ -78,6 +82,7 @@ function AppLayout() {
         
         {/* ✅ FIXED ROUTES */}
         <Route path="/dashboard/staff" element={<DashboardPage page="staff" />} />
+        <Route path="/locker-management" element={<DashboardPage page="locker-management" />} />
         <Route path="/dashboard/services" element={<DashboardPage page="services" />} />
       </Routes>
     );
