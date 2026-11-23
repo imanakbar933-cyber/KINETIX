@@ -1545,3 +1545,156 @@
     text-align: left;
   }
 }
+
+
+
+/* =========================================
+   FULL-PAGE CREATE / ASSIGN WORKOUT SCREENS
+   Keeps the existing KINETIX dark + neon theme.
+========================================= */
+
+/* The former modal overlay now behaves like a normal full-page screen. */
+.workout-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 0;
+  background: #0b0d0b;
+  backdrop-filter: none;
+  animation: modalOverlay 0.25s ease;
+}
+
+/* Full-page content area */
+.workout-modal,
+.workout-modal.create-plan-modal {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  min-height: 100vh;
+  height: auto;
+  max-height: none;
+  margin: 0 auto;
+  overflow: visible;
+  padding: 42px 34px 55px;
+  background: #0b0d0b;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  animation: modalEnter 0.35s ease;
+}
+
+/* Keep the neon top accent as part of the page design */
+.workout-modal .modal-top-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #03ea04;
+  box-shadow: 0 0 15px #03ea04;
+}
+
+/* Give the form sections comfortable page spacing */
+.workout-modal .modal-heading {
+  padding-bottom: 24px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #252e25;
+}
+
+.workout-modal .modal-form {
+  width: 100%;
+}
+
+.workout-modal .exercise-builder-list {
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
+}
+
+/* Close button remains visible while scrolling */
+.workout-modal .modal-close {
+  position: sticky;
+  top: 12px;
+}
+
+/* Full-page form responsiveness */
+@media (max-width: 700px) {
+  .workout-modal,
+  .workout-modal.create-plan-modal {
+    padding: 28px 16px 40px;
+  }
+
+  .workout-modal .modal-heading {
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workout-modal-overlay,
+  .workout-modal {
+    animation: none;
+  }
+}
+
+
+/* =========================================================
+   TRUE PAGE VIEW: CREATE PLAN / ASSIGN WORKOUT
+   These screens replace the dashboard visually instead of
+   appearing as centered modal dialogs.
+========================================================= */
+
+/* When either form is open, hide the dashboard content. */
+.workout-page:has(> .workout-modal-overlay) > :not(.workout-modal-overlay) {
+  display: none !important;
+}
+
+/* Turn the former overlay into a normal full-page wrapper. */
+.workout-page > .workout-modal-overlay {
+  position: relative !important;
+  inset: auto !important;
+  z-index: auto !important;
+  display: block !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: #0b0d0b !important;
+  backdrop-filter: none !important;
+  animation: none !important;
+}
+
+/* The form itself becomes the page content, not a dialog card. */
+.workout-page > .workout-modal-overlay > .workout-modal,
+.workout-page > .workout-modal-overlay > .workout-modal.create-plan-modal {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 1180px !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  max-height: none !important;
+  margin: 0 auto !important;
+  padding: 42px 34px 60px !important;
+  overflow: visible !important;
+  background: #0b0d0b !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* Keep the form usable on smaller screens. */
+@media (max-width: 700px) {
+  .workout-page > .workout-modal-overlay > .workout-modal,
+  .workout-page > .workout-modal-overlay > .workout-modal.create-plan-modal {
+    padding: 28px 16px 42px !important;
+  }
+}
