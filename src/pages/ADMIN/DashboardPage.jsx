@@ -13,7 +13,9 @@ import TrainerManagement from "../../components/ADMIN/TrainerManagement";
 
 // ✅ NAYE PAGES IMPORT KIYE HAIN
 import DashboardServices from "../../components/ADMIN/DashboardServices"; 
-// import StaffManagement from "../../components/ADMIN/StaffManagement"; // Agar Staff ka component bana liya hai toh isko uncomment karein
+
+// ✅ STAFF IMPORT (Aap ki file ke naam ke mutabiq)
+import Staff from "../../components/ADMIN/Staff"; 
 
 import WorkoutPlans from "../../components/Admin/WorkoutPlans"; 
 import DietPlans from "../../components/Admin/DietPlans";
@@ -176,8 +178,8 @@ const DashboardPage = ({ page }) => {
         return <DashboardServices />;
 
       case "staff":
-        // Jab StaffManagement component bana lena, tab isko use karna
-        return <Placeholder title="Staff Management" />;
+        // ✅ STAFF COMPONENT YAHAN LAGA DIYA HAI
+        return <Staff />;
         
       default:
         return <Placeholder title="Page Not Found" />;

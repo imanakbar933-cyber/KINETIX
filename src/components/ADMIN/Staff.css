@@ -1,0 +1,195 @@
+/* ============================================================
+   ADMIN STAFF THEME (Kinetix Fitness Club)
+============================================================ */
+
+.admin-staff-container {
+  padding: 24px;
+  background-color: #0B0B0B;
+  color: #FFFFFF;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  box-sizing: border-box;
+}
+
+.admin-staff-container * {
+  box-sizing: border-box;
+}
+
+/* Breadcrumb */
+.admin-breadcrumb { font-size: 14px; color: #888; margin-bottom: 20px; display: flex; gap: 8px; }
+.admin-crumb-link { cursor: pointer; transition: 0.2s; }
+.admin-crumb-link:hover { color: #39FF14; }
+.admin-crumb-active { color: #39FF14; font-weight: bold; }
+
+/* Headers */
+.admin-list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.admin-page-title { font-size: 24px; font-weight: 700; color: #FFFFFF; text-shadow: 0 0 10px rgba(57, 255, 20, 0.2); margin: 0; }
+
+/* Buttons */
+.admin-btn-primary {
+  background-color: #39FF14; color: #000000; border: none;
+  padding: 10px 18px; border-radius: 6px; font-weight: bold; cursor: pointer;
+  transition: 0.3s; font-size: 14px;
+}
+.admin-btn-primary:hover { box-shadow: 0 0 15px rgba(57, 255, 20, 0.5); transform: translateY(-2px); }
+
+.admin-btn-secondary { background-color: #1A1A1A; color: #FFF; border: 1px solid #333; padding: 10px 18px; border-radius: 6px; cursor: pointer; transition: 0.3s; font-size: 14px; }
+.admin-btn-secondary:hover { border-color: #39FF14; color: #39FF14; }
+
+.admin-btn-danger { background-color: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid #EF4444; padding: 10px 18px; border-radius: 6px; cursor: pointer; transition: 0.3s; font-size: 14px; }
+.admin-btn-danger:hover { background-color: #EF4444; color: #FFF; }
+
+.admin-btn-back { background: transparent; border: none; color: #39FF14; font-weight: bold; cursor: pointer; margin-bottom: 16px; font-size: 14px; padding: 0; }
+.admin-btn-back:hover { text-decoration: underline; }
+
+/* Search */
+.admin-search-bar { margin-bottom: 20px; }
+.admin-search-input {
+  width: 100%; max-width: 320px; padding: 10px 14px; border-radius: 6px;
+  background-color: #111; border: 1px solid #333; color: #FFF; outline: none;
+  transition: 0.3s; font-size: 14px;
+}
+.admin-search-input:focus { border-color: #39FF14; box-shadow: 0 0 8px rgba(57, 255, 20, 0.2); }
+
+/* Grid & Cards */
+.admin-staff-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.admin-staff-card {
+  background-color: #121212; border: 1px solid #222; border-radius: 10px;
+  padding: 16px; cursor: pointer; transition: 0.3s;
+}
+.admin-staff-card:hover { transform: translateY(-4px); border-color: #39FF14; box-shadow: 0 4px 20px rgba(57, 255, 20, 0.1); }
+
+.admin-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.admin-avatar {
+  width: 45px; height: 45px; border-radius: 50%; background-color: rgba(57, 255, 20, 0.15);
+  color: #39FF14; display: flex; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 16px; border: 1px solid rgba(57, 255, 20, 0.3); flex-shrink: 0;
+}
+.admin-staff-name { font-size: 16px; font-weight: 700; margin: 0; color: #FFF; }
+.admin-staff-role { font-size: 12px; color: #39FF14; margin: 2px 0 0 0; font-weight: 600; }
+.admin-staff-info { font-size: 13px; color: #AAA; margin: 4px 0; }
+
+.admin-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
+.admin-badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
+.admin-badge.active { background: rgba(57, 255, 20, 0.15); color: #39FF14; border: 1px solid rgba(57, 255, 20, 0.3); }
+.admin-badge.leave { background: rgba(250, 204, 21, 0.15); color: #FACC15; border: 1px solid rgba(250, 204, 21, 0.3); }
+.admin-badge.inactive { background: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+.admin-view-link { font-size: 12px; color: #39FF14; font-weight: bold; }
+
+/* Detail Header */
+.admin-detail-header {
+  display: flex; align-items: center; gap: 20px; background-color: #121212;
+  padding: 20px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px;
+}
+.admin-avatar-large {
+  width: 70px; height: 70px; border-radius: 50%; background-color: rgba(57, 255, 20, 0.15);
+  color: #39FF14; display: flex; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 24px; border: 1px solid rgba(57, 255, 20, 0.3); flex-shrink: 0;
+}
+.admin-detail-info { flex: 1; }
+.admin-staff-name-large { font-size: 22px; margin: 0 0 4px 0; color: #FFF; }
+.admin-staff-role-large { font-size: 14px; color: #39FF14; margin: 0 0 6px 0; font-weight: 600; }
+.admin-staff-id { font-size: 12px; color: #888; margin: 0; }
+.admin-detail-actions { display: flex; gap: 10px; }
+
+/* Tabs */
+.admin-tabs { display: flex; gap: 10px; border-bottom: 1px solid #222; margin-bottom: 20px; }
+.admin-tab-btn {
+  background: transparent; border: none; color: #888; padding: 10px 16px;
+  font-size: 14px; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent;
+  text-transform: capitalize; transition: 0.3s;
+}
+.admin-tab-btn:hover { color: #FFF; }
+.admin-tab-btn.active { color: #39FF14; border-bottom-color: #39FF14; }
+
+/* Panels & Info */
+.admin-overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.admin-panel { background-color: #121212; border: 1px solid #222; border-radius: 10px; padding: 20px; }
+.admin-panel-title { font-size: 16px; color: #FFF; margin: 0 0 15px 0; padding-bottom: 10px; border-bottom: 1px solid #222; }
+.admin-info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #222; font-size: 14px; }
+.admin-info-row span:first-child { color: #888; }
+.admin-info-val { color: #FFF; font-weight: 600; }
+
+/* Attendance */
+.admin-attendance-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
+.admin-attendance-card { background: #1A1A1A; border-radius: 8px; padding: 12px; text-align: center; border: 1px solid #222; }
+.admin-att-date { font-size: 12px; color: #888; margin: 0 0 6px 0; }
+.admin-att-status { font-size: 13px; font-weight: bold; margin: 0; }
+.admin-att-status.present { color: #39FF14; }
+.admin-att-status.absent { color: #EF4444; }
+.admin-no-data { color: #888; grid-column: 1 / -1; text-align: center; padding: 20px; }
+
+/* Salary Summary */
+.admin-summary-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.admin-summary-card { background: #121212; border: 1px solid #222; border-radius: 10px; padding: 16px; border-left: 4px solid #FFF; }
+.admin-summary-card p { margin: 0 0 6px 0; font-size: 12px; color: #888; }
+.admin-summary-card h4 { margin: 0; font-size: 20px; color: #FFF; }
+.admin-summary-card.green { border-left-color: #39FF14; }
+.admin-summary-card.green h4 { color: #39FF14; }
+.admin-summary-card.red { border-left-color: #EF4444; }
+.admin-summary-card.red h4 { color: #EF4444; }
+
+.admin-salary-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+
+/* Table */
+.admin-salary-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.admin-salary-table th { text-align: left; padding: 12px 10px; color: #888; font-weight: 600; border-bottom: 1px solid #222; }
+.admin-salary-table td { padding: 12px 10px; border-bottom: 1px solid #222; color: #DDD; }
+.admin-txt-green { color: #39FF14; font-weight: bold; }
+.admin-txt-red { color: #EF4444; font-weight: bold; }
+.admin-btn-small { background: #39FF14; color: #000; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.admin-btn-small:hover { box-shadow: 0 0 10px rgba(57, 255, 20, 0.5); }
+
+
+/* ================= MODAL & FORMS (FIXED) ================= */
+
+.admin-modal-overlay { 
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85); 
+  display: flex; 
+  align-items: flex-start; /* Center hata kar upar se shuru kiya */
+  justify-content: center; 
+  z-index: 9999; 
+  padding: 60px 20px 40px 20px; /* Upar se 60px gap taake navbar ke neechay se shuru ho */
+  overflow-y: auto; /* Taake screen se bahar na jaye balke scroll ho */
+}
+
+.admin-modal-content { 
+  background: #121212; 
+  border: 1px solid #333; 
+  border-radius: 12px; 
+  padding: 24px; 
+  width: 100%; 
+  max-width: 650px; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  margin-bottom: 40px;
+}
+
+.admin-modal-title { 
+  font-size: 22px; 
+  color: #FFF; 
+  margin: 0 0 20px 0; 
+  font-weight: bold;
+}
+
+.admin-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.admin-form-input {
+  width: 100%; padding: 12px 14px; border-radius: 6px; background-color: #0B0B0B;
+  border: 1px solid #333; color: #FFF; outline: none; font-size: 14px; font-family: inherit;
+}
+.admin-form-input:focus { border-color: #39FF14; }
+.admin-modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-overview-grid, .admin-summary-grid, .admin-form-grid { grid-template-columns: 1fr; }
+  .admin-detail-header { flex-direction: column; text-align: center; }
+  .admin-detail-actions { width: 100%; justify-content: center; }
+  .admin-tabs { overflow-x: auto; white-space: nowrap; }
+  .admin-salary-table { display: block; overflow-x: auto; white-space: nowrap; }
+  .admin-modal-overlay { padding-top: 20px; }
+}
