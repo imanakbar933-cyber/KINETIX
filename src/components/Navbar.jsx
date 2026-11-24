@@ -3,146 +3,250 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
+const defaultPalettes = {
+  dark: {
+    bgMain: "#050706",
+    bgCard: "#111513",
+    textMain: "#ffffff",
+    textSecondary: "#d0d0d0",
+    textMuted: "#a0a0a0",
+    accent: "#03ea04",
+  },
+  light: {
+    bgMain: "#f4f4f4",
+    bgCard: "#ffffff",
+    textMain: "#171717",
+    textSecondary: "#555555",
+    textMuted: "#999999",
+    accent: "#16a326",
+  },
+  custom: {
+    bgMain: "#050706",
+    bgCard: "#111513",
+    textMain: "#ffffff",
+    textSecondary: "#d0d0d0",
+    textMuted: "#a0a0a0",
+    accent: "#03ea04",
+  },
+};
+
+const colorLabels = [
+  { key: "accent", label: "Accent Color" },
+  { key: "bgMain", label: "Main Background" },
+  { key: "bgCard", label: "Card Background" },
+  { key: "textMain", label: "Primary Text" },
+  { key: "textSecondary", label: "Secondary Text" },
+  { key: "textMuted", label: "Muted Text" },
+];
+
+function getSavedSettings() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("themeSettings"));
+
+    if (saved) {
+      return {
+        theme: saved.theme || localStorage.getItem("theme") || "dark",
+        palettes: {
+          dark: { ...defaultPalettes.dark, ...saved.palettes?.dark },
+          light: { ...defaultPalettes.light, ...saved.palettes?.light },
+          custom: { ...defaultPalettes.custom, ...saved.palettes?.custom },
+        },
+      };
+    }
+
+    // Support previously saved custom theme
+    const oldCustom = JSON.parse(localStorage.getItem("customTheme") || "null");
+    const oldLight = JSON.parse(localStorage.getItem("lightTextColors") || "null");
+
+    return {
+      theme: localStorage.getItem("theme") || "dark",
+      palettes: {
+        dark: { ...defaultPalettes.dark },
+        light: {
+          ...defaultPalettes.light,
+          ...(oldLight || {}),
+        },
+        custom: {
+          ...defaultPalettes.custom,
+          ...(oldCustom || {}),
+        },
+      },
+    };
+  } catch {
+    return {
+      theme: "dark",
+      palettes: defaultPalettes,
+    };
+  }
+}
+
 function Navbar() {
+  const savedSettings = getSavedSettings();
+
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // THEME STATES
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "dark"
-  );
+  // SAVED THEME SETTINGS
+  const [theme, setTheme] = useState(savedSettings.theme);
+  const [palettes, setPalettes] = useState(savedSettings.palettes);
 
-  const [themeMenuOpen, setThemeMenuOpen] = useState(false);
-  const [customPanelOpen, setCustomPanelOpen] = useState(false);
-
-  // CUSTOM COLORS
-  const defaultColors = {
-    bgMain: "#050706",
-    bgCard: "#111513",
-    textMain: "#ffffff",
-    textMuted: "#a0a0a0",
-    accent: "#03ea04",
-  };
-
-  const [customColors, setCustomColors] = useState(() => {
-    try {
-      const saved = localStorage.getItem("customTheme");
-
-      return saved
-        ? { ...defaultColors, ...JSON.parse(saved) }
-        : defaultColors;
-    } catch {
-      return defaultColors;
-    }
+  // THEME CUSTOMIZER
+  const [customizerOpen, setCustomizerOpen] = useState(false);
+  const [draftTheme, setDraftTheme] = useState(savedSettings.theme);
+  const [draftColors, setDraftColors] = useState({
+    ...savedSettings.palettes[savedSettings.theme],
   });
 
   // =========================================
-  // APPLY DARK / LIGHT / CUSTOM THEME
+  // APPLY THEME VARIABLES TO WHOLE WEBSITE
   // =========================================
 
   useEffect(() => {
     const root = document.documentElement;
+    const colors = palettes[theme] || defaultPalettes.dark;
 
-    if (theme === "custom") {
-      root.setAttribute("data-theme", "custom");
+    root.setAttribute("data-theme", theme);
 
-      const {
-        bgMain,
-        bgCard,
-        textMain,
-        textMuted,
-        accent,
-      } = customColors;
+    const {
+      bgMain,
+      bgCard,
+      textMain,
+      textSecondary,
+      textMuted,
+      accent,
+    } = colors;
 
-      // MAIN COLORS
-      root.style.setProperty("--bg-main", bgMain);
-      root.style.setProperty("--bg-card", bgCard);
-      root.style.setProperty("--text-main", textMain);
-      root.style.setProperty("--text-muted", textMuted);
-      root.style.setProperty("--accent", accent);
+    // MAIN THEME COLORS
+    root.style.setProperty("--bg-main", bgMain);
+    root.style.setProperty("--bg-card", bgCard);
+    root.style.setProperty("--card-bg", bgCard);
+    root.style.setProperty("--surface-bg", bgCard);
+    root.style.setProperty("--hover-bg", bgCard);
 
-      // BACKGROUND ALIASES
-      root.style.setProperty("--card-bg", bgCard);
-      root.style.setProperty("--surface-bg", bgCard);
-      root.style.setProperty("--hover-bg", bgCard);
+    root.style.setProperty("--text-main", textMain);
+    root.style.setProperty("--text-secondary", textSecondary);
+    root.style.setProperty("--text-muted", textMuted);
 
-      // ACCENT HEX TO RGB
-      const hex = String(accent || "#03ea04").trim();
+    root.style.setProperty("--accent", accent);
 
-      const validHex = /^#[0-9A-Fa-f]{6}$/.test(hex)
-        ? hex
-        : "#03ea04";
+    // ACCENT RGB VALUES
+    const validHex = /^#[0-9A-Fa-f]{6}$/.test(accent)
+      ? accent
+      : "#03ea04";
 
-      const r = parseInt(validHex.slice(1, 3), 16);
-      const g = parseInt(validHex.slice(3, 5), 16);
-      const b = parseInt(validHex.slice(5, 7), 16);
+    const r = parseInt(validHex.slice(1, 3), 16);
+    const g = parseInt(validHex.slice(3, 5), 16);
+    const b = parseInt(validHex.slice(5, 7), 16);
 
-      // ACCENT VARIABLES
-      root.style.setProperty("--accent-rgb", `${r}, ${g}, ${b}`);
+    root.style.setProperty("--accent-rgb", `${r}, ${g}, ${b}`);
 
-      root.style.setProperty(
-        "--accent-soft",
-        `rgba(${r}, ${g}, ${b}, 0.15)`
-      );
+    root.style.setProperty(
+      "--accent-soft",
+      `rgba(${r}, ${g}, ${b}, 0.15)`
+    );
 
-      root.style.setProperty(
-        "--accent-glow",
-        `rgba(${r}, ${g}, ${b}, 0.4)`
-      );
+    root.style.setProperty(
+      "--accent-glow",
+      `rgba(${r}, ${g}, ${b}, 0.4)`
+    );
 
-      root.style.setProperty(
-        "--accent-glow-strong",
-        `rgba(${r}, ${g}, ${b}, 0.65)`
-      );
+    root.style.setProperty(
+      "--accent-glow-strong",
+      `rgba(${r}, ${g}, ${b}, 0.65)`
+    );
 
-      // SAVE CUSTOM COLORS
-      localStorage.setItem(
-        "customTheme",
-        JSON.stringify(customColors)
-      );
+    // BORDER AND SHADOW VARIABLES
+    root.style.setProperty(
+      "--border-color",
+      theme === "light"
+        ? "rgba(0,0,0,0.10)"
+        : "rgba(255,255,255,0.10)"
+    );
 
-    } else {
-      root.setAttribute("data-theme", theme);
+    root.style.setProperty(
+      "--border-strong",
+      theme === "light"
+        ? "rgba(0,0,0,0.20)"
+        : "rgba(255,255,255,0.20)"
+    );
 
-      // REMOVE CUSTOM INLINE VARIABLES
-      [
-        "--bg-main",
-        "--bg-card",
-        "--card-bg",
-        "--surface-bg",
-        "--hover-bg",
-        "--text-main",
-        "--text-muted",
-        "--accent",
-        "--accent-rgb",
-        "--accent-soft",
-        "--accent-glow",
-        "--accent-glow-strong",
-      ].forEach((variable) => {
-        root.style.removeProperty(variable);
-      });
-    }
+    root.style.setProperty(
+      "--shadow-color",
+      theme === "light"
+        ? "rgba(0,0,0,0.10)"
+        : "rgba(0,0,0,0.50)"
+    );
 
+    // SAVE APPLIED SETTINGS
     localStorage.setItem("theme", theme);
-
-  }, [theme, customColors]);
+    localStorage.setItem(
+      "themeSettings",
+      JSON.stringify({ theme, palettes })
+    );
+  }, [theme, palettes]);
 
   // =========================================
-  // THEME MENU
+  // OPEN CUSTOMIZER
   // =========================================
 
-  const toggleTheme = () => {
-    setThemeMenuOpen((prev) => !prev);
+  const openCustomizer = () => {
+    setDraftTheme(theme);
+    setDraftColors({ ...palettes[theme] });
+    setCustomizerOpen(true);
   };
 
-  const selectTheme = (selected) => {
-    setTheme(selected);
-    setThemeMenuOpen(false);
+  // =========================================
+  // SELECT DRAFT THEME
+  // =========================================
 
-    if (selected !== "custom") {
-      setCustomPanelOpen(false);
-    }
+  const selectDraftTheme = (selected) => {
+    setDraftTheme(selected);
+    setDraftColors({ ...palettes[selected] });
+  };
+
+  // =========================================
+  // UPDATE DRAFT COLOR
+  // =========================================
+
+  const updateDraftColor = (key, value) => {
+    setDraftColors((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  // =========================================
+  // APPLY CHANGES
+  // =========================================
+
+  const applyThemeChanges = () => {
+    const updatedPalettes = {
+      ...palettes,
+      [draftTheme]: { ...draftColors },
+    };
+
+    setPalettes(updatedPalettes);
+    setTheme(draftTheme);
+    setCustomizerOpen(false);
+  };
+
+  // =========================================
+  // RESET CURRENT DRAFT
+  // =========================================
+
+  const resetDraft = () => {
+    setDraftColors({ ...defaultPalettes[draftTheme] });
+  };
+
+  // =========================================
+  // CANCEL CUSTOMIZER
+  // =========================================
+
+  const cancelCustomizer = () => {
+    setDraftTheme(theme);
+    setDraftColors({ ...palettes[theme] });
+    setCustomizerOpen(false);
   };
 
   // =========================================
@@ -182,15 +286,17 @@ function Navbar() {
   };
 
   // =========================================
-  // UPDATE CUSTOM COLOR
+  // COLOR PRESETS
   // =========================================
 
-  const updateCustomColor = (key, value) => {
-    setCustomColors((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
+  const accentPresets = [
+    "#03ea04",
+    "#6957e8",
+    "#159e9a",
+    "#f59e0b",
+    "#ed4264",
+    "#2696ed",
+  ];
 
   return (
     <>
@@ -216,25 +322,16 @@ function Navbar() {
           {/* NAVIGATION LINKS */}
           <nav className={`navbar-menu ${menuOpen ? "menu-open" : ""}`}>
 
-            <Link
-              to="/"
-              className="nav-link"
-              onClick={handleHomeClick}
-            >
+            <Link to="/" className="nav-link" onClick={handleHomeClick}>
               Home
             </Link>
 
-            <Link
-              to="/about"
-              className="nav-link"
-              onClick={handleNavigation}
-            >
+            <Link to="/about" className="nav-link" onClick={handleNavigation}>
               About
             </Link>
 
             {/* SERVICES DROPDOWN */}
             <div className="nav-item-dropdown">
-
               <button
                 className="nav-link dropdown-toggle"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -243,268 +340,80 @@ function Navbar() {
                 Services <span className="dropdown-arrow">▼</span>
               </button>
 
-              <div
-                className={`dropdown-menu ${
-                  dropdownOpen ? "show" : ""
-                }`}
-              >
-                <Link
-                  to="/team"
-                  className="dropdown-item"
-                  onClick={handleNavigation}
-                >
+              <div className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}>
+                <Link to="/team" className="dropdown-item" onClick={handleNavigation}>
                   Our Team
                 </Link>
 
-                <Link
-                  to="/ClassroomPage"
-                  className="dropdown-item"
-                  onClick={handleNavigation}
-                >
+                <Link to="/ClassroomPage" className="dropdown-item" onClick={handleNavigation}>
                   Classes
                 </Link>
 
-                <Link
-                  to="/schedules"
-                  className="dropdown-item"
-                  onClick={handleNavigation}
-                >
+                <Link to="/schedules" className="dropdown-item" onClick={handleNavigation}>
                   Schedules
                 </Link>
 
-                <Link
-                  to="/GalleryPage"
-                  className="dropdown-item"
-                  onClick={handleNavigation}
-                >
+                <Link to="/GalleryPage" className="dropdown-item" onClick={handleNavigation}>
                   Gallery
                 </Link>
 
-                <Link
-                  to="/faqpage"
-                  className="dropdown-item"
-                  onClick={handleNavigation}
-                >
+                <Link to="/faqpage" className="dropdown-item" onClick={handleNavigation}>
                   FAQs
                 </Link>
               </div>
             </div>
 
-            <Link
-              to="/trainers"
-              className="nav-link"
-              onClick={handleNavigation}
-            >
+            <Link to="/trainers" className="nav-link" onClick={handleNavigation}>
               Trainers
             </Link>
 
-            <Link
-              to="/dashboard"
-              className="nav-link dashboard-link"
-              onClick={handleNavigation}
-            >
+            <Link to="/dashboard" className="nav-link dashboard-link" onClick={handleNavigation}>
               Dashboard
             </Link>
 
-            <Link
-              to="/plans"
-              className="nav-link"
-              onClick={handleNavigation}
-            >
+            <Link to="/plans" className="nav-link" onClick={handleNavigation}>
               Membership
             </Link>
 
-            <Link
-              to="/contact"
-              className="nav-link"
-              onClick={handleNavigation}
-            >
+            <Link to="/contact" className="nav-link" onClick={handleNavigation}>
               Contact
             </Link>
-
           </nav>
 
           {/* RIGHT SIDE ACTIONS */}
           <div className="navbar-right">
 
-            {/* THEME TOGGLE */}
-            <div className="theme-toggle-wrapper">
-
-              <button
-                className="theme-toggle-btn"
-                onClick={toggleTheme}
-                aria-label="Change theme"
-                aria-expanded={themeMenuOpen}
-              >
-
-                {theme === "dark" && (
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-                  </svg>
-                )}
-
-                {theme === "light" && (
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                  </svg>
-                )}
-
-                {theme === "custom" && (
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <circle cx="13.5" cy="6.5" r="2.5"></circle>
-                    <circle cx="17.5" cy="14.5" r="2.5"></circle>
-                    <circle cx="8.5" cy="7.5" r="2.5"></circle>
-                    <circle cx="6.5" cy="16.5" r="2.5"></circle>
-                    <path d="M12 2a10 10 0 1 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.4-.3-.4-.5-.9-.5-1.4 0-1.1.9-2 2-2h1.5c2.5 0 4.5-2 4.5-4.5C21 5.5 17 2 12 2z"></path>
-                  </svg>
-                )}
-
-              </button>
-
-              {/* THEME OPTIONS */}
-              {themeMenuOpen && (
-                <div className="theme-options-menu">
-
-                  <button
-                    className={`theme-option ${
-                      theme === "dark" ? "active" : ""
-                    }`}
-                    onClick={() => selectTheme("dark")}
-                  >
-                    <span className="theme-dot dark-dot"></span>
-                    Dark
-                  </button>
-
-                  <button
-                    className={`theme-option ${
-                      theme === "light" ? "active" : ""
-                    }`}
-                    onClick={() => selectTheme("light")}
-                  >
-                    <span className="theme-dot light-dot"></span>
-                    Light
-                  </button>
-
-                  <button
-                    className={`theme-option ${
-                      theme === "custom" ? "active" : ""
-                    }`}
-                    onClick={() => {
-                      selectTheme("custom");
-                      setCustomPanelOpen(true);
-                    }}
-                  >
-                    <span className="theme-dot custom-dot"></span>
-                    Custom
-                  </button>
-
-                </div>
+            {/* THEME CUSTOMIZER BUTTON */}
+            <button
+              className="theme-toggle-btn"
+              onClick={openCustomizer}
+              aria-label="Open theme customizer"
+              title="Customize appearance"
+            >
+              {theme === "light" ? (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="5" />
+                  <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                </svg>
+              ) : theme === "custom" ? (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 2v20M2 12h20" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
               )}
-
-              {/* CUSTOM THEME PANEL */}
-              {customPanelOpen && theme === "custom" && (
-                <div className="custom-theme-panel">
-
-                  <h4>Customize Theme</h4>
-
-                  <label>
-                    Background
-                    <input
-                      type="color"
-                      value={customColors.bgMain}
-                      onChange={(e) =>
-                        updateCustomColor("bgMain", e.target.value)
-                      }
-                    />
-                  </label>
-
-                  <label>
-                    Card BG
-                    <input
-                      type="color"
-                      value={customColors.bgCard}
-                      onChange={(e) =>
-                        updateCustomColor("bgCard", e.target.value)
-                      }
-                    />
-                  </label>
-
-                  <label>
-                    Text
-                    <input
-                      type="color"
-                      value={customColors.textMain}
-                      onChange={(e) =>
-                        updateCustomColor("textMain", e.target.value)
-                      }
-                    />
-                  </label>
-
-                  <label>
-                    Muted Text
-                    <input
-                      type="color"
-                      value={customColors.textMuted}
-                      onChange={(e) =>
-                        updateCustomColor("textMuted", e.target.value)
-                      }
-                    />
-                  </label>
-
-                  <label>
-                    Accent
-                    <input
-                      type="color"
-                      value={customColors.accent}
-                      onChange={(e) =>
-                        updateCustomColor("accent", e.target.value)
-                      }
-                    />
-                  </label>
-
-                  <button
-                    className="custom-theme-close"
-                    onClick={() => setCustomPanelOpen(false)}
-                  >
-                    Done
-                  </button>
-
-                </div>
-              )}
-
-            </div>
+            </button>
 
             {/* LOGIN */}
-            <Link
-              to="/login"
-              className="login-nav-button"
-              onClick={handleNavigation}
-            >
+            <Link to="/login" className="login-nav-button" onClick={handleNavigation}>
               Login
             </Link>
 
             {/* REGISTER */}
-            <Link
-              to="/signup"
-              className="register-button"
-              onClick={handleNavigation}
-            >
+            <Link to="/signup" className="register-button" onClick={handleNavigation}>
               <span>Register</span>
               <span className="join-arrow">↗</span>
             </Link>
@@ -519,10 +428,252 @@ function Navbar() {
               <span></span>
               <span></span>
             </button>
-
           </div>
         </div>
       </header>
+
+      {/* =========================================
+          PREMIUM THEME CUSTOMIZER MODAL
+      ========================================= */}
+
+      {customizerOpen && (
+        <div
+          className="theme-modal-overlay"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) cancelCustomizer();
+          }}
+        >
+          <div
+            className="theme-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="theme-modal-title"
+          >
+            {/* MODAL HEADER */}
+            <div className="theme-modal-header">
+              <div>
+                <span className="theme-modal-eyebrow">KINETIX APPEARANCE</span>
+                <h2 id="theme-modal-title">Theme Customizer</h2>
+                <p>Personalize your website experience</p>
+              </div>
+
+              <button
+                className="theme-modal-close"
+                onClick={cancelCustomizer}
+                aria-label="Close customizer"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="theme-modal-body">
+
+              {/* THEME MODE */}
+              <section className="theme-setting-section">
+                <div className="theme-section-heading">
+                  <span className="theme-section-number">01</span>
+                  <div>
+                    <h3>Theme Mode</h3>
+                    <p>Choose your preferred appearance</p>
+                  </div>
+                </div>
+
+                <div className="theme-mode-grid">
+                  {[
+                    { id: "light", label: "Light", icon: "sun" },
+                    { id: "dark", label: "Dark", icon: "moon" },
+                    { id: "custom", label: "Custom", icon: "palette" },
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      className={`theme-mode-card ${
+                        draftTheme === item.id ? "selected" : ""
+                      }`}
+                      onClick={() => selectDraftTheme(item.id)}
+                    >
+                      {item.icon === "sun" && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                          <circle cx="12" cy="12" r="4" />
+                          <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+                        </svg>
+                      )}
+
+                      {item.icon === "moon" && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                          <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.7 8.7 0 1 0 20.5 14.2z" />
+                        </svg>
+                      )}
+
+                      {item.icon === "palette" && (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                          <path d="M12 3a9 9 0 1 0 0 18h1.2a2 2 0 0 0 1.4-3.4 1.7 1.7 0 0 1 1.2-2.9H18a3 3 0 0 0 3-3c0-4.8-4-8.7-9-8.7z" />
+                          <circle cx="7.5" cy="11" r="1" />
+                          <circle cx="10" cy="7.5" r="1" />
+                          <circle cx="15" cy="8" r="1" />
+                        </svg>
+                      )}
+
+                      <strong>{item.label}</strong>
+                      <span className="theme-mode-check">✓</span>
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              {/* ACCENT COLOR */}
+              <section className="theme-setting-section">
+                <div className="theme-section-heading">
+                  <span className="theme-section-number">02</span>
+                  <div>
+                    <h3>Accent Color</h3>
+                    <p>Buttons, links, icons and highlights</p>
+                  </div>
+                </div>
+
+                <div className="accent-presets">
+                  {accentPresets.map((color) => (
+                    <button
+                      key={color}
+                      className={`accent-swatch ${
+                        draftColors.accent === color ? "selected" : ""
+                      }`}
+                      style={{ "--swatch-color": color }}
+                      onClick={() => updateDraftColor("accent", color)}
+                      aria-label={`Select accent ${color}`}
+                    />
+                  ))}
+
+                  <label className="accent-custom-swatch" title="Choose custom accent">
+                    <input
+                      type="color"
+                      value={draftColors.accent}
+                      onChange={(e) => updateDraftColor("accent", e.target.value)}
+                    />
+                    <span>+</span>
+                  </label>
+                </div>
+              </section>
+
+              {/* BACKGROUND COLORS */}
+              <section className="theme-setting-section">
+                <div className="theme-section-heading">
+                  <span className="theme-section-number">03</span>
+                  <div>
+                    <h3>Background Colors</h3>
+                    <p>Control the website and card surfaces</p>
+                  </div>
+                </div>
+
+                <div className="theme-color-grid">
+                  {colorLabels
+                    .filter((item) => ["bgMain", "bgCard"].includes(item.key))
+                    .map((item) => (
+                      <label className="theme-color-control" key={item.key}>
+                        <span>{item.label}</span>
+                        <div className="theme-color-input-wrap">
+                          <input
+                            type="color"
+                            value={draftColors[item.key]}
+                            onChange={(e) => updateDraftColor(item.key, e.target.value)}
+                          />
+                          <code>{draftColors[item.key].toUpperCase()}</code>
+                        </div>
+                      </label>
+                    ))}
+                </div>
+              </section>
+
+              {/* TEXT COLORS */}
+              <section className="theme-setting-section">
+                <div className="theme-section-heading">
+                  <span className="theme-section-number">04</span>
+                  <div>
+                    <h3>Text Colors</h3>
+                    <p>Customize text throughout the website</p>
+                  </div>
+                </div>
+
+                <div className="theme-color-grid">
+                  {colorLabels
+                    .filter((item) =>
+                      ["textMain", "textSecondary", "textMuted"].includes(item.key)
+                    )
+                    .map((item) => (
+                      <label className="theme-color-control" key={item.key}>
+                        <span>{item.label}</span>
+                        <div className="theme-color-input-wrap">
+                          <input
+                            type="color"
+                            value={draftColors[item.key]}
+                            onChange={(e) => updateDraftColor(item.key, e.target.value)}
+                          />
+                          <code>{draftColors[item.key].toUpperCase()}</code>
+                        </div>
+                      </label>
+                    ))}
+                </div>
+              </section>
+
+              {/* PREVIEW */}
+              <section className="theme-live-preview">
+                <span className="theme-preview-label">COLOR PREVIEW</span>
+
+                <div
+                  className="theme-preview-card"
+                  style={{
+                    background: draftColors.bgMain,
+                    borderColor: draftColors.accent,
+                  }}
+                >
+                  <div
+                    className="theme-preview-inner"
+                    style={{ background: draftColors.bgCard }}
+                  >
+                    <strong style={{ color: draftColors.textMain }}>
+                      KINETIX FITNESS CLUB
+                    </strong>
+
+                    <p style={{ color: draftColors.textSecondary }}>
+                      Your fitness journey starts here.
+                    </p>
+
+                    <small style={{ color: draftColors.textMuted }}>
+                      Preview of secondary information
+                    </small>
+
+                    <span
+                      className="theme-preview-button"
+                      style={{
+                        background: draftColors.accent,
+                        color: "#071007",
+                      }}
+                    >
+                      GET STARTED
+                    </span>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            {/* MODAL FOOTER */}
+            <div className="theme-modal-footer">
+              <button className="theme-reset-btn" onClick={resetDraft}>
+                <span>↺</span> Reset
+              </button>
+
+              <div className="theme-footer-actions">
+                <button className="theme-cancel-btn" onClick={cancelCustomizer}>
+                  Cancel
+                </button>
+
+                <button className="theme-apply-btn" onClick={applyThemeChanges}>
+                  Apply Changes <span>→</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
