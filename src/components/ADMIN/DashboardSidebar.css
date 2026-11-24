@@ -1,13 +1,14 @@
+
 /* =========================================================
    DASHBOARD SIDEBAR
 ========================================================= */
 
 .dash-sidebar {
   width: var(--dash-sidebar-width, 280px);
-  height: var(--dash-sidebar-height, 100vh);   /* ✅ variable height */
+  height: var(--dash-sidebar-height, 100vh);
   background: #0a0d0b;
   border-right: 1px solid rgba(3, 234, 4, 0.2);
-  border-bottom: 1px solid rgba(3, 234, 4, 0.15);   /* ✅ height ke saath border */
+  border-bottom: 1px solid rgba(3, 234, 4, 0.15);
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -17,14 +18,14 @@
   transition: left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.3s ease, border-color 0.3s ease, width 0.15s ease,
     height 0.15s ease;
-  overflow: hidden;   /* ✅ taake footer na nikle */
+  overflow: hidden;
 }
 
 .dash-sidebar.open {
   left: 0;
 }
 
-/* ✅ RIGHT EDGE — WIDTH RESIZE HANDLE */
+/* RIGHT EDGE — WIDTH RESIZE HANDLE */
 .dash-sidebar-resize-handle {
   position: absolute;
   top: 0;
@@ -41,9 +42,11 @@
   background: transparent;
   transition: background 0.2s ease;
 }
+
 .dash-sidebar-resize-handle:hover {
   background: rgba(3, 234, 4, 0.08);
 }
+
 .dash-sidebar-resize-handle span {
   display: block;
   width: 3px;
@@ -52,13 +55,14 @@
   background: rgba(3, 234, 4, 0.35);
   transition: background 0.2s ease, transform 0.2s ease;
 }
+
 .dash-sidebar-resize-handle:hover span {
   background: var(--dash-accent, #03ea04);
   transform: scaleY(1.15);
   box-shadow: 0 0 10px rgba(3, 234, 4, 0.6);
 }
 
-/* ✅ BOTTOM EDGE — HEIGHT RESIZE HANDLE */
+/* BOTTOM EDGE — HEIGHT RESIZE HANDLE */
 .dash-sidebar-height-handle {
   position: absolute;
   bottom: -6px;
@@ -75,9 +79,11 @@
   background: transparent;
   transition: background 0.2s ease;
 }
+
 .dash-sidebar-height-handle:hover {
   background: rgba(3, 234, 4, 0.08);
 }
+
 .dash-sidebar-height-handle span {
   display: block;
   width: 24px;
@@ -86,19 +92,20 @@
   background: rgba(3, 234, 4, 0.35);
   transition: background 0.2s ease, transform 0.2s ease;
 }
+
 .dash-sidebar-height-handle:hover span {
   background: var(--dash-accent, #03ea04);
   transform: scaleX(1.15);
   box-shadow: 0 0 10px rgba(3, 234, 4, 0.6);
 }
 
-/* Sidebar Header */
+/* SIDEBAR HEADER */
 .dash-sidebar-header {
   padding: 30px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   justify-content: center;
-  flex-shrink: 0;   /* ✅ header na squeeze ho */
+  flex-shrink: 0;
 }
 
 .sidebar-logo img {
@@ -106,7 +113,7 @@
   object-fit: contain;
 }
 
-/* Menu */
+/* MENU */
 .dash-sidebar-menu {
   flex: 1;
   overflow-y: auto;
@@ -116,6 +123,7 @@
 .dash-sidebar-menu::-webkit-scrollbar {
   width: 4px;
 }
+
 .dash-sidebar-menu::-webkit-scrollbar-thumb {
   background: rgba(3, 234, 4, 0.3);
   border-radius: 10px;
@@ -152,20 +160,22 @@
 .dash-menu-item svg {
   transition: color 0.3s ease;
 }
+
 .dash-menu-item:hover svg {
   color: var(--dash-accent, #03ea04);
 }
+
 .dash-menu-item.active svg {
   color: var(--dash-accent, #03ea04);
 }
 
 /* =========================================================
-   SIDEBAR FOOTER (User Profile) — clickable + moved down
+   SIDEBAR FOOTER (USER PROFILE) — ORIGINAL PRESERVED
 ========================================================= */
 
 .dash-sidebar-footer-wrap {
   flex-shrink: 0;
-  padding: 10px 12px 24px;          /* ✅ extra bottom gap → profile thora upar */
+  padding: 10px 12px 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   background: #0a0d0b;
   transition: background 0.3s ease, border-color 0.3s ease;
@@ -204,6 +214,7 @@
   color: #fff;
   font-weight: 600;
 }
+
 .user-info p {
   margin: 0;
   font-size: 11px;
@@ -212,28 +223,34 @@
 }
 
 /* =========================================================
-   ✅ LIGHT MODE
+   LIGHT MODE
 ========================================================= */
+
 .dashboard-layout.dashboard-light .dash-sidebar {
   background: #ffffff;
   border-right: 1px solid #e5e7eb;
   border-bottom: 1px solid #e5e7eb;
 }
+
 .dashboard-layout.dashboard-light .dash-sidebar-header {
   border-bottom: 1px solid #e5e7eb;
 }
+
 .dashboard-layout.dashboard-light .dash-menu-item {
   color: #4b5563;
 }
+
 .dashboard-layout.dashboard-light .dash-menu-item:hover {
   background: rgba(0, 0, 0, 0.04);
   color: #111827;
 }
+
 .dashboard-layout.dashboard-light .dash-menu-item.active {
   background: rgba(3, 234, 4, 0.12);
   color: var(--dash-accent, #03ea04);
   border-left: 3px solid var(--dash-accent, #03ea04);
 }
+
 .dashboard-layout.dashboard-light .dash-menu-item.active svg {
   color: var(--dash-accent, #03ea04);
 }
@@ -242,54 +259,66 @@
   background: #ffffff;
   border-top: 1px solid #e5e7eb;
 }
+
 .dashboard-layout.dashboard-light .dash-sidebar-footer:hover {
   background: rgba(3, 234, 4, 0.08);
 }
+
 .dashboard-layout.dashboard-light .user-info h4 {
   color: #111827;
 }
+
 .dashboard-layout.dashboard-light .user-info p {
   color: var(--dash-accent, #03ea04);
 }
 
 /* =========================================================
-   ✅ COMPACT MODE
+   COMPACT MODE
 ========================================================= */
+
 .dashboard-layout.dashboard-compact .dash-sidebar {
   width: var(--dash-sidebar-width, 240px);
 }
+
 .dashboard-layout.dashboard-compact .dash-menu-item {
   padding: 10px 16px;
   font-size: 14px;
   margin-bottom: 3px;
 }
+
 .dashboard-layout.dashboard-compact .dash-sidebar-header {
   padding: 20px 16px;
 }
+
 .dashboard-layout.dashboard-compact .sidebar-logo img {
   height: 36px;
 }
+
 .dashboard-layout.dashboard-compact .dash-sidebar-footer-wrap {
   padding: 8px 12px 18px;
 }
+
 .dashboard-layout.dashboard-compact .dash-sidebar-footer {
   padding: 8px 10px;
 }
+
 .dashboard-layout.dashboard-compact .dash-sidebar-footer img {
   width: 36px;
   height: 36px;
 }
+
 .dashboard-layout.dashboard-compact .user-info h4 {
   font-size: 13px;
 }
+
 .dashboard-layout.dashboard-compact .user-info p {
   font-size: 11px;
 }
+
 /* =========================================================
-   WHATSAPP STYLE MODAL - BUTTONS FIX (For Sidebar)
+   WHATSAPP STYLE MODAL - BUTTONS FIX
 ========================================================= */
 
-/* Actions container */
 .wa-image-actions {
   display: flex;
   flex-direction: column;
@@ -299,7 +328,6 @@
   width: 100%;
 }
 
-/* Button row - horizontal alignment */
 .wa-image-btn-row {
   display: flex;
   flex-direction: row;
@@ -309,8 +337,7 @@
   flex-wrap: wrap;
 }
 
-/* Base style for all modal buttons */
-.wa-upload-btn, 
+.wa-upload-btn,
 .wa-remove-btn {
   display: inline-flex;
   align-items: center;
@@ -326,7 +353,7 @@
   text-decoration: none;
 }
 
-/* Change Photo & Edit Profile (Green Outline) */
+/* Change Photo & Edit Profile */
 .wa-upload-btn {
   background: transparent !important;
   border: 1px solid #03ea04 !important;
@@ -338,7 +365,7 @@
   box-shadow: 0 0 15px rgba(3, 234, 4, 0.3);
 }
 
-/* Remove Photo (Red Outline) */
+/* Remove Photo */
 .wa-remove-btn {
   background: transparent !important;
   border: 1px solid #ff4d4d !important;
@@ -356,8 +383,126 @@
     flex-direction: column;
     width: 100%;
   }
-  .wa-upload-btn, 
+
+  .wa-upload-btn,
   .wa-remove-btn {
     width: 100%;
   }
+}
+
+/* =========================================================
+   EXERCISES DROPDOWN — NEW ADDITION ONLY
+========================================================= */
+
+.dash-exercises-dropdown {
+  width: 100%;
+}
+
+/* Exercises Main Button */
+.dash-exercises-toggle {
+  width: 100%;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  background: transparent;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  outline: none;
+}
+
+.dash-exercises-toggle span {
+  flex: 1;
+}
+
+/* Dropdown Arrow */
+.dash-dropdown-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.dash-dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Exercises Submenu */
+.dash-exercises-submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 5px 0 8px 24px;
+  padding-left: 15px;
+  border-left: 1px solid rgba(3, 234, 4, 0.4);
+  animation: dashSubmenuOpen 0.25s ease;
+}
+
+/* Dropdown Animation */
+@keyframes dashSubmenuOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Exercise Submenu Links */
+.dash-exercise-sublink {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: #a0a0a0;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.dash-exercise-sublink svg {
+  flex-shrink: 0;
+}
+
+/* Hover */
+.dash-exercise-sublink:hover {
+  color: var(--dash-accent, #03ea04);
+  background: rgba(3, 234, 4, 0.08);
+}
+
+/* Active */
+.dash-exercise-sublink.active {
+  color: var(--dash-accent, #03ea04);
+  background: rgba(3, 234, 4, 0.12);
+  font-weight: 700;
+}
+
+/* Light Theme */
+.dashboard-layout.dashboard-light .dash-exercise-sublink {
+  color: #4b5563;
+}
+
+.dashboard-layout.dashboard-light .dash-exercise-sublink:hover,
+.dashboard-layout.dashboard-light .dash-exercise-sublink.active {
+  color: var(--dash-accent, #03ea04);
+  background: rgba(3, 234, 4, 0.1);
+}
+
+/* Compact Mode */
+.dashboard-layout.dashboard-compact .dash-exercise-sublink {
+  min-height: 35px;
+  font-size: 12px;
+  padding: 7px 10px;
+}
+
+/* Keyboard Focus */
+.dash-exercises-toggle:focus-visible,
+.dash-exercise-sublink:focus-visible {
+  outline: 2px solid var(--dash-accent, #03ea04);
+  outline-offset: 2px;
 }

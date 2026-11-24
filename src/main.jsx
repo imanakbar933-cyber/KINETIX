@@ -39,26 +39,22 @@ import DashboardPage from "./pages/Admin/DashboardPage.jsx";
 function AppLayout() {
   const location = useLocation();
 
-  // 1. AUTH PAGES (No Navbar, No Footer)
+  // AUTH PAGES: No Navbar, No Footer
   const isAuthPage =
-    location.pathname === "/login" || location.pathname === "/signup";
+    location.pathname === "/login" ||
+    location.pathname === "/signup";
 
-  // 2. DASHBOARD PAGES (No Navbar, No Footer)
-
-
-const isDashboard =
-  location.pathname.startsWith("/dashboard") ||
-  location.pathname.startsWith("/members") ||
-  location.pathname.startsWith("/workouts") ||
-  location.pathname.startsWith("/diet") ||
-  location.pathname.startsWith("/batch-schedule") ||
-  location.pathname.startsWith("/billing") ||
-  location.pathname.startsWith("/reports") ||
-  location.pathname.startsWith("/settings") ||
-  location.pathname.startsWith("/locker-management") ||
-  location.pathname.startsWith("/dashboard/staff") ||
-  location.pathname.startsWith("/dashboard/services");
-
+  // DASHBOARD PAGES: No Public Navbar, No Public Footer
+  const isDashboard =
+    location.pathname.startsWith("/dashboard") ||
+    location.pathname.startsWith("/members") ||
+    location.pathname.startsWith("/workouts") ||
+    location.pathname.startsWith("/diet") ||
+    location.pathname.startsWith("/batch-schedule") ||
+    location.pathname.startsWith("/billing") ||
+    location.pathname.startsWith("/reports") ||
+    location.pathname.startsWith("/settings") ||
+    location.pathname.startsWith("/locker-management");
 
   const isPlansPage = location.pathname === "/plans";
 
@@ -68,23 +64,84 @@ const isDashboard =
   if (isDashboard) {
     return (
       <Routes>
-        <Route path="/dashboard" element={<DashboardPage page="dashboard" />} />
-        <Route path="/members" element={<DashboardPage page="members" />} />
-        <Route path="/batch-schedule" element={<DashboardPage page="batch-schedule" />} />
-        <Route path="/workouts" element={<DashboardPage page="workouts" />} />
-        <Route path="/diet" element={<DashboardPage page="diet" />} />
-        <Route path="/schedule" element={<DashboardPage page="schedule" />} />
+        <Route
+          path="/dashboard"
+          element={<DashboardPage page="dashboard" />}
+        />
 
-        <Route path="/dashboard/trainers" element={<DashboardPage page="trainers" />} />
+        <Route
+          path="/members"
+          element={<DashboardPage page="members" />}
+        />
 
-        <Route path="/billing" element={<DashboardPage page="billing" />} />
-        <Route path="/reports" element={<DashboardPage page="reports" />} />
-        <Route path="/settings" element={<DashboardPage page="settings" />} />
+        <Route
+          path="/batch-schedule"
+          element={<DashboardPage page="batch-schedule" />}
+        />
 
-        {/* FIXED ROUTES */}
-        <Route path="/dashboard/staff" element={<DashboardPage page="staff" />} />
-        <Route path="/locker-management" element={<DashboardPage page="locker-management" />} />
-        <Route path="/dashboard/services" element={<DashboardPage page="services" />} />
+        <Route
+          path="/workouts"
+          element={<DashboardPage page="workouts" />}
+        />
+
+        <Route
+          path="/diet"
+          element={<DashboardPage page="diet" />}
+        />
+
+        <Route
+          path="/schedule"
+          element={<DashboardPage page="schedule" />}
+        />
+
+        <Route
+          path="/dashboard/trainers"
+          element={<DashboardPage page="trainers" />}
+        />
+
+        <Route
+          path="/billing"
+          element={<DashboardPage page="billing" />}
+        />
+
+        <Route
+          path="/reports"
+          element={<DashboardPage page="reports" />}
+        />
+
+        <Route
+          path="/settings"
+          element={<DashboardPage page="settings" />}
+        />
+
+        {/* STAFF */}
+        <Route
+          path="/dashboard/staff"
+          element={<DashboardPage page="staff" />}
+        />
+
+        {/* LOCKER MANAGEMENT */}
+        <Route
+          path="/locker-management"
+          element={<DashboardPage page="locker-management" />}
+        />
+
+        {/* SERVICES */}
+        <Route
+          path="/dashboard/services"
+          element={<DashboardPage page="services" />}
+        />
+
+        {/* EXERCISES */}
+        <Route
+          path="/dashboard/exercises/library"
+          element={<DashboardPage page="exercise-library" />}
+        />
+
+        <Route
+          path="/dashboard/exercises/detail"
+          element={<DashboardPage page="exercise-detail" />}
+        />
       </Routes>
     );
   }
@@ -95,6 +152,7 @@ const isDashboard =
   return (
     <>
       <ScrollToTop />
+
       {!isAuthPage && <Navbar />}
 
       <div
@@ -113,7 +171,10 @@ const isDashboard =
           <Route path="/faqpage" element={<FaqPage />} />
           <Route path="/ClassroomPage" element={<ClassroomPage />} />
           <Route path="/GalleryPage" element={<GalleryPage />} />
-          <Route path="/class-detail/:classId" element={<ClassDetail />} />
+          <Route
+            path="/class-detail/:classId"
+            element={<ClassDetail />}
+          />
           <Route path="/contact" element={<Contact />} />
           <Route path="/schedules" element={<SchedulePage />} />
           <Route path="/login" element={<Login />} />
@@ -122,6 +183,7 @@ const isDashboard =
           {/* PUBLIC TRAINERS PAGE */}
           <Route path="/trainers" element={<Team />} />
 
+          {/* MEMBERSHIP PLANS */}
           <Route
             path="/plans"
             element={
@@ -131,6 +193,7 @@ const isDashboard =
                     <h1>MEMBERSHIP</h1>
                   </div>
                 </div>
+
                 <div className="plans-content-container">
                   <MembershipPlans />
                 </div>
@@ -138,7 +201,10 @@ const isDashboard =
             }
           />
 
-          <Route path="/services/:slug" element={<ServiceDetail />} />
+          <Route
+            path="/services/:slug"
+            element={<ServiceDetail />}
+          />
         </Routes>
       </div>
 

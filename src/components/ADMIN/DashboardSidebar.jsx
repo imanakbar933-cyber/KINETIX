@@ -17,7 +17,11 @@ import {
   X,
   User,
   Trash2,
-  LockKeyhole
+  LockKeyhole,
+  Activity,
+  ChevronDown,
+  BookOpen,
+  ClipboardList
 } from "lucide-react";
 
 import "./DashboardSidebar.css";
@@ -47,6 +51,21 @@ const DashboardSidebar = ({
   });
 
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+
+  // EXERCISES DROPDOWN STATE
+  const [isExercisesOpen, setIsExercisesOpen] = useState(
+    location.pathname.startsWith("/dashboard/exercises")
+  );
+
+  const isExerciseActive = location.pathname.startsWith(
+    "/dashboard/exercises"
+  );
+
+  useEffect(() => {
+    if (location.pathname.startsWith("/dashboard/exercises")) {
+      setIsExercisesOpen(true);
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     const loadProfile = () => {
@@ -154,6 +173,62 @@ const DashboardSidebar = ({
             Workout Routine
           </Link>
 
+          {/* =========================================
+              EXERCISES DROPDOWN - NEW
+          ========================================= */}
+          <div className="dash-exercises-dropdown">
+
+            <button
+              type="button"
+              className={`dash-menu-item dash-exercises-toggle ${
+                isExerciseActive ? "active" : ""
+              }`}
+              onClick={() => setIsExercisesOpen((prev) => !prev)}
+              aria-expanded={isExercisesOpen}
+            >
+              <Activity size={20} />
+
+              <span>Exercises</span>
+
+              <ChevronDown
+                size={17}
+                className={`dash-dropdown-arrow ${
+                  isExercisesOpen ? "open" : ""
+                }`}
+              />
+            </button>
+
+            {isExercisesOpen && (
+              <div className="dash-exercises-submenu">
+
+                <Link
+                  to="/dashboard/exercises/library"
+                  className={
+                    location.pathname === "/dashboard/exercises/library"
+                      ? "dash-exercise-sublink active"
+                      : "dash-exercise-sublink"
+                  }
+                >
+                  <BookOpen size={17} />
+                  <span>Exercise Library</span>
+                </Link>
+
+                <Link
+                  to="/dashboard/exercises/detail"
+                  className={
+                    location.pathname === "/dashboard/exercises/detail"
+                      ? "dash-exercise-sublink active"
+                      : "dash-exercise-sublink"
+                  }
+                >
+                  <ClipboardList size={17} />
+                  <span>Exercise Detail</span>
+                </Link>
+
+              </div>
+            )}
+          </div>
+
           <Link to="/diet" className={isActive("/diet")}>
             <Utensils size={20} />
             Diet Chart
@@ -193,7 +268,7 @@ const DashboardSidebar = ({
             Point of Sale
           </Link>
 
-          {/* NEW: LOCKER MANAGEMENT */}
+          {/* LOCKER MANAGEMENT */}
           <Link
             to="/locker-management"
             className={isActive("/locker-management")}
@@ -214,7 +289,7 @@ const DashboardSidebar = ({
 
         </div>
 
-        {/* SIDEBAR PROFILE */}
+        {/* SIDEBAR PROFILE - ORIGINAL CODE PRESERVED */}
         <div className="dash-sidebar-footer-wrap">
           <div
             className="dash-sidebar-footer"
@@ -260,7 +335,7 @@ const DashboardSidebar = ({
 
       </aside>
 
-      {/* PROFILE IMAGE MODAL */}
+      {/* PROFILE IMAGE MODAL - ORIGINAL CODE PRESERVED */}
       {isImageModalOpen && (
         <div
           className="wa-image-modal-backdrop"
