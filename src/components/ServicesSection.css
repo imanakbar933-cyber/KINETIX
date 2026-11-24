@@ -1,9 +1,23 @@
 
+/* =========================================
+   KINETIX SERVICES SECTION
+   DARK / LIGHT / CUSTOM THEME
+========================================= */
+
 .services-section {
   padding: 100px 7%;
-  background: #080b08;
-  color: #fff;
+
+  background: var(--bg-main, #080b08);
+  color: var(--text-main, #ffffff);
+
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
 }
+
+/* =========================================
+   SERVICES HEADING
+========================================= */
 
 .services-heading {
   text-align: center;
@@ -11,27 +25,45 @@
 }
 
 .services-eyebrow {
-  color: #03ea04;
+  color: var(--accent, #03ea04);
+
   letter-spacing: 4px;
   font-size: 13px;
   font-weight: 700;
+
+  transition: color 0.4s ease;
 }
 
 .services-heading h2 {
   font-size: clamp(32px, 5vw, 52px);
   margin: 15px 0;
   font-weight: 900;
+
+  color: var(--text-main, #ffffff);
 }
 
 .services-heading h2 span {
-  color: #03ea04;
-  text-shadow: 0 0 15px #03ea0460;
+  color: var(--accent, #03ea04);
+
+  text-shadow:
+    0 0 15px rgba(var(--accent-rgb, 3, 234, 4), 0.35);
+
+  transition:
+    color 0.4s ease,
+    text-shadow 0.4s ease;
 }
 
 .services-heading p {
-  color: #aaa;
+  color: var(--text-muted, #aaa);
+
   font-size: 15px;
+
+  transition: color 0.4s ease;
 }
+
+/* =========================================
+   SERVICES GRID
+========================================= */
 
 .services-grid {
   display: grid;
@@ -39,18 +71,36 @@
   gap: 25px;
 }
 
-.service-card {
-  background: #111611;
-  border: 1px solid #252d25;
+/* =========================================
+   SERVICE CARD
+========================================= */
+
+.services-section .service-card {
+  background: var(--bg-card, #111611);
+
+  border: 1px solid var(--border-color, #252d25);
+
   border-radius: 10px;
   overflow: hidden;
+
   text-decoration: none;
-  color: #fff;
-  transition: 0.4s ease;
+
+  color: var(--text-main, #ffffff);
+
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
 
   opacity: 0;
   transform: translateY(35px);
 }
+
+/* =========================================
+   CARD REVEAL ANIMATION
+========================================= */
 
 .services-section.show .service-card {
   animation: serviceReveal 0.7s ease forwards;
@@ -64,63 +114,111 @@
   }
 }
 
-.service-card:hover {
-  border-color: #03ea04;
-  box-shadow: 0 0 20px #03ea0430;
+/* =========================================
+   CARD HOVER
+========================================= */
+
+.services-section .service-card:hover {
+  border-color: var(--accent, #03ea04);
+
+  box-shadow:
+    0 0 20px rgba(var(--accent-rgb, 3, 234, 4), 0.18);
+
   transform: translateY(-8px);
 }
 
-.service-image {
+/* =========================================
+   SERVICE IMAGE
+========================================= */
+
+.services-section .service-image {
   width: 100%;
   height: 250px;
+
   overflow: hidden;
+
+  background: var(--bg-card, #111611);
 }
 
-.service-card img {
+.services-section .service-card img {
   width: 100%;
   height: 250px;
+
   object-fit: cover;
   display: block;
+
   transition: transform 0.5s ease;
 }
 
-.service-card:hover img {
+.services-section .service-card:hover img {
   transform: scale(1.08);
 }
 
-.service-content {
+/* =========================================
+   SERVICE CONTENT
+========================================= */
+
+.services-section .service-content {
   padding: 22px;
+
+  background: var(--bg-card, #111611);
+
+  transition: background 0.4s ease;
 }
 
-.service-content h3 {
+.services-section .service-content h3 {
   font-size: 21px;
+
   margin: 0 0 12px;
+
+  color: var(--text-main, #ffffff);
+
   transition: color 0.3s ease;
 }
 
-.service-card:hover h3 {
-  color: #03ea04;
+.services-section .service-card:hover h3 {
+  color: var(--accent, #03ea04);
 }
 
-.service-content p {
-  color: #aaa;
+.services-section .service-content p {
+  color: var(--text-muted, #aaa);
+
   font-size: 14px;
   line-height: 1.7;
+
   margin-bottom: 20px;
+
+  transition: color 0.4s ease;
 }
 
-.service-arrow {
-  color: #03ea04;
+/* =========================================
+   EXPLORE SERVICE
+========================================= */
+
+.services-section .service-arrow {
+  color: var(--accent, #03ea04);
+
   font-size: 12px;
   font-weight: 800;
+
   letter-spacing: 1px;
+
+  transition: color 0.4s ease;
 }
+
+/* =========================================
+   RESPONSIVE TABLET
+========================================= */
 
 @media (max-width: 900px) {
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* =========================================
+   RESPONSIVE MOBILE
+========================================= */
 
 @media (max-width: 600px) {
   .services-section {
@@ -131,8 +229,8 @@
     grid-template-columns: 1fr;
   }
 
-  .service-image,
-  .service-card img {
+  .services-section .service-image,
+  .services-section .service-card img {
     height: 230px;
   }
 }

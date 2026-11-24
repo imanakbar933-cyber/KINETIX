@@ -6,10 +6,10 @@ function ContactInfo() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, {
     amount: 0.15,
-    once: false,   // 👈 HAR BAAR animate hoga (scroll pe)
+    once: false,
   });
 
-  // ===== Animation Variants =====
+  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0, y: 40 },
     visible: {
@@ -81,9 +81,7 @@ function ContactInfo() {
       animate={isInView ? "visible" : "hidden"}
     >
       <div className="contact-help-container">
-        {/* =========================================
-            LEFT SIDE — INFO
-        ========================================= */}
+        {/* LEFT SIDE — INFO */}
         <div className="contact-help-left">
           <motion.h2
             className="contact-help-title"
@@ -97,8 +95,8 @@ function ContactInfo() {
             variants={descVariants}
           >
             Have questions about memberships, training sessions, or fitness programs?
-Our KINETIX team is here to guide you. Reach out and we’ll help you find
-the right way to get started.
+            Our KINETIX team is here to guide you. Reach out and we'll help you find
+            the right way to get started.
           </motion.p>
 
           {/* Info Items */}
@@ -118,10 +116,10 @@ the right way to get started.
                 className="contact-help-icon"
                 whileHover={{
                   scale: 1.12,
-                  backgroundColor: "#03ea04",
+                  backgroundColor: "var(--accent)",
                   color: "#0b0b0b",
                   boxShadow:
-                    "0 0 20px rgba(3, 234, 4, 0.6), 0 0 40px rgba(3, 234, 4, 0.35)",
+                    "0 0 20px var(--accent-glow), 0 0 40px var(--accent-soft)",
                 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
@@ -137,11 +135,11 @@ the right way to get started.
               </motion.div>
               <div className="contact-help-text">
                 <h4>OFFICE:</h4>
-               <p>
-  KINETIX Fitness Club, Satellite Town,
-  <br />
-  Gujranwala, Punjab, Pakistan.
-</p>
+                <p>
+                  KINETIX Fitness Club, Satellite Town,
+                  <br />
+                  Gujranwala, Punjab, Pakistan.
+                </p>
               </div>
             </motion.div>
 
@@ -157,10 +155,10 @@ the right way to get started.
                 className="contact-help-icon"
                 whileHover={{
                   scale: 1.12,
-                  backgroundColor: "#03ea04",
+                  backgroundColor: "var(--accent)",
                   color: "#0b0b0b",
                   boxShadow:
-                    "0 0 20px rgba(3, 234, 4, 0.6), 0 0 40px rgba(3, 234, 4, 0.35)",
+                    "0 0 20px var(--accent-glow), 0 0 40px var(--accent-soft)",
                 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
@@ -175,7 +173,7 @@ the right way to get started.
               </motion.div>
               <div className="contact-help-text">
                 <h4>CONTACT</h4>
-                <p><p>+92 300 847 2619</p></p>
+                <p>+92 300 847 2619</p>
               </div>
             </motion.div>
 
@@ -191,10 +189,10 @@ the right way to get started.
                 className="contact-help-icon"
                 whileHover={{
                   scale: 1.12,
-                  backgroundColor: "#03ea04",
+                  backgroundColor: "var(--accent)",
                   color: "#0b0b0b",
                   boxShadow:
-                    "0 0 20px rgba(3, 234, 4, 0.6), 0 0 40px rgba(3, 234, 4, 0.35)",
+                    "0 0 20px var(--accent-glow), 0 0 40px var(--accent-soft)",
                 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
@@ -210,20 +208,18 @@ the right way to get started.
               </motion.div>
               <div className="contact-help-text">
                 <h4>EMAIL:</h4>
-                <p><p>hello@kinetixfitness.pk</p></p>
+                <p>hello@kinetixfitness.pk</p>
               </div>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* =========================================
-            RIGHT SIDE — FORM
-        ========================================= */}
+        {/* RIGHT SIDE — FORM */}
         <motion.div
           className="contact-help-right"
           variants={formVariants}
           whileHover={{
-            borderColor: "rgba(3, 234, 4, 0.3)",
+            borderColor: "var(--accent-glow)",
             transition: { duration: 0.4 },
           }}
         >
@@ -238,9 +234,9 @@ the right way to get started.
             className="contact-form-desc"
             variants={descVariants}
           >
-           Tell us what you’re looking for. Whether it’s membership information,
-personal training, or general support, send us a message and our team
-will get back to you.
+            Tell us what you're looking for. Whether it's membership information,
+            personal training, or general support, send us a message and our team
+            will get back to you.
           </motion.p>
 
           <form className="contact-help-form">
@@ -291,7 +287,7 @@ will get back to you.
               className="contact-form-group"
               variants={formFieldVariants}
             >
-              <label>	How Can We Help?</label>
+              <label>How Can We Help?</label>
               <textarea rows="6" placeholder="Message"></textarea>
             </motion.div>
 
@@ -303,12 +299,12 @@ will get back to you.
               whileHover={{
                 y: -3,
                 boxShadow:
-                  "0 0 20px rgba(3, 234, 4, 0.6), 0 0 40px rgba(3, 234, 4, 0.4), 0 10px 30px rgba(0, 0, 0, 0.4)",
+                  "0 0 20px var(--accent-glow), 0 0 40px var(--accent-soft), 0 10px 30px var(--shadow-color)",
               }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
-             Submit Your Enquiry
+              Submit Your Enquiry
             </motion.button>
           </form>
         </motion.div>

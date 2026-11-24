@@ -7,52 +7,50 @@ import "./AboutFAQ.css";
 const AboutFAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
 
-  
-const faqData = [
-  {
-    id: 1,
-    number: "01",
-    question: "When was KINETIX established?",
-    answer:
-      "KINETIX was established in 2024 in Gujranwala, Pakistan, with a vision to make quality fitness training accessible to the local community. Since then, we have focused on creating a welcoming environment where members can work towards their fitness goals with confidence.",
-  },
-  {
-    id: 2,
-    number: "02",
-    question: "What is the mission of KINETIX?",
-    answer:
-      "Our mission is to help people build healthier lifestyles through consistent training, proper guidance, and a supportive fitness environment. We believe fitness is not about quick results; it is about making small improvements every day.",
-  },
-  {
-    id: 3,
-    number: "03",
-    question: "Who will guide me during my workouts?",
-    answer:
-      "Our fitness team includes experienced trainers who guide members according to their fitness levels and individual goals. Whether you are new to the gym or have been training for years, our trainers help you understand exercises, maintain proper form, and follow a suitable workout routine.",
-  },
-  {
-    id: 4,
-    number: "04",
-    question: "What makes KINETIX different?",
-    answer:
-      "At KINETIX, we focus on more than just providing gym equipment. Members can manage their memberships, track attendance, follow workout and diet plans, and monitor their fitness progress. Our goal is to make every member's fitness journey organized, comfortable, and motivating.",
-  },
-  {
-    id: 5,
-    number: "05",
-    question: "What facilities are available at KINETIX?",
-    answer:
-      "Members can benefit from strength training equipment, cardio workouts, personalized exercise guidance, workout plans, and fitness progress tracking. We also provide membership options to suit different fitness goals and training preferences.",
-  },
-  {
-    id: 6,
-    number: "06",
-    question: "How can I become a KINETIX member?",
-    answer:
-      "Getting started is simple. Visit KINETIX in Gujranwala, explore the available membership plans, and choose the option that suits your fitness goals. Our team will guide you through registration and help you get started with your fitness journey.",
-  },
-];
-
+  const faqData = [
+    {
+      id: 1,
+      number: "01",
+      question: "When was KINETIX established?",
+      answer:
+        "KINETIX was established in 2024 in Gujranwala, Pakistan, with a vision to make quality fitness training accessible to the local community. Since then, we have focused on creating a welcoming environment where members can work towards their fitness goals with confidence.",
+    },
+    {
+      id: 2,
+      number: "02",
+      question: "What is the mission of KINETIX?",
+      answer:
+        "Our mission is to help people build healthier lifestyles through consistent training, proper guidance, and a supportive fitness environment. We believe fitness is not about quick results; it is about making small improvements every day.",
+    },
+    {
+      id: 3,
+      number: "03",
+      question: "Who will guide me during my workouts?",
+      answer:
+        "Our fitness team includes experienced trainers who guide members according to their fitness levels and individual goals. Whether you are new to the gym or have been training for years, our trainers help you understand exercises, maintain proper form, and follow a suitable workout routine.",
+    },
+    {
+      id: 4,
+      number: "04",
+      question: "What makes KINETIX different?",
+      answer:
+        "At KINETIX, we focus on more than just providing gym equipment. Members can manage their memberships, track attendance, follow workout and diet plans, and monitor their fitness progress. Our goal is to make every member's fitness journey organized, comfortable, and motivating.",
+    },
+    {
+      id: 5,
+      number: "05",
+      question: "What facilities are available at KINETIX?",
+      answer:
+        "Members can benefit from strength training equipment, cardio workouts, personalized exercise guidance, workout plans, and fitness progress tracking. We also provide membership options to suit different fitness goals and training preferences.",
+    },
+    {
+      id: 6,
+      number: "06",
+      question: "How can I become a KINETIX member?",
+      answer:
+        "Getting started is simple. Visit KINETIX in Gujranwala, explore the available membership plans, and choose the option that suits your fitness goals. Our team will guide you through registration and help you get started with your fitness journey.",
+    },
+  ];
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -60,15 +58,12 @@ const faqData = [
 
   return (
     <section className="aboutfaq-section">
-
       {/* 🌊 Background Glow */}
       <div className="aboutfaq-bg-glow"></div>
 
       <div className="aboutfaq-container">
-
         {/* ============ LEFT SIDE — Title + Description ============ */}
         <div className="aboutfaq-left">
-
           <motion.p
             className="aboutfaq-subtitle"
             initial={{ opacity: 0, y: 20 }}
@@ -122,12 +117,10 @@ const faqData = [
           >
             Learn More About Us →
           </motion.button>
-
         </div>
 
         {/* ============ RIGHT SIDE — FAQ List ============ */}
         <div className="aboutfaq-right">
-
           <div className="aboutfaq-list">
             {faqData.map((item, index) => {
               const isOpen = openIndex === index;
@@ -152,7 +145,9 @@ const faqData = [
                   <motion.div
                     className="aboutfaq-number"
                     animate={{
-                      color: isOpen ? "#4ade80" : "#4a4a4a",
+                      color: isOpen
+                        ? "var(--accent)"
+                        : "var(--text-subtle)",
                       scale: isOpen ? 1.1 : 1,
                     }}
                     transition={{ duration: 0.3 }}
@@ -235,9 +230,7 @@ const faqData = [
               );
             })}
           </div>
-
         </div>
-
       </div>
     </section>
   );

@@ -6,10 +6,10 @@ function ContactMap() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, {
     amount: 0.15,
-    once: false,   // 👈 HAR BAAR animate hoga
+    once: false,
   });
 
-  // ===== Animation Variants =====
+  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0, y: 40 },
     visible: {
@@ -71,9 +71,7 @@ function ContactMap() {
       animate={isInView ? "visible" : "hidden"}
     >
       <div className="contact-map-container">
-        {/* =========================================
-            HEADING
-        ========================================= */}
+        {/* HEADING */}
         <div className="contact-map-header">
           <motion.span
             className="contact-map-badge"
@@ -94,15 +92,13 @@ function ContactMap() {
             variants={descVariants}
           >
             Visit KINETIX Fitness Club in Gujranwala and take the first
-step towards a stronger, healthier lifestyle.
-<br />
-Our team is ready to welcome you and help you get started.
+            step towards a stronger, healthier lifestyle.
+            <br />
+            Our team is ready to welcome you and help you get started.
           </motion.p>
         </div>
 
-        {/* =========================================
-            MAP WRAPPER (with neon border)
-        ========================================= */}
+        {/* MAP WRAPPER */}
         <motion.div
           className="contact-map-wrapper"
           variants={mapVariants}
@@ -115,11 +111,11 @@ Our team is ready to welcome you and help you get started.
             className="contact-map-neon"
             animate={{
               boxShadow: [
-                "inset 0 0 15px rgba(3, 234, 4, 0.45), inset 0 0 30px rgba(3, 234, 4, 0.25), 0 0 18px rgba(3, 234, 4, 0.5), 0 0 38px rgba(3, 234, 4, 0.28)",
-                "inset 0 0 25px rgba(3, 234, 4, 0.75), inset 0 0 55px rgba(3, 234, 4, 0.45), 0 0 28px rgba(3, 234, 4, 0.9), 0 0 65px rgba(3, 234, 4, 0.55)",
-                "inset 0 0 15px rgba(3, 234, 4, 0.45), inset 0 0 30px rgba(3, 234, 4, 0.25), 0 0 18px rgba(3, 234, 4, 0.5), 0 0 38px rgba(3, 234, 4, 0.28)",
+                "inset 0 0 15px var(--accent-soft), inset 0 0 30px var(--accent-soft), 0 0 18px var(--accent-glow), 0 0 38px var(--accent-soft)",
+                "inset 0 0 25px var(--accent-glow), inset 0 0 55px var(--accent-soft), 0 0 28px var(--accent-glow), 0 0 65px var(--accent-soft)",
+                "inset 0 0 15px var(--accent-soft), inset 0 0 30px var(--accent-soft), 0 0 18px var(--accent-glow), 0 0 38px var(--accent-soft)",
               ],
-              borderColor: ["#03ea04", "#7eff80", "#03ea04"],
+              borderColor: ["var(--accent)", "var(--accent-glow)", "var(--accent)"],
             }}
             transition={{
               duration: 2.5,
@@ -131,7 +127,7 @@ Our team is ready to welcome you and help you get started.
           <iframe
             className="contact-map-frame"
             title="KINETIX Fitness Club Location"
-src="https://www.google.com/maps?q=Satellite+Town,+Gujranwala,+Pakistan&output=embed"
+            src="https://www.google.com/maps?q=Satellite+Town,+Gujranwala,+Pakistan&output=embed"
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"

@@ -1,3 +1,4 @@
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -52,13 +53,12 @@ function AppLayout() {
     location.pathname.startsWith("/billing") ||
     location.pathname.startsWith("/reports") ||
     location.pathname.startsWith("/settings") ||
-    location.pathname.startsWith("/dashboard/staff") ||   // ✅ FIXED
-    location.pathname.startsWith("/dashboard/services");  // ✅ FIXED
+    location.pathname === "/schedule";
 
   const isPlansPage = location.pathname === "/plans";
 
   // ==========================================
-  // ✅ DASHBOARD LAYOUT
+  // DASHBOARD LAYOUT
   // ==========================================
   if (isDashboard) {
     return (
@@ -69,14 +69,14 @@ function AppLayout() {
         <Route path="/workouts" element={<DashboardPage page="workouts" />} />
         <Route path="/diet" element={<DashboardPage page="diet" />} />
         <Route path="/schedule" element={<DashboardPage page="schedule" />} />
-        
+
         <Route path="/dashboard/trainers" element={<DashboardPage page="trainers" />} />
-        
+
         <Route path="/billing" element={<DashboardPage page="billing" />} />
         <Route path="/reports" element={<DashboardPage page="reports" />} />
         <Route path="/settings" element={<DashboardPage page="settings" />} />
-        
-        {/* ✅ FIXED ROUTES */}
+
+        {/* FIXED ROUTES */}
         <Route path="/dashboard/staff" element={<DashboardPage page="staff" />} />
         <Route path="/dashboard/services" element={<DashboardPage page="services" />} />
       </Routes>
@@ -84,7 +84,7 @@ function AppLayout() {
   }
 
   // ==========================================
-  // ✅ MAIN WEBSITE LAYOUT
+  // MAIN WEBSITE LAYOUT
   // ==========================================
   return (
     <>
@@ -113,7 +113,7 @@ function AppLayout() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
 
-          {/* ✅ PUBLIC TRAINERS PAGE */}
+          {/* PUBLIC TRAINERS PAGE */}
           <Route path="/trainers" element={<Team />} />
 
           <Route

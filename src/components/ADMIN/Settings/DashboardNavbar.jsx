@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  Menu, Search, Bell, Mail, Maximize, Minimize, ChevronDown,
+  Menu, Search, Bell, Maximize, Minimize, ChevronDown,
   Settings, LogOut, User, Home, Camera, X, Trash2
 } from "lucide-react";
 import "./DashboardNavbar.css";
@@ -133,9 +133,7 @@ const DashboardNavbar = ({ toggleSidebar, isSidebarOpen }) => {
                 {isFullscreen ? <Minimize size={22} /> : <Maximize size={22} />}
               </button>
 
-              <button className="dash-icon-btn tooltip" data-tooltip="Messages" onClick={() => alert("Messages panel opening...")}>
-                <Mail size={22} />
-              </button>
+              {/* ❌ Messages (Mail) icon removed from here */}
 
               <button className="dash-icon-btn tooltip" data-tooltip="Notifications" onClick={() => alert("You have 1 new notification!")}>
                 <Bell size={22} />

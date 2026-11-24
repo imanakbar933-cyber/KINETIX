@@ -1,81 +1,32 @@
 import "./Footer.css";
 
 function Footer() {
-const quickLinks = [
-  "Home",
-  "About KINETIX",
-  "Membership Plans",
-  "Our Trainers",
-  "Our Classes",
-  "Contact Us"
-];
+  const quickLinks = [
+    "Home",
+    "About KINETIX",
+    "Membership Plans",
+    "Our Trainers",
+    "Our Classes",
+    "Contact Us",
+  ];
 
   const services = [
-  "Strength Training",
-  "Cardio & Endurance",
-  "Personal Training",
-  "Workout Planning",
-  "Diet & Nutrition",
-  "Progress Tracking",
-  "Attendance Management"
-];
+    "Strength Training",
+    "Cardio & Endurance",
+    "Personal Training",
+    "Workout Planning",
+    "Diet & Nutrition",
+    "Progress Tracking",
+    "Attendance Management",
+  ];
 
   return (
     <footer className="gym-footer">
 
-      {/* ================= NEWSLETTER ================= */}
-
-      <section className="footer-newsletter">
-
-        <div className="newsletter-content">
-
-          <p className="newsletter-tag">
-         STAY FIT • STAY CONSISTENT
-          </p>
-
-          <h2>
-          Your Stronger
-<br />
-Journey <span>Starts Here.</span>
-          </h2>
-
-          <p>
-           Get fitness guidance, gym updates, training tips,
-and membership information from the KINETIX team.
-          </p>
-
-          <div className="newsletter-box">
-
-            <input
-              type="email"
-              placeholder="Enter your email address"
-            />
-
-            <button>
-              GET UPDATES →
-            </button>
-
-          </div>
-
-        </div>
-
-        <div className="footer-quote">
-          TRAIN
-          <br />
-          SWEAT
-          <br />
-          <span>TRANSFORM</span>
-        </div>
-
-      </section>
-
-
       {/* ================= FOOTER CONTENT ================= */}
-
       <section className="footer-content">
 
         {/* BRAND */}
-
         <div className="footer-brand">
 
           <h2>
@@ -86,31 +37,25 @@ and membership information from the KINETIX team.
             TRAIN • SWEAT • TRANSFORM
           </p>
 
-         <p className="footer-description">
-  KINETIX Fitness Club is a place to build strength,
-  improve fitness, and develop healthier habits
-  through consistent training and proper guidance.
-</p>
+          <p className="footer-description">
+            KINETIX Fitness Club is a place to build strength,
+            improve fitness, and develop healthier habits
+            through consistent training and proper guidance.
+          </p>
 
           <div className="social-links">
-
             <a href="#">f</a>
             <a href="#">◎</a>
             <a href="#">𝕏</a>
             <a href="#">▶</a>
             <a href="#">in</a>
-
           </div>
 
         </div>
 
-
         {/* QUICK LINKS */}
-
         <div className="footer-column">
-
           <h3>Quick Links</h3>
-
           <div className="footer-title-line"></div>
 
           {quickLinks.map((link, index) => (
@@ -119,16 +64,11 @@ and membership information from the KINETIX team.
               {link}
             </a>
           ))}
-
         </div>
 
-
         {/* SERVICES */}
-
         <div className="footer-column">
-
           <h3>Our Services</h3>
-
           <div className="footer-title-line"></div>
 
           {services.map((service, index) => (
@@ -137,55 +77,42 @@ and membership information from the KINETIX team.
               {service}
             </a>
           ))}
-
         </div>
 
-
         {/* CONTACT */}
-
         <div className="footer-column">
-
           <h3>Contact Us</h3>
-
           <div className="footer-title-line"></div>
-
 
           <div className="contact-row">
             <span className="contact-icon">⌖</span>
-
             <div>
               <strong>Satellite Town, Gujranwala</strong>
-<small>Punjab, Pakistan</small>
+              <small>Punjab, Pakistan</small>
             </div>
           </div>
-
 
           <div className="contact-row">
             <span className="contact-icon">☎</span>
-
             <div>
               <strong>+92 300 847 2619</strong>
-<small>Contact our fitness team</small>
+              <small>Contact our fitness team</small>
             </div>
           </div>
-
 
           <div className="contact-row">
             <span className="contact-icon">✉</span>
-
             <div>
               <strong>hello@kinetixfitness.pk</strong>
-<small>Membership & general enquiries</small>
+              <small>Membership &amp; general enquiries</small>
             </div>
           </div>
 
-
           <div className="contact-row">
             <span className="contact-icon">◷</span>
-
             <div>
-             <strong>6:00 AM — 10:00 PM</strong>
-<small>Monday — Saturday</small>
+              <strong>6:00 AM — 10:00 PM</strong>
+              <small>Monday — Saturday</small>
             </div>
           </div>
 
@@ -193,9 +120,7 @@ and membership information from the KINETIX team.
 
       </section>
 
-
       {/* ================= BOTTOM ================= */}
-
       <div className="footer-bottom">
 
         <div className="footer-line-design">
@@ -204,7 +129,7 @@ and membership information from the KINETIX team.
 
         <p>
           © 2026 <span>KINETIX</span> Fitness Club.
-All rights reserved.
+          All rights reserved.
         </p>
 
         <div className="footer-motto">

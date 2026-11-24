@@ -4,12 +4,13 @@
    SECTION
    ============================================ */
 .galleryimages-section {
-  background: #0a0a0a;
-  color: #fff;
+  background: var(--bg-main);
+  color: var(--text-main);
   padding: 100px 60px 60px;
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                "Helvetica Neue", Arial, sans-serif;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 .galleryimages-container {
@@ -26,13 +27,13 @@
 }
 
 .galleryimages-subtitle {
-  color:  #00ff00;
+  color: var(--accent);
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 5px;
   text-transform: uppercase;
   margin: 0 0 18px 0;
-  text-shadow: 0 0 30px rgba(74, 222, 128, 0.4);
+  text-shadow: 0 0 30px var(--accent-glow);
 }
 
 .galleryimages-title {
@@ -40,18 +41,18 @@
   font-weight: 900;
   line-height: 1.1;
   letter-spacing: -2px;
-  color: #ffffff;
+  color: var(--text-main);
   margin: 0;
   text-transform: uppercase;
 }
 
 .galleryimages-highlight {
-  color:  #00ff00;
-  text-shadow: 0 0 40px rgba(74, 222, 128, 0.5);
+  color: var(--accent);
+  text-shadow: 0 0 40px var(--accent-glow);
 }
 
 /* ============================================
-   ✅ MASONRY GRID — Balanced Layout
+   MASONRY GRID
    ============================================ */
 .galleryimages-grid {
   display: grid;
@@ -61,17 +62,14 @@
   grid-auto-flow: dense;
 }
 
-/* Tall — 2 rows */
 .galleryimages-item.gallery-tall {
   grid-row: span 2;
 }
 
-/* Wide — 2 columns */
 .galleryimages-item.gallery-wide {
   grid-column: span 2;
 }
 
-/* Normal — 1×1 */
 .galleryimages-item.gallery-normal {
   grid-row: span 1;
   grid-column: span 1;
@@ -85,17 +83,17 @@
   border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
-  background: #141414;
-  border: 1px solid rgba(74, 222, 128, 0.1);
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
   min-height: 100%;
 }
 
 .galleryimages-item:hover {
-  border-color: rgba(74, 222, 128, 0.5);
+  border-color: var(--accent-glow);
   box-shadow:
-    0 20px 50px rgba(74, 222, 128, 0.2),
-    0 0 0 1px rgba(74, 222, 128, 0.4);
+    0 20px 50px var(--accent-soft),
+    0 0 0 1px var(--accent-glow);
 }
 
 .galleryimages-img {
@@ -111,15 +109,15 @@
   transform: scale(1.1);
 }
 
-/* Overlay */
+/* Overlay — image ke upar, always dark */
 .galleryimages-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(10, 10, 10, 0.2) 0%,
-    rgba(10, 10, 10, 0.5) 50%,
-    rgba(10, 10, 10, 0.95) 100%
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.95) 100%
   );
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -141,13 +139,13 @@
   height: 60px;
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.9);
-  background: rgba(74, 222, 128, 0.15);
+  background: var(--accent-soft);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
-  color:  #00ff00;
+  color: var(--accent);
   transition: all 0.4s ease;
   transform: scale(0.5) rotate(-45deg);
   opacity: 0;
@@ -157,9 +155,9 @@
 .galleryimages-item:hover .galleryimages-plus {
   transform: scale(1) rotate(0deg);
   opacity: 1;
-  background:  #00ff00;
+  background: var(--accent);
   color: #0a0a0a;
-  box-shadow: 0 0 30px rgba(74, 222, 128, 0.6);
+  box-shadow: 0 0 30px var(--accent-glow);
 }
 
 .galleryimages-plus svg {
@@ -187,7 +185,7 @@
 }
 
 /* ============================================
-   ✅ LIGHTBOX MODAL (Screenshot Style - UPDATED)
+   LIGHTBOX MODAL
    ============================================ */
 .gallery-modal-overlay {
   position: fixed;
@@ -204,7 +202,7 @@
   overflow: hidden;
 }
 
-/* ---------- Close Button (Top Right) ---------- */
+/* Close Button */
 .gallery-modal-close {
   position: absolute;
   top: 20px;
@@ -229,10 +227,10 @@
 }
 
 .gallery-modal-close:hover {
-  color:  #00ff00; /* Aapki theme ka green */
+  color: var(--accent);
 }
 
-/* ---------- Main Image + Arrows Area ---------- */
+/* Main Image + Arrows Area */
 .gallery-modal-main {
   flex: 1;
   width: 100%;
@@ -253,7 +251,7 @@
   cursor: default;
 }
 
-/* ---------- Navigation Arrows ---------- */
+/* Navigation Arrows */
 .gallery-modal-arrow {
   position: absolute;
   top: 50%;
@@ -278,9 +276,9 @@
 }
 
 .gallery-modal-arrow:hover {
-  background: rgba(74, 222, 128, 0.2);
-  border-color: rgba(74, 222, 128, 0.6);
-  color:  #00ff00;
+  background: var(--accent-soft);
+  border-color: var(--accent-glow);
+  color: var(--accent);
 }
 
 .gallery-modal-prev {
@@ -291,7 +289,7 @@
   right: 30px;
 }
 
-/* ---------- Caption ---------- */
+/* Caption */
 .gallery-modal-caption {
   color: #ffffff;
   font-size: 15px;
@@ -303,7 +301,7 @@
   text-align: center;
 }
 
-/* ---------- Bottom Thumbnail Strip ---------- */
+/* Bottom Thumbnail Strip */
 .gallery-thumbnail-strip {
   display: flex;
   gap: 10px;
@@ -314,7 +312,7 @@
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   scrollbar-width: thin;
-  scrollbar-color:  #00ff00 transparent;
+  scrollbar-color: var(--accent) transparent;
 }
 
 .gallery-thumbnail-strip::-webkit-scrollbar {
@@ -322,7 +320,7 @@
 }
 
 .gallery-thumbnail-strip::-webkit-scrollbar-thumb {
-  background:  #00ff00;
+  background: var(--accent);
   border-radius: 10px;
 }
 
@@ -356,9 +354,21 @@
 
 .gallery-thumb.active {
   opacity: 1;
-  border-color:  #00ff00;
+  border-color: var(--accent);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 18px rgba(74, 222, 128, 0.35);
+  box-shadow: 0 6px 18px var(--accent-glow);
+}
+
+/* ============================================
+   LIGHT THEME FINE-TUNING
+   ============================================ */
+[data-theme="light"] .galleryimages-item {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .galleryimages-item:hover {
+  box-shadow:
+    0 20px 50px rgba(3, 234, 4, 0.2),
+    0 0 0 1px var(--accent-glow);
 }
 
 /* ============================================
@@ -381,7 +391,6 @@
 }
 
 @media (max-width: 768px) {
-  /* Lightbox Mobile Adjustments */
   .gallery-modal-main {
     padding: 40px 15px;
   }

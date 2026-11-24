@@ -12,6 +12,7 @@
   align-items: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                "Helvetica Neue", Arial, sans-serif;
+  background: #000;
 }
 
 /* ============================================
@@ -46,6 +47,7 @@
   );
   z-index: 1;
   pointer-events: none;
+  transition: background 0.4s ease;
 }
 
 /* ============================================
@@ -66,7 +68,7 @@
 }
 
 /* ============================================
-   TITLE
+   TITLE — always white (video ke upar)
    ============================================ */
 .faqhero-title {
   font-size: 4rem;
@@ -107,7 +109,7 @@
 }
 
 .faqhero-breadcrumb-link:hover {
-  color: #4ade80;
+  color: var(--accent);
 }
 
 .faqhero-breadcrumb-link::after {
@@ -117,7 +119,8 @@
   bottom: -3px;
   width: 0;
   height: 1px;
-  background: #4ade80;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
   transition: width 0.3s ease;
 }
 
@@ -133,6 +136,53 @@
 .faqhero-breadcrumb-current {
   color: #ffffff;
   font-weight: 700;
+}
+
+/* ============================================
+   LIGHT THEME — overlay thoda aur dark
+   ============================================ */
+[data-theme="light"] .faqhero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.65) 40%,
+    rgba(0, 0, 0, 0.38) 70%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+
+[data-theme="light"] .faqhero-title {
+  color: #ffffff !important;
+  text-shadow:
+    0 0 40px rgba(0, 0, 0, 0.95),
+    0 4px 20px rgba(0, 0, 0, 0.85);
+}
+
+/* ============================================
+   CUSTOM THEME — title white, breadcrumb accent
+   ============================================ */
+[data-theme="custom"] .faqhero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.33) 70%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+}
+
+[data-theme="custom"] .faqhero-title {
+  color: #ffffff !important;
+  text-shadow:
+    0 0 40px rgba(0, 0, 0, 0.9),
+    0 4px 20px rgba(0, 0, 0, 0.75);
+}
+
+[data-theme="custom"] .faqhero-breadcrumb-current {
+  color: var(--accent, #03ea04) !important;
+  text-shadow:
+    0 0 15px var(--accent-glow),
+    0 2px 12px rgba(0, 0, 0, 0.9);
 }
 
 /* ============================================

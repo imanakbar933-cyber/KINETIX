@@ -1,24 +1,45 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* =========================================
+   KINETIX SIGNUP
+   DARK / LIGHT / CUSTOM THEME
+========================================= */
 
-/* ================= MAIN WRAPPER ================= */
 .signup-page {
+  --signup-bg: var(--bg-main, #030504);
+  --signup-card: var(--bg-card, #111513);
+  --signup-text: var(--text-main, #ffffff);
+  --signup-muted: var(--text-muted, #9ca3af);
+
+  /* Always receive selected global theme accent */
+  --signup-accent: var(--accent, #03ea04);
+  --signup-accent-rgb: var(--accent-rgb, 3, 234, 4);
+
+  --signup-border: var(--border-color, rgba(255,255,255,0.1));
+
   display: flex;
-  height: 100vh; /* Screen height fix ki taaki scroll na aaye */
+  height: 100vh;
   width: 100%;
-  background-color: #030504;
+  background-color: var(--signup-bg);
   font-family: 'Inter', sans-serif;
-  color: #ffffff;
+  color: var(--signup-text);
   overflow: hidden;
   perspective: 1000px;
+
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
 }
 
-/* ================= LEFT SIDE ================= */
+.signup-page * {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   LEFT SIDE
+========================================= */
+
 .signup-left {
   flex: 1.1;
   position: relative;
@@ -34,10 +55,15 @@
   background: url('/images/login-bg.png') center/cover no-repeat;
   z-index: 0;
 }
+
 .left-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(3, 5, 4, 0.4) 0%, rgba(3, 5, 4, 0.95) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(3, 5, 4, 0.4) 0%,
+    rgba(3, 5, 4, 0.95) 100%
+  );
   z-index: 1;
 }
 
@@ -58,115 +84,181 @@
   text-shadow: 0 0 10px rgba(255,255,255,0.3);
 }
 
-/* ✅ TEXT POSITION FIXED (No Overlap) */
+/* =========================================
+   LEFT SIDE HEADING
+========================================= */
+
 .left-bottom-text {
   margin-top: auto;
   margin-bottom: 40px;
   perspective: 800px;
   display: flex;
   flex-direction: column;
-  gap: 5px; /* Lines ke beech space */
+  gap: 5px;
 }
 
 .left-bottom-text h2 {
-  font-size: clamp(40px, 5vw, 75px); /* Font size thoda adjust kiya */
+  font-size: clamp(40px, 5vw, 75px);
   font-weight: 900;
-  line-height: 0.95; /* Lines ko overlap hone se rokta hai */
+  line-height: 0.95;
   text-transform: uppercase;
   font-style: italic;
+  color: #ffffff;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 1);
 }
 
-.highlight-text {
-  color:  #03ea04;
-  text-shadow: 0 0 30px rgba(74, 222, 128, 0.4), 0 10px 30px rgba(0, 0, 0, 1);
+.signup-page .highlight-text {
+  color: var(--signup-accent);
+  text-shadow:
+    0 0 30px rgba(var(--signup-accent-rgb), 0.4),
+    0 10px 30px rgba(0, 0, 0, 1);
+  transition: color 0.4s ease;
 }
 
 .left-bottom-text p {
   margin-top: 20px;
   font-size: 13px;
   letter-spacing: 6px;
-  color:  #03ea04;
+  color: var(--signup-accent);
   font-weight: 600;
   text-shadow: 0 5px 15px rgba(0, 0, 0, 1);
 }
 
-/* ================= RIGHT SIDE (COMPACT FORM) ================= */
+/* =========================================
+   RIGHT SIDE
+========================================= */
+
 .signup-right {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: radial-gradient(circle at 70% 50%, rgba(74, 222, 128, 0.08) 0%, transparent 60%);
+
+  background:
+    radial-gradient(
+      circle at 70% 50%,
+      rgba(var(--signup-accent-rgb), 0.08) 0%,
+      transparent 60%
+    ),
+    var(--signup-bg);
+
+  transition: background 0.4s ease;
 }
+
+/* =========================================
+   SIGNUP FORM CONTAINER
+========================================= */
 
 .signup-form-container {
   width: 100%;
-  max-width: 420px; /* Width kam ki */
-  padding: 25px 30px; /* ✅ Padding kam ki taaki form chhota ho */
+  max-width: 420px;
+  padding: 25px 30px;
   border-radius: 16px;
   position: relative;
   overflow: hidden;
-  
-  background: rgba(10, 15, 12, 0.7); 
+
+  background: var(--signup-card);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  
-  border: 1px solid rgba(74, 222, 128, 0.2);
-  border-left: 2px solid rgba(74, 222, 128, 0.5);
-  border-top: 2px solid rgba(74, 222, 128, 0.5);
-  
-  box-shadow: 
-    0 30px 60px rgba(0, 0, 0, 0.8),
-    inset 0 0 30px rgba(74, 222, 128, 0.05),
-    0 0 40px rgba(74, 222, 128, 0.1); 
+
+  border: 1px solid var(--signup-border);
+  border-left: 2px solid rgba(var(--signup-accent-rgb), 0.5);
+  border-top: 2px solid rgba(var(--signup-accent-rgb), 0.5);
+
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.25),
+    inset 0 0 30px rgba(var(--signup-accent-rgb), 0.05),
+    0 0 40px rgba(var(--signup-accent-rgb), 0.1);
+
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
 }
 
-/* Animated Cyber Grid */
+/* =========================================
+   ANIMATED CYBER GRID
+========================================= */
+
 .cyber-grid {
   position: absolute;
   inset: 0;
-  background-image: 
-    linear-gradient(rgba(74, 222, 128, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(74, 222, 128, 0.05) 1px, transparent 1px);
+
+  background-image:
+    linear-gradient(
+      rgba(var(--signup-accent-rgb), 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(var(--signup-accent-rgb), 0.05) 1px,
+      transparent 1px
+    );
+
   background-size: 30px 30px;
   z-index: 0;
   pointer-events: none;
 }
 
-/* Pulsing Background Glow */
+/* =========================================
+   PULSING BACKGROUND GLOW
+========================================= */
+
 .pulse-glow {
   position: absolute;
-  top: 50%; left: 50%;
-  width: 150%; height: 150%;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(74,222,128,0.15) 0%, transparent 60%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(var(--signup-accent-rgb), 0.15) 0%,
+      transparent 60%
+    );
+
   z-index: 0;
   pointer-events: none;
 }
 
-/* Glowing Corner Accents */
+/* =========================================
+   GLOWING CORNER ACCENTS
+========================================= */
+
 .signup-form-container::before,
 .signup-form-container::after {
   content: '';
   position: absolute;
-  width: 20px; height: 20px;
-  border: 3px solid  #03ea04;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--signup-accent);
   pointer-events: none;
-  filter: drop-shadow(0 0 10px  #03ea04); 
+  filter: drop-shadow(0 0 10px var(--signup-accent));
   z-index: 2;
 }
+
 .signup-form-container::before {
-  top: -1px; left: -1px;
-  border-right: none; border-bottom: none;
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
   border-top-left-radius: 16px;
 }
+
 .signup-form-container::after {
-  bottom: -1px; right: -1px;
-  border-left: none; border-top: none;
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
   border-bottom-right-radius: 16px;
 }
+
+/* =========================================
+   FORM HEADER
+========================================= */
 
 .form-header {
   display: flex;
@@ -178,29 +270,48 @@
 }
 
 .form-header h2 {
-  font-size: 20px; /* Heading size kam ki */
+  font-size: 20px;
   font-weight: 800;
+  color: var(--signup-text);
 }
 
-.text-green {
-  color:  #03ea04;
-  text-shadow: 0 0 15px rgba(74, 222, 128, 0.5);
+.signup-page .form-header svg path {
+  fill: var(--signup-accent) !important;
 }
+
+.signup-page .form-header svg {
+  color: var(--signup-accent) !important;
+  filter: drop-shadow(
+    0 0 8px rgba(var(--signup-accent-rgb), 0.5)
+  ) !important;
+}
+
+.signup-page .text-green {
+  color: var(--signup-accent) !important;
+  text-shadow: 0 0 15px rgba(var(--signup-accent-rgb), 0.5);
+}
+
+/* =========================================
+   FORM SUBTITLE
+========================================= */
 
 .form-subtitle {
   font-size: 12px;
-  color: #9ca3af;
-  margin-bottom: 15px; /* ✅ Gap kam kiya */
+  color: var(--signup-muted);
+  margin-bottom: 15px;
   line-height: 1.4;
   position: relative;
   z-index: 2;
 }
 
-/* ================= FORM ELEMENTS ================= */
+/* =========================================
+   FORM ELEMENTS
+========================================= */
+
 .compact-form {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* ✅ Gaps kam kiye taaki lambai kam ho */
+  gap: 10px;
   position: relative;
   z-index: 2;
 }
@@ -209,49 +320,78 @@
   position: relative;
 }
 
+/* =========================================
+   INPUT ICONS
+========================================= */
+
 .input-icon {
   position: absolute;
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #6b7280;
+  color: var(--signup-muted);
   display: flex;
   align-items: center;
   z-index: 3;
-  transition: all 0.3s;
+  transition: color 0.3s ease;
 }
+
+/* =========================================
+   INPUT FIELDS
+========================================= */
 
 .input-group input {
   width: 100%;
-  padding: 10px 12px 10px 38px; /* ✅ Input height kam ki */
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 38px 10px 38px;
+  background: var(--signup-bg);
+  border: 1px solid var(--signup-border);
   border-radius: 8px;
-  color: #fff;
-  font-size: 13px; /* Font size chhota kiya */
-  transition: all 0.4s ease;
+  color: var(--signup-text);
+  font-size: 13px;
+
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+
   position: relative;
   z-index: 2;
 }
 
 .input-group input::placeholder {
-  color: #6b7280;
+  color: var(--signup-muted);
 }
 
 .input-group input:focus {
   outline: none;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--signup-bg);
+  border-color: var(--signup-accent);
+
+  box-shadow:
+    0 0 10px rgba(var(--signup-accent-rgb), 0.12);
 }
 
-/* Laser Line Effect */
+.input-group input:focus ~ .input-icon {
+  color: var(--signup-accent);
+}
+
+/* =========================================
+   LASER LINE EFFECT
+========================================= */
+
 .laser-line {
   position: absolute;
   bottom: 0;
   left: 50%;
   width: 0%;
   height: 2px;
-  background:  #03ea04;
-  box-shadow: 0 0 10px  #03ea04, 0 0 20px  #03ea04;
+  background: var(--signup-accent);
+
+  box-shadow:
+    0 0 10px var(--signup-accent),
+    0 0 20px rgba(var(--signup-accent-rgb), 0.5);
+
   transition: all 0.4s ease;
   transform: translateX(-50%);
   z-index: 3;
@@ -261,9 +401,9 @@
   width: 100%;
 }
 
-.input-group input:focus ~ .input-icon {
-  color:  #03ea04;
-}
+/* =========================================
+   PASSWORD EYE ICON
+========================================= */
 
 .eye-icon {
   position: absolute;
@@ -272,15 +412,27 @@
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 14px;
-  opacity: 0.5;
-  z-index: 3;
+  opacity: 0.65;
+  z-index: 4;
+  color: var(--signup-text);
 }
-.eye-icon:hover { opacity: 1; }
 
-/* Role Selection */
+.eye-icon:hover {
+  opacity: 1;
+}
+
+/* =========================================
+   ROLE SELECTION
+========================================= */
+
+.role-selection {
+  position: relative;
+  z-index: 2;
+}
+
 .role-selection p {
   font-size: 11px;
-  color: #9ca3af;
+  color: var(--signup-muted);
   margin-bottom: 6px;
   font-weight: 600;
 }
@@ -295,126 +447,255 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px; /* ✅ Role box chhota kiya */
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px;
+  background: var(--signup-bg);
+  border: 1px solid var(--signup-border);
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .role-box span {
   font-size: 11px;
-  color: #9ca3af;
+  color: var(--signup-muted);
 }
 
 .role-box.active {
-  border-color:  #03ea04;
-  background: rgba(74, 222, 128, 0.15);
+  border-color: var(--signup-accent);
+  background: rgba(var(--signup-accent-rgb), 0.12);
 }
 
 .role-box.active span {
-  color:  #03ea04;
+  color: var(--signup-accent);
   font-weight: 700;
 }
 
-/* ELECTRIC BUTTON */
+/* =========================================
+   SIGNUP BUTTON
+========================================= */
+
 .signup-btn {
   width: 100%;
-  padding: 12px; /* ✅ Button chhota kiya */
-  background:  #03ea04;
-  color: #000;
+  padding: 12px;
+  background: var(--signup-accent);
+  color: #071009;
   border: none;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 800;
   cursor: pointer;
+
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+
   position: relative;
   overflow: hidden;
   margin-top: 5px;
+
+  transition:
+    background 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.signup-btn:hover {
+  box-shadow: 0 0 20px rgba(var(--signup-accent-rgb), 0.3);
 }
 
 .electric-btn::before {
   content: '';
   position: absolute;
-  top: 0; left: -100%;
-  width: 50%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.8),
+      transparent
+    );
+
   transform: skewX(-20deg);
   transition: all 0.6s ease;
 }
+
 .electric-btn:hover::before {
   left: 200%;
 }
 
-/* Divider */
+/* =========================================
+   DIVIDER
+========================================= */
+
 .divider {
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 12px 0; /* ✅ Gap kam kiya */
-  color: #6b7280;
+  margin: 12px 0;
+  color: var(--signup-muted);
   font-size: 11px;
   font-weight: 600;
   position: relative;
   z-index: 2;
 }
-.divider::before, .divider::after {
-  content: ''; flex: 1; border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.divider span { padding: 0 10px; }
 
-/* Google Button */
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--signup-border);
+}
+
+.divider span {
+  padding: 0 10px;
+}
+
+/* =========================================
+   GOOGLE BUTTON
+========================================= */
+
 .google-btn {
   width: 100%;
-  padding: 10px; /* ✅ Gap kam kiya */
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px;
+  background: var(--signup-bg);
+  border: 1px solid var(--signup-border);
   border-radius: 8px;
-  color: #fff;
+  color: var(--signup-text);
   font-size: 13px;
+
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+
   cursor: pointer;
   position: relative;
   z-index: 2;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
+
+.google-btn:hover {
+  border-color: var(--signup-accent);
+  background: var(--hover-bg, var(--signup-bg));
+}
+
+.google-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   LOGIN LINK
+========================================= */
 
 .login-link {
   text-align: center;
   margin-top: 12px;
   font-size: 12px;
-  color: #9ca3af;
+  color: var(--signup-muted);
   position: relative;
   z-index: 2;
 }
+
 .login-link a {
-  color:  #03ea04;
+  color: var(--signup-accent);
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
-/* Spinner */
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   SPINNER
+========================================= */
+
 .spinner {
-  width: 14px; height: 14px;
-  border: 2px solid rgba(74, 222, 128, 0.3);
-  border-top-color:  #03ea04;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(var(--signup-accent-rgb), 0.3);
+  border-top-color: var(--signup-accent);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
 
-/* Responsive */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
 @media (max-width: 900px) {
-  .signup-page { flex-direction: column; height: auto; overflow-y: auto; }
-  .signup-left { min-height: 300px; padding: 20px; }
-  .left-bottom-text { margin-bottom: 20px; }
-  .left-bottom-text h2 { font-size: 40px; }
-  .signup-right { padding: 15px; }
+  .signup-page {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .signup-left {
+    min-height: 300px;
+    padding: 20px;
+  }
+
+  .left-bottom-text {
+    margin-bottom: 20px;
+  }
+
+  .left-bottom-text h2 {
+    font-size: 40px;
+  }
+
+  .signup-right {
+    padding: 15px;
+  }
+
+  .signup-form-container {
+    margin: 15px 0;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+  .signup-left {
+    min-height: 250px;
+  }
+
+  .left-bottom-text h2 {
+    font-size: 34px;
+  }
+
+  .left-top-text {
+    font-size: 10px;
+    letter-spacing: 2px !important;
+  }
+
+  .signup-form-container {
+    padding: 22px 18px;
+  }
+
+  .form-header h2 {
+    font-size: 17px;
+  }
 }

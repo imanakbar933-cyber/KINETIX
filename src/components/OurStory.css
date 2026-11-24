@@ -1,17 +1,23 @@
+
 /* =========================================================
-   OUR STORY SECTION
+   OUR STORY SECTION — KINETIX THEME SUPPORT
 ========================================================= */
+
 .our-story {
+  --story-accent: var(--accent, #03ea04);
+  --story-accent-rgb: var(--accent-rgb, 3, 234, 4);
+
   position: relative;
   width: 100%;
-  padding: 220px 5% 120px;   /* ← top padding increased, bottom reduced */
-  background: #050505;
+  padding: 220px 5% 120px;
+  background: var(--bg-main, #050505);
   overflow: hidden;
   font-family: Arial, sans-serif;
   isolation: isolate;
   contain: layout style;
   content-visibility: auto;
   contain-intrinsic-size: 800px;
+  color: var(--text-main, #ffffff);
 }
 
 /* =========================================================
@@ -28,7 +34,7 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(3, 234, 4, 0.08),
+    rgba(var(--story-accent-rgb), 0.08),
     transparent 70%
   );
   filter: blur(60px);
@@ -39,20 +45,16 @@
 
 @keyframes glowFloat {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(60px, -30px) scale(1.15); }
+  50% { transform: translate(60px, -30px) scale(1.15); }
 }
 
 /* =========================================================
-   WATERMARK — "OUR MISSION" (NEON BORDER EFFECT)
-========================================================= */
-/* =========================================================
-   WATERMARK — "OUR MISSION" (NEON BORDER EFFECT)
-   ✅ NOW AT TOP
+   WATERMARK
 ========================================================= */
 
 .our-story-watermark {
   position: absolute;
-  top: 40px;                          /* ← TOP instead of bottom */
+  top: 40px;
   left: 0;
   right: 0;
   width: 100%;
@@ -65,16 +67,14 @@
   line-height: 1;
   text-transform: uppercase;
 
-  /* 1. Text ke andar transparent */
   color: transparent;
 
-  /* 2. Sirf border pe solid neon green */
-  -webkit-text-stroke: 2.5px #03ea04;
+  -webkit-text-stroke: 2.5px var(--story-accent);
 
-  /* 3. Border ke bahar neon glow */
-  filter: drop-shadow(0 0 10px rgba(3, 234, 4, 1))
-          drop-shadow(0 0 25px rgba(3, 234, 4, 0.6))
-          drop-shadow(0 0 50px rgba(3, 234, 4, 0.3));
+  filter:
+    drop-shadow(0 0 10px rgba(var(--story-accent-rgb), 1))
+    drop-shadow(0 0 25px rgba(var(--story-accent-rgb), 0.6))
+    drop-shadow(0 0 50px rgba(var(--story-accent-rgb), 0.3));
 
   pointer-events: none;
   user-select: none;
@@ -82,22 +82,24 @@
   white-space: nowrap;
   overflow: hidden;
 
-  /* 4. Breathing / Pulse effect */
   animation: neonPulse 3s ease-in-out infinite;
 }
 
 @keyframes neonPulse {
   0%, 100% {
-    -webkit-text-stroke: 2.5px rgba(3, 234, 4, 0.7);
-    filter: drop-shadow(0 0 8px rgba(3, 234, 4, 0.8))
-            drop-shadow(0 0 20px rgba(3, 234, 4, 0.4))
-            drop-shadow(0 0 35px rgba(3, 234, 4, 0.2));
+    -webkit-text-stroke: 2.5px rgba(var(--story-accent-rgb), 0.7);
+    filter:
+      drop-shadow(0 0 8px rgba(var(--story-accent-rgb), 0.8))
+      drop-shadow(0 0 20px rgba(var(--story-accent-rgb), 0.4))
+      drop-shadow(0 0 35px rgba(var(--story-accent-rgb), 0.2));
   }
+
   50% {
-    -webkit-text-stroke: 2.5px #03ea04;
-    filter: drop-shadow(0 0 15px rgba(3, 234, 4, 1))
-            drop-shadow(0 0 35px rgba(3, 234, 4, 0.7))
-            drop-shadow(0 0 70px rgba(3, 234, 4, 0.4));
+    -webkit-text-stroke: 2.5px var(--story-accent);
+    filter:
+      drop-shadow(0 0 15px rgba(var(--story-accent-rgb), 1))
+      drop-shadow(0 0 35px rgba(var(--story-accent-rgb), 0.7))
+      drop-shadow(0 0 70px rgba(var(--story-accent-rgb), 0.4));
   }
 }
 
@@ -126,11 +128,13 @@
   align-items: flex-start;
 }
 
-/* ---------- GREEN TAG ---------- */
+/* =========================================================
+   TAG
+========================================================= */
 
 .our-story-tag {
   display: inline-block;
-  color: #00ff00;
+  color: var(--story-accent);
   font-family: Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
@@ -139,7 +143,7 @@
   margin-bottom: 24px;
   position: relative;
   padding-left: 40px;
-  text-shadow: 0 0 12px rgba(3, 234, 4, 0.4);
+  text-shadow: 0 0 12px rgba(var(--story-accent-rgb), 0.4);
 }
 
 .our-story-tag::before {
@@ -150,8 +154,8 @@
   transform: translateY(-50%);
   width: 30px;
   height: 2px;
-  background: #00ff00;
-  box-shadow: 0 0 12px rgba(3, 234, 4, 0.8);
+  background: var(--story-accent);
+  box-shadow: 0 0 12px rgba(var(--story-accent-rgb), 0.8);
   border-radius: 2px;
 }
 
@@ -163,30 +167,40 @@
   transform: translateY(-50%);
   width: 8px;
   height: 8px;
-  background: #00ff00;
+  background: var(--story-accent);
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(3, 234, 4, 0.9);
+  box-shadow: 0 0 12px rgba(var(--story-accent-rgb), 0.9);
   animation: dotPulse 2s ease-in-out infinite;
 }
 
 @keyframes dotPulse {
-  0%, 100% { transform: translateY(-50%) scale(1); opacity: 1; }
-  50%      { transform: translateY(-50%) scale(1.6); opacity: 0.4; }
+  0%, 100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(-50%) scale(1.6);
+    opacity: 0.4;
+  }
 }
 
-/* ---------- HEADING ---------- */
+/* =========================================================
+   HEADING
+========================================================= */
 
 .our-story-heading {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main, #ffffff);
   font-family: Arial, sans-serif;
   font-size: clamp(38px, 5.2vw, 72px);
   font-weight: 900;
   line-height: 1.05;
   text-transform: uppercase;
   letter-spacing: -2px;
-  transition: letter-spacing 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-              text-shadow 0.4s ease;
+  transition:
+    letter-spacing 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    text-shadow 0.4s ease;
 }
 
 .our-story-heading.in-view {
@@ -195,8 +209,8 @@
 
 .our-story-heading:hover {
   text-shadow:
-    0 0 20px rgba(3, 234, 4, 0.28),
-    0 0 40px rgba(3, 234, 4, 0.14);
+    0 0 20px rgba(var(--story-accent-rgb), 0.28),
+    0 0 40px rgba(var(--story-accent-rgb), 0.14);
 }
 
 /* =========================================================
@@ -209,7 +223,7 @@
 
 .our-story-para {
   margin: 0;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-muted, rgba(255, 255, 255, 0.72));
   font-family: Arial, sans-serif;
   font-size: 17px;
   line-height: 1.85;
@@ -226,9 +240,13 @@
   top: 6px;
   bottom: 6px;
   width: 3px;
-  background: linear-gradient(180deg, #00ff00, transparent);
+  background: linear-gradient(
+    180deg,
+    var(--story-accent),
+    transparent
+  );
   border-radius: 3px;
-  box-shadow: 0 0 14px rgba(3, 234, 4, 0.5);
+  box-shadow: 0 0 14px rgba(var(--story-accent-rgb), 0.5);
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
@@ -255,11 +273,22 @@
   transform: translateY(0);
 }
 
-.our-story-tag.reveal     { transition-delay: 0s; }
-.our-story-heading.reveal { transition-delay: 0.08s; }
-.our-story-right.reveal   { transition-delay: 0.16s; }
+.our-story-tag.reveal {
+  transition-delay: 0s;
+}
 
-/* Para clip-path reveal */
+.our-story-heading.reveal {
+  transition-delay: 0.08s;
+}
+
+.our-story-right.reveal {
+  transition-delay: 0.16s;
+}
+
+/* =========================================================
+   PARAGRAPH CLIP-PATH REVEAL
+========================================================= */
+
 .our-story-para {
   clip-path: inset(0 100% 0 0);
   transition: clip-path 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.25s;
@@ -269,30 +298,35 @@
   clip-path: inset(0 0 0 0);
 }
 
+/* =========================================================
+   TABLET
+========================================================= */
 
-/* TABLET */
 @media (max-width: 900px) {
   .our-story {
-    padding: 180px 5% 90px;    /* ← top space for watermark */
+    padding: 180px 5% 90px;
   }
 
   .our-story-watermark {
-    top: 30px;                 /* ← top */
-    -webkit-text-stroke: 2px rgba(3, 234, 4, 0.8);
+    top: 30px;
+    -webkit-text-stroke: 2px rgba(var(--story-accent-rgb), 0.8);
   }
 }
 
-/* MOBILE */
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media (max-width: 600px) {
   .our-story {
-    padding: 140px 20px 70px;  /* ← top space for watermark */
+    padding: 140px 20px 70px;
   }
 
   .our-story-watermark {
     font-size: 36px;
     letter-spacing: 2px;
-    top: 25px;                 /* ← top */
+    top: 25px;
     padding: 0 15px;
-    -webkit-text-stroke: 1.5px rgba(3, 234, 4, 0.8);
+    -webkit-text-stroke: 1.5px rgba(var(--story-accent-rgb), 0.8);
   }
 }
