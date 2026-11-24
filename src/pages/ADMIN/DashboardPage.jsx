@@ -1,5 +1,11 @@
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback
+} from "react";
+
 import DashboardNavbar from "../../components/ADMIN/Settings/DashboardNavbar";
 import DashboardSidebar from "../../components/Admin/DashboardSidebar";
 
@@ -17,7 +23,7 @@ import Staff from "../../components/ADMIN/Staff";
 import WorkoutPlans from "../../components/Admin/WorkoutPlans";
 import DietPlans from "../../components/Admin/DietPlans";
 
-// NEW: LOCKER MANAGEMENT
+// LOCKER MANAGEMENT
 import LockerManagement from "../../components/Admin/LockerManagement";
 
 import "./DashboardPage.css";
@@ -39,15 +45,23 @@ const DashboardPage = ({ page }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const [sidebarWidth, setSidebarWidth] = useState(() => {
-    const saved = Number(localStorage.getItem("kinetix_sidebar_width"));
+    const saved = Number(
+      localStorage.getItem("kinetix_sidebar_width")
+    );
+
     return saved && saved >= MIN_WIDTH && saved <= MAX_WIDTH
       ? saved
       : DEFAULT_WIDTH;
   });
 
   const [sidebarHeight, setSidebarHeight] = useState(() => {
-    const saved = Number(localStorage.getItem("kinetix_sidebar_height"));
-    return saved && saved >= MIN_HEIGHT ? saved : window.innerHeight;
+    const saved = Number(
+      localStorage.getItem("kinetix_sidebar_height")
+    );
+
+    return saved && saved >= MIN_HEIGHT
+      ? saved
+      : window.innerHeight;
   });
 
   const isResizingWidth = useRef(false);
@@ -55,19 +69,43 @@ const DashboardPage = ({ page }) => {
 
   const [appearance, setAppearance] = useState(() => {
     const saved = localStorage.getItem("kinetix_appearance");
-    return saved ? JSON.parse(saved) : { ...DEFAULT_APPEARANCE };
+
+    return saved
+      ? JSON.parse(saved)
+      : { ...DEFAULT_APPEARANCE };
   });
+
+  // ==========================================
+  // LOAD APPEARANCE SETTINGS
+  // ==========================================
 
   useEffect(() => {
     const loadAppearance = () => {
       const saved = localStorage.getItem("kinetix_appearance");
-      setAppearance(saved ? JSON.parse(saved) : { ...DEFAULT_APPEARANCE });
+
+      setAppearance(
+        saved
+          ? JSON.parse(saved)
+          : { ...DEFAULT_APPEARANCE }
+      );
     };
 
-    window.addEventListener("appearanceUpdated", loadAppearance);
+    window.addEventListener(
+      "appearanceUpdated",
+      loadAppearance
+    );
 
-    return () => window.removeEventListener("appearanceUpdated", loadAppearance);
+    return () => {
+      window.removeEventListener(
+        "appearanceUpdated",
+        loadAppearance
+      );
+    };
   }, []);
+
+  // ==========================================
+  // SIDEBAR RESIZE
+  // ==========================================
 
   const handleWidthMouseDown = useCallback(() => {
     isResizingWidth.current = true;
@@ -84,7 +122,11 @@ const DashboardPage = ({ page }) => {
   useEffect(() => {
     const handleMouseMove = (e) => {
       if (isResizingWidth.current) {
-        const newWidth = Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, e.clientX));
+        const newWidth = Math.min(
+          MAX_WIDTH,
+          Math.max(MIN_WIDTH, e.clientX)
+        );
+
         setSidebarWidth(newWidth);
       }
 
@@ -93,6 +135,7 @@ const DashboardPage = ({ page }) => {
           window.innerHeight,
           Math.max(MIN_HEIGHT, e.clientY)
         );
+
         setSidebarHeight(newHeight);
       }
     };
@@ -100,12 +143,20 @@ const DashboardPage = ({ page }) => {
     const handleMouseUp = () => {
       if (isResizingWidth.current) {
         isResizingWidth.current = false;
-        localStorage.setItem("kinetix_sidebar_width", String(sidebarWidth));
+
+        localStorage.setItem(
+          "kinetix_sidebar_width",
+          String(sidebarWidth)
+        );
       }
 
       if (isResizingHeight.current) {
         isResizingHeight.current = false;
-        localStorage.setItem("kinetix_sidebar_height", String(sidebarHeight));
+
+        localStorage.setItem(
+          "kinetix_sidebar_height",
+          String(sidebarHeight)
+        );
       }
 
       document.body.style.cursor = "";
@@ -121,35 +172,69 @@ const DashboardPage = ({ page }) => {
     };
   }, [sidebarWidth, sidebarHeight]);
 
+  // ==========================================
+  // SAVE SIDEBAR WIDTH
+  // ==========================================
+
   useEffect(() => {
     const t = setTimeout(() => {
-      localStorage.setItem("kinetix_sidebar_width", String(sidebarWidth));
+      localStorage.setItem(
+        "kinetix_sidebar_width",
+        String(sidebarWidth)
+      );
     }, 300);
 
     return () => clearTimeout(t);
   }, [sidebarWidth]);
 
+  // ==========================================
+  // SAVE SIDEBAR HEIGHT
+  // ==========================================
+
   useEffect(() => {
     const t = setTimeout(() => {
-      localStorage.setItem("kinetix_sidebar_height", String(sidebarHeight));
+      localStorage.setItem(
+        "kinetix_sidebar_height",
+        String(sidebarHeight)
+      );
     }, 300);
 
     return () => clearTimeout(t);
   }, [sidebarHeight]);
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  // ==========================================
+  // PLACEHOLDER PAGE
+  // ==========================================
 
   const Placeholder = ({ title }) => (
     <div style={{ padding: "40px" }}>
-      <h1 style={{ fontSize: "32px", marginBottom: "10px" }}>
-        {title} Page
+      <h1
+        style={{
+          fontSize: "32px",
+          marginBottom: "10px"
+        }}
+      >
+        {title}
       </h1>
 
-      <p style={{ color: "var(--dash-muted, #888)", marginBottom: "30px" }}>
+      <p
+        style={{
+          color: "var(--dash-muted, #888)",
+          marginBottom: "30px"
+        }}
+      >
         This page is under construction. 🚧
       </p>
     </div>
   );
+
+  // ==========================================
+  // PAGE CONTENT
+  // ==========================================
 
   const renderContent = () => {
     switch (page) {
@@ -189,34 +274,68 @@ const DashboardPage = ({ page }) => {
       case "staff":
         return <Staff />;
 
-      // NEW: LOCKER MANAGEMENT
+      // LOCKER MANAGEMENT
       case "locker-management":
         return <LockerManagement />;
+
+      // EXERCISE LIBRARY
+      case "exercise-library":
+        return <Placeholder title="Exercise Library" />;
+
+      // EXERCISE DETAIL
+      case "exercise-detail":
+        return <Placeholder title="Exercise Detail" />;
 
       default:
         return <Placeholder title="Page Not Found" />;
     }
   };
 
-  const themeClass =
-    appearance.theme === "light" ? "dashboard-light" : "dashboard-dark";
+  // ==========================================
+  // THEME CLASSES
+  // ==========================================
 
-  const compactClass = appearance.compact ? "dashboard-compact" : "";
-  const animClass = appearance.animations ? "" : "dashboard-no-animations";
+  const themeClass =
+    appearance.theme === "light"
+      ? "dashboard-light"
+      : "dashboard-dark";
+
+  const compactClass = appearance.compact
+    ? "dashboard-compact"
+    : "";
+
+  const animClass = appearance.animations
+    ? ""
+    : "dashboard-no-animations";
+
+  // ==========================================
+  // DASHBOARD UI
+  // ==========================================
 
   return (
     <div
       className={`dashboard-layout ${themeClass} ${compactClass} ${animClass}`}
       style={{
         "--dash-accent": appearance.accent,
+
         "--dash-sidebar-width": `${sidebarWidth}px`,
+
         "--dash-sidebar-height": `${sidebarHeight}px`,
+
         "--dash-card-bg":
-          appearance.theme === "light" ? "#ffffff" : "#1a1a1a",
+          appearance.theme === "light"
+            ? "#ffffff"
+            : "#1a1a1a",
+
         "--dash-muted":
-          appearance.theme === "light" ? "#6b7280" : "#888",
+          appearance.theme === "light"
+            ? "#6b7280"
+            : "#888",
+
         "--dash-border":
-          appearance.theme === "light" ? "#e5e7eb" : "transparent",
+          appearance.theme === "light"
+            ? "#e5e7eb"
+            : "transparent",
       }}
     >
       <DashboardSidebar
@@ -230,7 +349,11 @@ const DashboardPage = ({ page }) => {
         isSidebarOpen={isSidebarOpen}
       />
 
-      <main className={`dashboard-content ${isSidebarOpen ? "shifted" : ""}`}>
+      <main
+        className={`dashboard-content ${
+          isSidebarOpen ? "shifted" : ""
+        }`}
+      >
         {renderContent()}
       </main>
     </div>
