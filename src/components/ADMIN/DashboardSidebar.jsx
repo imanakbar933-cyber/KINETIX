@@ -1,66 +1,123 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
-  LayoutGrid, Users, Dumbbell, Utensils, Calendar,
-  UserCircle, FileText, BarChart2, Settings, Briefcase,
-  BriefcaseBusiness, Camera, X, User, Trash2
+  LayoutGrid,
+  Users,
+  Dumbbell,
+  Utensils,
+  Calendar,
+  UserCircle,
+  FileText,
+  BarChart2,
+  Settings,
+  Briefcase,
+  BriefcaseBusiness,
+  Camera,
+  X,
+  User,
+  Trash2,
+  LockKeyhole
 } from "lucide-react";
+
 import "./DashboardSidebar.css";
 
 const DEFAULT_AVATAR = "/images/user.jpg";
 
-const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
+const DashboardSidebar = ({
+  isOpen,
+  onResizeStart,
+  onHeightResizeStart
+}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem("userProfile");
+
     return saved
       ? JSON.parse(saved)
-      : { name: "Nathan Reeves", email: "nathan@example.com", role: "Super Admin", photo: DEFAULT_AVATAR };
+      : {
+          name: "Nathan Reeves",
+          email: "nathan@example.com",
+          role: "Super Admin",
+          photo: DEFAULT_AVATAR
+        };
   });
 
-  // ✅ Same WhatsApp-style image modal as Navbar
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   useEffect(() => {
     const loadProfile = () => {
       const saved = localStorage.getItem("userProfile");
-      if (saved) setUser(JSON.parse(saved));
+
+      if (saved) {
+        setUser(JSON.parse(saved));
+      }
     };
+
     window.addEventListener("profileUpdated", loadProfile);
-    return () => window.removeEventListener("profileUpdated", loadProfile);
+
+    return () => {
+      window.removeEventListener("profileUpdated", loadProfile);
+    };
   }, []);
 
   const isActive = (path) =>
-    location.pathname === path ? "dash-menu-item active" : "dash-menu-item";
+    location.pathname === path
+      ? "dash-menu-item active"
+      : "dash-menu-item";
 
-  // ✅ Persist image (base64) → sync with Navbar & Settings
+  // Change Profile Photo
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+
     if (!file) return;
+
     const reader = new FileReader();
+
     reader.onload = () => {
-      const updated = { ...user, photo: reader.result };
+      const updated = {
+        ...user,
+        photo: reader.result
+      };
+
       setUser(updated);
-      localStorage.setItem("userProfile", JSON.stringify(updated));
+
+      localStorage.setItem(
+        "userProfile",
+        JSON.stringify(updated)
+      );
+
       window.dispatchEvent(new Event("profileUpdated"));
     };
+
     reader.readAsDataURL(file);
+    e.target.value = "";
   };
 
-  // ✅ Remove profile photo (reset to default avatar)
+  // Remove Profile Photo
   const handleRemovePhoto = () => {
-    const updated = { ...user, photo: DEFAULT_AVATAR };
+    const updated = {
+      ...user,
+      photo: DEFAULT_AVATAR
+    };
+
     setUser(updated);
-    localStorage.setItem("userProfile", JSON.stringify(updated));
+
+    localStorage.setItem(
+      "userProfile",
+      JSON.stringify(updated)
+    );
+
     window.dispatchEvent(new Event("profileUpdated"));
   };
 
   const triggerFileInput = (e) => {
     if (e) e.stopPropagation();
-    fileInputRef.current.click();
+
+    fileInputRef.current?.click();
   };
 
   const goToProfileSettings = () => {
@@ -71,46 +128,112 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
   return (
     <>
       <aside className={`dash-sidebar ${isOpen ? "open" : ""}`}>
+
+        {/* SIDEBAR LOGO */}
         <div className="dash-sidebar-header">
           <Link to="/" className="sidebar-logo">
             <img src="/images/kinetix.svg" alt="Kinetix" />
           </Link>
         </div>
 
+        {/* SIDEBAR MENU */}
         <div className="dash-sidebar-menu">
-          <Link to="/dashboard" className={isActive("/dashboard")}><LayoutGrid size={20} /> Dashboard</Link>
-          <Link to="/members" className={isActive("/members")}><Users size={20} /> Member</Link>
-          <Link to="/workouts" className={isActive("/workouts")}><Dumbbell size={20} /> Workout Routine</Link>
-          <Link to="/diet" className={isActive("/diet")}><Utensils size={20} /> Diet Chart</Link>
-          <Link to="/batch-schedule" className={isActive("/batch-schedule")}><Calendar size={20} /> Batch Schedule</Link>
 
-          <Link to="/dashboard/trainers" className={isActive("/dashboard/trainers")}>
-            <UserCircle size={20} /> Trainer List
+          <Link to="/dashboard" className={isActive("/dashboard")}>
+            <LayoutGrid size={20} />
+            Dashboard
           </Link>
-          <Link to="/dashboard/services" className={isActive("/dashboard/services")}>
+
+          <Link to="/members" className={isActive("/members")}>
+            <Users size={20} />
+            Member
+          </Link>
+
+          <Link to="/workouts" className={isActive("/workouts")}>
+            <Dumbbell size={20} />
+            Workout Routine
+          </Link>
+
+          <Link to="/diet" className={isActive("/diet")}>
+            <Utensils size={20} />
+            Diet Chart
+          </Link>
+
+          <Link to="/batch-schedule" className={isActive("/batch-schedule")}>
+            <Calendar size={20} />
+            Batch Schedule
+          </Link>
+
+          <Link
+            to="/dashboard/trainers"
+            className={isActive("/dashboard/trainers")}
+          >
+            <UserCircle size={20} />
+            Trainer List
+          </Link>
+
+          <Link
+            to="/dashboard/services"
+            className={isActive("/dashboard/services")}
+          >
             <BriefcaseBusiness size={20} />
             Services
           </Link>
-          <Link to="/dashboard/staff" className={isActive("/dashboard/staff")}>
-            <Briefcase size={20} /> Staff
-          </Link>
-          <Link to="/billing" className={isActive("/billing")}><FileText size={20} /> Point of Sale</Link>
-          <Link to="/reports" className={isActive("/reports")}><BarChart2 size={20} /> Report</Link>
 
-          <Link to="/settings" className={isActive("/settings")}><Settings size={20} /> Settings</Link>
+          <Link
+            to="/dashboard/staff"
+            className={isActive("/dashboard/staff")}
+          >
+            <Briefcase size={20} />
+            Staff
+          </Link>
+
+          <Link to="/billing" className={isActive("/billing")}>
+            <FileText size={20} />
+            Point of Sale
+          </Link>
+
+          {/* NEW: LOCKER MANAGEMENT */}
+          <Link
+            to="/locker-management"
+            className={isActive("/locker-management")}
+          >
+            <LockKeyhole size={20} />
+            Locker Management
+          </Link>
+
+          <Link to="/reports" className={isActive("/reports")}>
+            <BarChart2 size={20} />
+            Report
+          </Link>
+
+          <Link to="/settings" className={isActive("/settings")}>
+            <Settings size={20} />
+            Settings
+          </Link>
+
         </div>
 
-        {/* ✅ Sidebar footer profile — clickable to open same modal */}
+        {/* SIDEBAR PROFILE */}
         <div className="dash-sidebar-footer-wrap">
           <div
             className="dash-sidebar-footer"
             onClick={() => setIsImageModalOpen(true)}
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setIsImageModalOpen(true); }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                setIsImageModalOpen(true);
+              }
+            }}
             title="View / edit profile"
           >
-            <img src={user.photo} alt={user.name} style={{ objectFit: "cover" }} />
+            <img
+              src={user.photo}
+              alt={user.name}
+              style={{ objectFit: "cover" }}
+            />
+
             <div className="user-info">
               <h4>{user.name}</h4>
               <p>{user.role || "Super Admin"}</p>
@@ -118,12 +241,13 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
           </div>
         </div>
 
+        {/* RESIZE HANDLES */}
         {isOpen && (
           <div
             className="dash-sidebar-resize-handle"
             onMouseDown={onResizeStart}
             title="Drag to resize width"
-          ></div>
+          />
         )}
 
         {isOpen && (
@@ -131,35 +255,63 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
             className="dash-sidebar-height-handle"
             onMouseDown={onHeightResizeStart}
             title="Drag to resize height"
-          ></div>
+          />
         )}
+
       </aside>
 
-      {/* ✅ WhatsApp-style image modal — SAME as Navbar */}
+      {/* PROFILE IMAGE MODAL */}
       {isImageModalOpen && (
-        <div className="wa-image-modal-backdrop" onClick={() => setIsImageModalOpen(false)}>
-          <div className="wa-image-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="wa-close-btn" onClick={() => setIsImageModalOpen(false)}>
+        <div
+          className="wa-image-modal-backdrop"
+          onClick={() => setIsImageModalOpen(false)}
+        >
+          <div
+            className="wa-image-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="wa-close-btn"
+              onClick={() => setIsImageModalOpen(false)}
+            >
               <X size={24} />
             </button>
 
             <div className="wa-large-image-wrapper">
-              <img src={user.photo} alt="Profile" className="wa-large-image" />
+              <img
+                src={user.photo}
+                alt="Profile"
+                className="wa-large-image"
+              />
             </div>
 
             <div className="wa-image-actions">
+
               <div className="wa-user-details">
                 <h2>{user.name}</h2>
-                <p>{user.role || "Super Admin"} · {user.email}</p>
+                <p>
+                  {user.role || "Super Admin"} · {user.email}
+                </p>
               </div>
 
               <div className="wa-image-btn-row">
-                <button className="wa-upload-btn" onClick={triggerFileInput}>
-                  <Camera size={18} /> Change Photo
+
+                <button
+                  className="wa-upload-btn"
+                  onClick={triggerFileInput}
+                >
+                  <Camera size={18} />
+                  Change Photo
                 </button>
-                <button className="wa-upload-btn" onClick={goToProfileSettings}>
-                  <User size={18} /> Edit Profile
+
+                <button
+                  className="wa-upload-btn"
+                  onClick={goToProfileSettings}
+                >
+                  <User size={18} />
+                  Edit Profile
                 </button>
+
                 <button
                   className="wa-remove-btn"
                   onClick={() => {
@@ -168,8 +320,10 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
                     }
                   }}
                 >
-                  <Trash2 size={18} /> Remove Photo
+                  <Trash2 size={18} />
+                  Remove Photo
                 </button>
+
               </div>
             </div>
           </div>
@@ -183,6 +337,7 @@ const DashboardSidebar = ({ isOpen, onResizeStart, onHeightResizeStart }) => {
         accept="image/*"
         style={{ display: "none" }}
       />
+
     </>
   );
 };
