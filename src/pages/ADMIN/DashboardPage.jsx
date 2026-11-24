@@ -1,4 +1,3 @@
-
 import React, {
   useState,
   useEffect,
@@ -7,7 +6,7 @@ import React, {
 } from "react";
 
 import DashboardNavbar from "../../components/ADMIN/Settings/DashboardNavbar";
-import DashboardSidebar from "../../components/Admin/DashboardSidebar";
+import DashboardSidebar from "../../components/ADMIN/DashboardSidebar";
 
 // Pages
 import SettingsPage from "../../components/ADMIN/Settings/SettingsPage";
@@ -25,6 +24,11 @@ import DietPlans from "../../components/Admin/DietPlans";
 
 // LOCKER MANAGEMENT
 import LockerManagement from "../../components/Admin/LockerManagement";
+
+// ===== NEW ADDITIONS: EXERCISE COMPONENTS =====
+import ExerciseLibrary from "../../components/ADMIN/ExerciseLibrary";
+import ExerciseDetail from "../../components/ADMIN/ExerciseDetail";
+// ==============================================
 
 import "./DashboardPage.css";
 
@@ -278,13 +282,17 @@ const DashboardPage = ({ page }) => {
       case "locker-management":
         return <LockerManagement />;
 
-      // EXERCISE LIBRARY
+      // ==========================================
+      // EXERCISE LIBRARY (UPDATED)
+      // ==========================================
       case "exercise-library":
-        return <Placeholder title="Exercise Library" />;
+        return <ExerciseLibrary />;
 
-      // EXERCISE DETAIL
+      // ==========================================
+      // EXERCISE DETAIL (UPDATED)
+      // ==========================================
       case "exercise-detail":
-        return <Placeholder title="Exercise Detail" />;
+        return <ExerciseDetail />;
 
       default:
         return <Placeholder title="Page Not Found" />;

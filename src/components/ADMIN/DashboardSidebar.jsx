@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -174,7 +173,7 @@ const DashboardSidebar = ({
           </Link>
 
           {/* =========================================
-              EXERCISES DROPDOWN - NEW
+              EXERCISES DROPDOWN
           ========================================= */}
           <div className="dash-exercises-dropdown">
 
@@ -201,6 +200,7 @@ const DashboardSidebar = ({
             {isExercisesOpen && (
               <div className="dash-exercises-submenu">
 
+                {/* CHANGED: lowercase path */}
                 <Link
                   to="/dashboard/exercises/library"
                   className={
@@ -213,10 +213,11 @@ const DashboardSidebar = ({
                   <span>Exercise Library</span>
                 </Link>
 
+                {/* CHANGED: lowercase path */}
                 <Link
-                  to="/dashboard/exercises/detail"
+                  to="/dashboard/exercises/details"
                   className={
-                    location.pathname === "/dashboard/exercises/detail"
+                    location.pathname === "/dashboard/exercises/details"
                       ? "dash-exercise-sublink active"
                       : "dash-exercise-sublink"
                   }
@@ -289,7 +290,7 @@ const DashboardSidebar = ({
 
         </div>
 
-        {/* SIDEBAR PROFILE - ORIGINAL CODE PRESERVED */}
+        {/* SIDEBAR PROFILE */}
         <div className="dash-sidebar-footer-wrap">
           <div
             className="dash-sidebar-footer"
@@ -335,7 +336,7 @@ const DashboardSidebar = ({
 
       </aside>
 
-      {/* PROFILE IMAGE MODAL - ORIGINAL CODE PRESERVED */}
+      {/* PROFILE IMAGE MODAL */}
       {isImageModalOpen && (
         <div
           className="wa-image-modal-backdrop"
