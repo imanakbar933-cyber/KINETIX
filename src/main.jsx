@@ -1,4 +1,3 @@
-
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -34,7 +33,7 @@ import Login from "./pages/Login.jsx";
 import ServiceDetail from "./components/ServiceDetail.jsx";
 
 // Admin Dashboard
-import DashboardPage from "./pages/Admin/DashboardPage.jsx";
+import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
 
 function AppLayout() {
   const location = useLocation();
@@ -132,14 +131,22 @@ function AppLayout() {
           element={<DashboardPage page="services" />}
         />
 
-        {/* EXERCISES */}
+        {/* ========================================== */}
+        {/* EXERCISES - LOWERCASE PATHS */}
+        {/* ========================================== */}
         <Route
           path="/dashboard/exercises/library"
           element={<DashboardPage page="exercise-library" />}
         />
 
         <Route
-          path="/dashboard/exercises/detail"
+          path="/dashboard/exercises/details"
+          element={<DashboardPage page="exercise-detail" />}
+        />
+
+        {/* Specific Exercise ID ke liye */}
+        <Route
+          path="/dashboard/exercises/details/:id"
           element={<DashboardPage page="exercise-detail" />}
         />
       </Routes>

@@ -22,6 +22,11 @@ import WorkoutPlans from "../../components/ADMIN/WorkoutPlans";
 import DietPlans from "../../components/ADMIN/DietPlans";
 import LockerManagement from "../../components/ADMIN/LockerManagement";
 
+// ===== NEW ADDITIONS: EXERCISE COMPONENTS =====
+import ExerciseLibrary from "../../components/ADMIN/ExerciseLibrary";
+import ExerciseDetail from "../../components/ADMIN/ExerciseDetail";
+// ==============================================
+
 import "./DashboardPage.css";
 
 // ======================================================
@@ -313,11 +318,17 @@ const DashboardPage = ({ page }) => {
       case "locker-management":
         return <LockerManagement />;
 
+      // ==========================================
+      // EXERCISE LIBRARY (UPDATED)
+      // ==========================================
       case "exercise-library":
-        return <Placeholder title="Exercise Library" />;
+        return <ExerciseLibrary />;
 
+      // ==========================================
+      // EXERCISE DETAIL (UPDATED)
+      // ==========================================
       case "exercise-detail":
-        return <Placeholder title="Exercise Detail" />;
+        return <ExerciseDetail />;
 
       default:
         return <Placeholder title="Page Not Found" />;
