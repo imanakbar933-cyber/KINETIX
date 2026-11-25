@@ -305,19 +305,28 @@ function Navbar() {
         <div className="navbar-container">
 
           {/* LOGO */}
-          <div className="navbar-left">
-            <Link
-              to="/"
-              className="navbar-logo"
-              onClick={handleHomeClick}
-            >
-              <img
-                src="/images/kinetix.svg"
-                alt="KINETIX Fitness Club"
-                className="kinetix-logo-image"
-              />
-            </Link>
-          </div>
+         {/* KINETIX TEXT LOGO */}
+<div className="navbar-left">
+  <Link
+    to="/"
+    className="navbar-logo"
+    onClick={handleHomeClick}
+    aria-label="KINETIX Fitness Club Home"
+  >
+    <div className="navbar-brand-icon" aria-hidden="true">
+      <span />
+      <span />
+      <span />
+      <span />
+      <span />
+    </div>
+
+    <div className="navbar-brand-words">
+      <strong>KINETIX</strong>
+      <small>FITNESS CLUB</small>
+    </div>
+  </Link>
+</div>
 
           {/* NAVIGATION LINKS */}
           <nav className={`navbar-menu ${menuOpen ? "menu-open" : ""}`}>

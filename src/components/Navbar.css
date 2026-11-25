@@ -93,41 +93,92 @@
 }
 
 /* =========================================================
-   3. LEFT SIDE
+   3. LEFT SIDE — KINETIX TEXT LOGO
 ========================================================= */
 
 .navbar-left {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  margin-left: -25px;
 }
 
 .navbar-logo {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  gap: 13px;
   position: relative;
   z-index: 10001;
   text-decoration: none;
   transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-.kinetix-logo-image {
-  width: 250px;
-  height: auto;
+/* GREEN KINETIX ICON */
+
+.navbar-brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 55px;
+  height: 39px;
+  flex-shrink: 0;
+}
+
+.navbar-brand-icon span {
   display: block;
-  object-fit: contain;
-  position: relative;
-  z-index: 10001;
-  transition: transform 0.4s ease, filter 0.4s ease;
+  width: 6px;
+  border-radius: 8px;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.navbar-brand-icon span:nth-child(1),
+.navbar-brand-icon span:nth-child(5) {
+  height: 23px;
+}
+
+.navbar-brand-icon span:nth-child(2),
+.navbar-brand-icon span:nth-child(4) {
+  height: 37px;
+}
+
+.navbar-brand-icon span:nth-child(3) {
+  width: 17px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--text-main);
+}
+
+/* BRAND TEXT */
+
+.navbar-brand-words {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.navbar-brand-words strong {
+  color: var(--accent);
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 5px;
+  line-height: 1;
+}
+
+.navbar-brand-words small {
+  color: var(--text-main);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  white-space: nowrap;
 }
 
 .navbar-logo:hover {
   transform: translateY(-2px);
   filter: drop-shadow(0 0 10px var(--accent-glow));
-}
-
-.navbar-logo:hover .kinetix-logo-image {
-  transform: scale(1.02);
 }
 
 /* =========================================================
@@ -497,8 +548,21 @@
     padding: 13px 0;
   }
 
-  .kinetix-logo-image {
-    width: 200px;
+  /* RESPONSIVE KINETIX LOGO */
+
+  .navbar-brand-icon {
+    transform: scale(0.9);
+    transform-origin: left center;
+  }
+
+  .navbar-brand-words strong {
+    font-size: 22px;
+    letter-spacing: 4px;
+  }
+
+  .navbar-brand-words small {
+    font-size: 7px;
+    letter-spacing: 3px;
   }
 
   .navbar-menu {
@@ -655,8 +719,23 @@
     width: 88%;
   }
 
-  .kinetix-logo-image {
-    width: 180px;
+  .navbar-logo {
+    gap: 8px;
+  }
+
+  .navbar-brand-icon {
+    width: 45px;
+    gap: 3px;
+  }
+
+  .navbar-brand-words strong {
+    font-size: 19px;
+    letter-spacing: 3px;
+  }
+
+  .navbar-brand-words small {
+    font-size: 6px;
+    letter-spacing: 2.5px;
   }
 
   .navbar-menu {
@@ -761,6 +840,7 @@
 [data-theme="light"] .dropdown-item {
   color: var(--text-main) !important;
 }
+
 [data-theme="light"] .dropdown-item:hover {
   color: var(--accent) !important;
 }

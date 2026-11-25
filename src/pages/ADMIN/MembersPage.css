@@ -2,8 +2,10 @@
 .admin-layout {
   display: flex;
   min-height: 100vh;
-  background-color: #050706;
+  background-color: var(--bg-main);
   font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* ✅ MAIN CONTENT AREA */
@@ -39,13 +41,15 @@
 .page-header h1 {
   font-size: 24px;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-main);
   margin-bottom: 8px;
+  transition: color 0.4s ease;
 }
 
 .breadcrumb {
   font-size: 13px;
-  color: #9ca3af;
+  color: var(--text-muted);
+  transition: color 0.4s ease;
 }
 
 /* Mobile ke liye */

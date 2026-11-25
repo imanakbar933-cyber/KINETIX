@@ -1,40 +1,58 @@
 /* =========================================================
-   DASHBOARD TOP NAVBAR
+   KINETIX DASHBOARD NAVBAR
+   Dynamic Theme + Accent Color
 ========================================================= */
+
 .dash-navbar {
+  --navbar-accent: var(--dash-accent, #03ea04);
+
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 90px;
-  background: #0a0d0b;
   z-index: 900;
-  border-bottom: 1px solid rgba(3, 234, 4, 0.4);
-  box-shadow: 0 0 20px rgba(3, 234, 4, 0.15);
-  transition: width 0.4s ease, left 0.4s ease, background 0.3s ease,
-    border-color 0.3s ease;
+
+  background: var(--dash-navbar-bg, #0a0d0b);
+  color: var(--dash-text, #ffffff);
+
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--navbar-accent) 35%, transparent);
+
+  box-shadow: 0 0 20px
+    color-mix(in srgb, var(--navbar-accent) 10%, transparent);
+
+  transition:
+    width 0.4s ease,
+    left 0.4s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .dash-navbar.sidebar-open {
   width: calc(100% - var(--dash-sidebar-width, 280px));
   left: var(--dash-sidebar-width, 280px);
-  border-left: 1px solid rgba(3, 234, 4, 0.4);
 }
 
-/* Navbar Inner */
+/* NAVBAR INNER */
+
 .dash-nav-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  padding: 0 20px;
   width: 100%;
+  padding: 0 20px;
   gap: 15px;
+  box-sizing: border-box;
 }
 
 /* =========================================================
    LEFT SIDE
 ========================================================= */
+
 .dash-nav-left {
   display: flex;
   align-items: center;
@@ -43,36 +61,46 @@
 }
 
 .dash-icon-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
   width: 45px;
   height: 45px;
-  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #a0a0a0;
+
+  background: var(--dash-control-bg, transparent);
+  border: 1px solid var(--dash-border, rgba(255,255,255,0.15));
+  border-radius: 12px;
+
+  color: var(--dash-text-muted, #a0a0a0);
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  text-decoration: none;
+
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .dash-icon-btn:hover {
-  background: rgba(3, 234, 4, 0.15);
-  color: var(--dash-accent, #03ea04);
-  border-color: var(--dash-accent, #03ea04);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(3, 234, 4, 0.3);
+  background: color-mix(
+    in srgb,
+    var(--navbar-accent) 13%,
+    transparent
+  );
+
+  color: var(--navbar-accent);
+  border-color: var(--navbar-accent);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 6px 18px
+    color-mix(in srgb, var(--navbar-accent) 20%, transparent);
 }
 
 /* =========================================================
-   PREMIUM DASHBOARD TEXT STYLING
+   DASHBOARD HEADING
 ========================================================= */
+
 .dash-breadcrumb {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 500;
   white-space: nowrap;
 }
 
@@ -81,135 +109,169 @@
   font-weight: 900;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #03ea04;
+
+  color: var(--navbar-accent);
+
   display: inline-block;
   position: relative;
+
   animation: textGlowPulse 2.5s ease-in-out infinite alternate;
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.3s ease;
 }
 
-.current-text:hover {
-  transform: scale(1.05) translateX(5px);
-  text-shadow: 0 0 20px rgba(3, 234, 4, 1), 0 0 40px rgba(3, 234, 4, 0.6);
-  cursor: default;
-}
-
-/* Green Dot (Bigger Size & Shifted Right) */
 .current-text::before {
   content: "";
   position: absolute;
-  left: -6px; /* Dot ko left se thora door kiya taake text se takraye nahi */
+  left: -9px;
   top: 50%;
+
   transform: translate(-100%, -50%);
-  width: 10px; /* Size barha diya */
-  height: 10px;
-  background: #03ea04;
+
+  width: 9px;
+  height: 9px;
+
+  background: var(--navbar-accent);
   border-radius: 50%;
-  box-shadow: 0 0 15px rgba(3, 234, 4, 0.8);
+
+  box-shadow: 0 0 15px
+    color-mix(in srgb, var(--navbar-accent) 75%, transparent);
 }
 
-/* Glow Keyframes */
+.current-text:hover {
+  transform: scale(1.04) translateX(4px);
+}
+
 @keyframes textGlowPulse {
-  0% {
-    text-shadow: 0 0 10px rgba(3, 234, 4, 0.4);
+  from {
+    text-shadow: 0 0 8px
+      color-mix(in srgb, var(--navbar-accent) 35%, transparent);
   }
-  100% {
-    text-shadow: 0 0 20px rgba(3, 234, 4, 0.8), 0 0 30px rgba(3, 234, 4, 0.3);
-  }
-}
 
-/* Light Mode Fix */
-.dashboard-layout.dashboard-light .current-text {
-  color: #02b303;
-  text-shadow: 0 0 15px rgba(2, 179, 3, 0.4);
+  to {
+    text-shadow:
+      0 0 18px color-mix(in srgb, var(--navbar-accent) 70%, transparent),
+      0 0 28px color-mix(in srgb, var(--navbar-accent) 25%, transparent);
+  }
 }
 
 /* =========================================================
-   RIGHT SIDE (Search, Icons, Profile)
+   RIGHT SIDE
 ========================================================= */
+
 .dash-nav-right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 24px; /* Sabke darmiyan barabar gap */
+  gap: 24px;
   flex: 1;
+  min-width: 0;
 }
 
-/* Search Bar */
+/* =========================================================
+   SEARCH BAR
+========================================================= */
+
 .dash-search {
   display: flex;
   align-items: center;
-  background: #050706;
-  border: 1px solid rgba(3, 234, 4, 0.4);
+
+  background: var(--dash-input-bg, #050706);
+  border: 1px solid
+    color-mix(in srgb, var(--navbar-accent) 35%, var(--dash-border, transparent));
+
   padding: 10px 16px;
   border-radius: 12px;
+
   width: 100%;
   max-width: 400px;
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
-  box-shadow: 0 0 15px rgba(3, 234, 4, 0.1);
+  min-width: 100px;
+
+  transition: all 0.3s ease;
+
+  box-shadow: 0 0 15px
+    color-mix(in srgb, var(--navbar-accent) 8%, transparent);
 }
 
 .dash-search:focus-within {
-  border-color: var(--dash-accent, #03ea04);
-  box-shadow: 0 0 20px rgba(3, 234, 4, 0.3);
+  border-color: var(--navbar-accent);
+
+  box-shadow: 0 0 20px
+    color-mix(in srgb, var(--navbar-accent) 22%, transparent);
 }
 
 .dash-search input {
   background: transparent;
   border: none;
   outline: none;
-  color: #fff;
+
+  color: var(--dash-text, #ffffff);
   font-size: 14px;
+
   width: 100%;
+  min-width: 0;
   padding: 0;
 }
 
 .dash-search input::placeholder {
-  color: #666;
+  color: var(--dash-text-muted, #777777);
+  opacity: 0.8;
 }
 
 .search-shortcut {
   font-size: 11px;
-  color: #666;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 4px 6px;
+  color: var(--dash-text-muted, #777777);
+
+  background: var(--dash-shortcut-bg, rgba(255,255,255,0.05));
+
+  padding: 4px 7px;
   border-radius: 6px;
   margin-left: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border: 1px solid var(--dash-border, rgba(255,255,255,0.1));
   flex-shrink: 0;
 }
+
+/* =========================================================
+   ACTION ICONS
+========================================================= */
 
 .dash-actions {
   display: flex;
   align-items: center;
-  gap: 24px; /* Icons ke darmiyan barabar gap */
+  gap: 18px;
   flex-shrink: 0;
 }
 
-/* Tooltip */
 .tooltip {
   position: relative;
 }
 
 .tooltip::after {
   content: attr(data-tooltip);
+
   position: absolute;
   bottom: -38px;
   left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  background: #111;
-  color: #fff;
+
+  transform: translateX(-50%) translateY(8px);
+
+  background: var(--dash-tooltip-bg, #111111);
+  color: var(--dash-tooltip-text, #ffffff);
+
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 6px;
+
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+  transition: all 0.3s ease;
   white-space: nowrap;
   pointer-events: none;
-  z-index: 10;
-  border: 1px solid rgba(3, 234, 4, 0.3);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+
+  border: 1px solid
+    color-mix(in srgb, var(--navbar-accent) 35%, transparent);
 }
 
 .tooltip:hover::after {
@@ -221,6 +283,7 @@
 /* =========================================================
    PROFILE SECTION
 ========================================================= */
+
 .dash-profile {
   position: relative;
   flex-shrink: 0;
@@ -230,22 +293,38 @@
   display: flex;
   align-items: center;
   gap: 10px;
+
   cursor: pointer;
+
   padding: 5px 12px 5px 5px;
   border-radius: 50px;
-  transition: all 0.3s ease;
+
   border: 1px solid transparent;
+
+  transition: all 0.3s ease;
 }
 
 .profile-trigger:hover {
-  background: rgba(3, 234, 4, 0.05);
-  border-color: rgba(3, 234, 4, 0.3);
+  background: color-mix(
+    in srgb,
+    var(--navbar-accent) 7%,
+    transparent
+  );
+
+  border-color: color-mix(
+    in srgb,
+    var(--navbar-accent) 30%,
+    transparent
+  );
 }
+
+/* PROFILE IMAGE */
 
 .profile-image-wrapper {
   position: relative;
   width: 45px;
   height: 45px;
+
   border-radius: 50%;
   cursor: pointer;
   flex-shrink: 0;
@@ -254,9 +333,12 @@
 .profile-pic {
   width: 100%;
   height: 100%;
+
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--dash-accent, #03ea04);
+
+  border: 2px solid var(--navbar-accent);
+
   transition: all 0.3s ease;
 }
 
@@ -265,52 +347,74 @@
   filter: brightness(0.8);
 }
 
+/* PROFILE TEXT */
+
 .profile-info h4 {
-  margin: 0 0 2px 0;
+  margin: 0 0 3px;
+
   font-size: 14px;
-  color: #fff;
+  font-weight: 700;
+
+  color: var(--dash-text, #ffffff);
   white-space: nowrap;
 }
 
 .profile-info p {
   margin: 0;
+
   font-size: 12px;
-  color: var(--dash-accent, #03ea04);
   font-weight: 600;
+
+  color: var(--navbar-accent);
   white-space: nowrap;
 }
 
+/* ARROW */
+
 .arrow {
-  color: #777;
-  transition: transform 0.4s;
+  color: var(--dash-text-muted, #777777);
+  transition: transform 0.3s ease;
 }
 
 .arrow.open {
   transform: rotate(180deg);
-  color: var(--dash-accent, #03ea04);
+  color: var(--navbar-accent);
 }
 
-/* Dropdown Menu */
+/* =========================================================
+   PROFILE DROPDOWN
+========================================================= */
+
 .profile-dropdown {
   position: absolute;
   top: calc(100% + 15px);
   right: 0;
-  width: 240px;
-  background: #0a0d0b;
-  border: 1px solid rgba(3, 234, 4, 0.4);
+
+  width: 250px;
+
+  background: var(--dash-card-bg, #0a0d0b);
+  color: var(--dash-text, #ffffff);
+
+  border: 1px solid var(--dash-border, rgba(3,234,4,0.35));
   border-radius: 16px;
+
   padding: 10px 0;
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(3, 234, 4, 0.15);
-  animation: fadeInScale 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  z-index: 100;
+
+  box-shadow: 0 15px 50px
+    color-mix(in srgb, #000000 35%, transparent);
+
+  animation: fadeInScale 0.3s ease forwards;
+
+  z-index: 1000;
   transform-origin: top right;
 }
 
 @keyframes fadeInScale {
   from {
     opacity: 0;
-    transform: scale(0.9) translateY(-10px);
+    transform: scale(0.94) translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -322,174 +426,86 @@
 }
 
 .dropdown-header h4 {
-  margin: 0 0 4px;
+  margin: 0 0 5px;
   font-size: 15px;
-  color: #fff;
+  font-weight: 700;
+  color: var(--dash-text, #ffffff);
+  overflow-wrap: anywhere;
 }
 
 .dropdown-header p {
   margin: 0;
   font-size: 12px;
-  color: #777;
+  color: var(--dash-text-muted, #777777);
+  overflow-wrap: anywhere;
 }
 
 .dropdown-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--dash-border, rgba(255,255,255,0.08));
   margin: 8px 0;
 }
+
+/* DROPDOWN LINKS */
 
 .dropdown-link {
   display: flex;
   align-items: center;
   gap: 10px;
+
   width: 100%;
-  padding: 10px 15px;
+  padding: 11px 15px;
+
   background: transparent;
   border: none;
-  color: #a0a0a0;
+
+  color: var(--dash-text-muted, #a0a0a0);
+
+  font-family: inherit;
   font-size: 14px;
   font-weight: 500;
+
   cursor: pointer;
-  transition: all 0.3s ease;
   text-align: left;
   text-decoration: none;
+
+  transition: all 0.25s ease;
 }
 
 .dropdown-link:hover {
-  background: rgba(3, 234, 4, 0.1);
-  color: var(--dash-accent, #03ea04);
-  padding-left: 20px;
+  background: color-mix(
+    in srgb,
+    var(--navbar-accent) 10%,
+    transparent
+  );
+
+  color: var(--navbar-accent);
+  padding-left: 21px;
 }
 
 .dropdown-link.logout:hover {
-  background: rgba(255, 59, 48, 0.1);
-  color: #ff3b30;
-  padding-left: 20px;
-}
-
-/* =========================================================
-   LIGHT MODE OVERRIDES
-========================================================= */
-.dashboard-layout.dashboard-light .dash-navbar {
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.04);
-}
-
-.dashboard-layout.dashboard-light .dash-navbar.sidebar-open {
-  border-left: 1px solid #e5e7eb;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dash-icon-btn {
-  color: #4b5563;
-  border-color: #e5e7eb;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dash-icon-btn:hover {
-  background: rgba(3, 234, 4, 0.1);
-  color: var(--dash-accent, #03ea04);
-  border-color: var(--dash-accent, #03ea04);
-}
-
-.dashboard-layout.dashboard-light .animated-gradient-text {
-  background: linear-gradient(90deg, #03ea04 0%, #111827 50%, #03ea04 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dash-search {
-  background: #f3f4f6;
-  border-color: #e5e7eb;
-  box-shadow: none;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dash-search:focus-within {
-  border-color: var(--dash-accent, #03ea04);
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dash-search input {
-  color: #111827;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dash-search input::placeholder {
-  color: #9ca3af;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .search-shortcut {
-  color: #6b7280;
-  background: #ffffff;
-  border-color: #e5e7eb;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .profile-trigger:hover {
-  background: rgba(3, 234, 4, 0.08);
-  border-color: rgba(3, 234, 4, 0.3);
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .profile-info h4 {
-  color: #111827;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .profile-info p {
-  color: var(--dash-accent, #03ea04);
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .arrow {
-  color: #6b7280;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .arrow.open {
-  color: var(--dash-accent, #03ea04);
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .profile-dropdown {
-  background: #ffffff;
-  border-color: #e5e7eb;
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12), 0 0 25px rgba(3, 234, 4, 0.05);
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dropdown-header h4 {
-  color: #111827;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dropdown-header p {
-  color: #6b7280;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dropdown-divider {
-  background: #e5e7eb;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dropdown-link {
-  color: #374151;
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dropdown-link:hover {
-  background: rgba(3, 234, 4, 0.08);
-  color: var(--dash-accent, #03ea04);
-}
-
-.dashboard-layout.dashboard-light .dash-navbar .dropdown-link.logout:hover {
-  background: rgba(255, 59, 48, 0.08);
+  background: rgba(255, 59, 48, 0.10);
   color: #ff3b30;
 }
 
 /* =========================================================
-   WHATSAPP STYLE PROFILE IMAGE MODAL
+   PROFILE IMAGE MODAL
 ========================================================= */
+
 .wa-image-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+
+  background: rgba(0, 0, 0, 0.82);
   backdrop-filter: blur(10px);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   z-index: 99999;
   padding: 20px;
+
   animation: fadeInModal 0.3s ease;
 }
 
@@ -497,6 +513,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -504,20 +521,453 @@
 
 .wa-image-modal-content {
   position: relative;
+
+  width: min(100%, 560px);
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 25px;
-  animation: zoomInImage 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  gap: 22px;
+
+  padding: 35px 28px;
+
+  background: var(--dash-modal-bg, #101410);
+  color: var(--dash-text, #ffffff);
+
+  border: 1px solid var(--dash-border, rgba(3,234,4,0.3));
+  border-radius: 22px;
+
+  box-shadow: 0 20px 70px rgba(0,0,0,0.45);
+
+  animation: zoomInImage 0.3s ease;
 }
 
 @keyframes zoomInImage {
   from {
-    transform: scale(0.8);
+    transform: scale(0.9);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+/* CLOSE BUTTON */
+
+.wa-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--dash-control-bg, rgba(255,255,255,0.06));
+  color: var(--dash-text, #ffffff);
+
+  border: 1px solid var(--dash-border, rgba(255,255,255,0.12));
+  border-radius: 50%;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wa-close-btn:hover {
+  color: var(--navbar-accent);
+  border-color: var(--navbar-accent);
+  transform: rotate(90deg);
+}
+
+/* LARGE PROFILE IMAGE */
+
+.wa-large-image-wrapper {
+  width: 230px;
+  height: 230px;
+
+  border-radius: 50%;
+  overflow: hidden;
+
+  border: 3px solid var(--navbar-accent);
+
+  box-shadow: 0 0 30px
+    color-mix(in srgb, var(--navbar-accent) 22%, transparent);
+}
+
+.wa-large-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* MODAL DETAILS */
+
+.wa-image-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.wa-user-details {
+  text-align: center;
+}
+
+.wa-user-details h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  color: var(--dash-text, #ffffff);
+}
+
+.wa-user-details p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--dash-text-muted, #999999);
+  overflow-wrap: anywhere;
+}
+
+/* MODAL BUTTONS */
+
+.wa-image-btn-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.wa-upload-btn,
+.wa-remove-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 11px 15px;
+
+  border-radius: 10px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wa-upload-btn {
+  background: color-mix(
+    in srgb,
+    var(--navbar-accent) 12%,
+    transparent
+  );
+
+  color: var(--navbar-accent);
+  border: 1px solid var(--navbar-accent);
+}
+
+.wa-upload-btn:hover {
+  background: var(--navbar-accent);
+  color: #071007;
+  transform: translateY(-2px);
+}
+
+.wa-remove-btn {
+  background: rgba(255, 59, 48, 0.08);
+  color: #ff5b52;
+  border: 1px solid rgba(255, 59, 48, 0.4);
+}
+
+.wa-remove-btn:hover {
+  background: #ff3b30;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   DARK THEME
+========================================================= */
+
+.dashboard-layout.dashboard-dark .dash-navbar {
+  --dash-navbar-bg: var(--dash-sidebar-bg, #0a0d0b);
+  --dash-card-bg: #101410;
+  --dash-modal-bg: #101410;
+  --dash-input-bg: #050706;
+  --dash-control-bg: transparent;
+  --dash-shortcut-bg: rgba(255,255,255,0.05);
+  --dash-tooltip-bg: #111111;
+  --dash-tooltip-text: #ffffff;
+
+  --dash-text: #ffffff;
+  --dash-text-muted: #a0a0a0;
+  --dash-border: rgba(255,255,255,0.12);
+}
+
+/* =========================================================
+   LIGHT THEME
+========================================================= */
+
+.dashboard-layout.dashboard-light .dash-navbar {
+  --dash-navbar-bg: #ffffff;
+  --dash-card-bg: #ffffff;
+  --dash-modal-bg: #ffffff;
+  --dash-input-bg: #f3f4f6;
+  --dash-control-bg: #ffffff;
+  --dash-shortcut-bg: #f9fafb;
+  --dash-tooltip-bg: #111827;
+  --dash-tooltip-text: #ffffff;
+
+  --dash-text: #111827;
+  --dash-text-muted: #6b7280;
+  --dash-border: #e5e7eb;
+
+  background: var(--dash-navbar-bg);
+  color: var(--dash-text);
+
+  border-bottom: 1px solid var(--dash-border);
+
+  box-shadow: 0 3px 18px rgba(0,0,0,0.04);
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .dash-icon-btn {
+  color: #4b5563;
+  border-color: #e5e7eb;
+  background: #ffffff;
+}
+
+.dashboard-layout.dashboard-light .dash-navbar .dash-icon-btn:hover {
+  color: var(--navbar-accent);
+  border-color: var(--navbar-accent);
+
+  background: color-mix(
+    in srgb,
+    var(--navbar-accent) 9%,
+    white
+  );
+}
+
+.dashboard-layout.dashboard-light .current-text {
+  color: var(--navbar-accent);
+  text-shadow: none;
+}
+
+.dashboard-layout.dashboard-light .dash-search {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  box-shadow: none;
+}
+
+.dashboard-layout.dashboard-light .dash-search input {
+  color: #111827;
+}
+
+.dashboard-layout.dashboard-light .dash-search input::placeholder {
+  color: #9ca3af;
+}
+
+.dashboard-layout.dashboard-light .search-shortcut {
+  background: #ffffff;
+  color: #6b7280;
+  border-color: #e5e7eb;
+}
+
+.dashboard-layout.dashboard-light .profile-trigger:hover {
+  background: color-mix(
+    in srgb,
+    var(--navbar-accent) 7%,
+    white
+  );
+}
+
+.dashboard-layout.dashboard-light .profile-info h4 {
+  color: #111827;
+}
+
+.dashboard-layout.dashboard-light .profile-info p {
+  color: var(--navbar-accent);
+}
+
+.dashboard-layout.dashboard-light .arrow {
+  color: #6b7280;
+}
+
+.dashboard-layout.dashboard-light .profile-dropdown {
+  background: #ffffff;
+  border-color: #e5e7eb;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.12);
+}
+
+.dashboard-layout.dashboard-light .dropdown-header h4 {
+  color: #111827;
+}
+
+.dashboard-layout.dashboard-light .dropdown-header p {
+  color: #6b7280;
+}
+
+.dashboard-layout.dashboard-light .dropdown-divider {
+  background: #e5e7eb;
+}
+
+.dashboard-layout.dashboard-light .dropdown-link {
+  color: #374151;
+}
+
+.dashboard-layout.dashboard-light .dropdown-link:hover {
+  background: color-mix(
+    in srgb,
+    var(--navbar-accent) 8%,
+    white
+  );
+
+  color: var(--navbar-accent);
+}
+
+.dashboard-layout.dashboard-light .wa-image-modal-content {
+  background: #ffffff;
+  color: #111827;
+  border-color: #e5e7eb;
+}
+
+.dashboard-layout.dashboard-light .wa-user-details h2 {
+  color: #111827;
+}
+
+.dashboard-layout.dashboard-light .wa-user-details p {
+  color: #6b7280;
+}
+
+.dashboard-layout.dashboard-light .wa-close-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border-color: #e5e7eb;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width: 1100px) {
+  .dash-nav-right {
+    gap: 14px;
+  }
+
+  .dash-search {
+    max-width: 280px;
+  }
+
+  .dash-actions {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 850px) {
+  .dash-navbar {
+    height: 76px;
+  }
+
+  .dash-navbar.sidebar-open {
+    width: 100%;
+    left: 0;
+  }
+
+  .dash-search {
+    max-width: 220px;
+  }
+
+  .profile-info {
+    display: none;
+  }
+
+  .profile-trigger {
+    padding-right: 5px;
+  }
+
+  .current-text {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dash-nav-inner {
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .dash-nav-left {
+    gap: 12px;
+  }
+
+  .dash-nav-right {
+    gap: 8px;
+  }
+
+  .dash-search {
+    display: none;
+  }
+
+  .dash-actions {
+    gap: 7px;
+  }
+
+  .dash-icon-btn {
+    width: 39px;
+    height: 39px;
+    border-radius: 10px;
+  }
+
+  .dash-icon-btn svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .current-text {
+    font-size: 17px;
+    letter-spacing: 1px;
+  }
+
+  .profile-image-wrapper {
+    width: 39px;
+    height: 39px;
+  }
+
+  .profile-dropdown {
+    right: 0;
+    width: 230px;
+  }
+
+  .wa-image-modal-content {
+    padding: 35px 16px 22px;
+    gap: 18px;
+  }
+
+  .wa-large-image-wrapper {
+    width: 180px;
+    height: 180px;
+  }
+
+  .wa-image-btn-row {
+    flex-direction: column;
+  }
+
+  .wa-upload-btn,
+  .wa-remove-btn {
+    width: 100%;
+  }
+}
+
+/* REDUCED MOTION */
+
+.dashboard-layout.dashboard-no-animations .dash-navbar,
+.dashboard-layout.dashboard-no-animations .dash-navbar *,
+.dashboard-layout.dashboard-no-animations .wa-image-modal-backdrop,
+.dashboard-layout.dashboard-no-animations .wa-image-modal-content {
+  animation: none !important;
+  transition: none !important;
 }
