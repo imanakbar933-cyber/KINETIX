@@ -1,29 +1,10 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  LockKeyhole,
-  LockKeyholeOpen,
-  Users,
-  Wrench,
-  Plus,
-  Search,
-  CalendarDays,
-  Clock,
-  UserRound,
-  Phone,
-  Hash,
-  Eye,
-  Pencil,
-  Trash2,
-  RefreshCw,
-  Unlock,
-  X,
-  CheckCircle2,
-  AlertCircle,
-  History,
-  ArrowUpRight,
-  Timer,
-  MapPin,
+  LockKeyhole,LockKeyholeOpen, Users,Wrench,Plus,Search, CalendarDays,Clock,
+  UserRound,Phone, Hash, Eye, Pencil,Trash2,RefreshCw,Unlock,
+  X, CheckCircle2, AlertCircle, History, ArrowUpRight,
+  Timer,MapPin,
 } from "lucide-react";
 
 import "./LockerManagement.css";
@@ -150,6 +131,7 @@ const readLockers = () => {
 
 const emptyForm = {
   number: "",
+  lockerId: "",
   zone: "Male Section",
   type: "Standard",
   memberName: "",
@@ -250,6 +232,26 @@ const LockerManagement = () => {
     setModal("assign");
   };
 
+  // Header action: assign a member after choosing an available locker.
+  const openAssignMember = () => {
+    const availableLocker = lockers.find(
+      (locker) => getLockerStatus(locker) === "Available"
+    );
+
+    if (!availableLocker) {
+      setNotification("No available lockers are currently ready for assignment.");
+      return;
+    }
+
+    setSelectedLocker(null);
+    setForm({
+      ...emptyForm,
+      lockerId: availableLocker.id,
+      issueDate: getToday(),
+    });
+    setModal("assign");
+  };
+
   const openDetails = (locker) => {
     setSelectedLocker(locker);
     setModal("details");
@@ -300,6 +302,19 @@ const LockerManagement = () => {
   const assignLocker = (e) => {
     e.preventDefault();
 
+    const targetLocker =
+      selectedLocker || lockers.find((locker) => locker.id === form.lockerId);
+
+    if (!targetLocker) {
+      setNotification("Please select a locker.");
+      return;
+    }
+
+    if (getLockerStatus(targetLocker) !== "Available") {
+      setNotification("This locker is no longer available. Please choose another locker.");
+      return;
+    }
+
     if (
       !form.memberName.trim() ||
       !form.memberId.trim() ||
@@ -320,7 +335,7 @@ const LockerManagement = () => {
 
     setLockers((previous) =>
       previous.map((locker) =>
-        locker.id === selectedLocker.id
+        locker.id === targetLocker.id
           ? {
               ...locker,
               assignment: {
@@ -336,7 +351,8 @@ const LockerManagement = () => {
     );
 
     setModal(null);
-    setNotification(`${selectedLocker.number} assigned successfully!`);
+    setSelectedLocker(null);
+    setNotification(`${targetLocker.number} assigned successfully!`);
   };
 
   const releaseLocker = (locker) => {
@@ -480,10 +496,20 @@ const LockerManagement = () => {
           </p>
         </div>
 
-        <button className="locker-primary-btn" onClick={openAddLocker}>
-          <Plus size={19} />
-          Add New Locker
-        </button>
+        <div className="locker-header-actions">
+          <button
+            className="locker-primary-btn locker-assign-member-btn"
+            onClick={openAssignMember}
+          >
+            <UserRound size={19} />
+            Assign Member
+          </button>
+
+          <button className="locker-primary-btn" onClick={openAddLocker}>
+            <Plus size={19} />
+            Add New Locker
+          </button>
+        </div>
       </div>
 
       {/* STATISTICS */}
@@ -905,14 +931,36 @@ const LockerManagement = () => {
             {/* ASSIGN LOCKER */}
             {modal === "assign" && (
               <form onSubmit={assignLocker}>
-                <div className="locker-selected-info">
-                  <LockKeyhole size={23} />
-                  <div>
-                    <strong>{selectedLocker?.number}</strong>
-                    <span>{selectedLocker?.zone} · {selectedLocker?.type}</span>
+                {selectedLocker ? (
+                  <div className="locker-selected-info">
+                    <LockKeyhole size={23} />
+                    <div>
+                      <strong>{selectedLocker.number}</strong>
+                      <span>{selectedLocker.zone} · {selectedLocker.type}</span>
+                    </div>
+                    <span className="locker-status available"><i /> Available</span>
                   </div>
-                  <span className="locker-status available"><i /> Available</span>
-                </div>
+                ) : (
+                  <div className="locker-form-group">
+                    <label>Select Available Locker *</label>
+                    <div className="locker-input-wrapper">
+                      <LockKeyhole size={18} />
+                      <select
+                        value={form.lockerId}
+                        onChange={(e) => updateForm("lockerId", e.target.value)}
+                        required
+                      >
+                        {lockers
+                          .filter((locker) => getLockerStatus(locker) === "Available")
+                          .map((locker) => (
+                            <option key={locker.id} value={locker.id}>
+                              {locker.number} — {locker.zone} ({locker.type})
+                            </option>
+                          ))}
+                      </select>
+                    </div>
+                  </div>
+                )}
 
                 <div className="locker-form-group">
                   <label>Member Name *</label>

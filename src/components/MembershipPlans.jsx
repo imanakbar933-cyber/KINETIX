@@ -10,7 +10,7 @@ function MembershipPlans() {
     monthly: [
       {
         name: "Basic Membership",
-        price: "2500",
+        price: "3000",
         equipment: [
           "Access to available cardio machines",
           "Treadmills and exercise bikes",
@@ -140,8 +140,6 @@ function MembershipPlans() {
             Yearly Billing
           </button>
         </div>
-
-        {/* PLANS GRID */}
         <div className="membership-plans-grid">
           {plans[billing].map((plan, index) => {
             const isPopular = index === 1;

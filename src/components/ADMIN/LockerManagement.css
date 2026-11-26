@@ -1854,3 +1854,32 @@
     font-size: 14px;
   }
 }
+
+.locker-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.locker-assign-member-btn {
+  background: transparent;
+  border: 1px solid #03ea04;
+  color: #03ea04;
+}
+
+.locker-assign-member-btn:hover {
+  background: #03ea04;
+  color: #000;
+}
+
+@media (max-width: 600px) {
+  .locker-header-actions {
+    width: 100%;
+  }
+
+  .locker-header-actions button {
+    flex: 1;
+    justify-content: center;
+  }
+}
