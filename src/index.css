@@ -1,26 +1,72 @@
-/* Prevent Gray Flash on Load */
-html, body, #root {
-  background-color: #050706 !important;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-}
 
-:root, [data-theme="dark"] {
+/* =========================================
+   GLOBAL THEME + PREVENT GRAY FLASH
+========================================= */
+
+:root,
+[data-theme="dark"] {
   --bg-main: #050706;
   --bg-card: #111513;
+  --card-bg: var(--bg-card);
+  --surface-bg: var(--bg-card);
+  --hover-bg: #1a211d;
+
   --text-main: #ffffff;
   --text-muted: #a0a0a0;
+
   --border-color: rgba(255, 255, 255, 0.1);
+
+  --accent: #03ea04;
+  --accent-rgb: 3, 234, 4;
 }
 
 [data-theme="light"] {
   --bg-main: #f4f4f4;
   --bg-card: #ffffff;
+  --card-bg: var(--bg-card);
+  --surface-bg: var(--bg-card);
+  --hover-bg: #eeeeee;
+
   --text-main: #111111;
   --text-muted: #555555;
+
   --border-color: rgba(0, 0, 0, 0.1);
+
+  --accent: #16a326;
+  --accent-rgb: 22, 163, 38;
 }
+
+/* CUSTOM THEME */
+
+[data-theme="custom"] {
+  --card-bg: var(--bg-card);
+  --surface-bg: var(--bg-card);
+  --hover-bg: var(--bg-card);
+}
+
+/* =========================================
+   PREVENT GRAY FLASH ON LOAD
+========================================= */
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;
+
+  background-color: var(--bg-main, #050706);
+  color: var(--text-main, #ffffff);
+
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* =========================================
+   UNIVERSAL RESET
+========================================= */
 
 * {
   margin: 0;
@@ -35,144 +81,297 @@ html {
 body {
   overflow-x: hidden;
   font-family: Arial, sans-serif;
-  background-color: var(--bg-main) !important;
-  color: var(--text-main) !important;
-  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-img, video {
+/* =========================================
+   IMAGES AND VIDEOS
+========================================= */
+
+img,
+video {
   transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   max-width: 100%;
 }
 
-/* Light Mode Overrides */
+/* =========================================
+   GLOBAL THEME TEXT SUPPORT
+========================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  transition: color 0.3s ease;
+}
+
+p,
+li,
+span,
+label {
+  transition: color 0.3s ease;
+}
+
+/* =========================================
+   GLOBAL THEME BACKGROUND SUPPORT
+========================================= */
+
+.our-story,
+.trainers,
+.info-cards,
+.services-wrapper,
+.facilities-wrapper,
+.membership-wrapper,
+.plans-content-container,
+.schedule-section {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* =========================================
+   GLOBAL CARD THEME SUPPORT
+========================================= */
+
+.service-card,
+.info-card,
+.membership-plan-card,
+.facility-panel {
+  background-color: var(--bg-card);
+  border-color: var(--border-color);
+  color: var(--text-main);
+
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* =========================================
+   DROPDOWN AND SIDEBAR
+========================================= */
+
+.dropdown-menu,
+.sidebar {
+  background-color: var(--bg-card);
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+.dropdown-item,
+.sidebar-links a,
+.sidebar-header h3 {
+  color: var(--text-main);
+}
+
+/* =========================================
+   GLOBAL TEXT COLORS
+========================================= */
+
+body {
+  color: var(--text-main);
+}
+
+.our-story-para,
+.services-subtitle,
+.facilities-subtitle,
+.membership-subtitle {
+  color: var(--text-muted);
+}
+
+/* =========================================
+   LIGHT MODE OVERRIDES
+========================================= */
+
+/* Main Sections */
+
 [data-theme="light"] .our-story,
 [data-theme="light"] .trainers,
 [data-theme="light"] .info-cards,
 [data-theme="light"] .services-wrapper,
 [data-theme="light"] .facilities-wrapper,
-[data-theme="light"] .membership-wrapper {
-  background-color: var(--bg-main) !important;
+[data-theme="light"] .membership-wrapper,
+[data-theme="light"] .plans-content-container,
+[data-theme="light"] .schedule-section {
+  background-color: var(--bg-main);
+  color: var(--text-main);
 }
+
+/* Cards */
 
 [data-theme="light"] .service-card,
 [data-theme="light"] .info-card,
 [data-theme="light"] .membership-plan-card,
 [data-theme="light"] .facility-panel {
-  background-color: var(--bg-card) !important;
-  border-color: var(--border-color) !important;
+  background-color: var(--bg-card);
+  border-color: var(--border-color);
+  color: var(--text-main);
 }
+
+/* Dropdown and Sidebar */
 
 [data-theme="light"] .dropdown-menu,
 [data-theme="light"] .sidebar {
-  background: var(--bg-card) !important;
-  border-color: var(--border-color) !important;
+  background: var(--bg-card);
+  border-color: var(--border-color);
 }
 
 [data-theme="light"] .dropdown-item,
 [data-theme="light"] .sidebar-links a,
 [data-theme="light"] .sidebar-header h3 {
-  color: var(--text-main) !important;
+  color: var(--text-main);
 }
 
-[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3,
-[data-theme="light"] h4, [data-theme="light"] h5, [data-theme="light"] h6,
-[data-theme="light"] p, [data-theme="light"] li, [data-theme="light"] .nav-link,
-[data-theme="light"] .our-story-para, [data-theme="light"] .services-subtitle,
-[data-theme="light"] .facilities-subtitle, [data-theme="light"] .membership-subtitle {
-  color: var(--text-main) !important;
+/* General Text */
+
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6,
+[data-theme="light"] p,
+[data-theme="light"] li,
+[data-theme="light"] .nav-link,
+[data-theme="light"] .our-story-para,
+[data-theme="light"] .services-subtitle,
+[data-theme="light"] .facilities-subtitle,
+[data-theme="light"] .membership-subtitle {
+  color: var(--text-main);
 }
 
-[data-theme="light"] .trainer-card-name, [data-theme="light"] .info-card-content h3,
-[data-theme="light"] .info-card-number, [data-theme="light"] .service-card h3,
-[data-theme="light"] .service-card p, [data-theme="light"] .facility-content h3,
-[data-theme="light"] .facility-content p, [data-theme="light"] .facility-vertical-title span,
-[data-theme="light"] .membership-plan-card h3, [data-theme="light"] .membership-plan-price strong {
-  color: #ffffff !important; 
+/* Card Text */
+
+[data-theme="light"] .trainer-card-name,
+[data-theme="light"] .info-card-content h3,
+[data-theme="light"] .info-card-number,
+[data-theme="light"] .service-card h3,
+[data-theme="light"] .service-card p,
+[data-theme="light"] .facility-content h3,
+[data-theme="light"] .facility-content p,
+[data-theme="light"] .facility-vertical-title span,
+[data-theme="light"] .membership-plan-card h3,
+[data-theme="light"] .membership-plan-price strong {
+  color: var(--text-main);
 }
 
-[data-theme="light"] .trainer-card-image, [data-theme="light"] .info-card-image,
-[data-theme="light"] .service-image, [data-theme="light"] .facility-image {
-  background-color: transparent !important;
+/* Image Backgrounds */
+
+[data-theme="light"] .trainer-card-image,
+[data-theme="light"] .info-card-image,
+[data-theme="light"] .service-image,
+[data-theme="light"] .facility-image {
+  background-color: transparent;
 }
 
 /* =========================================
-   PLANS HERO SECTION (Full Width & Larger)
+   PLANS HERO SECTION
 ========================================= */
 
 .plans-hero-section {
   position: relative;
-  width: 100%; /* 👈 Full width kar diya hai */
-  height: 75vh; /* 👈 Height barha di hai taake bari nazar aaye */
-  
-  /* Background Image */
-  background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop'); 
+  width: 100%;
+  height: 75vh;
+
+  background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  
+
   display: flex;
-  align-items: flex-end; 
-  justify-content: flex-start; 
-  padding: 60px 80px; 
+  align-items: flex-end;
+  justify-content: flex-start;
+
+  padding: 60px 80px;
   overflow: hidden;
-  
-  /* 👈 NAVBAR AUR IMAGE KE DARMIYAN SPACE */
-  margin-top: 120px; /* Agar navbar 80px hai, toh 20px ka gap banega */
-  
-  /* Agar aap chahte hain ke image screen ke kinaron se bilkul touch kare (bina gap ke), 
-     toh neechay wali 3 lines hata dein. Agar thora sa gap chahiye toh rehne dein. */
-  width: 100%;
-  /* margin-left: auto;
-  margin-right: auto;
-  border-radius: 12px; */
+
+  margin-top: 120px;
 }
 
-/* Left side Dark Gradient */
+/* =========================================
+   PLANS HERO DARK GRADIENT
+========================================= */
+
 .plans-hero-section::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 70%; 
+
+  width: 70%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(4, 20, 10, 0.95) 0%, rgba(4, 20, 10, 0.6) 50%, transparent 100%);
+
+  background: linear-gradient(
+    90deg,
+    rgba(4, 20, 10, 0.95) 0%,
+    rgba(4, 20, 10, 0.6) 50%,
+    transparent 100%
+  );
+
   z-index: 1;
 }
+
+/* =========================================
+   PLANS HERO CONTENT
+========================================= */
 
 .plans-hero-content {
   position: relative;
   z-index: 2;
 }
 
-/* TEXT STYLING */
+/* =========================================
+   PLANS HERO HEADING
+========================================= */
+
 .plans-hero-content h1 {
   font-family: 'Playfair Display', 'Georgia', serif;
-  font-size: 4.5rem; /* Text ka size bhi thora bara kiya hai */
+
+  font-size: 4.5rem;
   font-weight: 700;
+
   text-transform: uppercase;
   letter-spacing: 4px;
+
   margin: 0;
+  padding: 20px 0;
+
   position: relative;
-  padding: 20px 0; 
   display: inline-block;
-  color: #ffffff; 
+
+  color: #ffffff;
+
   cursor: pointer;
-  transition: color 0.4s ease, text-shadow 0.4s ease;
+
+  transition:
+    color 0.4s ease,
+    text-shadow 0.4s ease;
 }
 
-/* NEON LINES (Exact About page style) */
+/* =========================================
+   PLANS HERO NEON LINES
+========================================= */
+
 .plans-hero-content h1::before,
 .plans-hero-content h1::after {
   content: '';
+
   position: absolute;
   left: 0;
-  height: 3px; /* Thick lines */
-  background-color: #39FF14; /* Neon Green */
-  width: 60px; 
-  transition: width 0.4s ease-in-out, background-color 0.4s ease; 
+
+  height: 3px;
+  width: 60px;
+
+  background-color: var(--accent, #03ea04);
+
+  transition:
+    width 0.4s ease-in-out,
+    background-color 0.4s ease;
 }
 
 .plans-hero-content h1::before {
@@ -183,19 +382,104 @@ img, video {
   bottom: 0;
 }
 
-/* HOVER EFFECTS */
+/* =========================================
+   PLANS HERO HOVER EFFECTS
+========================================= */
+
 .plans-hero-content h1:hover {
-  color: #39FF14; 
-  text-shadow: 0 0 15px rgba(57, 255, 20, 0.6); /* Neon Glow */
+  color: var(--accent, #03ea04);
+
+  text-shadow:
+    0 0 15px rgba(var(--accent-rgb, 3, 234, 4), 0.6);
 }
 
 .plans-hero-content h1:hover::before,
 .plans-hero-content h1:hover::after {
-  width: 100%; 
+  width: 100%;
 }
 
-/* Plans Container */
+/* =========================================
+   PLANS CONTENT CONTAINER
+========================================= */
+
 .plans-content-container {
   padding: 60px 20px;
+
   background-color: var(--bg-main);
+  color: var(--text-main);
+
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN - TABLET
+========================================= */
+
+@media screen and (max-width: 992px) {
+  .plans-hero-section {
+    height: 65vh;
+    padding: 50px 50px;
+  }
+
+  .plans-hero-content h1 {
+    font-size: 3.5rem;
+  }
+}
+
+/* =========================================
+   RESPONSIVE DESIGN - MOBILE
+========================================= */
+
+@media screen and (max-width: 768px) {
+  .plans-hero-section {
+    height: 55vh;
+    padding: 40px 30px;
+    margin-top: 100px;
+  }
+
+  .plans-hero-section::before {
+    width: 100%;
+
+    background: linear-gradient(
+      90deg,
+      rgba(4, 20, 10, 0.9) 0%,
+      rgba(4, 20, 10, 0.55) 70%,
+      transparent 100%
+    );
+  }
+
+  .plans-hero-content h1 {
+    font-size: 2.8rem;
+    letter-spacing: 3px;
+  }
+}
+
+/* =========================================
+   RESPONSIVE DESIGN - SMALL MOBILE
+========================================= */
+
+@media screen and (max-width: 480px) {
+  .plans-hero-section {
+    height: 48vh;
+    padding: 30px 20px;
+    margin-top: 90px;
+  }
+
+  .plans-hero-content h1 {
+    font-size: 2rem;
+    letter-spacing: 2px;
+    padding: 15px 0;
+  }
+
+  .plans-hero-content h1::before,
+  .plans-hero-content h1::after {
+    height: 2px;
+    width: 45px;
+  }
+
+  .plans-content-container {
+    padding: 40px 15px;
+  }
 }

@@ -5,12 +5,13 @@
    ============================================ */
 .classdetailcontent-section {
   position: relative;
-  background: #0a0a0a;
-  color: #fff;
+  background: var(--bg-main);
+  color: var(--text-main);
   padding: 100px 60px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                "Helvetica Neue", Arial, sans-serif;
   overflow: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 .classdetailcontent-section::before {
@@ -23,12 +24,13 @@
   height: 900px;
   background: radial-gradient(
     circle,
-    rgba(74, 222, 128, 0.04) 0%,
+    var(--accent-soft) 0%,
     transparent 70%
   );
   filter: blur(80px);
   pointer-events: none;
   z-index: 0;
+  opacity: 0.6;
 }
 
 .classdetailcontent-container {
@@ -39,7 +41,7 @@
 }
 
 /* ============================================
-   GRID — 2 Columns (Left: Content, Right: Box)
+   GRID
    ============================================ */
 .classdetailcontent-grid {
   display: grid;
@@ -61,12 +63,12 @@
 .classdetailcontent-heading {
   font-size: 1.5rem;
   font-weight: 900;
-  color: #ffffff;
+  color: var(--text-main);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin: 0 0 8px 0;
   padding-bottom: 14px;
-  border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+  border-bottom: 1px solid var(--border-color);
   position: relative;
 }
 
@@ -77,15 +79,16 @@
   bottom: -1px;
   width: 60px;
   height: 2px;
-  background: #00ff00;
+  background: var(--accent);
   border-radius: 2px;
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 /* About Paragraph */
 .classdetailcontent-about {
   font-size: 1.05rem;
   line-height: 1.85;
-  color: #b5b5b5;
+  color: var(--text-muted);
   margin: 0 0 30px 0;
 }
 
@@ -104,13 +107,13 @@
   align-items: center;
   gap: 14px;
   font-size: 1rem;
-  color: #d0d0d0;
+  color: var(--text-main);
   font-weight: 500;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .classdetailcontent-features li:hover {
-  color: #00ff00;
+  color: var(--accent);
   transform: translateX(6px);
 }
 
@@ -122,9 +125,9 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: rgba(74, 222, 128, 0.15);
-  border: 1px solid rgba(74, 222, 128, 0.4);
-  color: #00ff00;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-glow);
+  color: var(--accent);
   font-weight: 900;
   font-size: 0.85rem;
   flex-shrink: 0;
@@ -132,13 +135,13 @@
 }
 
 .classdetailcontent-features li:hover .feature-check {
-  background: #00ff00;
+  background: var(--accent);
   color: #0a0a0a;
-  box-shadow: 0 0 15px rgba(74, 222, 128, 0.6);
+  box-shadow: 0 0 15px var(--accent-glow);
 }
 
 /* ============================================
-   ✅ RIGHT SIDE — Info Box
+   RIGHT SIDE — Info Box
    ============================================ */
 .classdetailcontent-right {
   position: sticky;
@@ -146,8 +149,8 @@
 }
 
 .classdetailcontent-box {
-  background: #141414;
-  border: 1px solid rgba(74, 222, 128, 0.15);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 18px;
   padding: 35px 30px;
   display: flex;
@@ -168,7 +171,7 @@
   height: 300px;
   background: radial-gradient(
     circle,
-    rgba(74, 222, 128, 0.15) 0%,
+    var(--accent-soft) 0%,
     transparent 70%
   );
   filter: blur(40px);
@@ -176,15 +179,15 @@
 }
 
 .classdetailcontent-box:hover {
-  border-color: rgba(74, 222, 128, 0.4);
-  box-shadow: 0 20px 50px rgba(74, 222, 128, 0.12);
+  border-color: var(--accent-glow);
+  box-shadow: 0 20px 50px var(--accent-soft);
 }
 
 /* Box Title */
 .classdetailcontent-box-title {
   font-size: 1.5rem;
   font-weight: 900;
-  color: #ffffff;
+  color: var(--text-main);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin: 0;
@@ -195,7 +198,7 @@
 /* Box Description */
 .classdetailcontent-box-desc {
   font-size: 0.9rem;
-  color: #8a8a8a;
+  color: var(--text-muted);
   line-height: 1.7;
   margin: 0 0 10px 0;
   position: relative;
@@ -232,9 +235,9 @@
   flex-shrink: 0;
 }
 
-/* Label — "DATE:", "TIME:" etc */
+/* Label */
 .box-label {
-  color: #ffffff;
+  color: var(--text-main);
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -244,7 +247,7 @@
 
 /* Value */
 .box-value {
-  color: #a0a0a0;
+  color: var(--text-muted);
   font-weight: 500;
   font-size: 0.95rem;
 }
@@ -255,7 +258,7 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(74, 222, 128, 0.3) 50%,
+    var(--accent-glow) 50%,
     transparent 100%
   );
   margin: 8px 0;
@@ -274,7 +277,7 @@
 }
 
 .box-price-label {
-  color: #8a8a8a;
+  color: var(--text-muted);
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -282,11 +285,11 @@
 }
 
 .box-price-value {
-  color: #00ff00;
+  color: var(--accent);
   font-size: 1.3rem;
   font-weight: 900;
   letter-spacing: 0.5px;
-  text-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+  text-shadow: 0 0 20px var(--accent-glow);
 }
 
 /* Buy Now Button */
@@ -295,8 +298,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  background: #ffffff;
-  color: #0a0a0a;
+  background: var(--text-main);
+  color: var(--bg-main);
   padding: 18px 24px;
   border-radius: 10px;
   text-decoration: none;
@@ -308,12 +311,13 @@
   margin-top: 8px;
   position: relative;
   z-index: 1;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px var(--shadow-color);
 }
 
 .box-buy-btn:hover {
-  background: #00ff00;
-  box-shadow: 0 15px 40px rgba(74, 222, 128, 0.5);
+  background: var(--accent);
+  color: #0a0a0a;
+  box-shadow: 0 15px 40px var(--accent-glow);
   transform: translateY(-3px);
 }
 
@@ -332,7 +336,6 @@
    RESPONSIVE
    ============================================ */
 
-/* Tablet */
 @media (max-width: 1024px) {
   .classdetailcontent-section {
     padding: 80px 30px;
@@ -352,7 +355,6 @@
   }
 }
 
-/* Mobile */
 @media (max-width: 700px) {
   .classdetailcontent-section {
     padding: 60px 20px;

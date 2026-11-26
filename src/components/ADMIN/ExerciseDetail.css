@@ -1,0 +1,147 @@
+.exdet-container {
+  padding: 30px;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  background-color: #0f0f0f;
+  min-height: 100vh;
+}
+
+.exdet-back-btn {
+  background: transparent;
+  color: #9ca3af;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  margin-bottom: 25px;
+  padding: 0;
+  transition: 0.2s;
+}
+
+.exdet-back-btn:hover {
+  color: #22c55e;
+}
+
+.exdet-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 768px) {
+  .exdet-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.exdet-image {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #333;
+}
+
+.exdet-tags {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.exdet-tag {
+  background: #22c55e;
+  color: #000;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.exdet-tag.outline {
+  background: transparent;
+  color: #22c55e;
+  border: 1px solid #22c55e;
+}
+
+.exdet-left h1 {
+  font-size: 32px;
+  margin: 0 0 15px 0;
+}
+
+.exdet-desc {
+  color: #9ca3af;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.exdet-muscles {
+  margin-top: 30px;
+}
+
+.exdet-muscles h3 {
+  font-size: 16px;
+  color: #22c55e;
+  margin-bottom: 10px;
+}
+
+.exdet-muscle-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.exdet-muscle-list span {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #e5e7eb;
+}
+
+/* RIGHT SIDE (INSTRUCTIONS) */
+.exdet-right {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.exdet-right h2 {
+  margin-top: 0;
+  font-size: 22px;
+  color: #fff;
+  border-bottom: 1px solid #333;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.exdet-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.exdet-step {
+  display: flex;
+  gap: 15px;
+}
+
+.exdet-step-num {
+  background: #22c55e;
+  color: #000;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.exdet-step p {
+  margin: 0;
+  color: #d1d5db;
+  line-height: 1.5;
+  font-size: 15px;
+}

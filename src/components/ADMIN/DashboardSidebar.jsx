@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -17,7 +16,11 @@ import {
   X,
   User,
   Trash2,
-  LockKeyhole
+  LockKeyhole,
+  Activity,
+  ChevronDown,
+  BookOpen,
+  ClipboardList
 } from "lucide-react";
 
 import "./DashboardSidebar.css";
@@ -34,26 +37,53 @@ const DashboardSidebar = ({
   const fileInputRef = useRef(null);
 
   const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem("userProfile");
+    try {
+      const saved = localStorage.getItem("userProfile");
 
-    return saved
-      ? JSON.parse(saved)
-      : {
-          name: "Nathan Reeves",
-          email: "nathan@example.com",
-          role: "Super Admin",
-          photo: DEFAULT_AVATAR
-        };
+      return saved
+        ? JSON.parse(saved)
+        : {
+            name: "Nathan Reeves",
+            email: "nathan@example.com",
+            role: "Super Admin",
+            photo: DEFAULT_AVATAR
+          };
+    } catch {
+      return {
+        name: "Nathan Reeves",
+        email: "nathan@example.com",
+        role: "Super Admin",
+        photo: DEFAULT_AVATAR
+      };
+    }
   });
 
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
+  const [isExercisesOpen, setIsExercisesOpen] = useState(
+    location.pathname.startsWith("/dashboard/exercises")
+  );
+
+  const isExerciseActive = location.pathname.startsWith(
+    "/dashboard/exercises"
+  );
+
+  useEffect(() => {
+    if (location.pathname.startsWith("/dashboard/exercises")) {
+      setIsExercisesOpen(true);
+    }
+  }, [location.pathname]);
+
   useEffect(() => {
     const loadProfile = () => {
-      const saved = localStorage.getItem("userProfile");
+      try {
+        const saved = localStorage.getItem("userProfile");
 
-      if (saved) {
-        setUser(JSON.parse(saved));
+        if (saved) {
+          setUser(JSON.parse(saved));
+        }
+      } catch (error) {
+        console.error("Unable to load user profile:", error);
       }
     };
 
@@ -69,11 +99,16 @@ const DashboardSidebar = ({
       ? "dash-menu-item active"
       : "dash-menu-item";
 
-  // Change Profile Photo
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files?.[0];
 
     if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Please select a valid image.");
+      e.target.value = "";
+      return;
+    }
 
     const reader = new FileReader();
 
@@ -93,11 +128,14 @@ const DashboardSidebar = ({
       window.dispatchEvent(new Event("profileUpdated"));
     };
 
+    reader.onerror = () => {
+      alert("Unable to read this image.");
+    };
+
     reader.readAsDataURL(file);
     e.target.value = "";
   };
 
-  // Remove Profile Photo
   const handleRemovePhoto = () => {
     const updated = {
       ...user,
@@ -116,7 +154,6 @@ const DashboardSidebar = ({
 
   const triggerFileInput = (e) => {
     if (e) e.stopPropagation();
-
     fileInputRef.current?.click();
   };
 
@@ -129,10 +166,21 @@ const DashboardSidebar = ({
     <>
       <aside className={`dash-sidebar ${isOpen ? "open" : ""}`}>
 
-        {/* SIDEBAR LOGO */}
+        {/* KINETIX SIDEBAR LOGO */}
         <div className="dash-sidebar-header">
           <Link to="/" className="sidebar-logo">
-            <img src="/images/kinetix.svg" alt="Kinetix" />
+            <div className="sidebar-brand-icon" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+
+            <div className="sidebar-brand-words">
+              <strong>KINETIX</strong>
+              <small>FITNESS CLUB</small>
+            </div>
           </Link>
         </div>
 
@@ -141,27 +189,83 @@ const DashboardSidebar = ({
 
           <Link to="/dashboard" className={isActive("/dashboard")}>
             <LayoutGrid size={20} />
-            Dashboard
+            <span>Dashboard</span>
           </Link>
 
           <Link to="/members" className={isActive("/members")}>
             <Users size={20} />
-            Member
+            <span>Member</span>
           </Link>
 
           <Link to="/workouts" className={isActive("/workouts")}>
             <Dumbbell size={20} />
-            Workout Routine
+            <span>Workout Routine</span>
           </Link>
+
+          {/* =========================================
+              EXERCISES DROPDOWN
+          ========================================= */}
+          <div className="dash-exercises-dropdown">
+            <button
+              type="button"
+              className={`dash-menu-item dash-exercises-toggle ${
+                isExerciseActive ? "active" : ""
+              }`}
+              onClick={() => setIsExercisesOpen((prev) => !prev)}
+              aria-expanded={isExercisesOpen}
+            >
+              <Activity size={20} />
+              <span>Exercises</span>
+
+              <ChevronDown
+                size={17}
+                className={`dash-dropdown-arrow ${
+                  isExercisesOpen ? "open" : ""
+                }`}
+              />
+            </button>
+
+            {isExercisesOpen && (
+              <div className="dash-exercises-submenu">
+
+                {/* CHANGED: lowercase path */}
+                <Link
+                  to="/dashboard/exercises/library"
+                  className={
+                    location.pathname === "/dashboard/exercises/library"
+                      ? "dash-exercise-sublink active"
+                      : "dash-exercise-sublink"
+                  }
+                >
+                  <BookOpen size={17} />
+                  <span>Exercise Library</span>
+                </Link>
+
+                {/* CHANGED: lowercase path */}
+                <Link
+                  to="/dashboard/exercises/details"
+                  className={
+                    location.pathname === "/dashboard/exercises/details"
+                      ? "dash-exercise-sublink active"
+                      : "dash-exercise-sublink"
+                  }
+                >
+                  <ClipboardList size={17} />
+                  <span>Exercise Detail</span>
+                </Link>
+
+              </div>
+            )}
+          </div>
 
           <Link to="/diet" className={isActive("/diet")}>
             <Utensils size={20} />
-            Diet Chart
+            <span>Diet Chart</span>
           </Link>
 
           <Link to="/batch-schedule" className={isActive("/batch-schedule")}>
             <Calendar size={20} />
-            Batch Schedule
+            <span>Batch Schedule</span>
           </Link>
 
           <Link
@@ -169,7 +273,7 @@ const DashboardSidebar = ({
             className={isActive("/dashboard/trainers")}
           >
             <UserCircle size={20} />
-            Trainer List
+            <span>Trainer List</span>
           </Link>
 
           <Link
@@ -177,7 +281,7 @@ const DashboardSidebar = ({
             className={isActive("/dashboard/services")}
           >
             <BriefcaseBusiness size={20} />
-            Services
+            <span>Services</span>
           </Link>
 
           <Link
@@ -185,31 +289,30 @@ const DashboardSidebar = ({
             className={isActive("/dashboard/staff")}
           >
             <Briefcase size={20} />
-            Staff
+            <span>Staff</span>
           </Link>
 
           <Link to="/billing" className={isActive("/billing")}>
             <FileText size={20} />
-            Point of Sale
+            <span>Point of Sale</span>
           </Link>
 
-          {/* NEW: LOCKER MANAGEMENT */}
           <Link
             to="/locker-management"
             className={isActive("/locker-management")}
           >
             <LockKeyhole size={20} />
-            Locker Management
+            <span>Locker Management</span>
           </Link>
 
           <Link to="/reports" className={isActive("/reports")}>
             <BarChart2 size={20} />
-            Report
+            <span>Report</span>
           </Link>
 
           <Link to="/settings" className={isActive("/settings")}>
             <Settings size={20} />
-            Settings
+            <span>Settings</span>
           </Link>
 
         </div>
@@ -229,9 +332,11 @@ const DashboardSidebar = ({
             title="View / edit profile"
           >
             <img
-              src={user.photo}
+              src={user.photo || DEFAULT_AVATAR}
               alt={user.name}
-              style={{ objectFit: "cover" }}
+              onError={(e) => {
+                e.currentTarget.src = DEFAULT_AVATAR;
+              }}
             />
 
             <div className="user-info">
@@ -241,7 +346,7 @@ const DashboardSidebar = ({
           </div>
         </div>
 
-        {/* RESIZE HANDLES */}
+        {/* WIDTH RESIZE HANDLE */}
         {isOpen && (
           <div
             className="dash-sidebar-resize-handle"
@@ -250,6 +355,7 @@ const DashboardSidebar = ({
           />
         )}
 
+        {/* HEIGHT RESIZE HANDLE */}
         {isOpen && (
           <div
             className="dash-sidebar-height-handle"
@@ -273,20 +379,20 @@ const DashboardSidebar = ({
             <button
               className="wa-close-btn"
               onClick={() => setIsImageModalOpen(false)}
+              aria-label="Close profile"
             >
               <X size={24} />
             </button>
 
             <div className="wa-large-image-wrapper">
               <img
-                src={user.photo}
+                src={user.photo || DEFAULT_AVATAR}
                 alt="Profile"
                 className="wa-large-image"
               />
             </div>
 
             <div className="wa-image-actions">
-
               <div className="wa-user-details">
                 <h2>{user.name}</h2>
                 <p>
@@ -295,7 +401,6 @@ const DashboardSidebar = ({
               </div>
 
               <div className="wa-image-btn-row">
-
                 <button
                   className="wa-upload-btn"
                   onClick={triggerFileInput}
@@ -323,7 +428,6 @@ const DashboardSidebar = ({
                   <Trash2 size={18} />
                   Remove Photo
                 </button>
-
               </div>
             </div>
           </div>
@@ -337,7 +441,6 @@ const DashboardSidebar = ({
         accept="image/*"
         style={{ display: "none" }}
       />
-
     </>
   );
 };

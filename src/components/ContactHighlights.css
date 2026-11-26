@@ -5,9 +5,10 @@
 .contact-cta {
   position: relative;
   width: 100%;
-  background: #0a0a0a;
+  background: var(--bg-main);
   padding: 100px 80px 100px 80px;
   overflow: hidden;
+  transition: background 0.4s ease;
 }
 
 /* ===== Grid Pattern ===== */
@@ -16,11 +17,12 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(3, 234, 4, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(3, 234, 4, 0.03) 1px, transparent 1px);
+    linear-gradient(var(--accent-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent-soft) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
   z-index: 0;
+  opacity: 0.3;
   mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
   -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
 }
@@ -35,7 +37,7 @@
   width: 700px;
   height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(3, 234, 4, 0.12), transparent 70%);
+  background: radial-gradient(circle, var(--accent-soft), transparent 70%);
   filter: blur(140px);
   pointer-events: none;
   z-index: 0;
@@ -67,10 +69,10 @@
 .contact-cta-badge {
   display: inline-block;
   padding: 8px 18px;
-  background: rgba(3, 234, 4, 0.08);
-  border: 1px solid rgba(3, 234, 4, 0.3);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-glow);
   border-radius: 50px;
-  color: #03ea04;
+  color: var(--accent);
   font-family: "Segoe UI", sans-serif;
   font-size: 11px;
   font-weight: 700;
@@ -84,7 +86,7 @@
   font-family: "Arial Black", "Helvetica", sans-serif;
   font-size: 58px;
   font-weight: 900;
-  color: #ffffff;
+  color: var(--text-main);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   line-height: 1.05;
@@ -92,15 +94,15 @@
 }
 
 .contact-cta-title .green {
-  color: #03ea04;
+  color: var(--accent);
   text-shadow:
-    0 0 20px rgba(3, 234, 4, 0.6),
-    0 0 40px rgba(3, 234, 4, 0.35);
+    0 0 20px var(--accent-glow),
+    0 0 40px var(--accent-soft);
 }
 
 /* ===== Description ===== */
 .contact-cta-desc {
-  color: #9a9a9a;
+  color: var(--text-muted);
   font-size: 15.5px;
   line-height: 1.75;
   max-width: 560px;
@@ -115,11 +117,11 @@
   position: relative;
   border-radius: 20px;
   padding: 3px;
-  background: #0a0a0a;
+  background: var(--bg-main);
   isolation: isolate;
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(3, 234, 4, 0.04) inset;
+    0 20px 60px var(--shadow-color),
+    0 0 0 1px var(--accent-soft) inset;
 }
 
 /* Top gradient line */
@@ -130,7 +132,7 @@
   left: 40px;
   right: 40px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #03ea04, transparent);
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0.5;
   border-radius: 2px;
   z-index: 6;
@@ -143,14 +145,14 @@
   border-radius: 20px;
   pointer-events: none;
   z-index: 5;
-  border: 2px solid #03ea04;
+  border: 2px solid var(--accent);
 }
 
 .contact-cta-inner {
   position: relative;
   z-index: 2;
   border-radius: 18px;
-  background: #0f0f0f;
+  background: var(--bg-card);
   padding: 60px 50px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -165,8 +167,8 @@
   position: relative;
   padding: 38px 28px 34px;
   border-radius: 14px;
-  background: #131313;
-  border: 1px solid #1c1c1c;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
   overflow: hidden;
   transition: background 0.4s ease, border-color 0.4s ease;
 }
@@ -179,7 +181,7 @@
   left: 0;
   width: 3px;
   height: 100%;
-  background: #03ea04;
+  background: var(--accent);
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.4s ease;
@@ -197,7 +199,7 @@
   font-family: "Arial Black", "Helvetica", sans-serif;
   font-size: 68px;
   font-weight: 900;
-  color: #ffffff;
+  color: var(--text-main);
   opacity: 0.035;
   line-height: 1;
   pointer-events: none;
@@ -212,9 +214,9 @@
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: rgba(3, 234, 4, 0.06);
-  border: 1px solid rgba(3, 234, 4, 0.28);
-  color: #03ea04;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-glow);
+  color: var(--accent);
   margin-bottom: 24px;
   transition: all 0.35s ease;
 }
@@ -228,7 +230,7 @@
   font-family: "Arial Black", "Helvetica", sans-serif;
   font-size: 17px;
   font-weight: 900;
-  color: #ffffff;
+  color: var(--text-main);
   text-transform: uppercase;
   letter-spacing: 1.2px;
   margin: 0 0 12px 0;
@@ -236,7 +238,7 @@
 }
 
 .cta-card-text {
-  color: #8a8a8a;
+  color: var(--text-muted);
   font-size: 13.5px;
   line-height: 1.7;
   margin: 0;
@@ -256,7 +258,7 @@
   align-items: center;
   gap: 12px;
   padding: 18px 46px;
-  background: #03ea04;
+  background: var(--accent);
   color: #0a0a0a;
   border-radius: 50px;
   font-family: "Arial Black", "Helvetica", sans-serif;
@@ -267,7 +269,7 @@
   text-decoration: none;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 30px rgba(3, 234, 4, 0.35);
+  box-shadow: 0 0 30px var(--accent-glow);
 }
 
 .cta-button::before {
@@ -296,7 +298,7 @@
 }
 
 .cta-note {
-  color: #666;
+  color: var(--text-subtle);
   font-size: 13px;
   font-style: italic;
   margin: 22px 0 0 0;
@@ -304,8 +306,21 @@
 }
 
 /* =========================================================
+   LIGHT THEME FINE-TUNING
+   ========================================================= */
+[data-theme="light"] .cta-button {
+  color: #fff;
+}
+[data-theme="light"] .cta-card {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .contact-cta-neon {
+  border-color: var(--accent);
+}
+
+/* =========================================================
    RESPONSIVE
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 1024px) {
   .contact-cta {

@@ -2,10 +2,13 @@
 /* =========================================
    KINETIX SERVICE DETAIL
    PREMIUM CINEMATIC DESIGN
+   DYNAMIC CUSTOM THEME
 ========================================= */
 
 .service-detail-page {
-  --sd-green: #03ea04;
+  --sd-green: var(--accent, #03ea04);
+  --sd-green-rgb: var(--accent-rgb, 3, 234, 4);
+
   --sd-black: #070907;
   --sd-panel: #111611;
   --sd-white: #f4f7f2;
@@ -168,7 +171,7 @@
   background: #fff;
   color: #050805;
   transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(3, 234, 4, .12);
+  box-shadow: 0 12px 28px rgba(var(--sd-green-rgb), .12);
 }
 
 .sd-primary-btn:hover span {
@@ -245,6 +248,17 @@
   font-size: 16px;
   font-weight: 800;
   letter-spacing: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 5px;
+}
+
+.sd-intro-number small {
+  color: #788278;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
 }
 
 .sd-intro-content {
@@ -263,18 +277,19 @@
 }
 
 .sd-intro-content p {
-  max-width: 720px;
+  max-width: 780px;
   margin: 0;
-  color: var(--sd-muted);
-  font-size: 19px;
-  line-height: 1.8;
+  color: #b4beb3;
+  font-size: 18px;
+  line-height: 1.95;
+  letter-spacing: .1px;
 }
 
 .sd-intro-mark {
   position: absolute;
   right: 0;
   bottom: 25px;
-  color: rgba(3, 234, 4, .06);
+  color: rgba(var(--sd-green-rgb), .06);
   font-size: 180px;
   line-height: 1;
   font-weight: 1000;
@@ -294,13 +309,15 @@
 }
 
 .sd-section-heading h2 {
+  max-width: 760px;
   margin: 15px 0 0;
   color: #fff;
   font-size: clamp(40px, 5.6vw, 70px);
-  line-height: 1;
+  line-height: 1.12;
   letter-spacing: -2.5px;
   font-weight: 900;
   text-transform: uppercase;
+  overflow-wrap: break-word;
 }
 
 .sd-section-heading h2 span,
@@ -314,7 +331,7 @@
   margin: 0 0 5px;
   color: var(--sd-muted);
   font-size: 17px;
-  line-height: 1.7;
+  line-height: 1.85;
 }
 
 /* =========================================
@@ -325,6 +342,24 @@
   padding-top: 115px;
   padding-bottom: 130px;
   scroll-margin-top: 40px;
+}
+
+.sd-offer-section .sd-section-heading {
+  align-items: center;
+}
+
+.sd-offer-section .sd-section-heading h2 {
+  max-width: 680px;
+  font-size: clamp(36px, 4.5vw, 59px);
+  line-height: 1.08;
+  letter-spacing: -2px;
+  text-transform: none;
+}
+
+.sd-offer-section .sd-section-heading > p {
+  max-width: 390px;
+  font-size: 16px;
+  line-height: 1.9;
 }
 
 .sd-offer-layout {
@@ -410,6 +445,19 @@
   font-weight: 900;
 }
 
+.sd-offer-visual::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(255, 255, 255, .15);
+  pointer-events: none;
+  transition: border-color .5s ease;
+}
+
+.sd-offer-visual:hover::after {
+  border-color: rgba(var(--sd-green-rgb), .55);
+}
+
 .sd-offer-list {
   display: flex;
   flex-direction: column;
@@ -418,8 +466,8 @@
 
 .sd-offer-card {
   flex: 1;
-  min-height: 115px;
-  padding: 23px 22px;
+  min-height: 130px;
+  padding: 25px;
   position: relative;
   overflow: hidden;
   display: grid;
@@ -453,7 +501,7 @@
 
 .sd-offer-card:hover {
   background: #172117;
-  border-color: rgba(3, 234, 4, .4);
+  border-color: rgba(var(--sd-green-rgb), .4);
   transform: translateX(7px);
 }
 
@@ -468,16 +516,17 @@
 .sd-offer-copy h3 {
   margin: 0 0 8px;
   color: #fff;
-  font-size: clamp(19px, 2vw, 25px);
+  font-size: 21px;
+  letter-spacing: -.3px;
   line-height: 1.2;
   font-weight: 850;
 }
 
 .sd-offer-copy p {
   margin: 0;
-  color: #aeb7ad;
+  color: #aeb8ae;
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.75;
 }
 
 .sd-offer-arrow {
@@ -510,9 +559,9 @@
 
 .sd-benefits-heading h2 {
   margin: 20px 0;
-  font-size: clamp(40px, 5vw, 62px);
-  line-height: 1.08;
-  letter-spacing: -2px;
+  font-size: clamp(36px, 4.5vw, 59px);
+  line-height: 1.12;
+  letter-spacing: -1.8px;
   font-weight: 900;
 }
 
@@ -520,7 +569,15 @@
   max-width: 390px;
   color: var(--sd-muted);
   font-size: 17px;
-  line-height: 1.7;
+  line-height: 1.9;
+}
+
+.sd-benefit-accent {
+  width: 65px;
+  height: 3px;
+  margin-top: 30px;
+  background: var(--sd-green);
+  box-shadow: 0 0 15px rgba(var(--sd-green-rgb), .35);
 }
 
 .sd-benefits-list {
@@ -532,9 +589,11 @@
   position: relative;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 45px 1fr 25px;
+  grid-template-columns: 42px 1fr 25px;
   gap: 15px;
   align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, .15);
   transition: padding .4s var(--sd-ease);
 }
@@ -566,11 +625,18 @@
   font-weight: 800;
 }
 
+.sd-benefit-index {
+  color: var(--sd-green);
+  font-size: 12px;
+  font-weight: 850;
+}
+
 .sd-benefit-item h3 {
   margin: 0;
   color: #f4f7f2;
-  font-size: clamp(17px, 1.7vw, 22px);
-  font-weight: 750;
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 650;
   transition: color .4s ease;
 }
 
@@ -595,14 +661,18 @@
 .sd-process-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 18px;
 }
 
 .sd-process-card {
-  min-height: 225px;
-  padding: 28px;
+  min-height: 300px;
+  padding: 32px;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   background: #111611;
   border: 1px solid rgba(255, 255, 255, .08);
   transition:
@@ -612,15 +682,18 @@
 }
 
 .sd-process-card:hover {
-  border-color: rgba(3, 234, 4, .65);
+  border-color: rgba(var(--sd-green-rgb), .65);
   background: #151c15;
-  transform: translateY(-6px);
+  transform: translateY(-9px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, .2);
 }
 
 .sd-process-number {
   display: inline-block;
+  position: relative;
+  z-index: 2;
   color: var(--sd-green);
-  font-size: 35px;
+  font-size: 39px;
   font-weight: 900;
   transition: transform .6s var(--sd-ease);
 }
@@ -643,12 +716,40 @@
 }
 
 .sd-process-card h3 {
-  max-width: 290px;
-  margin: 0;
+  max-width: 300px;
+  margin: 0 0 15px;
+  position: relative;
+  z-index: 2;
   color: #fff;
-  font-size: 22px;
-  line-height: 1.4;
+  font-size: 23px;
+  line-height: 1.35;
   font-weight: 800;
+}
+
+.sd-process-card p {
+  position: relative;
+  z-index: 2;
+  max-width: 320px;
+  margin: 0;
+  color: #aab5a9;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.sd-process-watermark {
+  position: absolute;
+  right: 15px;
+  bottom: -35px;
+  color: rgba(var(--sd-green-rgb), .045);
+  font-size: 130px;
+  font-weight: 950;
+  line-height: 1;
+  pointer-events: none;
+  transition: transform .7s var(--sd-ease);
+}
+
+.sd-process-card:hover .sd-process-watermark {
+  transform: translateY(-10px);
 }
 
 /* =========================================
@@ -666,12 +767,12 @@
   background:
     radial-gradient(
       ellipse at 85% 50%,
-      rgba(3, 234, 4, .12),
+      rgba(var(--sd-green-rgb), .12),
       transparent 40%
     ),
     #0d120d;
-  border-top: 1px solid rgba(3, 234, 4, .15);
-  border-bottom: 1px solid rgba(3, 234, 4, .15);
+  border-top: 1px solid rgba(var(--sd-green-rgb), .15);
+  border-bottom: 1px solid rgba(var(--sd-green-rgb), .15);
 }
 
 .sd-cta-content {
@@ -682,12 +783,14 @@
 }
 
 .sd-cta-content h2 {
-  margin: 20px 0;
+  max-width: 900px;
+  margin: 20px auto;
   color: #fff;
-  font-size: clamp(43px, 6.5vw, 78px);
-  line-height: 1.02;
-  letter-spacing: -3px;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1.12;
+  letter-spacing: -2px;
   font-weight: 950;
+  overflow-wrap: break-word;
 }
 
 .sd-cta-content h2 span {
@@ -695,16 +798,18 @@
 }
 
 .sd-cta-content p {
-  margin: 0 0 30px;
+  max-width: 620px;
+  margin: 0 auto 32px;
   color: #aab4a9;
   font-size: 18px;
+  line-height: 1.8;
 }
 
 .sd-cta-watermark {
   position: absolute;
   right: 4%;
   bottom: -140px;
-  color: rgba(3, 234, 4, .045);
+  color: rgba(var(--sd-green-rgb), .045);
   font-size: 500px;
   line-height: 1;
   font-weight: 1000;
@@ -738,7 +843,11 @@
   overflow: hidden;
   isolation: isolate;
   background: #151a15;
+  border: 1px solid rgba(255, 255, 255, .07);
   text-decoration: none;
+  transition:
+    border-color .5s ease,
+    transform .6s var(--sd-ease);
 }
 
 .sd-related-card > img {
@@ -752,6 +861,11 @@
 
 .sd-related-card:hover > img {
   transform: scale(1.07);
+}
+
+.sd-related-card:hover {
+  border-color: rgba(var(--sd-green-rgb), .5);
+  transform: translateY(-6px);
 }
 
 .sd-related-overlay {
@@ -850,7 +964,7 @@
 }
 
 .sd-not-found > span {
-  color: #03ea04;
+  color: var(--sd-green);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 2px;
@@ -861,7 +975,7 @@
 }
 
 .sd-not-found a {
-  color: #03ea04;
+  color: var(--sd-green);
   font-weight: 800;
   text-decoration: none;
 }
@@ -951,6 +1065,18 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .sd-process-card {
+    min-height: 270px;
+  }
+
+  .sd-offer-section .sd-section-heading {
+    align-items: flex-start;
+  }
+
+  .sd-benefit-item h3 {
+    font-size: 16px;
+  }
+
   .sd-related-card {
     min-height: 320px;
   }
@@ -1020,12 +1146,19 @@
     padding-bottom: 85px;
   }
 
-  .sd-intro h2 {
-    font-size: 39px;
+  .sd-intro-content p {
+    font-size: 15px;
+    line-height: 1.85;
   }
 
-  .sd-intro-content p {
-    font-size: 16px;
+  .sd-intro-number {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sd-intro h2 {
+    font-size: 39px;
   }
 
   .sd-intro-mark {
@@ -1055,6 +1188,15 @@
     font-size: 15px;
   }
 
+  .sd-offer-section .sd-section-heading h2 {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+
+  .sd-offer-section .sd-section-heading > p {
+    font-size: 15px;
+  }
+
   .sd-offer-visual {
     min-height: 370px;
   }
@@ -1067,15 +1209,17 @@
   .sd-offer-card {
     grid-template-columns: 27px 1fr 18px;
     gap: 10px;
-    padding: 19px 14px;
+    min-height: 125px;
+    padding: 18px 14px;
   }
 
   .sd-offer-copy h3 {
-    font-size: 19px;
+    font-size: 18px;
   }
 
   .sd-offer-copy p {
     font-size: 14px;
+    line-height: 1.7;
   }
 
   .sd-benefits-section {
@@ -1083,7 +1227,7 @@
   }
 
   .sd-benefits-heading h2 {
-    font-size: 43px;
+    font-size: 37px;
   }
 
   .sd-benefit-item {
@@ -1093,7 +1237,7 @@
   }
 
   .sd-benefit-item h3 {
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .sd-process-grid {
@@ -1101,7 +1245,17 @@
   }
 
   .sd-process-card {
-    min-height: 180px;
+    min-height: 240px;
+    padding: 25px;
+  }
+
+  .sd-process-card h3 {
+    font-size: 21px;
+  }
+
+  .sd-process-card p {
+    font-size: 14px;
+    line-height: 1.75;
   }
 
   .sd-cta-section {
@@ -1110,8 +1264,8 @@
   }
 
   .sd-cta-content h2 {
-    font-size: 44px;
-    letter-spacing: -1.5px;
+    font-size: 39px;
+    letter-spacing: -1px;
   }
 
   .sd-cta-content p {
@@ -1151,328 +1305,7 @@
     transform: none;
     filter: none;
   }
-}
 
-
-
-
-/* =========================================
-   KINETIX SERVICE DETAIL - CONTENT UPGRADE
-========================================= */
-
-/* INTRO NUMBER */
-
-.sd-intro-number {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-top: 5px;
-}
-
-.sd-intro-number small {
-  color: #788278;
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  font-weight: 800;
-}
-
-/* BETTER INTRO TYPOGRAPHY */
-
-.sd-intro-content p {
-  max-width: 780px;
-  font-size: 18px;
-  line-height: 1.95;
-  letter-spacing: .1px;
-  color: #b4beb3;
-}
-
-/* SERVICE SPECIFIC OFFER HEADING */
-
-.sd-offer-section .sd-section-heading {
-  align-items: center;
-}
-
-.sd-offer-section .sd-section-heading h2 {
-  max-width: 680px;
-  font-size: clamp(36px, 4.5vw, 59px);
-  line-height: 1.08;
-  letter-spacing: -2px;
-  text-transform: none;
-}
-
-.sd-offer-section .sd-section-heading > p {
-  max-width: 390px;
-  font-size: 16px;
-  line-height: 1.9;
-}
-
-/* FEATURE CARDS */
-
-.sd-offer-card {
-  min-height: 130px;
-  padding: 25px;
-}
-
-.sd-offer-copy h3 {
-  font-size: 21px;
-  letter-spacing: -.3px;
-}
-
-.sd-offer-copy p {
-  font-size: 15px;
-  line-height: 1.75;
-  color: #aeb8ae;
-}
-
-/* BENEFITS HEADING */
-
-.sd-benefits-heading h2 {
-  font-size: clamp(36px, 4.5vw, 59px);
-  line-height: 1.12;
-  letter-spacing: -1.8px;
-}
-
-.sd-benefits-heading > p {
-  font-size: 17px;
-  line-height: 1.9;
-}
-
-.sd-benefit-accent {
-  width: 65px;
-  height: 3px;
-  margin-top: 30px;
-  background: #03ea04;
-  box-shadow: 0 0 15px rgba(3, 234, 4, .35);
-}
-
-/* BENEFIT LIST */
-
-.sd-benefit-item {
-  grid-template-columns: 42px 1fr 25px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
-.sd-benefit-index {
-  color: #03ea04;
-  font-size: 12px;
-  font-weight: 850;
-}
-
-.sd-benefit-item h3 {
-  font-size: 17px;
-  line-height: 1.65;
-  font-weight: 650;
-}
-
-/* PROCESS CARDS */
-
-.sd-process-grid {
-  gap: 18px;
-}
-
-.sd-process-card {
-  min-height: 300px;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-
-.sd-process-card h3 {
-  max-width: 300px;
-  font-size: 23px;
-  line-height: 1.35;
-  margin-bottom: 15px;
-  position: relative;
-  z-index: 2;
-}
-
-.sd-process-card p {
-  position: relative;
-  z-index: 2;
-  max-width: 320px;
-  margin: 0;
-  color: #aab5a9;
-  font-size: 15px;
-  line-height: 1.8;
-}
-
-.sd-process-number {
-  position: relative;
-  z-index: 2;
-  font-size: 39px;
-}
-
-.sd-process-watermark {
-  position: absolute;
-  right: 15px;
-  bottom: -35px;
-  color: rgba(3, 234, 4, .045);
-  font-size: 130px;
-  font-weight: 950;
-  line-height: 1;
-  pointer-events: none;
-  transition: transform .7s cubic-bezier(.22, 1, .36, 1);
-}
-
-.sd-process-card:hover .sd-process-watermark {
-  transform: translateY(-10px);
-}
-
-.sd-process-card:hover {
-  transform: translateY(-9px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, .2);
-}
-
-/* SECTION HEADING READABILITY */
-
-.sd-section-heading h2 {
-  max-width: 760px;
-  line-height: 1.12;
-  overflow-wrap: break-word;
-}
-
-.sd-section-heading > p {
-  line-height: 1.85;
-}
-
-/* CTA TYPOGRAPHY */
-
-.sd-cta-content h2 {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: clamp(42px, 6vw, 76px);
-  line-height: 1.12;
-  letter-spacing: -2px;
-  overflow-wrap: break-word;
-}
-
-.sd-cta-content p {
-  max-width: 620px;
-  margin: 0 auto 32px;
-  line-height: 1.8;
-}
-
-/* RELATED SERVICE CARDS */
-
-.sd-related-card {
-  border: 1px solid rgba(255, 255, 255, .07);
-  transition:
-    border-color .5s ease,
-    transform .6s cubic-bezier(.22, 1, .36, 1);
-}
-
-.sd-related-card:hover {
-  border-color: rgba(3, 234, 4, .5);
-  transform: translateY(-6px);
-}
-
-/* PREMIUM HOVER EFFECT */
-
-.sd-offer-visual::after {
-  content: "";
-  position: absolute;
-  inset: 12px;
-  border: 1px solid rgba(255, 255, 255, .15);
-  pointer-events: none;
-  transition: border-color .5s ease;
-}
-
-.sd-offer-visual:hover::after {
-  border-color: rgba(3, 234, 4, .55);
-}
-
-/* TABLET */
-
-@media (max-width: 900px) {
-  .sd-process-card {
-    min-height: 270px;
-  }
-
-  .sd-offer-section .sd-section-heading {
-    align-items: flex-start;
-  }
-
-  .sd-benefit-item h3 {
-    font-size: 16px;
-  }
-}
-
-/* MOBILE */
-
-@media (max-width: 600px) {
-  .sd-intro-content p {
-    font-size: 15px;
-    line-height: 1.85;
-  }
-
-  .sd-intro-number {
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .sd-offer-section .sd-section-heading h2 {
-    font-size: 36px;
-    letter-spacing: -1px;
-  }
-
-  .sd-offer-section .sd-section-heading > p {
-    font-size: 15px;
-  }
-
-  .sd-offer-card {
-    min-height: 125px;
-    padding: 18px 14px;
-  }
-
-  .sd-offer-copy h3 {
-    font-size: 18px;
-  }
-
-  .sd-offer-copy p {
-    font-size: 14px;
-    line-height: 1.7;
-  }
-
-  .sd-benefits-heading h2 {
-    font-size: 37px;
-  }
-
-  .sd-benefit-item {
-    grid-template-columns: 30px 1fr 20px;
-  }
-
-  .sd-benefit-item h3 {
-    font-size: 15px;
-  }
-
-  .sd-process-card {
-    min-height: 240px;
-    padding: 25px;
-  }
-
-  .sd-process-card h3 {
-    font-size: 21px;
-  }
-
-  .sd-process-card p {
-    font-size: 14px;
-    line-height: 1.75;
-  }
-
-  .sd-cta-content h2 {
-    font-size: 39px;
-    letter-spacing: -1px;
-  }
-}
-
-/* ACCESSIBILITY */
-
-@media (prefers-reduced-motion: reduce) {
   .sd-process-watermark,
   .sd-process-card,
   .sd-related-card {

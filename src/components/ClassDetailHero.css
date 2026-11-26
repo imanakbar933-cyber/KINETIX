@@ -12,6 +12,7 @@
   align-items: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                "Helvetica Neue", Arial, sans-serif;
+  background: #000;
 }
 
 /* ============================================
@@ -24,8 +25,6 @@
   background-position: center 25%;
   background-repeat: no-repeat;
   z-index: 0;
-
-  /* ✅ Slow Zoom Animation */
   animation: classHeroZoom 25s ease-in-out infinite;
 }
 
@@ -49,6 +48,7 @@
   );
   z-index: 1;
   pointer-events: none;
+  transition: background 0.4s ease;
 }
 
 /* ============================================
@@ -68,7 +68,7 @@
 }
 
 /* ============================================
-   TITLE
+   TITLE — always white (image ke upar)
    ============================================ */
 .classdetailhero-title {
   font-size: 4rem;
@@ -108,7 +108,7 @@
 }
 
 .classdetailhero-link:hover {
-  color: #00ff00;
+  color: var(--accent);
 }
 
 .classdetailhero-link::after {
@@ -118,7 +118,8 @@
   bottom: -3px;
   width: 0;
   height: 1px;
-  background: #00ff00;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
   transition: width 0.3s ease;
 }
 
@@ -132,8 +133,59 @@
 }
 
 .classdetailhero-current {
-  color: #00ff00;
+  color: var(--accent);
   font-weight: 800;
+  text-shadow:
+    0 0 15px var(--accent-glow),
+    0 2px 12px rgba(0, 0, 0, 0.9);
+}
+
+/* ============================================
+   LIGHT THEME — overlay thoda aur dark
+   (white text clearly visible rahe)
+   ============================================ */
+[data-theme="light"] .classdetailhero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.7) 40%,
+    rgba(0, 0, 0, 0.4) 70%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+
+[data-theme="light"] .classdetailhero-title {
+  color: #ffffff !important;
+  text-shadow:
+    0 0 40px rgba(0, 0, 0, 0.95),
+    0 4px 20px rgba(0, 0, 0, 0.85);
+}
+
+/* ============================================
+   CUSTOM THEME — title white, accent breadcrumb
+   ============================================ */
+[data-theme="custom"] .classdetailhero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.65) 40%,
+    rgba(0, 0, 0, 0.35) 70%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+}
+
+[data-theme="custom"] .classdetailhero-title {
+  color: #ffffff !important;
+  text-shadow:
+    0 0 40px rgba(0, 0, 0, 0.9),
+    0 4px 20px rgba(0, 0, 0, 0.75);
+}
+
+[data-theme="custom"] .classdetailhero-current {
+  color: var(--accent, #03ea04) !important;
+  text-shadow:
+    0 0 15px var(--accent-glow),
+    0 2px 12px rgba(0, 0, 0, 0.9);
 }
 
 /* ============================================
@@ -177,7 +229,6 @@
     background: rgba(0, 0, 0, 0.7);
   }
 
-  /* Mobile pe animation off */
   .classdetailhero-bg {
     animation: none;
   }

@@ -1,235 +1,409 @@
 
-/* ================= MAIN SECTION ================= */
+/* ============================================
+   KINETIX SCHEDULE
+   DARK / LIGHT / CUSTOM THEME
+============================================ */
+
+/* ============================================
+   MAIN SECTION
+============================================ */
+
 .schedule-section {
+  --schedule-bg: var(--bg-main, #050706);
+  --schedule-card: var(--bg-card, #111513);
+  --schedule-text: var(--text-main, #ffffff);
+  --schedule-muted: var(--text-muted, #a0a0a0);
+  --schedule-accent: var(--accent, #03ea04);
+  --schedule-border: var(--border-color, rgba(255,255,255,0.1));
+  --schedule-hover: var(--hover-bg, #1a211d);
+  --schedule-accent-rgb: var(--accent-rgb, 3, 234, 4);
+
+  position: relative;
+
   width: 100%;
+  max-width: 100%;
+
+  margin-left: 0;
+  margin-top: 0;
+
   min-height: 100vh;
-  background-color: #050706;
-  padding: 80px 20px;
+
+  background-color: var(--schedule-bg);
+  color: var(--schedule-text);
+
+  padding: 45px 30px 80px;
+
   display: flex;
   justify-content: center;
   align-items: flex-start;
+
+  box-sizing: border-box;
+
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
 }
+
+/* ============================================
+   CONTAINER
+============================================ */
 
 .schedule-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1800px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
   gap: 30px;
 }
 
-/* ================= HEADER ================= */
+/* ============================================
+   HEADER
+============================================ */
+
 .schedule-header {
+  width: 100%;
+
   text-align: center;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
   margin-bottom: 20px;
 }
 
-.section-subtitle {
-  color: #03ea04;
-  font-size: 14px;
+.schedule-section .section-subtitle {
+  color: var(--schedule-accent);
+
+  font-size: 16px;
   font-weight: 700;
+
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 15px;
+
+  margin-bottom: 12px;
+
+  transition: color 0.4s ease;
 }
 
-.section-title {
-  color: #ffffff;
-  font-size: 42px;
+.schedule-section .section-title {
+  color: var(--schedule-text);
+
+  font-size: 48px;
   font-weight: 800;
+
   line-height: 1.2;
+
   margin: 0;
+
   text-align: center;
+
+  transition: color 0.4s ease;
 }
 
-/* ================= FILTER TABS ================= */
-.filter-tabs {
+/* ============================================
+   FILTER TABS
+============================================ */
+
+.schedule-section .filter-tabs {
+  width: 100%;
+
   display: flex;
   flex-wrap: wrap;
+
   justify-content: center;
+
   gap: 15px;
+
   margin-bottom: 30px;
 }
 
-.tab-btn {
-  background: transparent;
-  color: #9ca3af;
-  border: 1px solid #1f2e24;
-  padding: 12px 24px;
+.schedule-section .tab-btn {
+  background: var(--schedule-card);
+
+  color: var(--schedule-muted);
+
+  border: 1px solid var(--schedule-border);
+
+  padding: 14px 26px;
+
   border-radius: 8px;
-  font-size: 14px;
+
+  font-size: 15px;
   font-weight: 600;
+
   cursor: pointer;
-  transition: all 0.3s ease;
   outline: none;
+
+  transition: all 0.3s ease;
 }
 
-.tab-btn:hover {
-  border-color: #03ea04;
-  color: #03ea04;
+.schedule-section .tab-btn:hover {
+  background: var(--schedule-hover);
+
+  border-color: var(--schedule-accent);
+
+  color: var(--schedule-accent);
 }
 
-.tab-btn.active {
-  background: rgba(3, 234, 4, 0.1);
-  border-color: #03ea04;
-  color: #03ea04;
-  box-shadow: 0 0 15px rgba(3, 234, 4, 0.2);
+.schedule-section .tab-btn.active {
+  background: var(--schedule-accent);
+
+  border-color: var(--schedule-accent);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 18px rgba(var(--schedule-accent-rgb), 0.25);
 }
 
-/* ================= SCHEDULE TABLE ================= */
-.schedule-table {
+/* ============================================
+   SCHEDULE TABLE
+============================================ */
+
+.schedule-section .schedule-table {
   width: 100%;
-  background: #0a0f0c;
-  border: 1px solid #1f2e24;
+
+  background-color: var(--schedule-card);
+
+  border: 1px solid var(--schedule-border);
+
   border-radius: 12px;
+
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease;
 }
 
-/* Header Row - 7 Columns */
-.table-header {
+/* ============================================
+   TABLE HEADER
+============================================ */
+
+.schedule-section .table-header {
   display: grid;
+
   grid-template-columns: 1.5fr repeat(6, minmax(0, 1fr));
-  background: #111a14;
-  border-bottom: 2px solid #03ea04;
+
+  background-color: var(--schedule-card);
+
+  border-bottom: 2px solid var(--schedule-accent);
+
+  transition: background-color 0.4s ease;
 }
 
-.header-cell {
-  padding: 20px 10px;
-  color: #03ea04;
-  font-size: 13px;
+.schedule-section .header-cell {
+  padding: 22px 10px;
+
+  color: var(--schedule-accent);
+
+  font-size: 15px;
   font-weight: 700;
+
   text-transform: uppercase;
+
   text-align: center;
+
   white-space: nowrap;
+
+  transition: color 0.4s ease;
 }
 
-/* Data Rows - 7 Columns */
-.table-row {
+/* ============================================
+   TABLE ROWS
+============================================ */
+
+.schedule-section .table-row {
   display: grid;
+
   grid-template-columns: 1.5fr repeat(6, minmax(0, 1fr));
-  border-bottom: 1px solid #1f2e24;
-  transition: background 0.3s ease;
+
+  background-color: var(--schedule-card);
+
+  border-bottom: 1px solid var(--schedule-border);
+
+  transition: background-color 0.3s ease;
 }
 
-.table-row:last-child {
+.schedule-section .table-row:last-child {
   border-bottom: none;
 }
 
-.table-row:hover {
-  background: #0f1712;
+.schedule-section .table-row:hover {
+  background-color: var(--schedule-hover);
 }
 
-.table-cell {
-  padding: 18px 10px;
-  color: #d1d5db;
-  font-size: 13px;
+.schedule-section .table-cell {
+  padding: 20px 10px;
+
+  color: var(--schedule-text);
+
+  font-size: 15px;
+
   text-align: center;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   min-width: 0;
+
+  transition: color 0.4s ease;
 }
 
-/* Time Column */
-.time-cell {
-  color: #03ea04;
+/* ============================================
+   TIME COLUMN
+============================================ */
+
+.schedule-section .time-cell {
+  color: var(--schedule-accent);
+
   font-weight: 700;
-  font-size: 13px;
+  font-size: 15px;
+
   justify-content: flex-start;
-  padding-left: 18px;
+
+  padding-left: 22px;
+
   white-space: nowrap;
+
+  transition: color 0.4s ease;
 }
 
-/* ================= RESPONSIVE DESIGN ================= */
+/* ============================================
+   RESPONSIVE DESIGN
+============================================ */
 
 @media (max-width: 1200px) {
+
   .schedule-container {
     max-width: 100%;
   }
 
-  .header-cell,
-  .table-cell {
-    font-size: 12px;
+  .schedule-section .header-cell,
+  .schedule-section .table-cell {
+    font-size: 13px;
     padding: 16px 7px;
   }
 
-  .time-cell {
+  .schedule-section .time-cell {
     padding-left: 12px;
   }
+
 }
 
 @media (max-width: 992px) {
-  .section-title {
-    font-size: 32px;
+
+  .schedule-section {
+    padding: 45px 20px 60px;
   }
 
-  .schedule-table {
+  .schedule-section .section-title {
+    font-size: 36px;
+  }
+
+  .schedule-section .schedule-table {
     overflow-x: auto;
   }
 
-  .table-header,
-  .table-row {
+  .schedule-section .table-header,
+  .schedule-section .table-row {
     min-width: 1050px;
   }
 
-  .header-cell,
-  .table-cell {
-    font-size: 13px;
-    padding: 15px 10px;
-  }
 }
 
 @media (max-width: 768px) {
+
   .schedule-section {
-    padding: 60px 15px;
+    padding: 40px 15px 50px;
   }
 
-  .section-title {
-    font-size: 28px;
+  .schedule-section .section-title {
+    font-size: 30px;
   }
 
-  .section-subtitle {
-    font-size: 12px;
+  .schedule-section .section-subtitle {
+    font-size: 13px;
   }
 
-  .filter-tabs {
+  .schedule-section .filter-tabs {
     gap: 10px;
   }
 
-  .tab-btn {
+  .schedule-section .tab-btn {
     padding: 10px 15px;
     font-size: 12px;
   }
 
-  .schedule-table {
+  .schedule-section .schedule-table {
     overflow-x: auto;
+
     width: 100%;
+
     scrollbar-width: thin;
-    scrollbar-color: #03ea04 #111a14;
+
+    scrollbar-color:
+      var(--schedule-accent)
+      var(--schedule-card);
   }
 
-  .table-header,
-  .table-row {
+  .schedule-section .table-header,
+  .schedule-section .table-row {
     min-width: 1050px;
   }
+
 }
 
 @media (max-width: 480px) {
+
   .schedule-section {
-    padding: 50px 12px;
+    padding: 35px 12px 40px;
   }
 
-  .section-title {
+  .schedule-section .section-title {
     font-size: 25px;
   }
 
-  .tab-btn {
+  .schedule-section .section-subtitle {
+    font-size: 11px;
+  }
+
+  .schedule-section .tab-btn {
     padding: 9px 12px;
     font-size: 11px;
   }
+
+}
+
+/* ============================================
+   FIX BLACK BACKGROUND INSIDE SCHEDULE
+============================================ */
+
+/* Main Schedule Background */
+.schedule-section {
+  background: var(--bg-main) !important;
+}
+
+/* Remove Black Background From Inner Container */
+.schedule-section .schedule-container {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Schedule Header Background */
+.schedule-section .schedule-header {
+  background: transparent !important;
+}
+
+/* Remove Black Background From Other Inner Wrappers */
+.schedule-section .schedule-container > div:not(.schedule-table):not(.filter-tabs) {
+  background-color: transparent !important;
 }

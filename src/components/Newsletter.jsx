@@ -7,10 +7,9 @@ const Newsletter = () => {
   return (
     <section className="newsletter">
 
-      {/* ---------- LEFT SIDE: Text + Form ---------- */}
+      {/* LEFT SIDE: Text + Form */}
       <div className="newsletter-left">
 
-        {/* Heading with slide-in animation */}
         <motion.h1
           className="newsletter-title"
           initial={{ opacity: 0, x: -80 }}
@@ -20,7 +19,6 @@ const Newsletter = () => {
           STAY STRONG AND <br /> STAY INFORMED
         </motion.h1>
 
-        {/* Paragraph with fade-up animation */}
         <motion.p
           className="newsletter-para"
           initial={{ opacity: 0, y: 40 }}
@@ -32,7 +30,6 @@ const Newsletter = () => {
           and updates about our latest gym activities and offers.
         </motion.p>
 
-        {/* Email input + arrow with fade-up */}
         <motion.div
           className="newsletter-form"
           initial={{ opacity: 0, y: 40 }}
@@ -56,10 +53,10 @@ const Newsletter = () => {
         </motion.div>
       </div>
 
-      {/* ---------- RIGHT SIDE: Image in circular glow ---------- */}
+      {/* RIGHT SIDE: Image in circular glow */}
       <div className="newsletter-right">
 
-        {/* Glowing pulsing circle behind image */}
+        {/* Dynamic Accent Glow */}
         <motion.div
           className="newsletter-glow"
           animate={{
@@ -73,7 +70,7 @@ const Newsletter = () => {
           }}
         />
 
-        {/* Trainer image with floating animation */}
+        {/* Trainer Image */}
         <motion.img
           src="/gym-assets/Newsletter.jpg"
           alt="Personal training session at KINETIX Fitness Club"
@@ -97,7 +94,6 @@ const Newsletter = () => {
         />
 
       </div>
-
     </section>
   );
 };

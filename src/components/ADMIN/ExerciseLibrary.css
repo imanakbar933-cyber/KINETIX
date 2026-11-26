@@ -1,0 +1,143 @@
+.exlib-container {
+  padding: 30px;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  background-color: #0f0f0f; /* Aapke dashboard ka background color */
+  min-height: 100vh;
+}
+
+.exlib-header h1 {
+  font-size: 28px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.exlib-header p {
+  color: #9ca3af;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.exlib-search-bar {
+  display: flex;
+  align-items: center;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 25px 0;
+}
+
+.exlib-search-bar span {
+  color: #666;
+  margin-right: 10px;
+}
+
+.exlib-search-bar input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  width: 100%;
+  outline: none;
+  font-size: 14px;
+}
+
+.exlib-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.exlib-tabs button {
+  background: #1a1a1a;
+  color: #9ca3af;
+  border: 1px solid #333;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.exlib-tabs button.active {
+  background: #22c55e; /* Neon Green */
+  color: #000;
+  border-color: #22c55e;
+  font-weight: 600;
+}
+
+.exlib-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.exlib-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.exlib-card:hover {
+  transform: translateY(-5px);
+  border-color: #22c55e;
+}
+
+.exlib-image-wrapper {
+  position: relative;
+  height: 180px;
+}
+
+.exlib-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.exlib-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #22c55e;
+  color: #000;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.exlib-card-content {
+  padding: 15px;
+}
+
+.exlib-card-content h3 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+}
+
+.exlib-card-content p {
+  color: #9ca3af;
+  font-size: 13px;
+  margin: 0 0 15px 0;
+}
+
+.exlib-view-btn {
+  background: transparent;
+  color: #22c55e;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+}
+
+.exlib-empty {
+  text-align: center;
+  color: #666;
+  padding: 50px;
+}

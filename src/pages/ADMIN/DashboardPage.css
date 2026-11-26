@@ -1,63 +1,106 @@
+
 /* =========================================================
    DASHBOARD LAYOUT — THEME + ACCENT + COMPACT + ANIMATIONS
 ========================================================= */
+
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
-  background: #050706;
-  color: #fff;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  position: relative;
-  transition: background 0.3s ease, color 0.3s ease;
 
-  /* Default (dark) theme tokens */
-  --dash-accent: #03ea04;
-  --dash-card-bg: #1a1a1a;
-  --dash-muted: #888;
-  --dash-border: transparent;
-  --dash-bg: #050706;
-  --dash-sidebar-bg: #050706;
-  --dash-navbar-bg: #050706;
-  --dash-text: #ffffff;
-  --dash-text-muted: rgba(255, 255, 255, 0.6);
+  background: var(--dash-bg, #050706);
+  color: var(--dash-text, #ffffff);
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  position: relative;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+
+  --dash-accent: var(--accent, #03ea04);
+  --dash-card-bg: var(--bg-card, #1a1a1a);
+  --dash-muted: var(--text-muted, #888888);
+  --dash-border: var(--border-color, transparent);
+  --dash-bg: var(--bg-main, #050706);
+  --dash-sidebar-bg: var(--bg-main, #050706);
+  --dash-navbar-bg: var(--bg-main, #050706);
+  --dash-text: var(--text-main, #ffffff);
+  --dash-text-muted: var(--text-muted, rgba(255, 255, 255, 0.6));
 }
 
 /* =========================================================
    MAIN CONTENT
 ========================================================= */
+
 .dashboard-content {
   flex: 1;
+
   margin-top: 90px;
   margin-left: 0;
+
   padding: 30px;
+
   background: var(--dash-bg);
   color: var(--dash-text);
+
   min-height: calc(100vh - 90px);
-  transition: margin-left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    background 0.3s ease, color 0.3s ease;
+
   width: 100%;
+  min-width: 0;
+
   overflow-x: hidden;
+
+  transition:
+    margin-left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 .dashboard-content.shifted {
-  margin-left: 280px;
+  margin-left: var(--dash-sidebar-width, 280px);
 }
 
 /* =========================================================
-   ✅ LIGHT MODE
+   PLACEHOLDER PAGE
 ========================================================= */
+
+.dashboard-placeholder {
+  padding: 40px;
+  color: var(--dash-text);
+}
+
+.dashboard-placeholder h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.dashboard-placeholder p {
+  color: var(--dash-muted);
+  margin-bottom: 30px;
+}
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+.dashboard-layout.dashboard-dark {
+  background: var(--dash-bg);
+  color: var(--dash-text);
+}
+
+.dashboard-layout.dashboard-dark .dashboard-content {
+  background: var(--dash-bg);
+  color: var(--dash-text);
+}
+
+/* =========================================================
+   LIGHT MODE
+========================================================= */
+
 .dashboard-layout.dashboard-light {
-  background: #f4f6f8;
-  color: #1a1a1a;
-  --dash-accent: var(--dash-accent, #03ea04);
-  --dash-card-bg: #ffffff;
-  --dash-muted: #6b7280;
-  --dash-border: #e5e7eb;
-  --dash-bg: #f4f6f8;
-  --dash-sidebar-bg: #ffffff;
-  --dash-navbar-bg: #ffffff;
-  --dash-text: #111827;
-  --dash-text-muted: #6b7280;
+  background: var(--dash-bg);
+  color: var(--dash-text);
 }
 
 .dashboard-layout.dashboard-light .dashboard-content {
@@ -66,101 +109,261 @@
 }
 
 /* Sidebar light */
+
 .dashboard-layout.dashboard-light .dash-sidebar {
   background: var(--dash-sidebar-bg);
   border-right: 1px solid var(--dash-border);
 }
 
-.dashboard-layout.dashboard-light .dash-sidebar .dash-menu-item {
-  color: #4b5563;
-}
-
-.dashboard-layout.dashboard-light .dash-sidebar .dash-menu-item:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: #111827;
-}
-
-.dashboard-layout.dashboard-light .dash-sidebar .dash-menu-item.active {
-  background: var(--dash-accent);
-  color: #050505;
-}
-
-.dashboard-layout.dashboard-light .dash-sidebar .dash-sidebar-footer {
-  border-top: 1px solid var(--dash-border);
-}
-
-.dashboard-layout.dashboard-light .dash-sidebar .user-info h4 {
-  color: #111827;
-}
-
-.dashboard-layout.dashboard-light .dash-sidebar .user-info p {
-  color: #6b7280;
-}
-
 /* Navbar light */
+
 .dashboard-layout.dashboard-light .dash-navbar {
   background: var(--dash-navbar-bg);
   border-bottom: 1px solid var(--dash-border);
-  color: #1a1a1a;
+  color: var(--dash-text);
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .home-text {
-  color: #6b7280;
+  color: var(--dash-text-muted);
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .current-text {
-  color: #111827;
+  color: var(--dash-text);
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .dash-icon-btn {
-  color: #4b5563;
+  color: var(--dash-text-muted);
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .dash-icon-btn:hover {
   color: var(--dash-accent);
-  background: rgba(0, 0, 0, 0.05);
+  background: color-mix(
+    in srgb,
+    var(--dash-accent) 10%,
+    transparent
+  );
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .dash-search input {
-  background: #f3f4f6;
-  color: #111827;
-  border-color: #e5e7eb;
+  background: var(--dash-card-bg);
+  color: var(--dash-text);
+  border-color: var(--dash-border);
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .profile-info h4 {
-  color: #111827;
+  color: var(--dash-text);
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .profile-info p {
-  color: #6b7280;
+  color: var(--dash-muted);
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .profile-dropdown {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  color: #111827;
+  background: var(--dash-card-bg);
+  border: 1px solid var(--dash-border);
+  color: var(--dash-text);
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .profile-dropdown .dropdown-header h4 {
-  color: #111827;
+  color: var(--dash-text);
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .profile-dropdown .dropdown-header p {
-  color: #6b7280;
+  color: var(--dash-muted);
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .dropdown-link {
-  color: #374151;
+  color: var(--dash-text);
 }
 
 .dashboard-layout.dashboard-light .dash-navbar .dropdown-link:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: #111827;
+  background: color-mix(
+    in srgb,
+    var(--dash-accent) 12%,
+    transparent
+  );
+
+  color: var(--dash-accent);
 }
 
 /* =========================================================
-   ✅ COMPACT MODE
+   SIDEBAR THEME
 ========================================================= */
+
+.dashboard-layout .dash-sidebar {
+  background: var(--dash-sidebar-bg);
+  color: var(--dash-text);
+  border-right: 1px solid var(--dash-border);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Sidebar sections */
+
+.dashboard-layout .dash-sidebar-header,
+.dashboard-layout .dash-sidebar-menu,
+.dashboard-layout .dash-sidebar-footer-wrap {
+  background: var(--dash-sidebar-bg);
+}
+
+/* Menu items */
+
+.dashboard-layout .dash-sidebar .dash-menu-item {
+  color: var(--dash-text-muted);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Menu hover */
+
+.dashboard-layout .dash-sidebar .dash-menu-item:hover {
+  color: var(--dash-accent);
+
+  background: color-mix(
+    in srgb,
+    var(--dash-accent) 10%,
+    transparent
+  );
+}
+
+/* Active menu */
+
+.dashboard-layout .dash-sidebar .dash-menu-item.active {
+  background: color-mix(
+    in srgb,
+    var(--dash-accent) 15%,
+    transparent
+  );
+
+  color: var(--dash-accent);
+  border-left-color: var(--dash-accent);
+}
+
+.dashboard-layout .dash-sidebar .dash-menu-item.active svg {
+  color: var(--dash-accent);
+}
+
+/* Exercise submenu */
+
+.dashboard-layout .dash-sidebar .dash-exercise-sublink {
+  color: var(--dash-text-muted);
+}
+
+.dashboard-layout .dash-sidebar .dash-exercise-sublink:hover,
+.dashboard-layout .dash-sidebar .dash-exercise-sublink.active {
+  color: var(--dash-accent);
+
+  background: color-mix(
+    in srgb,
+    var(--dash-accent) 12%,
+    transparent
+  );
+}
+
+/* Sidebar footer */
+
+.dashboard-layout .dash-sidebar .dash-sidebar-footer {
+  border-color: var(--dash-border);
+  transition: all 0.3s ease;
+}
+
+.dashboard-layout .dash-sidebar .user-info h4 {
+  color: var(--dash-text);
+}
+
+.dashboard-layout .dash-sidebar .user-info p {
+  color: var(--dash-accent);
+}
+
+/* Profile image */
+
+.dashboard-layout .dash-sidebar .dash-sidebar-footer img {
+  border-color: var(--dash-accent);
+
+  box-shadow: 0 0 12px color-mix(
+    in srgb,
+    var(--dash-accent) 35%,
+    transparent
+  );
+}
+
+/* Footer hover */
+
+.dashboard-layout .dash-sidebar .dash-sidebar-footer:hover {
+  background: color-mix(
+    in srgb,
+    var(--dash-accent) 8%,
+    transparent
+  );
+
+  border-color: var(--dash-accent);
+}
+
+/* =========================================================
+   KINETIX TEXT LOGO
+========================================================= */
+
+.dashboard-layout .sidebar-brand-icon span:not(:nth-child(3)) {
+  background: var(--dash-accent);
+  box-shadow: 0 0 12px var(--dash-accent);
+}
+
+.dashboard-layout .sidebar-brand-words strong {
+  color: var(--dash-accent);
+  text-shadow: 0 0 10px var(--dash-accent);
+}
+
+/* =========================================================
+   ACCENT COLOR — NAVBAR
+========================================================= */
+
+.dashboard-layout .dash-navbar .dash-icon-btn:hover {
+  color: var(--dash-accent);
+}
+
+.dashboard-layout .dash-navbar .dropdown-link:hover {
+  color: var(--dash-accent);
+}
+
+/* =========================================================
+   CUSTOM THEME SUPPORT
+========================================================= */
+
+.dashboard-layout[data-theme="custom"],
+[data-theme="custom"] .dashboard-layout {
+  background: var(--dash-bg);
+  color: var(--dash-text);
+}
+
+[data-theme="custom"] .dashboard-layout .dash-sidebar {
+  background: var(--dash-sidebar-bg);
+  border-right: 1px solid var(--dash-border);
+}
+
+[data-theme="custom"] .dashboard-layout .dash-navbar {
+  background: var(--dash-navbar-bg);
+  border-bottom: 1px solid var(--dash-border);
+}
+
+[data-theme="custom"] .dashboard-layout .dashboard-content {
+  background: var(--dash-bg);
+  color: var(--dash-text);
+}
+
+/* =========================================================
+   COMPACT MODE
+========================================================= */
+
+.dashboard-layout.dashboard-compact {
+  --dash-sidebar-width: 240px;
+}
+
 .dashboard-layout.dashboard-compact .dashboard-content {
   padding: 18px 22px;
   margin-top: 70px;
@@ -180,14 +383,14 @@
   height: 70px;
 }
 
-.dashboard-layout.dashboard-compact
-  .dashboard-content.shifted {
+.dashboard-layout.dashboard-compact .dashboard-content.shifted {
   margin-left: 240px;
 }
 
 /* =========================================================
-   ✅ NO ANIMATIONS
+   NO ANIMATIONS
 ========================================================= */
+
 .dashboard-layout.dashboard-no-animations *,
 .dashboard-layout.dashboard-no-animations *::before,
 .dashboard-layout.dashboard-no-animations *::after {
@@ -196,36 +399,19 @@
 }
 
 /* =========================================================
-   ✅ ACCENT COLOR USAGE
+   RESPONSIVE
 ========================================================= */
-.dashboard-layout .dash-sidebar .dash-menu-item.active {
-  background: var(--dash-accent);
-  color: #050505;
-}
 
-.dashboard-layout .dash-sidebar .dash-menu-item.active svg {
-  color: #050505;
-}
-
-.dashboard-layout .dash-navbar .dash-icon-btn:hover {
-  color: var(--dash-accent);
-}
-
-.dashboard-layout .dash-sidebar .sidebar-logo img {
-  filter: drop-shadow(0 0 8px var(--dash-accent));
-}
-
-/* =========================================================
-   ✅ RESPONSIVE
-========================================================= */
 @media (max-width: 768px) {
   .dashboard-content {
     margin-top: 80px;
     padding: 20px;
   }
+
   .dashboard-content.shifted {
     margin-left: 0;
   }
+
   .dashboard-layout.dashboard-compact .dashboard-content {
     margin-top: 70px;
     padding: 14px;

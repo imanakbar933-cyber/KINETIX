@@ -5,11 +5,11 @@
 .trainers {
   position: relative;
   width: 100%;
-  /* 👇 Blank space fix: top padding kam ki, bottom thoda kam kiya */
-  padding: 20px 5% 80px; 
-  background: #050505;
+  padding: 20px 5% 80px;
+  background: var(--bg-main);
   font-family: Arial, sans-serif;
   overflow: hidden;
+  transition: background 0.4s ease;
 }
 
 .trainers-container {
@@ -32,22 +32,19 @@
 }
 
 /* =========================================================
-   ANIMATION TRIGGERS (SLOW & RELIABLE)
+   ANIMATION TRIGGERS
 ========================================================= */
 
-/* Tag Animation */
 .trainers-tag {
   display: inline-block;
-  color: #03ea04;
+  color: var(--accent);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 4px;
   text-transform: uppercase;
   position: relative;
   padding-left: 40px;
-  text-shadow: 0 0 12px rgba(3, 234, 4, 0.5);
-  
-  /* Start State */
+  text-shadow: 0 0 12px var(--accent-glow);
   opacity: 0;
   transform: translateX(-30px);
   transition: opacity 1s ease-out, transform 1s ease-out;
@@ -67,8 +64,8 @@
   transform: translateY(-50%);
   width: 28px;
   height: 2px;
-  background: #03ea04;
-  box-shadow: 0 0 12px rgba(3, 234, 4, 0.9);
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
   border-radius: 2px;
 }
 
@@ -78,7 +75,7 @@
 
 .trainers-heading {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: clamp(38px, 4.5vw, 64px);
   font-weight: 900;
   line-height: 1.1;
@@ -97,21 +94,19 @@
 }
 
 .trainers-heading .word.green {
-  color: #03ea04;
+  color: var(--accent);
   text-shadow:
-    0 0 18px rgba(3, 234, 4, 0.7),
-    0 0 40px rgba(3, 234, 4, 0.4);
+    0 0 18px var(--accent-glow),
+    0 0 40px var(--accent-soft);
 }
 
 /* =========================================================
-   ARROW BUTTONS (CONTROLS)
+   ARROW BUTTONS
 ========================================================= */
 
 .trainers-controls {
   display: flex;
   gap: 12px;
-  
-  /* Start State */
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1s ease-out, transform 1s ease-out;
@@ -126,8 +121,8 @@
 .trainer-arrow {
   width: 52px;
   height: 52px;
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  background: var(--bg-card);
+  color: var(--text-main);
   font-size: 20px;
   font-weight: 700;
   border-radius: 8px;
@@ -135,7 +130,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease-out;
@@ -145,7 +140,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: #03ea04;
+  background: var(--accent);
   transform: translateY(101%);
   transition: transform 0.3s ease-out;
   z-index: -1;
@@ -156,9 +151,9 @@
 }
 
 .trainer-arrow:hover {
-  color: #050505;
-  border-color: #03ea04;
-  box-shadow: 0 0 22px rgba(3, 234, 4, 0.6);
+  color: #0a0a0a;
+  border-color: var(--accent);
+  box-shadow: 0 0 22px var(--accent-glow);
   transform: translateY(-4px);
 }
 
@@ -183,19 +178,15 @@
 
 .trainer-card {
   flex: 0 0 calc((100% - 40px) / 3);
-  
-  /* Start State */
   opacity: 0;
   transform: translateY(50px) scale(0.95);
   transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), 
               transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Cards one-by-one reveal */
 .trainers.in-view .trainer-card {
   opacity: 1;
   transform: translateY(0) scale(1);
-  /* Delay calculate via CSS variable --i */
   transition-delay: calc(0.6s + (var(--i) * 0.15s));
 }
 
@@ -212,8 +203,8 @@
   border-radius: 10px;
   overflow: hidden;
   isolation: isolate;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 15px 40px var(--shadow-color);
   transition:
     transform 0.35s ease-out,
     box-shadow 0.35s ease,
@@ -222,10 +213,10 @@
 
 .trainer-card:hover .trainer-card-image {
   transform: translateY(-10px);
-  border-color: rgba(3, 234, 4, 0.55);
+  border-color: var(--accent-glow);
   box-shadow:
-    0 0 30px rgba(3, 234, 4, 0.22),
-    0 25px 50px rgba(0, 0, 0, 0.7);
+    0 0 30px var(--accent-soft),
+    0 25px 50px var(--shadow-color);
 }
 
 .trainer-card-image img {
@@ -243,7 +234,7 @@
 }
 
 /* =========================================================
-   NEON SWEEP & SCAN (Hover Effects)
+   NEON SWEEP & SCAN
 ========================================================= */
 
 .trainer-sweep {
@@ -255,9 +246,9 @@
   background: linear-gradient(
     120deg,
     transparent 0%,
-    rgba(3, 234, 4, 0.18) 40%,
+    var(--accent-soft) 40%,
     rgba(255, 255, 255, 0.28) 50%,
-    rgba(3, 234, 4, 0.18) 60%,
+    var(--accent-soft) 60%,
     transparent 100%
   );
   transform: skewX(-18deg);
@@ -288,9 +279,9 @@
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(3, 234, 4, 0.12) 45%,
-    rgba(3, 234, 4, 0.35) 50%,
-    rgba(3, 234, 4, 0.12) 55%,
+    var(--accent-soft) 45%,
+    var(--accent-glow) 50%,
+    var(--accent-soft) 55%,
     transparent 100%
   );
   opacity: 0;
@@ -328,29 +319,27 @@
 .trainer-card:hover .trainer-card-overlay {
   background: linear-gradient(
     180deg,
-    rgba(3, 234, 4, 0.08) 0%,
+    var(--accent-soft) 0%,
     rgba(0, 0, 0, 0.35) 55%,
     rgba(0, 0, 0, 0.95) 100%
   );
 }
 
 /* =========================================================
-   ✅ NAME (FIXED FOR 2 LINES)
+   NAME
 ========================================================= */
 
-/* Ye naya wrapper hai jo naam ko hold karega */
 .trainer-name-block {
   position: absolute;
   left: 20px;
   bottom: 22px;
   z-index: 5;
   display: flex;
-  flex-direction: column; /* Dono lines ek ke neeche ek */
+  flex-direction: column;
   gap: 2px;
   transition: transform 0.35s ease;
 }
 
-/* Dono lines ke liye style */
 .trainer-card-name {
   margin: 0;
   color: #ffffff;
@@ -358,20 +347,19 @@
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
-  line-height: 1.1; /* Overlap hone se bachata hai */
+  line-height: 1.1;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
   transition: color 0.35s ease;
 }
 
-/* Hover effect poore naam par */
 .trainer-card:hover .trainer-name-block {
   transform: translateY(-4px);
 }
 
 .trainer-card:hover .trainer-card-name {
-  color: #03ea04;
+  color: var(--accent);
   text-shadow:
-    0 0 15px rgba(3, 234, 4, 0.8),
+    0 0 15px var(--accent-glow),
     0 2px 12px rgba(0, 0, 0, 0.9);
 }
 
@@ -395,10 +383,10 @@
 }
 
 .trainer-card:hover .trainer-card-arrow {
-  background: #03ea04;
-  color: #050505;
-  border-color: #03ea04;
-  box-shadow: 0 0 22px rgba(3, 234, 4, 0.8);
+  background: var(--accent);
+  color: #0a0a0a;
+  border-color: var(--accent);
+  box-shadow: 0 0 22px var(--accent-glow);
   transform: rotate(45deg);
 }
 
@@ -412,7 +400,7 @@
   height: 20px;
   z-index: 6;
   pointer-events: none;
-  border-color: #03ea04;
+  border-color: var(--accent);
   border-style: solid;
   border-width: 0;
   opacity: 0;
@@ -427,6 +415,19 @@
 .trainer-card:hover .t-corner {
   opacity: 1;
   transform: translate(0, 0);
+}
+
+/* =========================================================
+   LIGHT THEME FINE-TUNING
+========================================================= */
+
+[data-theme="light"] .trainer-card-arrow {
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .trainer-arrow:hover,
+[data-theme="light"] .trainer-card:hover .trainer-card-arrow {
+  color: #fff;
 }
 
 /* =========================================================
@@ -445,7 +446,7 @@
 
 @media (max-width: 600px) {
   .trainers {
-    padding: 20px 20px 70px; /* Top padding kam ki */
+    padding: 20px 20px 70px;
   }
   .trainers-heading {
     font-size: 32px;
@@ -454,7 +455,6 @@
     flex: 0 0 100%;
   }
 
-  /* ✅ Mobile Name Fix */
   .trainer-name-block {
     left: 12px;
     bottom: 14px;
