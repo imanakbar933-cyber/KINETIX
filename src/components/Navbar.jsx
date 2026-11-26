@@ -269,12 +269,15 @@ function Navbar() {
   // HOME CURTAIN ANIMATION
   // =========================================
 
-  const handleHomeClick = () => {
-    window.dispatchEvent(new Event("triggerHomeAnimation"));
+const handleHomeClick = () => {
+  setMenuOpen(false);
+  setDropdownOpen(false);
 
-    setMenuOpen(false);
-    setDropdownOpen(false);
-  };
+  // Navigation complete hone ke baad Hero animation trigger hogi
+  setTimeout(() => {
+    window.dispatchEvent(new Event("triggerHomeAnimation"));
+  }, 150);
+};
 
   // =========================================
   // NAVIGATION

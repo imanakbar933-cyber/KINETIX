@@ -1,4 +1,5 @@
-import { StrictMode } from "react";
+
+import React, { StrictMode, useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import {
   BrowserRouter,
@@ -9,6 +10,9 @@ import {
 
 import "./index.css";
 import "./components/global.css";
+
+// Intro
+import KinetixIntro from "./components/KinetixIntro";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -38,6 +42,26 @@ import DashboardPage from "./pages/ADMIN/DashboardPage.jsx";
 function AppLayout() {
   const location = useLocation();
 
+  // STARTUP INTRO: Only on first opening of Home page
+  const [showStartupIntro, setShowStartupIntro] = useState(
+    () => window.location.pathname === "/"
+  );
+
+  useEffect(() => {
+    if (!showStartupIntro) return;
+
+    const timer = setTimeout(() => {
+      setShowStartupIntro(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [showStartupIntro]);
+
+  // Intro ke waqt sirf KINETIX intro render hoga
+  if (showStartupIntro) {
+    return <KinetixIntro key="startup-intro" />;
+  }
+
   // AUTH PAGES: No Navbar, No Footer
   const isAuthPage =
     location.pathname === "/login" ||
@@ -57,9 +81,7 @@ function AppLayout() {
 
   const isPlansPage = location.pathname === "/plans";
 
-  // ==========================================
   // DASHBOARD LAYOUT
-  // ==========================================
   if (isDashboard) {
     return (
       <Routes>
@@ -131,9 +153,7 @@ function AppLayout() {
           element={<DashboardPage page="services" />}
         />
 
-        {/* ========================================== */}
-        {/* EXERCISES - LOWERCASE PATHS */}
-        {/* ========================================== */}
+        {/* EXERCISES */}
         <Route
           path="/dashboard/exercises/library"
           element={<DashboardPage page="exercise-library" />}
@@ -144,7 +164,6 @@ function AppLayout() {
           element={<DashboardPage page="exercise-detail" />}
         />
 
-        {/* Specific Exercise ID ke liye */}
         <Route
           path="/dashboard/exercises/details/:id"
           element={<DashboardPage page="exercise-detail" />}
@@ -153,9 +172,7 @@ function AppLayout() {
     );
   }
 
-  // ==========================================
   // MAIN WEBSITE LAYOUT
-  // ==========================================
   return (
     <>
       <ScrollToTop />
@@ -178,10 +195,12 @@ function AppLayout() {
           <Route path="/faqpage" element={<FaqPage />} />
           <Route path="/ClassroomPage" element={<ClassroomPage />} />
           <Route path="/GalleryPage" element={<GalleryPage />} />
+
           <Route
             path="/class-detail/:classId"
             element={<ClassDetail />}
           />
+
           <Route path="/contact" element={<Contact />} />
           <Route path="/schedules" element={<SchedulePage />} />
           <Route path="/login" element={<Login />} />

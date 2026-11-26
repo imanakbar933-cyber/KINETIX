@@ -16,6 +16,15 @@
   transition: background-color 0.4s ease;
 }
 
+/* Hide original Hero while KINETIX intro is playing */
+
+.hero-intro-hidden {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+
 .hero-left {
   width: 52%;
   padding: 40px 30px;
@@ -91,7 +100,7 @@
 }
 
 /* =========================================================
-   PREMIUM KINETIX INTRO
+   PREMIUM KINETIX INTRO — FIXED
 ========================================================= */
 
 .kinetix-intro {
@@ -113,23 +122,28 @@
   isolation: isolate;
 
   color: var(--intro-accent);
-  background:
+
+  /* Fully opaque background */
+  background-color: var(--bg-main, #050706);
+  background-image:
     radial-gradient(
       ellipse at 50% 45%,
       var(--accent-soft, rgba(3, 234, 4, 0.08)),
       transparent 55%
-    ),
-    var(--bg-main, #050706);
+    );
 
   animation: introFadeIn 0.6s ease both;
 }
 
-/* Subtle moving grid */
+/* =========================================================
+   SUBTLE MOVING GRID
+========================================================= */
 
 .intro-grid {
   position: absolute;
   inset: -50%;
-  z-index: -2;
+  z-index: 0;
+  pointer-events: none;
 
   background-image:
     linear-gradient(
@@ -149,16 +163,20 @@
   opacity: 0.45;
 }
 
-/* Ambient light */
+/* =========================================================
+   AMBIENT LIGHT
+========================================================= */
 
 .intro-glow {
   position: absolute;
   width: 380px;
   height: 380px;
   border-radius: 50%;
+
   filter: blur(90px);
   pointer-events: none;
-  z-index: -1;
+
+  z-index: 1;
   background: var(--accent, #03ea04);
   opacity: 0.08;
 }
@@ -210,7 +228,8 @@
   opacity: 0;
   transform: translateY(25px) scale(0.8);
 
-  animation: logoReveal 0.85s cubic-bezier(0.2, 0.8, 0.2, 1)
+  animation:
+    logoReveal 0.85s cubic-bezier(0.2, 0.8, 0.2, 1)
     0.1s forwards;
 }
 
@@ -265,6 +284,7 @@
   justify-content: center;
   gap: 5px;
   white-space: nowrap;
+  position: relative;
 }
 
 .intro-letter {
@@ -285,17 +305,14 @@
   opacity: 0;
   transform: translateY(35px) rotateX(-35deg) scale(0.85);
 
-  animation: premiumLetterReveal 0.7s
+  animation:
+    premiumLetterReveal 0.7s
     cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 /* =========================================================
    ANIMATED LIGHT SWEEP
 ========================================================= */
-
-.intro-word {
-  position: relative;
-}
 
 .intro-word::after {
   content: "";
@@ -390,18 +407,30 @@
 ========================================================= */
 
 @keyframes introFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes gridMove {
-  from { background-position: 0 0; }
-  to { background-position: 55px 55px; }
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 55px 55px;
+  }
 }
 
 @keyframes ambientFloat {
-  from { transform: translate(0, 0); }
-  to { transform: translate(70px, 45px); }
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(70px, 45px);
+  }
 }
 
 @keyframes logoReveal {
@@ -412,20 +441,30 @@
 }
 
 @keyframes logoScale {
-  from { transform: scale(0.7); }
-  to { transform: scale(1); }
+  from {
+    transform: scale(0.7);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 @keyframes drawLogoFrame {
-  to { stroke-dashoffset: 0; }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes cornerReveal {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes simpleReveal {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes premiumLetterReveal {
@@ -451,7 +490,9 @@
     opacity: 0;
   }
 
-  20% { opacity: 0.8; }
+  20% {
+    opacity: 0.8;
+  }
 
   100% {
     left: 115%;
@@ -460,7 +501,9 @@
 }
 
 @keyframes lineReveal {
-  to { width: min(380px, 75vw); }
+  to {
+    width: min(380px, 75vw);
+  }
 }
 
 @keyframes taglineReveal {

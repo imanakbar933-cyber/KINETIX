@@ -1,5 +1,6 @@
+
 /* =========================================================
-   HERO
+   HERO1 — ORIGINAL HERO WITHOUT OLD CURTAIN
 ========================================================= */
 
 .hero {
@@ -15,9 +16,7 @@
   transition: background-color 0.4s ease;
 }
 
-/* =========================================================
-   LEFT SIDE
-========================================================= */
+/* LEFT SIDE */
 
 .hero-left {
   width: 52%;
@@ -29,12 +28,9 @@
   z-index: 2;
 }
 
-/* =========================================================
-   OUTLINE TEXT (GET FIT WITH)
-========================================================= */
+/* OUTLINE TEXT */
 
 .outline-text {
-  /* Colors are forced via Inline Styles in JSX to guarantee Custom Theme works */
   font-size: 85px;
   font-weight: 900;
   line-height: 0.95;
@@ -42,12 +38,9 @@
   animation: neonPulse 3s ease-in-out infinite alternate;
 }
 
-/* =========================================================
-   H1 TEXT (KINETIX FITNESS CLUB)
-========================================================= */
+/* MAIN HEADING */
 
 .hero-left h1 {
-  /* Colors are forced via Inline Styles in JSX */
   font-size: 85px;
   font-weight: 900;
   line-height: 0.95;
@@ -55,20 +48,18 @@
   animation: neonPulse 3s ease-in-out infinite alternate;
 }
 
-/* Animation for the glow effect */
 @keyframes neonPulse {
   0% {
     opacity: 0.9;
   }
+
   100% {
     opacity: 1;
     filter: brightness(1.2);
   }
 }
 
-/* =========================================================
-   RIGHT SIDE / VIDEO
-========================================================= */
+/* RIGHT SIDE / VIDEO */
 
 .hero-right {
   width: 60%;
@@ -91,88 +82,31 @@
   transform: scale(1.02);
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
+/* MOBILE RESPONSIVE */
 
 @media (max-width: 900px) {
   .hero {
     flex-direction: column;
     height: auto;
   }
+
   .hero-left {
     width: 100%;
     min-height: 500px;
     padding: 60px 20px;
   }
+
   .hero-right {
     width: 100%;
     height: 600px;
   }
+
   .hero-right video {
     object-position: center 65%;
   }
-  .outline-text {
-    font-size: 60px;
-  }
+
+  .outline-text,
   .hero-left h1 {
     font-size: 60px;
   }
-}
-
-/* =========================================================
-   CURTAIN ANIMATION
-========================================================= */
-
-.curtain-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 9999999;
-  overflow: hidden;
-  background-color: #050706;
-}
-
-.curtain-full-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  object-position: center;
-  pointer-events: none;
-  user-select: none;
-  z-index: 1;
-}
-
-.curtain-black {
-  position: absolute;
-  top: 0;
-  height: 100vh;
-  width: 50vw;
-  background-color: #050706;
-  z-index: 2;
-}
-
-.curtain-black-left {
-  left: 0;
-  animation: openLeft 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.8s forwards;
-}
-
-.curtain-black-right {
-  right: 0;
-  animation: openRight 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.8s forwards;
-}
-
-@keyframes openLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
-@keyframes openRight {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(100%); }
 }
