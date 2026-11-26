@@ -131,7 +131,7 @@ a {
 
 .facilities.in-view .section-heading h2,
 .services.show .section-heading h2,
-.membership-show .membership-title {
+.membership-wrapper.in-view .membership-title {
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
@@ -1930,4 +1930,54 @@ a {
     opacity: 1;
     transform: none;
   }
+}
+
+/* =========================================================
+   KINETIX MEMBERSHIP - GLOBAL VISIBILITY FIX
+========================================================= */
+
+.membership-wrapper {
+  overflow: visible !important;
+}
+
+.membership-wrapper .membership-header {
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+.membership-wrapper .membership-eyebrow,
+.membership-wrapper .membership-title,
+.membership-wrapper .membership-subtitle {
+  visibility: visible !important;
+}
+
+.membership-wrapper.in-view .membership-eyebrow {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.membership-wrapper.in-view .membership-title {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  filter: blur(0) !important;
+  clip-path: none !important;
+}
+
+.membership-wrapper.in-view .membership-subtitle {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  filter: blur(0) !important;
+}
+
+.membership-wrapper.in-view .membership-billing-switch {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.membership-wrapper.in-view .membership-plan-card {
+  opacity: 1 !important;
+  visibility: visible !important;
 }

@@ -107,26 +107,36 @@ function MembershipPlans() {
   }, []);
 
   return (
-    <section className="membership-wrapper" id="plans" ref={sectionRef}>
+    <section
+      className="membership-wrapper"
+      id="plans"
+      ref={sectionRef}
+    >
       <div className="membership-container">
 
         {/* HEADER */}
         <div className="membership-header">
-          <p className="membership-eyebrow">KINETIX MEMBERSHIPS</p>
+
+          <p className="membership-eyebrow">
+            KINETIX MEMBERSHIPS
+          </p>
 
           <h2 className="membership-title">
             CHOOSE YOUR <span>FITNESS PLAN</span>
           </h2>
 
           <p className="membership-subtitle">
-            Find a membership that matches your fitness goals, training
-            routine, and lifestyle at KINETIX Fitness Club.
+            Find a membership that matches your fitness goals,
+            training routine, and lifestyle at KINETIX Fitness Club.
           </p>
+
         </div>
 
         {/* BILLING SWITCH */}
         <div className="membership-billing-switch">
+
           <button
+            type="button"
             className={billing === "monthly" ? "active" : ""}
             onClick={() => setBilling("monthly")}
           >
@@ -134,13 +144,18 @@ function MembershipPlans() {
           </button>
 
           <button
+            type="button"
             className={billing === "yearly" ? "active" : ""}
             onClick={() => setBilling("yearly")}
           >
             Yearly Billing
           </button>
+
         </div>
+
+        {/* MEMBERSHIP CARDS */}
         <div className="membership-plans-grid">
+
           {plans[billing].map((plan, index) => {
             const isPopular = index === 1;
 
@@ -150,8 +165,11 @@ function MembershipPlans() {
                   isPopular ? "popular" : ""
                 }`}
                 key={plan.name}
-                style={{ "--delay": `${index * 0.15}s` }}
+                style={{
+                  "--delay": `${index * 0.15}s`,
+                }}
               >
+
                 {isPopular && (
                   <span className="membership-popular-badge">
                     Most Popular
@@ -168,7 +186,10 @@ function MembershipPlans() {
                   </small>
                 </div>
 
-                <button className="membership-plan-button">
+                <button
+                  type="button"
+                  className="membership-plan-button"
+                >
                   Subscribe <span>→</span>
                 </button>
 
@@ -176,13 +197,15 @@ function MembershipPlans() {
                   {plan.equipment.map((item) => (
                     <li key={item}>
                       <span>✓</span>
-                      {item}
+                      <p>{item}</p>
                     </li>
                   ))}
                 </ul>
+
               </div>
             );
           })}
+
         </div>
 
       </div>
